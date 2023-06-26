@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd869f516fa0b94a9d85a94015b09a1, type: 3}
+  m_Name: SpineAnimaConfig
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: b63e1add1a6cabb4fa2767d048ddcfec, type: 2}
+  sourceMaterial: {fileID: 2100000, guid: d5210703def746d42aee929fec6ba15b, type: 2}
+  equippables:
+  - type: 0
+    templateSkin: warrior
+    slot:
+    - WEAPON
+    templateAttachment:
+    - WEAPON
+  - type: 1
+    templateSkin: warrior
+    slot:
+    - SHIELD
+    templateAttachment:
+    - SHIELD
+  - type: 2
+    templateSkin: warrior
+    slot:
+    - BODY
+    - HIP
+    templateAttachment:
+    - BODY
+    - HIP
+  - type: 3
+    templateSkin: warrior
+    slot:
+    - SHOULDER A
+    - SHOULDER B
+    templateAttachment:
+    - SHOULDER A
+    - SHOULDER B
+  - type: 4
+    templateSkin: warrior
+    slot:
+    - LEG A1
+    - LEG A2
+    - LEG A3
+    - LEG B1
+    - LEG B2
+    - LEG B3
+    templateAttachment:
+    - LEG A1
+    - LEG A2
+    - LEG A3
+    - LEG B1
+    - LEG B2
+    - LEG B3
+  - type: 5
+    templateSkin: warrior
+    slot:
+    - HELMET
+    templateAttachment:
+    - HELMET
+  - type: 6
+    templateSkin: warrior
+    slot:
+    - ARM A1
+    - ARM A2
+    - ARM A3
+    - ARM B1
+    - ARM B2
+    - ARM B3B
+    - ARM B3F
+    templateAttachment:
+    - ARM A1
+    - ARM A2
+    - ARM A3
+    - ARM B1
+    - ARM B2
+    - ARM B3B
+    - ARM B3F

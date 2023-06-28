@@ -26,6 +26,7 @@ namespace TEngine
         public override void AfterShow()
         {
             base.AfterShow();
+            Log.Debug("当前流程是:" + GameModule.Procedure.CurrentProcedure);
         }
         public override void BeforeClose()
         {

@@ -25,9 +25,9 @@ MonoBehaviour:
       AssetTags: Actor
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetRaw/Actor
-        CollectorGUID: 9c67ce0c9edfd4e4aa1006ee39846d66
-        CollectorType: 1
+      - CollectPath: Assets/AssetRaw/Actor/EnemySpineUnit
+        CollectorGUID: 193038bd06f292c458cc3172f1d8ec74
+        CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll

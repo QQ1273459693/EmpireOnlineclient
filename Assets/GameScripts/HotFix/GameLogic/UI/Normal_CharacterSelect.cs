@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using GameLogic;
 
 namespace TEngine
 {
@@ -11,7 +12,7 @@ namespace TEngine
     {
         GameObject mBtnStartGame;
 
-       
+
         public override void ScriptGenerator()
         {
             mBtnStartGame = FindChild("Button_Ready").gameObject;
@@ -20,16 +21,23 @@ namespace TEngine
 
         void OpenMainCity(GameObject obj, PointerEventData eventData)
         {
+            GameEvent.Send(GameProcedureEvent.LoadMainStateEvent.EventId);
+            //GameModule.UI.ShowUI<Main_City>();
+        }
+        void LoadMainUI()
+        {
             GameModule.UI.ShowUI<Main_City>();
         }
 
         public override void AfterShow()
         {
             base.AfterShow();
+            GameEvent.AddEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
         }
         public override void BeforeClose()
         {
             base.BeforeClose();
+            GameEvent.RemoveEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
         }
     }
 }

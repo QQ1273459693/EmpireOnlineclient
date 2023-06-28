@@ -388,8 +388,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 828420966}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &110205813
 Camera:
@@ -763,10 +763,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 110205811}
   - {fileID: 88107082}
   - {fileID: 1047946043}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047946042
 GameObject:
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   - GameMain.ProcedureInitResources
   - GameMain.ProcedureLaunch
   - GameMain.ProcedureLoadAssembly
+  - GameMain.ProcedureMainSence
   - GameMain.ProcedurePreload
   - GameMain.ProcedureSplash
   - GameMain.ProcedureStartGame

@@ -31,7 +31,7 @@ public partial class GameApp:Singleton<GameApp>
     {
         L_BagSystemDate.Instance.m_Curlong = 1;
         L_BagSystemDate.Instance.LoadBagListData();
-        L_CharacterDataController.Instance.LoadCharacterData();
+        L_CharacterDataController.Instance.LoadCharacterData();    
         GameModule.UI.ShowUI<Normal_TapToStart>();
     }
 

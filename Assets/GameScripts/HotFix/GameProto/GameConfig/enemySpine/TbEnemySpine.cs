@@ -11,34 +11,34 @@ using SimpleJSON;
 
 
 
-namespace GameConfig.Battle
+namespace GameConfig.enemySpine
 { 
 
-public sealed partial class TbSkill
+public sealed partial class TbEnemySpine
 {
-    private readonly Dictionary<int, Battle.SkillBaseConfig> _dataMap;
-    private readonly List<Battle.SkillBaseConfig> _dataList;
+    private readonly Dictionary<int, enemySpine.EnemySpine> _dataMap;
+    private readonly List<enemySpine.EnemySpine> _dataList;
     
-    public TbSkill(JSONNode _json)
+    public TbEnemySpine(JSONNode _json)
     {
-        _dataMap = new Dictionary<int, Battle.SkillBaseConfig>();
-        _dataList = new List<Battle.SkillBaseConfig>();
+        _dataMap = new Dictionary<int, enemySpine.EnemySpine>();
+        _dataList = new List<enemySpine.EnemySpine>();
         
         foreach(JSONNode _row in _json.Children)
         {
-            var _v = Battle.SkillBaseConfig.DeserializeSkillBaseConfig(_row);
+            var _v = enemySpine.EnemySpine.DeserializeEnemySpine(_row);
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
         PostInit();
     }
 
-    public Dictionary<int, Battle.SkillBaseConfig> DataMap => _dataMap;
-    public List<Battle.SkillBaseConfig> DataList => _dataList;
+    public Dictionary<int, enemySpine.EnemySpine> DataMap => _dataMap;
+    public List<enemySpine.EnemySpine> DataList => _dataList;
 
-    public Battle.SkillBaseConfig GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public Battle.SkillBaseConfig Get(int key) => _dataMap[key];
-    public Battle.SkillBaseConfig this[int key] => _dataMap[key];
+    public enemySpine.EnemySpine GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public enemySpine.EnemySpine Get(int key) => _dataMap[key];
+    public enemySpine.EnemySpine this[int key] => _dataMap[key];
 
     public void Resolve(Dictionary<string, object> _tables)
     {

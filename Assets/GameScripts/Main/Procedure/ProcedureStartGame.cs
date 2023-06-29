@@ -14,6 +14,7 @@ namespace GameMain
         {
             base.OnEnter(procedureOwner);
             m_procedureOwner= procedureOwner;
+            SpineHelper.PreloadInit();
             StartGame().Forget();
             GameEvent.AddEventListener(GameProcedureEvent.LoadMainStateEvent.EventId, LoadMainSence);
         }

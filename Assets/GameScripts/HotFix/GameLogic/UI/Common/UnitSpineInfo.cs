@@ -8,4 +8,5 @@ public class UnitSpineInfo : ScriptableObject
     public TextAsset SkelData;
     public TextAsset Atlas;
     public Texture2D[] Textures;
+    public Material Materials;
 }

@@ -26,5 +26,14 @@ namespace GameLogic
 
             }
         }
+        public class LoadFightStateEvent : IMemory
+        {
+            public static readonly int EventId = StringId.StringToHash("LoadFightStateEvent");
+
+            public void Clear()
+            {
+
+            }
+        }
     }
 }

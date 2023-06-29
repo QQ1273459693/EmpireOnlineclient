@@ -33,6 +33,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/AssetRaw/Actor/EnemySpinePrefab
+        CollectorGUID: 4f67bf331c31f21429ae790b5c9594eb
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
     - GroupName: UIRaw
       GroupDesc: "\u56FE\u7247\u8D44\u6E90"
       AssetTags: UIRaw
@@ -48,7 +56,7 @@ MonoBehaviour:
         UserData: 
       - CollectPath: Assets/AssetRaw/UIRaw/Raw
         CollectorGUID: 6bc134b912ac6bb4399ea1bec4c11636
-        CollectorType: 0
+        CollectorType: 1
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll

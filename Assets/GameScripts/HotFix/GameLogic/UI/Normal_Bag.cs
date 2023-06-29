@@ -60,7 +60,7 @@ namespace TEngine
             ItemPool itemPool; 
             if (!dictionaryPool.TryGetValue(cell,out itemPool))
             {
-                itemPool = GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPool<ItemPool>().Spawn();
+                itemPool = GameModule.ObjectPool.GetObjectPool<ItemPool>().Spawn(); //GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPool<ItemPool>().Spawn();
                 itemPool.IntObj(cell);
                 itemPool.GetClickTipEvent().onClick.AddListener((go, arg) =>
                 {
@@ -103,7 +103,7 @@ namespace TEngine
             base.BeforeClose();
             GameEvent.RemoveEventListener<int>("BagEquipWear", EquipWearEvent);
             Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);
-            var UnSpawnPool = GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
+            var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemPool>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
             foreach (var item in dictionaryPool.Values)
             {
                 UnSpawnPool.Unspawn(item);

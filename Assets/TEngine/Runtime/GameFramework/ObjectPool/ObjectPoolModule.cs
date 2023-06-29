@@ -37,7 +37,14 @@ namespace TEngine
                 return;
             }
         }
-
+        public IObjectPool<T> GetObjectPool<T>() where T : IPoolObject
+        {
+            return m_ObjectPoolManager.GetObjectPool<T>();
+        }
+        public ObjectPoolBase GetObjectPoolByType<T>()
+        {
+            return m_ObjectPoolManager.GetObjectPoolByType(typeof(T));///
+        }
         public void Clear()
         {
             m_ObjectPoolManager.Release();

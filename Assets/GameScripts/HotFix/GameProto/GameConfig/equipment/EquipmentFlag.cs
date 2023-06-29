@@ -28,7 +28,7 @@ namespace GameConfig.equipment
         /// </summary>
         Wand = 4,
         /// <summary>
-        /// 护手防具类型
+        /// 护肩防具类型
         /// </summary>
         Arm = 5,
         /// <summary>

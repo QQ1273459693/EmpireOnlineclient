@@ -10,17 +10,23 @@ namespace TEngine
     class Main_City : UIWindow
     {
         GameObject mBtnBag;
+        GameObject mFightBtn;
         public override void ScriptGenerator()
         {
             mBtnBag = FindChild("Home/HomeMenu/Inventory").gameObject;
+            mFightBtn = FindChild("Home/Button_Play").gameObject;
             RegisterEventClick(mBtnBag,OnBagClick);
+            RegisterEventClick(mFightBtn, OnFightClick);
             //m_btnClose.onClick.AddListener(OpenWindow/*UniTask.UnityAction(OnClickCloseBtn)*/);
         }
 
         void OnBagClick(GameObject obj, PointerEventData eventData)
         {
-            Log.Debug("点击了");
             GameModule.UI.ShowUI<Normal_Bag>();
+        }
+        void OnFightClick(GameObject obj, PointerEventData eventData)
+        {
+            GameEvent.Send(GameLogic.GameProcedureEvent.LoadFightStateEvent.EventId);
         }
 
         public override void AfterShow()

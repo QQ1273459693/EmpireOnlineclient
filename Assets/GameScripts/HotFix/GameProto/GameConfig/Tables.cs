@@ -17,6 +17,7 @@ public sealed partial class Tables
     public item.TbItem TbItem {get; }
     public equipment.TbEquipment TbEquipment {get; }
     public itemBackGround.TbItemBgGround TbItemBgGround {get; }
+    public enemySpine.TbEnemySpine TbEnemySpine {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -27,11 +28,14 @@ public sealed partial class Tables
         tables.Add("equipment.TbEquipment", TbEquipment);
         TbItemBgGround = new itemBackGround.TbItemBgGround(loader("itembackground_tbitembgground")); 
         tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
+        TbEnemySpine = new enemySpine.TbEnemySpine(loader("enemyspine_tbenemyspine")); 
+        tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
         PostInit();
 
         TbItem.Resolve(tables); 
         TbEquipment.Resolve(tables); 
         TbItemBgGround.Resolve(tables); 
+        TbEnemySpine.Resolve(tables); 
         PostResolve();
     }
 
@@ -40,6 +44,7 @@ public sealed partial class Tables
         TbItem.TranslateText(translator); 
         TbEquipment.TranslateText(translator); 
         TbItemBgGround.TranslateText(translator); 
+        TbEnemySpine.TranslateText(translator); 
     }
     
     partial void PostInit();

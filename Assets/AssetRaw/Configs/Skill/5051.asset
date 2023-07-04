@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae73d62a147d1d4aaa67f69ddd6f9a7, type: 3}
+  m_Name: 5051
+  m_EditorClassIdentifier: 
+  hideBullet: 1
+  hideDamagePercentage: 1
+  skillIcon: {fileID: 0}
+  skillid: 5051
+  skillName: "\u88C2\u5730\u51FB"
+  needRageValuel: 100
+  skillShakeBeforeTimeMS: 800
+  skillAttackDurationMS: 500
+  skillShakeAfterTimeMS: 1200
+  skillType: 1
+  roleTragetType: 2
+  skillAttackType: 1
+  bullet: 
+  damageType: 3
+  damagePercentage: 280
+  skillAnim: Attack01
+  skillAudio: {fileID: 0}
+  skillEffect: 
+  skillHitEffect: 
+  addBuffs: 
+  skillDes: "\u88C2\u5730\u51FB\uFF1A\u4ECE\u5929\u800C\u964D\u7684\u4E00\u51FB\u5A01\u529B\u5DE8\u5927\uFF0C\u9020\u6210\u653B\u51FB\u529B380%\u7684\u4F24\u5BB3\u3002"

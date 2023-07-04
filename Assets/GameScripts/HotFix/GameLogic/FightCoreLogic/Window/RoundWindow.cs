@@ -1,57 +1,39 @@
-﻿using System.Collections;
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+using TMPro;
+
 public class RoundWindow : MonoBehaviour
 {
-    public GameObject roundStartAnim;
-    public Text roundText;
-    public Text logicFrameText;
-    public Text quickenMultipleText;
-    private int mMaxRoundid;
-  
-    public void RoundStart()
+    public TMP_Text roundText;
+    public TMP_Text logicFrameText;
+    public TMP_Text quickenMultipleText;//���ٱ���
+    private int MaxRoundId=15;
+    public void Update()
     {
-        roundStartAnim.SetActive(true);
-        mMaxRoundid = BattleWorld.Instance.roundLoigc.MaxRoundID;
-        gameObject.SetActive(true);
-        roundText.text = BattleWorld.Instance.roundLoigc.RoundId + "/" + mMaxRoundid;
-        roundStartAnim.transform.DOScale(1, 0.3f).SetEase(Ease.InOutQuad).OnComplete(() =>
-        {
-            roundStartAnim.transform.DOScale(0, 0f).SetDelay(0.6f);
-        });
-        quickenMultipleText.text = "x" + BattleWorld.Instance.quickenMultiple;
+        UpdateLogicFrameCount();
+    }
+    public void RoundStart(int roundId)
+    {
+        roundText.text = $"{roundId}/{MaxRoundId}";
     }
     public void NextRound(int roundid)
     {
-        roundText.text = roundid.ToString() + "/" + mMaxRoundid;
+        roundText.text = $"{roundid}/{MaxRoundId}";
     }
-
-    public void JumpButtonClick()
+    public void OnButtonGamePause()
     {
-        HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
+        WorldManager.BattleWorld.PauseBattle();
     }
-    /// <summary>
-    /// 暂停游戏
-    /// </summary>
-    public void PauseBattleButtonClick()
+    public void OnQuckenBattle()
     {
-        BattleWorld.Instance.PauseBattle();
+        //WorldManager.BattleWorld.QuickenBattle();
+        //quickenMultipleText.text = "X" + WorldManager.BattleWorld.QuickenMultiple;
     }
-    /// <summary>
-    /// 加速游戏
-    /// </summary>
-    public void QuickenButtonClick()
-    {
-        BattleWorld.Instance.QuickenBattle();
-        quickenMultipleText.text = "x"+BattleWorld.Instance.quickenMultiple;
-    }
-    /// <summary>
-    /// 更新逻辑帧显示
-    /// </summary>
     public void UpdateLogicFrameCount()
     {
-        logicFrameText.text = "LogicFrame:"+ FrameSyncConfig.LogicFrameid;
+        logicFrameText.text = "֡��:" + LogicFrameSyncConfig.LogicFrameid;
     }
 }

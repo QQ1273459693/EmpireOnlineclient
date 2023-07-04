@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d871fd7f5f7ddf045ac6a57b8ec671df, type: 3}
+  m_Name: 10211
+  m_EditorClassIdentifier: 
+  buffIcon: {fileID: 0}
+  buffid: 10211
+  buffName: "\u51B0\u5C01\u4E07\u91CC\u4F24\u5BB3"
+  maxStackingNum: 0
+  buffDurationRound: 0
+  buffDurationTimeMs: 600
+  buffTriggerIntervalMs: 500
+  buffTriggerProbability: 100
+  buffType: 0
+  buffState: 2
+  buffTriggerType: 0
+  damageType: 3
+  damageOrPercentage: 360
+  buffEffect: 
+  buffAudio: {fileID: 0}
+  buffAnim: 
+  buffDes: "\u9020\u6210\u653B\u51FB\u529B360%\u7684\u4F24\u5BB3"

@@ -1,6 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using GameLogic;
 using TEngine;
+using YooAsset;
 
 namespace GameMain
 {
@@ -12,7 +14,11 @@ namespace GameMain
         {
             base.OnEnter(procedureOwner);
             Log.Debug("正式进入战斗场景");
-            GameModule.Resource.LoadSceneAsync("Fight");
+            GameModule.Resource.LoadSceneAsync("Fight").Completed+= StartFight;
+        }
+        void StartFight(SceneOperationHandle handle)
+        {
+            Log.Debug(FightWorldMain.Instance.IsStart);
         }
     }
 }

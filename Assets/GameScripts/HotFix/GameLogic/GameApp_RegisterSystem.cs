@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using TEngine;
 
 public partial class GameApp
@@ -25,7 +26,7 @@ public partial class GameApp
     /// </summary>
     private void RegisterAllSystem()
     {
-        
+        AddLogicSys(BehaviourSingleSystem.Instance);
     }
     
     /// <summary>

@@ -18,16 +18,18 @@ namespace TEngine
             get { return m_WRAnimation; }
         }
         GameObject ItemGO;
-        GameObject m_SpineParentGO;
+        public GameObject m_SpineParentGO;
         bool m_UIView;
+        bool m_isFill;//是否翻转180
         /// <summary>
         /// 初始化骨骼动画
         /// </summary>
         /// <param name="go">节点</param>
         /// <param name="SpineName">动画资源名</param>
         /// <param name="UIModle">是否是UI层级</param>
-        public void Load(GameObject go,string SpineName,bool UIModle=false)
+        public void Load(GameObject go,string SpineName,bool UIModle=false,bool isFill=false)
         {
+            m_isFill = isFill;
             m_UIView = UIModle;
             ItemGO = go;
             LoadSpineRes(ItemGO, SpineName);
@@ -56,7 +58,7 @@ namespace TEngine
                 AnimTr.SetParent(m_SpineParentGO.transform.Find("Animation"));
                 AnimTr.localScale = Vector3.one;
                 AnimTr.localPosition = Vector3.zero;
-                AnimTr.localRotation = Quaternion.identity;
+                AnimTr.localRotation = m_isFill?new Quaternion(0,180,0,0): Quaternion.identity;
 
             }
             PlayAnimation("Idle",true);
@@ -66,7 +68,7 @@ namespace TEngine
         /// <summary>
         /// 根据名称播放动画
         /// </summary>
-        private void PlayAnimation(string AnimName,bool isLoop=false)
+        public  void PlayAnimation(string AnimName,bool isLoop=false)
         {
             if (m_UIView)
             {

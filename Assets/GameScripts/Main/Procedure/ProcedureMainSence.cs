@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using TEngine;
+using YooAsset;
 
 namespace GameMain
 {
@@ -13,9 +14,14 @@ namespace GameMain
         {
             base.OnEnter(procedureOwner);
             fsm=procedureOwner;
-            Log.Debug("正式进入主场景");
-            GameModule.Resource.LoadSceneAsync("MainCity");
             GameEvent.AddEventListener(GameLogic.GameProcedureEvent.LoadFightStateEvent.EventId, ChangeFightState);
+            Log.Debug("正式进入主场景");
+            GameModule.Resource.LoadSceneAsync("MainCity").Completed+=StartMain;
+            
+            
+        }
+        void StartMain(SceneOperationHandle handle)
+        {
             GameEvent.Send(GameLogic.GameProcedureEvent.LoadMainCityUIEvent.EventId);
         }
         protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)

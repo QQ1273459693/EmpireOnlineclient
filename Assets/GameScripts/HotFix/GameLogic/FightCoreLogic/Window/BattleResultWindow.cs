@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,56 +6,41 @@ using UnityEngine.UI;
 public class BattleResultWindow : MonoBehaviour
 {
     public Text resultText;
-
-    void Start()
-    {
-
-    }
-
-    public void SetBattleRsult(bool iswin)
+    public void SetBattleResult(bool isWin)
     {
         gameObject.SetActive(true);
-        resultText.text = iswin ? "胜利" : "失败";
+        resultText.text = isWin ? "ʤ��" : "ʧ��";
     }
-    /// <summary>
-    /// 回放
-    /// </summary>
     public void BackPlayButtonClick()
     {
         gameObject.SetActive(false);
         string json = PlayerPrefs.GetString(BattleDataModel.Key);
-        BattleDataModel battleData = Newtonsoft.Json.JsonConvert.DeserializeObject<BattleDataModel>(json);
-        //WorldManager.CreateBattleWord(battleData.herolist,battleData.enemylist,battleData.battleSite);
-        WorldManager.CreateBattleWord(WorldManager.lastheroDataList, WorldManager.lastEnemyDataList, WorldManager.lastRandomSiteid, WorldManager.lastBattleid,null, true);
+        BattleDataModel battleData= Newtonsoft.Json.JsonConvert.DeserializeObject<BattleDataModel>(json);
+        WorldManager.CreateBattleWorld(battleData.herolist, battleData.enemyList);
     }
-    /// <summary>
-    /// 重新开始
-    /// </summary>
-    public void ResetPlayButtonClick()
+    public void OnResetGameButtonClick()
     {
         gameObject.SetActive(false);
+        List<HeroData> playerHeroList = new List<HeroData>();
+        List<HeroData> enemyHeroList = new List<HeroData>();
+        List<int> heroidlist = new List<int> { 101, 102, 103, 104, 105, 501, 502, 503, 504, 505 };
 
-        ////创建英雄
-        //List<int> heroidlist = new List<int>() { 101, 102, 103, 104, 105, 501, 502, 503, 504, 505 };
-        //List<HeroData> herolist = new List<HeroData>();
-        //List<HeroData> enemylist = new List<HeroData>();
-        //for (int i = 0; i < heroidlist.Count; i++)
-        //{
-        //    if (i < 5)
-        //    {
-        //        HeroData heroData = ConfigConter.GetHeroData(heroidlist[i]);
-        //        heroData.seatid = i;
-        //        herolist.Add(heroData);
-        //    }
-        //    else
-        //    {
-        //        HeroData heroData = ConfigConter.GetHeroData(heroidlist[i]);
-        //        heroData.seatid = i - 5;
-        //        enemylist.Add(ConfigConter.GetHeroData(heroidlist[i]));
-        //    }
-        //}
-        //WorldManager.CreateBattleWord(herolist, enemylist, Random.Range(0, 100));
-
-        WorldManager.CreateBattleWord(WorldManager.lastheroDataList,WorldManager.lastEnemyDataList,WorldManager.lastRandomSiteid,WorldManager.lastBattleid);
+        for (int i = 0; i < heroidlist.Count; i++)
+        {
+            HeroData hero = ConfigConter.GetHeroData(heroidlist[i]);
+            if (i < 5)
+            {
+                hero.seatid = i;
+                playerHeroList.Add(hero);
+            }
+            else
+            {
+                //�з�Ӣ��
+                hero.seatid = i - 5;
+                enemyHeroList.Add(hero);
+            }
+        }
+        
+        WorldManager.CreateBattleWorld(playerHeroList, enemyHeroList);
     }
 }

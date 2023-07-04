@@ -19,14 +19,16 @@ public sealed partial class EnemySpine :  Bright.Config.BeanBase
     public EnemySpine(JSONNode _json) 
     {
         { if(!_json["id"].IsNumber) { throw new SerializationException(); }  Id = _json["id"]; }
+        { if(!_json["EnemyName"].IsString) { throw new SerializationException(); }  EnemyName = _json["EnemyName"]; }
         { if(!_json["SpineResName"].IsString) { throw new SerializationException(); }  SpineResName = _json["SpineResName"]; }
         { var __json0 = _json["AnimationName"]; if(!__json0.IsArray) { throw new SerializationException(); } AnimationName = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  AnimationName.Add(__v0); }   }
         PostInit();
     }
 
-    public EnemySpine(int id, string SpineResName, System.Collections.Generic.List<string> AnimationName ) 
+    public EnemySpine(int id, string EnemyName, string SpineResName, System.Collections.Generic.List<string> AnimationName ) 
     {
         this.Id = id;
+        this.EnemyName = EnemyName;
         this.SpineResName = SpineResName;
         this.AnimationName = AnimationName;
         PostInit();
@@ -41,6 +43,10 @@ public sealed partial class EnemySpine :  Bright.Config.BeanBase
     /// 怪物ID
     /// </summary>
     public int Id { get; private set; }
+    /// <summary>
+    /// 怪物名字
+    /// </summary>
+    public string EnemyName { get; private set; }
     /// <summary>
     /// 怪物动画资源
     /// </summary>
@@ -66,6 +72,7 @@ public sealed partial class EnemySpine :  Bright.Config.BeanBase
     {
         return "{ "
         + "Id:" + Id + ","
+        + "EnemyName:" + EnemyName + ","
         + "SpineResName:" + SpineResName + ","
         + "AnimationName:" + Bright.Common.StringUtil.CollectionToString(AnimationName) + ","
         + "}";

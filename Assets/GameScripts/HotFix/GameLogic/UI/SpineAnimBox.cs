@@ -11,6 +11,12 @@ namespace GameLogic
     public class SpineAnimBox : IPoolObject
     {
         GameObject GO;
+
+        //非UIHUD组件
+        TextMeshPro HpText;
+        TextMeshPro DamageText;
+
+
         public long Id { get; set ; }
         public bool IsFromPool { get ; set ; }
 
@@ -34,19 +40,35 @@ namespace GameLogic
         /// <summary>
         /// 刷新数据
         /// </summary>
-        public void RefreshData(string SpineResName)
+        public void RefreshData(string SpineResName,bool isFlii)
         {
             m_SpineAnimRes = SpineResName;
-            RefreshSpineModle();
+            RefreshSpineModle(isFlii);
+            HpText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("HpText").GetComponent<TextMeshPro>();
+            DamageText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("DamageHp").GetComponent<TextMeshPro>();
+        }
+        public void PlayAnim(string AnimName,bool isLoop=false)
+        {
+            m_SpineAnimLoader.PlayAnimation(AnimName,isLoop);
+        }
+        /// <summary>
+        /// 更新Hp相关HUD显示
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="hpRateValue"></param>
+        public void UpdateHp_Hud(int damage, float hpRateValue)
+        {
+            DamageText.text = (damage > 0 ? "-" : "+") + Mathf.Abs(damage);
+            HpText.text = $"Hp:{hpRateValue}";
         }
         /// <summary>
         /// 刷新Spine模型
         /// </summary>
-        public void RefreshSpineModle()
+        void RefreshSpineModle(bool isFill)
         {
             m_SpineAnimLoader?.Dispose();
             m_SpineAnimLoader = ReferencePool.Acquire<SpineAnimLoader>();
-            m_SpineAnimLoader.Load(GO,m_SpineAnimRes);
+            m_SpineAnimLoader.Load(GO,m_SpineAnimRes,false,isFill);
         }
         public void OnSpawn()
         {

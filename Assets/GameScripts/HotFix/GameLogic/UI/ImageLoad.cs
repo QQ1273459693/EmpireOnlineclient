@@ -32,6 +32,7 @@ namespace GameLogic
 
         public void Clear()
         {
+            imagLoad?.Dispose();
             m_Image = null;
             imagLoad = null;
         }

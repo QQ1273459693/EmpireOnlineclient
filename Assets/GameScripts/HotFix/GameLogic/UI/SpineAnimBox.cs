@@ -5,6 +5,7 @@ using TEngine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace GameLogic
 {
@@ -15,7 +16,8 @@ namespace GameLogic
         //非UIHUD组件
         TextMeshPro HpText;
         TextMeshPro DamageText;
-
+        Transform AttackUI;
+        SpriteRenderer AttackUiSprite;
 
         public long Id { get; set ; }
         public bool IsFromPool { get ; set ; }
@@ -46,10 +48,24 @@ namespace GameLogic
             RefreshSpineModle(isFlii);
             HpText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("HpText").GetComponent<TextMeshPro>();
             DamageText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("DamageHp").GetComponent<TextMeshPro>();
+            AttackUI = m_SpineAnimLoader.m_SpineParentGO.transform.Find("AttackTipsPos/AttackUITips").transform;
+            AttackUiSprite= AttackUI.GetComponent<SpriteRenderer>();
+            AttackUI.gameObject.SetActive(false);
         }
         public void PlayAnim(string AnimName,bool isLoop=false)
         {
             m_SpineAnimLoader.PlayAnimation(AnimName,isLoop);
+            if (AnimName=="BeAttack")
+            {
+                return;
+            }
+            AttackUI.gameObject.SetActive(true);
+            AttackUiSprite.color = Color.white;
+            AttackUiSprite.DOBlendableColor(Color.clear,1F);
+            AttackUI.DOLocalJump(new Vector3(0, 3.5F), 2, 1, 0.9F).OnComplete(() =>
+            {
+                AttackUI.gameObject.SetActive(false);
+            });
         }
         /// <summary>
         /// 更新Hp相关HUD显示

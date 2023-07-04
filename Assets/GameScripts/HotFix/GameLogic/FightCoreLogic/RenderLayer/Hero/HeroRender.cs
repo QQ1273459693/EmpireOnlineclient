@@ -27,7 +27,7 @@ public class HeroRender : RenderObject
     }
     public void HeroDeath()
     {
-        PlayAnim("Death");
+        //PlayAnim("Death");
         gameObject.SetActive(false);
     }
     public void PlayAnim(string Anim)

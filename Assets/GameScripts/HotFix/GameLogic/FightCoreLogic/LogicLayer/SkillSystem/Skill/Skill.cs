@@ -106,6 +106,7 @@ public class Skill
         {
             targetPos = new VInt3(mSkillOwner.HeroTeam==HeroTeamEnum.Enemy?BattleWorldNodes.Instance.slefHeroConterTrans.position:BattleWorldNodes.Instance.enemyConterTrans.position);
         }
+        Debuger.LogError("正在移动,目标位置是:"+ targetPos);
         MoveToAction action = new MoveToAction(mSkillOwner,targetPos,(VInt)SkillCfg.skillShakeBeforeTimeMS,moveFinish);
         ActionManager.Instance.RunAction(action);
     }
@@ -184,18 +185,21 @@ public class Skill
     /// </summary>
     public List<HeroLogic> CauseDamage()
     {
+        //Debug测试
+        string DamageText="我方:"+ mSkillOwner.HeroData.Name+":对";
+
+
         List<HeroLogic> herolist = WorldManager.BattleWorld.heroLogic.GetHeroListByTeam(mSkillOwner, (HeroTeamEnum)SkillCfg.roleTragetType);
         //根据攻击类型计算受到攻击的英雄
         List<HeroLogic> attackHeroList= BattleRule.GetAttackListByAttackType(SkillCfg.skillAttackType, herolist,mSkillOwner.HeroData.seatid);
-        CreateSkillEffect(attackHeroList);
-        Debuger.Log("看下攻击列表:"+attackHeroList.Count+",配置的枚举:"+ SkillCfg.skillAttackType);
+        //CreateSkillEffect(attackHeroList);
+        //Debuger.Log("看下攻击列表:"+attackHeroList.Count+",配置的枚举:"+ SkillCfg.skillAttackType);
         foreach (var hero in attackHeroList)
         {
             VInt damage= BattleRule.CalculaDamage(SkillCfg, mSkillOwner,hero);
             //受击回复怒气值
             hero.UpdateAnger(hero.HeroData.takeDamageRange);
             mSkillOwner.UpdateAnger(0);
-            Debuger.Log("伤害是:"+damage);
             if (damage!=0)
             {
                 if (SkillCfg.roleTragetType== RoleTargetType.Teammate)
@@ -206,9 +210,10 @@ public class Skill
                 {
                     hero.DamageHp(damage);
                 }
-                Debuger.Log("伤害:"+damage.RawInt);
+                DamageText += $"敌人:{hero.HeroData.Name}造成:<color=#B10ADB>{damage.RawInt}</color>的伤害!";
             }
         }
+        Debuger.Log(DamageText);
         return attackHeroList;
         
     }

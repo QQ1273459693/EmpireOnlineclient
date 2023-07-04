@@ -10,6 +10,7 @@ public class RoundWindow : MonoBehaviour
     public TMP_Text roundText;
     public TMP_Text logicFrameText;
     public TMP_Text quickenMultipleText;//加速倍数
+    public TMP_Text FightInfoText;//场上信息文本
     private int MaxRoundId=15;
     public void Update()
     {
@@ -35,5 +36,9 @@ public class RoundWindow : MonoBehaviour
     public void UpdateLogicFrameCount()
     {
         logicFrameText.text = "帧数:" + LogicFrameSyncConfig.LogicFrameid;
+    }
+    public void UpdateFightInfoText(string Info)
+    {
+        FightInfoText.text = Info;
     }
 }

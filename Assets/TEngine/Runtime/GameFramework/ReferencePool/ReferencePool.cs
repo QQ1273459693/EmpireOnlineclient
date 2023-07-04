@@ -9,7 +9,7 @@ namespace TEngine
     /// </summary>
     public static partial class ReferencePool
     {
-        private static readonly Dictionary<Type, ReferenceCollection> s_ReferenceCollections = new Dictionary<Type, ReferenceCollection>();
+        private static Dictionary<Type, ReferenceCollection> s_ReferenceCollections = new Dictionary<Type, ReferenceCollection>();
         private static bool m_EnableStrictCheck = false;
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace TEngine
                 throw new GameFrameworkException("ReferenceType is invalid.");
             }
 
-            ReferenceCollection referenceCollection = null;
+            ReferenceCollection referenceCollection;
             lock (s_ReferenceCollections)
             {
                 if (!s_ReferenceCollections.TryGetValue(referenceType, out referenceCollection))

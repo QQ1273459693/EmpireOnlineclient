@@ -154,7 +154,7 @@ public class BattleWorld
     {
         battleEnd = true;
 # if CLIENT_LOGIC
-        BattleWorldNodes.Instance.battleResultWindow.SetBattleResult(isWin);
+       // BattleWorldNodes.Instance.battleResultWindow.SetBattleResult(isWin);
 #endif
         OnDestroyWorld();
     }

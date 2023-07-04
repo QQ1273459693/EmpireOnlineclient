@@ -39,6 +39,18 @@ public class RoundLogicCtrl : ILogicBehaviour
         }
         //计算英雄出手顺序,并把英雄放到队列里面
         mHeroAttackQueue = mHeroLogicCtrl.CalcuTaackSort();
+        HeroLogic heroLogic =null;
+        
+        if (mHeroAttackQueue.TryPeek(out heroLogic))
+        {
+
+        }
+        else
+        {
+            //已经是最后一个了
+        }
+
+
         StartNextHeroAttack();
 
     }

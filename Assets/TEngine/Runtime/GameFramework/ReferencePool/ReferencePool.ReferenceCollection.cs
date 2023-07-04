@@ -122,7 +122,6 @@ namespace TEngine
 
             public void Release(IReference reference)
             {
-                reference.Dispose();
                 lock (m_References)
                 {
                     if (m_EnableStrictCheck && m_References.Contains(reference))
@@ -132,9 +131,10 @@ namespace TEngine
 
                     m_References.Enqueue(reference);
                 }
-
+               
                 m_ReleaseReferenceCount++;
                 m_UsingReferenceCount--;
+                Log.Debug("已经成功释放资源,剩余数量是:" + m_UsingReferenceCount);
             }
 
             public void Add<T>(int count) where T : class, IReference, new()

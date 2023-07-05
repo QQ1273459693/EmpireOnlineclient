@@ -18,4 +18,5 @@ public class BattleWorldNodes:SingletionMono<BattleWorldNodes>
     public Transform conTerTrans;
     public Transform enemyConterTrans;
     public Transform slefHeroConterTrans;
+    public Transform DamageUHD;
 }

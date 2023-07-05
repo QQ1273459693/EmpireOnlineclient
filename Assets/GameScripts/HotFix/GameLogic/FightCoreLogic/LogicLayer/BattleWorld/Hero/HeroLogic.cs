@@ -126,7 +126,7 @@ public class HeroLogic : LogicObject
             }
             
         }
-        Debuger.Log("英雄ID:" +id+"英雄损失血量:"+damagehp+"英雄剩余血量:"+hp);
+        Debuger.Log("英雄:" + HeroData.Name+ "英雄损失血量:"+damagehp+"英雄剩余血量:"+hp);
         //把伤害数值,血量百分比传给渲染层,更新渲染数据
 #if RENDER_LOGIC
         float hpValue = hp.RawInt;//hp.RawFloat / MaxHp.RawFloat;

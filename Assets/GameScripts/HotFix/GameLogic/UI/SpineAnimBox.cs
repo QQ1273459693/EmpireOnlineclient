@@ -11,7 +11,7 @@ namespace GameLogic
 {
     public class SpineAnimBox : IPoolObject
     {
-        GameObject GO;
+        public GameObject GO;
 
         //·ÇUIHUD×é¼þ
         TextMeshPro HpText;
@@ -74,7 +74,7 @@ namespace GameLogic
         /// <param name="hpRateValue"></param>
         public void UpdateHp_Hud(int damage, float hpRateValue)
         {
-            DamageText.text = (damage > 0 ? "-" : "+") + Mathf.Abs(damage);
+            //DamageText.text = (damage > 0 ? "-" : "+") + Mathf.Abs(damage);
             HpText.text = $"Hp:{hpRateValue}";
         }
         /// <summary>

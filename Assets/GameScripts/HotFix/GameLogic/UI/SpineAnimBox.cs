@@ -15,10 +15,10 @@ namespace GameLogic
 
         //非UIHUD组件
         TextMeshPro HpText;
-        TextMeshPro DamageText;
         Transform AttackUI;
         SpriteRenderer AttackUiSprite;
 
+        public Vector3 m_HudPos;
         public long Id { get; set ; }
         public bool IsFromPool { get ; set ; }
 
@@ -38,6 +38,7 @@ namespace GameLogic
         public void IntObj(GameObject OBJ)
         {
             GO=OBJ;
+            m_HudPos=GO.transform.position;
         }
         /// <summary>
         /// 刷新数据
@@ -47,7 +48,6 @@ namespace GameLogic
             m_SpineAnimRes = SpineResName;
             RefreshSpineModle(isFlii);
             HpText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("HpText").GetComponent<TextMeshPro>();
-            DamageText = m_SpineAnimLoader.m_SpineParentGO.transform.Find("DamageHp").GetComponent<TextMeshPro>();
             AttackUI = m_SpineAnimLoader.m_SpineParentGO.transform.Find("AttackTipsPos/AttackUITips").transform;
             AttackUiSprite= AttackUI.GetComponent<SpriteRenderer>();
             AttackUI.gameObject.SetActive(false);

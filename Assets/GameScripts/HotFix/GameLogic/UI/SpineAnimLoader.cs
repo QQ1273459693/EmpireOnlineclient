@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Spine.Unity;
 using GameLogic;
+using Spine;
 
 namespace TEngine
 {
@@ -72,11 +73,26 @@ namespace TEngine
         {
             if (m_UIView)
             {
+                if (m_UIAnimation==null)
+                {
+                    return;
+                }
                 m_UIAnimation.AnimationState.SetAnimation(0, AnimName, isLoop);
             }
             else
             {
-                m_WRAnimation.AnimationState.SetAnimation(0, AnimName, isLoop);
+                if (m_WRAnimation == null)
+                {
+                    return;
+                }
+                m_WRAnimation.AnimationState.SetAnimation(0, AnimName, isLoop).Complete+= IdleLoopPlay;
+            }
+        }
+        void IdleLoopPlay(TrackEntry trackEntry)
+        {
+            if (trackEntry.Animation.Name!="Idle")
+            {
+                PlayAnimation("Idle",true);
             }
         }
         public override void Dispose()

@@ -36,10 +36,14 @@ public class HeroRender : RenderObject
     }
     public void UpdateHp_Hud(int damage, float hpRateValue)
     {
-        var Rect= GameModule.Resource.LoadAsset<GameObject>("common_DamageTips").GetComponent<RectTransform>();
-        Rect.SetParent(BattleWorldNodes.Instance.DamageUHD);
-        Rect.anchoredPosition = World3DToCanvasPos(spineAnimBox.GO.transform.position);
-        Rect.gameObject.SetActive(true);
+        if (damage!=0)
+        {
+            var DamageBox = GameModule.ObjectPool.GetObjectPool<HudDamageTipsPool>().Spawn();
+            DamageBox.Init();
+            Debuger.LogError($"看下物体名称:{spineAnimBox.GO.name},目标位置:{spineAnimBox.m_HudPos}");
+            DamageBox.AdjustPos(damage, spineAnimBox.m_HudPos);
+        }
+      
         spineAnimBox.UpdateHp_Hud(damage, hpRateValue);
     }
     /// <summary>
@@ -51,19 +55,6 @@ public class HeroRender : RenderObject
         //{
         //    mHeroHUD.UpdateAngerSlider(rate);
         //}
-    }
-    /// <summary>
-    /// 世界3D坐标转换为UGUI本地坐标
-    /// </summary>
-    /// <param name="targetPos"></param>
-    /// <returns></returns>
-    public Vector3 World3DToCanvasPos(Vector3 targetPos)
-    {
-        Vector2 uguiWorldPos;
-        Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(BattleWorldNodes.Instance.Camera3D, targetPos);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(BattleWorldNodes.Instance.HUDWindowTrans as RectTransform, screenPos,
-            BattleWorldNodes.Instance.UICamera, out uguiWorldPos);
-        return uguiWorldPos;
     }
     public override void Update()
     {

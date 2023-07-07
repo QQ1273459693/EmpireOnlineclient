@@ -8,6 +8,8 @@ public class BattleWorldNodes:SingletionMono<BattleWorldNodes>
     //敌我双方位置父节点
     public Transform[] heroTransArr;
     public Transform[] enemyTransArr;
+    public GameObject[] heroUIHpFill;
+    public GameObject[] enemyUIHpFill;
     public Transform HUDWindowTrans;
     public Camera Camera3D;
     public Camera UICamera;

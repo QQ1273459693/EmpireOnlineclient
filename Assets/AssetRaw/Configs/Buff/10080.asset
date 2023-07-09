@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d871fd7f5f7ddf045ac6a57b8ec671df, type: 3}
   m_Name: 10080
   m_EditorClassIdentifier: 
-  buffIcon: {fileID: 21300000, guid: 9edffa2daaa349b458760d1300408535, type: 3}
+  buffIcon: {fileID: 21300000, guid: d465fc4bb24e96c42bd5c13a63dacfff, type: 3}
   buffid: 10080
   buffName: "\u707C\u70E7"
-  maxStackingNum: 5
+  maxStackingNum: 2
   buffDurationRound: 2
   buffDurationTimeMs: 0
   buffTriggerIntervalMs: 0
   buffTriggerProbability: 100
-  buffType: 2
-  buffState: 3
-  buffTriggerType: 3
-  damageType: 2
+  buffType: 0
+  buffState: 4
+  buffTriggerType: 1
+  buffTriggerDamageType: 0
+  damageType: 1
   damageOrPercentage: 25
   buffEffect: 
   buffAudio: {fileID: 0}

@@ -42,8 +42,8 @@ namespace TEngine
 
         private Dictionary<GameObject, bool> m_IsAddedListener = new Dictionary<GameObject, bool>(); //用于 判断是否重复添加 点击事件
 
-        private new Action<GameObject, GameObject, int, int> m_FuncCallBackFunc;
-        protected new Action<GameObject, GameObject, int, int> m_FuncOnClickCallBack;
+        private  Action<GameObject, GameObject, int, int> m_FuncCallBackFunc;
+        protected  Action<GameObject, GameObject, int, int> m_FuncOnClickCallBack;
 
         public void Init(Action<GameObject, GameObject, int, int> callBack)
         {

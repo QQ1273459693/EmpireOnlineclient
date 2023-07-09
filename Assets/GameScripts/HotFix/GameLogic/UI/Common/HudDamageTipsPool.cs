@@ -31,7 +31,7 @@ namespace GameLogic
             m_HudObj = GameModule.Resource.LoadAsset<GameObject>(RES_NAME,out handle);
             mRectTrans = m_HudObj.GetComponent<RectTransform>();
             m_DamageText= m_HudObj.GetComponent<TMP_Text>();
-            m_HudObj.transform.SetParent(BattleWorldNodes.Instance.DamageUHD);
+            m_HudObj.transform.SetParent(BattleWordNodes.Instance.DamageUHD);
             m_HudObj.SetActive(false);
             m_HudObj.transform.localPosition = Vector3.zero;
             m_HudObj.transform.localRotation = Quaternion.identity;
@@ -48,16 +48,28 @@ namespace GameLogic
         {
 
         }
-        public void AdjustPos(int Value,Vector3 TargetPos)
+        public void AdjustPos(int Value,Vector3 TargetPos, BuffConfig buff)
         {
+            int TopDoValue = 100;
+            string BuffSr = "";
+            if (buff!=null)
+            {
+                BuffSr = buff.buffName;
+                m_DamageText.color = Color.green;
+            }
+            else
+            {
+                TopDoValue = 140;
+                m_DamageText.color = Color.red;
+            }
+            m_DamageText.text = BuffSr+(Value > 0 ? "-" : "+") + Mathf.Abs(Value);
             m_HudObj.SetActive(true);
-            m_DamageText.text = (Value > 0 ? "-" : "+") + Mathf.Abs(Value);
-            Vector3 tmpVec3 = RectTransformUtility.WorldToScreenPoint(BattleWorldNodes.Instance.Camera3D, TargetPos);
+            Vector3 tmpVec3 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, TargetPos);
 
-            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(mRectTrans, tmpVec3, BattleWorldNodes.Instance.UICamera, out tmpVec3))
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(mRectTrans, tmpVec3, BattleWordNodes.Instance.UiCamera, out tmpVec3))
             {
                 m_HudObj.transform.position = tmpVec3;
-                mRectTrans.DOAnchorPosY(mRectTrans.anchoredPosition.y + 100, 0.75F).OnComplete(() =>
+                mRectTrans.DOAnchorPosY(mRectTrans.anchoredPosition.y + TopDoValue, 0.75F).OnComplete(() =>
                 {
                     m_HudObj.SetActive(false);
                 });

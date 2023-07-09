@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c20e15daf9c13f47b213db40c739662, type: 3}
+  m_Name: SmurfBow
+  m_EditorClassIdentifier: 
+  SkelData: {fileID: 4900000, guid: 98dd77f2f451f464889ac6d6d1029cca, type: 3}
+  Atlas: {fileID: 4900000, guid: 707627674dab91542bbd5ed804af8998, type: 3}
+  Textures:
+  - {fileID: 2800000, guid: 93c6f2cd3a8250142ad7b3548e8ee7bd, type: 3}
+  Materials: {fileID: 2100000, guid: 335201c0586f1f540ab4e40d2eae291f, type: 2}

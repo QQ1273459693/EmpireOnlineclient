@@ -54,6 +54,7 @@ namespace GameLogic
         }
         public void PlayAnim(string AnimName,bool isLoop=false)
         {
+            Log.Debug("¶¯»­Ãû:"+ AnimName);
             m_SpineAnimLoader.PlayAnimation(AnimName,isLoop);
             if (AnimName=="BeAttack")
             {

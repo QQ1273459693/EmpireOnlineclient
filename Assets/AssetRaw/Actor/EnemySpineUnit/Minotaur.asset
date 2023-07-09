@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c20e15daf9c13f47b213db40c739662, type: 3}
+  m_Name: Minotaur
+  m_EditorClassIdentifier: 
+  SkelData: {fileID: 4900000, guid: 6a24695362ae0074d84c677e51fd5ad7, type: 3}
+  Atlas: {fileID: 4900000, guid: d9c732ee27145f1408c8a4c436042719, type: 3}
+  Textures:
+  - {fileID: 2800000, guid: bc9a027f30f41d040bcc914fc5a0c4d5, type: 3}
+  Materials: {fileID: 2100000, guid: ffcc6ded2aca9274caef2324365026c3, type: 2}

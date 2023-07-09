@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: 1041
   m_EditorClassIdentifier: 
   hideBullet: 1
-  hideDamagePercentage: 1
+  hideDamagePercentage: 0
   skillIcon: {fileID: 0}
   skillid: 1041
   skillName: "\u51B0\u5C01\u4E07\u91CC"
   needRageValuel: 100
-  skillShakeBeforeTimeMS: 100
+  skillShakeBeforeTimeMS: 700
   skillAttackDurationMS: 100
-  skillShakeAfterTimeMS: 100
+  skillShakeAfterTimeMS: 300
   skillType: 3
   roleTragetType: 2
   skillAttackType: 1
   bullet: 
-  damageType: 0
-  damagePercentage: 208
+  damageType: 3
+  damagePercentage: 115
   skillAnim: Attack01
   skillAudio: {fileID: 0}
   skillEffect: 
   skillHitEffect: 
-  addBuffs: e2270000
+  addBuffs: 
   skillDes: "\u9F99\u738B\u4E4B\u6012:\u51B0\u5C01\u5343\u91CC"

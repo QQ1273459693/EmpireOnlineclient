@@ -1,44 +1,52 @@
-using DG.Tweening;
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
-
 public class RoundWindow : MonoBehaviour
 {
     public TMP_Text roundText;
     public TMP_Text logicFrameText;
-    public TMP_Text quickenMultipleText;//º”ÀŸ±∂ ˝
-    public TMP_Text FightInfoText;//≥°…œ–≈œ¢Œƒ±æ
-    private int MaxRoundId=15;
-    public void Update()
+    public TMP_Text quickenMultipleText;
+    private int mMaxRoundid;
+  
+    public void RoundStart()
     {
-        UpdateLogicFrameCount();
-    }
-    public void RoundStart(int roundId)
-    {
-        roundText.text = $"{roundId}/{MaxRoundId}";
+        mMaxRoundid = BattleWorld.Instance.roundLoigc.MaxRoundID;
+        gameObject.SetActive(true);
+        roundText.text = BattleWorld.Instance.roundLoigc.RoundId + "/" + mMaxRoundid;
+        quickenMultipleText.text = "x" + BattleWorld.Instance.quickenMultiple;
     }
     public void NextRound(int roundid)
     {
-        roundText.text = $"{roundid}/{MaxRoundId}";
+        roundText.text = roundid.ToString() + "/" + mMaxRoundid;
     }
-    public void OnButtonGamePause()
+
+    public void JumpButtonClick()
     {
-        WorldManager.BattleWorld.PauseBattle();
+        HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
     }
-    public void OnQuckenBattle()
+    /// <summary>
+    /// ÊöÇÂÅúÊ∏∏Êàè
+    /// </summary>
+    public void PauseBattleButtonClick()
     {
-        //WorldManager.BattleWorld.QuickenBattle();
-        //quickenMultipleText.text = "X" + WorldManager.BattleWorld.QuickenMultiple;
+        BattleWorld.Instance.PauseBattle();
     }
+    /// <summary>
+    /// Âä†ÈÄüÊ∏∏Êàè
+    /// </summary>
+    public void QuickenButtonClick()
+    {
+        BattleWorld.Instance.QuickenBattle();
+        quickenMultipleText.text = "x"+BattleWorld.Instance.quickenMultiple;
+    }
+    /// <summary>
+    /// Êõ¥Êñ∞ÈÄªËæëÂ∏ßÊòæÁ§∫
+    /// </summary>
     public void UpdateLogicFrameCount()
     {
-        logicFrameText.text = "÷° ˝:" + LogicFrameSyncConfig.LogicFrameid;
-    }
-    public void UpdateFightInfoText(string Info)
-    {
-        FightInfoText.text = Info;
+        logicFrameText.text = "Â∏ßÊï∞:"+ FrameSyncConfig.LogicFrameid;
     }
 }

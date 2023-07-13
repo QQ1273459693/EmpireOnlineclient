@@ -81,7 +81,7 @@ public class SkillConfig
  
 public enum DamageType  //伤害类型，所有伤害都是基于攻击力
 {
-    [LabelText("无伤害")] None,               //无伤害
+    [LabelText("无伤害")] None,               //无伤害//
     [LabelText("普通伤害")] NomalDamage,        //普通伤害
     [LabelText("真实伤害 (无视护盾、减伤)")] RealDamage,         //真实伤害 (无视护盾、减伤)
     [LabelText("攻击力百分比伤害")] AtkPercentage,      //攻击力百分比伤害

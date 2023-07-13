@@ -1,3 +1,4 @@
+using GabrielBigardi.SpriteAnimator;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace GameLogic
         public GameObject HudDamage;
         public bool isTips;
         public List<GameObject> HP;
+
+        public SpriteAnimator spriteAnimator;
 
         // Start is called before the first frame update
         void Start()

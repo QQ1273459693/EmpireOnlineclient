@@ -41,6 +41,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/AssetRaw/Actor/PixelHeroRes
+        CollectorGUID: d534a0f0fb95f7245b407aa19c27aafe
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
     - GroupName: UIRaw
       GroupDesc: "\u56FE\u7247\u8D44\u6E90"
       AssetTags: UIRaw

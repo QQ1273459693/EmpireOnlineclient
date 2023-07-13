@@ -7,12 +7,14 @@ using UnityEngine.UI;
 using TMPro;
 using GameLogic;
 using UnityEditor.Experimental.GraphView;
+using TEngine;
 
 public class HeroRender : RenderObject
 {
     public HeroData HeroData { get; private set; }
     public HeroTeamEnum heroTeam;
-    SpineAnimBox spineAnimBox;
+    //SpineAnimBox spineAnimBox;//骨骼模型
+    PixelHeroBox pixelHeroBox;//像素模型
     Image m_HpFill;
 
     public void SetHeroData(HeroData heroData, HeroTeamEnum heroTeam)
@@ -24,9 +26,14 @@ public class HeroRender : RenderObject
     
     public void Initlizate()
     {
-        spineAnimBox = GameModule.ObjectPool.GetObjectPool<SpineAnimBox>().Spawn();
-        spineAnimBox.IntObj(gameObject);
-        spineAnimBox.RefreshData(ConfigLoader.Instance.Tables.TbEnemySpine.DataMap[HeroData.id].SpineResName, heroTeam == HeroTeamEnum.Self);
+        pixelHeroBox= GameModule.ObjectPool.GetObjectPool<PixelHeroBox>().Spawn();
+        pixelHeroBox.Initialize(gameObject.transform);
+        pixelHeroBox.RefreshData(ConfigLoader.Instance.Tables.TbEnemySpine.DataMap[HeroData.id].PixelResName, heroTeam == HeroTeamEnum.Self);
+
+
+        //spineAnimBox = GameModule.ObjectPool.GetObjectPool<SpineAnimBox>().Spawn();
+        //spineAnimBox.IntObj(gameObject);
+        //spineAnimBox.RefreshData(ConfigLoader.Instance.Tables.TbEnemySpine.DataMap[HeroData.id].SpineResName, heroTeam == HeroTeamEnum.Self);
         UpdateHP_HUD(0, HeroData.hp, 1);
     }
     public override void Update()
@@ -39,7 +46,8 @@ public class HeroRender : RenderObject
 
     public void PlayAnim(string animName)
     {
-        spineAnimBox.PlayAnim(animName);
+        pixelHeroBox.PlayAnim(animName);
+        //spineAnimBox.PlayAnim(animName);
     }
     public void SetAnimState(AnimState state)
     {
@@ -53,13 +61,13 @@ public class HeroRender : RenderObject
             var DamageBox = GameModule.ObjectPool.GetObjectPool<HudDamageTipsPool>().Spawn();
             DamageBox.Init();
             //Debuger.LogError($"看下物体名称:{spineAnimBox.GO.name},目标位置:{spineAnimBox.m_HudPos}");
-            DamageBox.AdjustPos(damage, spineAnimBox.m_HudPos, buffCfg);
+            DamageBox.AdjustPos(damage, pixelHeroBox.m_HudPos /*spineAnimBox.m_HudPos*/, buffCfg);
             m_HpFill.DOFillAmount(Hpfill, 0.45F);
         }
         else
         {
             //第一次加载HUD
-            Vector3 tmpVec31 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, spineAnimBox.m_HudPos);
+            Vector3 tmpVec31 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, pixelHeroBox.m_HudPos  /*spineAnimBox.m_HudPos*/);
 
             RectTransform HpObj = heroTeam == HeroTeamEnum.Self ? BattleWordNodes.Instance.heroUIHpFill[HeroData.seatid] : BattleWordNodes.Instance.enemyUIHpFill[HeroData.seatid];
 
@@ -70,10 +78,11 @@ public class HeroRender : RenderObject
             if (RectTransformUtility.ScreenPointToWorldPointInRectangle(HpObj, tmpVec31, BattleWordNodes.Instance.UiCamera, out tmpVec31))
             {
                 HpObj.transform.position = tmpVec31;
+                Log.Debug("位置变化:"+ tmpVec31);
             }
         }
-
-        spineAnimBox.UpdateHp_Hud(damage, hpRateValue);
+        pixelHeroBox.UpdateHp_Hud(damage, hpRateValue);
+        //spineAnimBox.UpdateHp_Hud(damage, hpRateValue);
 
         //生成Buff伤害提示
         if (buffCfg != null)
@@ -102,7 +111,8 @@ public class HeroRender : RenderObject
 
     public void HeroDeath()
     {
-        spineAnimBox.UpdateHp_Hud(0, 0);
+        pixelHeroBox.UpdateHp_Hud(0,0);
+        //spineAnimBox.UpdateHp_Hud(0, 0);
         m_HpFill.DOFillAmount(0, 0.45F).OnComplete(() =>
         {
             m_HpFill.transform.parent.gameObject.SetActive(false);
@@ -114,7 +124,8 @@ public class HeroRender : RenderObject
     public override void OnRelease()
     {
         base.OnRelease();
-        spineAnimBox.OnUnspawn();
+        pixelHeroBox.OnUnspawn();
+        //spineAnimBox.OnUnspawn();
     }
 }
 #endif

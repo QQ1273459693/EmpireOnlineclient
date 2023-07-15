@@ -8,6 +8,7 @@ using TMPro;
 using GameLogic;
 using UnityEditor.Experimental.GraphView;
 using TEngine;
+using System;
 
 public class HeroRender : RenderObject
 {
@@ -46,8 +47,12 @@ public class HeroRender : RenderObject
 
     public void PlayAnim(string animName)
     {
-        pixelHeroBox.PlayAnim(animName);
+        pixelHeroBox.PlayAnim(animName, Vector3.zero,null);
         //spineAnimBox.PlayAnim(animName);
+    }
+    public void NewPlayAnim(string animName,Vector3 TargetPos,Action DamageAction)
+    {
+        pixelHeroBox.PlayAnim(animName, TargetPos,DamageAction);
     }
     public void SetAnimState(AnimState state)
     {
@@ -78,7 +83,6 @@ public class HeroRender : RenderObject
             if (RectTransformUtility.ScreenPointToWorldPointInRectangle(HpObj, tmpVec31, BattleWordNodes.Instance.UiCamera, out tmpVec31))
             {
                 HpObj.transform.position = tmpVec31;
-                Log.Debug("位置变化:"+ tmpVec31);
             }
         }
         pixelHeroBox.UpdateHp_Hud(damage, hpRateValue);

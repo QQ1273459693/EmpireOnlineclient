@@ -14,7 +14,8 @@ namespace GameLogic
     public class PixelHeroBox : IPoolObject
     {
         public GameObject GO;
-
+        Transform m_HeroTrs;
+        Vector3 m_Position;
         //非UIHUD组件
         TextMeshPro HpText;
         Transform AttackUI;
@@ -39,9 +40,11 @@ namespace GameLogic
         public void Initialize(Transform parntObj)
         {
             GO = GameModule.Resource.LoadAsset<GameObject>("PixelHeroRoot");
+            m_HeroTrs = GO.transform;
+            m_Position = parntObj.position;
             animator = GO.GetComponent<SpriteAnimator>();
             m_HudPos = new Vector3(parntObj.position.x, parntObj.position.y-1);
-            GO.transform.SetParent(parntObj,false);
+            m_HeroTrs.SetParent(parntObj,false);
         }
         /// <summary>
         /// 刷新数据
@@ -51,41 +54,91 @@ namespace GameLogic
             SpriteAnimationObject spriteAnimation = GameModule.Resource.LoadAsset<SpriteAnimationObject>(SpineResName);
             animator.ChangeAnimationObject(spriteAnimation);
             animator.enabled = true;
-            GO.transform.localRotation = new Quaternion(0, isFlii ? 0 : 180, 0, 0);
-            HpText = GO.transform.Find("HpText").GetComponent<TextMeshPro>();
-            AttackUI = GO.transform.Find("AttackTipsPos/AttackUITips").transform;
+            m_HeroTrs.localRotation = new Quaternion(0, isFlii ? 0 : 180, 0, 0);
+            HpText = m_HeroTrs.Find("HpText").GetComponent<TextMeshPro>();
+            AttackUI = m_HeroTrs.Find("AttackTipsPos/AttackUITips").transform;
             AttackUiSprite = AttackUI.GetComponent<SpriteRenderer>();
             AttackUI.gameObject.SetActive(false);
         }
-        public void PlayAnim(string AnimName, bool isLoop = false)
+        public void PlayAnim(string AnimName, Vector3 TargetPos,Action DamageAction,bool isLoop = false)
         {
             if (AnimName == "BeAttack"|| animator==null)
             {
                 return;
             }
-            Log.Debug("动画名:"+ AnimName);
-            if (AnimName!="Idle")
-            {
-                //则全部返回Idle动画
-                animator.Play(AnimName).OnAnimationComplete+= IdleLoopPlay;
-            }
-            else
+
+
+            animator.Play("Move");
+            //移动到目标位置再释放技能名,再回来
+            m_HeroTrs.DOMove(TargetPos, 1F).OnComplete(() =>
             {
 
-                animator.Play(AnimName);
-            }
-            
-            AttackUI.gameObject.SetActive(true);
-            AttackUiSprite.color = Color.white;
-            AttackUiSprite.DOBlendableColor(Color.clear,1F);
-            AttackUI.DOLocalJump(new Vector3(0, 3.5F), 2, 1, 0.9F).OnComplete(() =>
-            {
-                AttackUI.gameObject.SetActive(false);
+                animator.Play(AnimName).OnAnimationComplete += AttackBackIdle;
+
+                DamageAction?.Invoke();
+
+                AttackUI.gameObject.SetActive(true);
+                AttackUiSprite.color = Color.white;
+                AttackUiSprite.DOBlendableColor(Color.clear, 1F);
+                AttackUI.DOLocalJump(new Vector3(0, 3.5F), 2, 1, 0.9F).OnComplete(() =>
+                {
+                    AttackUI.gameObject.SetActive(false);
+                });
             });
+
+
+            //if (TargetPos!=null)
+            //{
+            //    animator.Play("Move");
+            //    //移动到目标位置再释放技能名,再回来
+            //    m_HeroTrs.DOMove(TargetPos, 1F).OnComplete(() =>
+            //    {
+
+            //        animator.Play(AnimName).OnAnimationComplete+= AttackBackIdle;
+
+            //        AttackUI.gameObject.SetActive(true);
+            //        AttackUiSprite.color = Color.white;
+            //        AttackUiSprite.DOBlendableColor(Color.clear, 1F);
+            //        AttackUI.DOLocalJump(new Vector3(0, 3.5F), 2, 1, 0.9F).OnComplete(() =>
+            //        {
+            //            AttackUI.gameObject.SetActive(false);
+            //        });
+            //    });
+            //}
+            //else
+            //{
+            //    Log.Debug("动画名:" + AnimName);
+            //    if (AnimName != "Idle")
+            //    {
+            //        //则全部返回Idle动画
+            //        animator.Play(AnimName).OnAnimationComplete += IdleLoopPlay;
+            //    }
+            //    else
+            //    {
+
+            //        animator.Play(AnimName);
+            //    }
+
+            //    AttackUI.gameObject.SetActive(true);
+            //    AttackUiSprite.color = Color.white;
+            //    AttackUiSprite.DOBlendableColor(Color.clear, 1F);
+            //    AttackUI.DOLocalJump(new Vector3(0, 3.5F), 2, 1, 0.9F).OnComplete(() =>
+            //    {
+            //        AttackUI.gameObject.SetActive(false);
+            //    });
+            //}
+
+
         }
         void IdleLoopPlay()
         {
             animator.Play("Idle");
+        }
+        void AttackBackIdle()
+        {
+            animator.Play("Idle");
+            m_HeroTrs.DOMove(m_Position, 1F);
+
         }
         /// <summary>
         /// 更新Hp相关HUD显示

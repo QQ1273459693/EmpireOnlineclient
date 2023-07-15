@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 916cd297972ff0b47ada39fc66a28a22
+guid: f0a140637463a4b4ea9bfabeec63e43d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -20,12 +20,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -48,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -64,7 +63,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -77,7 +75,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -90,7 +87,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -103,92 +99,91 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2_HeroIdle_0
+      name: 3_HeroMagicAttack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 68
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 94
+        height: 90
+      alignment: 9
+      pivot: {x: 0.51, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3790a74a0c554d04ea3d712aebb19c83
-      internalID: -1575021825
+      spriteID: aea462a0eb8b8b34c9bfa6dd844d3739
+      internalID: -1751102664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_HeroIdle_1
+      name: 3_HeroMagicAttack_1
       rect:
         serializedVersion: 2
-        x: 68
+        x: 94
         y: 0
-        width: 68
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 94
+        height: 90
+      alignment: 9
+      pivot: {x: 0.51, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10db62e452b57e54aa040196582bfe5a
-      internalID: 1753850687
+      spriteID: 0b40a8fb974291a41bc912a616e59a0a
+      internalID: 1796893077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_HeroIdle_2
+      name: 3_HeroMagicAttack_2
       rect:
         serializedVersion: 2
-        x: 136
+        x: 188
         y: 0
-        width: 68
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 94
+        height: 90
+      alignment: 9
+      pivot: {x: 0.51, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b291d5e641aeeb4f8fad5e7c29ae867
-      internalID: 551590225
+      spriteID: a08ba345950cfde40a529e4e3f897d83
+      internalID: 1319684160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_HeroIdle_3
+      name: 3_HeroMagicAttack_3
       rect:
         serializedVersion: 2
-        x: 204
+        x: 282
         y: 0
-        width: 68
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 94
+        height: 90
+      alignment: 9
+      pivot: {x: 0.51, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e74edbc56491c2f43a9655d8922e80a2
-      internalID: -545449842
+      spriteID: abb2b3a6d74a63a4fbf4237ccf200306
+      internalID: 1148893488
       vertices: []
       indices: 
       edges: []
@@ -204,12 +199,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      2_HeroIdle_0: -1575021825
-      2_HeroIdle_1: 1753850687
-      2_HeroIdle_2: 551590225
-      2_HeroIdle_3: -545449842
-  mipmapLimitGroupName: 
+      3_HeroMagicAttack_0: -1751102664
+      3_HeroMagicAttack_1: 1796893077
+      3_HeroMagicAttack_2: 1319684160
+      3_HeroMagicAttack_3: 1148893488
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

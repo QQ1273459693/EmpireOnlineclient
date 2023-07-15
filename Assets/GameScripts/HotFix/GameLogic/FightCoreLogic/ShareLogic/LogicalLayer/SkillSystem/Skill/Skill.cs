@@ -44,27 +44,29 @@ public class Skill
 
 
         Debuger.Log("释放技能" + mSkillCfg.skillid);
-        PlayAnimation();
-        if (mSkillCfg.skillType == SkillType.MoveToAttack || mSkillCfg.skillType == SkillType.MoveToEnemyConter || mSkillCfg.skillType == SkillType.MoveToConter)//移动攻击形技能
-        {
-            MoveTarget(TriggerSkill);
-        }
-        else if (mSkillCfg.skillType == SkillType.Chant) //吟唱技能
-        {
-            LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillShakeBeforeTimeMS, TriggerSkill);
-        }
-        else if (mSkillCfg.skillType == SkillType.Ballistic)//子弹技能
-        {
-            LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillShakeBeforeTimeMS, CreateBullet);
-        }
+        PlayAnimation(TriggerSkill);
+        //if (mSkillCfg.skillType == SkillType.MoveToAttack || mSkillCfg.skillType == SkillType.MoveToEnemyConter || mSkillCfg.skillType == SkillType.MoveToConter)//移动攻击形技能
+        //{
+        //    PlayAnimation();
+        //    //MoveTarget(TriggerSkill);
+        //}
+        //else if (mSkillCfg.skillType == SkillType.Chant) //吟唱技能
+        //{
+        //    LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillShakeBeforeTimeMS, TriggerSkill);
+        //}
+        //else if (mSkillCfg.skillType == SkillType.Ballistic)//子弹技能
+        //{
+        //    LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillShakeBeforeTimeMS, CreateBullet);
+        //}
     }
-    public void PlayAnimation()
+    public void PlayAnimation(Action TrigeSkill=null)
     {
         Log.Debug("看下技能名称:"+ mSkillCfg.skillAnim);
-        mSkillOwner.PlayAnim(mSkillCfg.skillAnim);
+        //mSkillOwner.PlayAnim(mSkillCfg.skillAnim);
+        mSkillOwner.NewPlayAnim(mSkillCfg.skillAnim,BattleWordNodes.Instance.conterTrans.position, TrigeSkill);
 #if CLIENT_LOGIC
         //if (!mIsNormalAtk)
-           // BattleWordNodes.Instance.skillWindow.PlayAnim(mSkillCfg, mSkillOwner.id);
+        // BattleWordNodes.Instance.skillWindow.PlayAnim(mSkillCfg, mSkillOwner.id);
 #endif
         //mSkillOwner.PlayAnim(mSkillCfg.skillAnim);
     }
@@ -78,12 +80,14 @@ public class Skill
         VInt3 targetPos = VInt3.zero;
 #if CLIENT_LOGIC
         //获取目标位置
+        mSkillTarget = BattleRule.GetNomalAttackTarget(BattleWorld.Instance.heroLogic.GetHeroListByTeam(mSkillOwner, (HeroTeamEnum)mSkillCfg.roleTragetType), mSkillOwner.HeroData.seatid);
+        targetPos = new VInt3(mSkillTarget.LogicPosition.x, mSkillTarget.LogicPosition.y, mSkillTarget.LogicPosition.z);
         //if (mSkillCfg.skillType == SkillType.MoveToAttack)
         //{
         //    mSkillTarget = BattleRule.GetNomalAttackTarget(BattleWorld.Instance.heroLogic.GetHeroListByTeam(mSkillOwner, (HeroTeamEnum)mSkillCfg.roleTragetType), mSkillOwner.HeroData.seatid);
         //    targetPos = new VInt3(mSkillTarget.LogicPosition.x, mSkillTarget.LogicPosition.y, mSkillTarget.LogicPosition.z);
-        //    VInt z = mSkillOwner.HeroTeam == HeroTeamEnum.Enemy ? new VInt(-3).Int : new VInt(3).Int;
-        //    targetPos.z -= z.RawInt;
+        //    //VInt z = mSkillOwner.HeroTeam == HeroTeamEnum.Enemy ? new VInt(-3).Int : new VInt(3).Int;
+        //    //targetPos.z -= z.RawInt;
         //}
         //else if (mSkillCfg.skillType == SkillType.MoveToEnemyConter)
         //{
@@ -94,6 +98,8 @@ public class Skill
         //    targetPos = new VInt3(BattleWordNodes.Instance.conterTrans.position);
         //}
 #endif
+
+        Log.Debug("移动完成,目标位置是:"+ targetPos);
         //Debuger.Log("MoveAttackTarget : targetPos:" + targetPos.vec3 + " 移动目标id：" + ((HeroLogic)mSkillTarget).id + " 目标状态:" + ((HeroLogic)mSkillTarget).objectState);
         MoveToAction action = new MoveToAction(mSkillOwner, targetPos, (VInt)mSkillCfg.skillShakeBeforeTimeMS, moveFinish);
         ActionManager.Instance.RunAction(action);
@@ -143,7 +149,7 @@ public class Skill
                 angle.y = 180;
                 skillEffect.transform.eulerAngles = angle;
             }
-            if (mSkillCfg.skillAttackType == SkillAttackType.AllHero)
+            if(mSkillCfg.skillAttackType == SkillAttackType.AllHero)
             {
                 skillEffect.GetComponent<SkillEffect>().SetEffectPos(VInt3.zero);
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum AnimState
@@ -294,6 +295,14 @@ public class HeroLogic : LogicObject
 #if RENDER_LOGIC
         HeroRender.PlayAnim(animName);
 #endif
+    }
+    /// <summary>
+    /// 新播放动画
+    /// </summary>
+    /// <param name="animName"></param>
+    public void NewPlayAnim(string animName,Vector3 TargetPos,Action DamageAction)
+    {
+        HeroRender.NewPlayAnim(animName,TargetPos,DamageAction);
     }
     public void SetAnimState(AnimState state)
     {

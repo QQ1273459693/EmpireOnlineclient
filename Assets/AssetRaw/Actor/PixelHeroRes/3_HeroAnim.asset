@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fafcc6bd2ee94ebe9ac341b986e7a, type: 3}
+  m_Name: 3_HeroAnim
+  m_EditorClassIdentifier: 
+  SpriteAnimations:
+  - Name: Idle
+    FPS: 10
+    Frames:
+    - {fileID: 911590010, guid: 573282220baae574eaa5c204468a04af, type: 3}
+    - {fileID: 1197915838, guid: 573282220baae574eaa5c204468a04af, type: 3}
+    - {fileID: 331143511, guid: 573282220baae574eaa5c204468a04af, type: 3}
+    - {fileID: -1045546052, guid: 573282220baae574eaa5c204468a04af, type: 3}
+    SpriteAnimationType: 0
+  - Name: Attack
+    FPS: 10
+    Frames:
+    - {fileID: -670677374, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: 1430148611, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -778007904, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -33661526, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -328034489, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: 1147819457, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: 490017162, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: 1429377659, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -871229339, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    - {fileID: -733347645, guid: 37f1ac5faa80dff49afb27a10b479097, type: 3}
+    SpriteAnimationType: 0
+  - Name: MagicAttack
+    FPS: 10
+    Frames:
+    - {fileID: -1751102664, guid: f0a140637463a4b4ea9bfabeec63e43d, type: 3}
+    - {fileID: 1796893077, guid: f0a140637463a4b4ea9bfabeec63e43d, type: 3}
+    - {fileID: 1319684160, guid: f0a140637463a4b4ea9bfabeec63e43d, type: 3}
+    - {fileID: 1148893488, guid: f0a140637463a4b4ea9bfabeec63e43d, type: 3}
+    SpriteAnimationType: 0
+  - Name: Move
+    FPS: 10
+    Frames:
+    - {fileID: 21300000, guid: d211eaa194e644742813d18a5f159c8b, type: 3}
+    SpriteAnimationType: 0

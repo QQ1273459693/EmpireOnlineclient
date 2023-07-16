@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fafcc6bd2ee94ebe9ac341b986e7a, type: 3}
+  m_Name: MainHeroAnim
+  m_EditorClassIdentifier: 
+  SpriteAnimations:
+  - Name: Attack
+    FPS: 18
+    Frames:
+    - {fileID: 21300000, guid: 5f21de50218bf3947b427e23c9629d7d, type: 3}
+    - {fileID: 21300000, guid: d58153676b7f5364bb39c1d3f35f5e60, type: 3}
+    - {fileID: 21300000, guid: 21961e0d1e486ac4f9e625049177df8e, type: 3}
+    - {fileID: 21300000, guid: 6309b4594cdf75c47b1346e8774e4c04, type: 3}
+    - {fileID: 21300000, guid: eaf9f7a5d4b719841b6de07340fd0d9b, type: 3}
+    - {fileID: 21300000, guid: c3d8b4fe22fd0704ab629d16b15dfcf1, type: 3}
+    - {fileID: 21300000, guid: 186a9fef43facb84c836b5ac2e701438, type: 3}
+    - {fileID: 21300000, guid: b4ab97e6813674044ac58f98a970064d, type: 3}
+    - {fileID: 21300000, guid: 21c4de51e6dc11c4eb81eff58f872800, type: 3}
+    - {fileID: 21300000, guid: c83fc9d5d06ec974f957339bedcd8657, type: 3}
+    - {fileID: 21300000, guid: d9110ae2cc12cb64f921119f2b314bb6, type: 3}
+    - {fileID: 21300000, guid: 5c472c51e04ff96468b1257eb88f8af4, type: 3}
+    SpriteAnimationType: 0
+  - Name: Idle
+    FPS: 10
+    Frames:
+    - {fileID: 21300000, guid: 5357b58e3fa5c054d9569fabba9aa53d, type: 3}
+    - {fileID: 21300000, guid: 7a83eece1e8b2244e9824dc5a44efddb, type: 3}
+    - {fileID: 21300000, guid: a450eea02c8271c419fab019c32e27c8, type: 3}
+    - {fileID: 21300000, guid: d90b19b1a21634048ae4836c032c97ce, type: 3}
+    - {fileID: 21300000, guid: 76c2a762f2911804e9b54ab5bbf034db, type: 3}
+    - {fileID: 21300000, guid: f2630c4ef0f5b8c4ab721d21d079bd33, type: 3}
+    SpriteAnimationType: 0

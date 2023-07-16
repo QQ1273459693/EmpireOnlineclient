@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIRaw_NewPixeGUI_skill_board
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 0
+      compressionQuality: 0
+      maxTextureSize: 0
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 49
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 433d64cdac4016944af1b3fc3c233f5d, type: 3}
+    - {fileID: 21300000, guid: 5185b8a7efbccdc4382d8fa5ee446085, type: 3}
+    - {fileID: 21300000, guid: f5cca2d53e027b14a95d0b9f91000b7f, type: 3}
+    - {fileID: 21300000, guid: 66cd9231e10cc5744b2333c1bc3dad4a, type: 3}
+    - {fileID: 21300000, guid: 0297a0d6f2fe43b40a60160d05b42e05, type: 3}
+    - {fileID: 21300000, guid: 0cb196a857c6b8848abd9478597d0178, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 66cd9231e10cc5744b2333c1bc3dad4a: 21300000
+    - f5cca2d53e027b14a95d0b9f91000b7f: 21300000
+    - 0297a0d6f2fe43b40a60160d05b42e05: 21300000
+    - 5185b8a7efbccdc4382d8fa5ee446085: 21300000
+    - 0cb196a857c6b8848abd9478597d0178: 21300000
+    - 433d64cdac4016944af1b3fc3c233f5d: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 66cd9231e10cc5744b2333c1bc3dad4a, type: 3}
+  - {fileID: 21300000, guid: f5cca2d53e027b14a95d0b9f91000b7f, type: 3}
+  - {fileID: 21300000, guid: 0297a0d6f2fe43b40a60160d05b42e05, type: 3}
+  - {fileID: 21300000, guid: 5185b8a7efbccdc4382d8fa5ee446085, type: 3}
+  - {fileID: 21300000, guid: 0cb196a857c6b8848abd9478597d0178, type: 3}
+  - {fileID: 21300000, guid: 433d64cdac4016944af1b3fc3c233f5d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - board_04
+  - board_03
+  - board_05
+  - board_02
+  - board_06
+  - board_01
+  m_RenderDataMap: {}
+  m_Tag: UIRaw_NewPixeGUI_skill_board
+  m_IsVariant: 0

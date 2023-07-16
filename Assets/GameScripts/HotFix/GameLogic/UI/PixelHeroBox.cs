@@ -23,7 +23,7 @@ namespace GameLogic
 
         //数据组件
         SpriteAnimator animator;
-
+        Action m_Action;
         public Vector3 m_HudPos;
         public long Id { get; set; }
         public bool IsFromPool { get; set; }
@@ -60,6 +60,7 @@ namespace GameLogic
             AttackUiSprite = AttackUI.GetComponent<SpriteRenderer>();
             AttackUI.gameObject.SetActive(false);
         }
+        
         public void PlayAnim(string AnimName, Vector3 TargetPos,Action DamageAction,bool isLoop = false)
         {
             if (AnimName == "BeAttack"|| animator==null)
@@ -67,15 +68,14 @@ namespace GameLogic
                 return;
             }
 
-
+            m_Action = DamageAction;
             animator.Play("Move");
             //移动到目标位置再释放技能名,再回来
-            m_HeroTrs.DOMove(TargetPos, 1F).OnComplete(() =>
+            m_HeroTrs.DOMove(TargetPos, 0.4F).SetEase(Ease.Linear).OnComplete(() =>
             {
 
-                animator.Play(AnimName).OnAnimationComplete += AttackBackIdle;
+                animator.Play(AnimName).OnAnimationComplete+= AttackBackIdle;
 
-                DamageAction?.Invoke();
 
                 AttackUI.gameObject.SetActive(true);
                 AttackUiSprite.color = Color.white;
@@ -136,8 +136,12 @@ namespace GameLogic
         }
         void AttackBackIdle()
         {
-            animator.Play("Idle");
-            m_HeroTrs.DOMove(m_Position, 1F);
+            m_Action?.Invoke();
+            animator.Play("Move");
+            m_HeroTrs.DOMove(m_Position, 0.5F).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                animator.Play("Idle");
+            });
 
         }
         /// <summary>

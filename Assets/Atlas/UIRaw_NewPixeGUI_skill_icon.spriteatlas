@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIRaw_NewPixeGUI_skill_icon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 0
+      compressionQuality: 0
+      maxTextureSize: 0
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 49
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 0a6c6858ad30f4a409d9f12745e5aa0f, type: 3}
+    - {fileID: 21300000, guid: aa592833ef668624d89d98e2585fad10, type: 3}
+    - {fileID: 21300000, guid: 253bfeb0759dffe4db600730e1cb2c3d, type: 3}
+    - {fileID: 21300000, guid: 477f7305af9399e4b8eca923f40d4250, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 253bfeb0759dffe4db600730e1cb2c3d: 21300000
+    - aa592833ef668624d89d98e2585fad10: 21300000
+    - 477f7305af9399e4b8eca923f40d4250: 21300000
+    - 0a6c6858ad30f4a409d9f12745e5aa0f: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 253bfeb0759dffe4db600730e1cb2c3d, type: 3}
+  - {fileID: 21300000, guid: aa592833ef668624d89d98e2585fad10, type: 3}
+  - {fileID: 21300000, guid: 477f7305af9399e4b8eca923f40d4250, type: 3}
+  - {fileID: 21300000, guid: 0a6c6858ad30f4a409d9f12745e5aa0f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - icon_s
+  - icon_padlock
+  - icon_skill_01
+  - icon_gold
+  m_RenderDataMap: {}
+  m_Tag: UIRaw_NewPixeGUI_skill_icon
+  m_IsVariant: 0

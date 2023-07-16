@@ -61,7 +61,7 @@ public class HeroLogicCtrl : ILogicBehaviour
         foreach (var item in AllHeroList)
         {
             heroLogicQueue.Enqueue(item);
-            //Debuger.Log(" agl" + item.Agl);
+            Debuger.Log(" agl" + item.Agl);
         }
   
         return heroLogicQueue;

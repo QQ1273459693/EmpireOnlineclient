@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 8cd4b3bd3c0e87f4b8be80c4b2f10165
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 4_HeroAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 696
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba8141511f87f040b35ea930a92fc95
+      internalID: -802263933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_1
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 696
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16d40266ea69e044691c9f3daf4820c8
+      internalID: 1685900103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_2
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 696
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5bf04c3532546d458982842dc03de70
+      internalID: -222041429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_3
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 696
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d73f47ad692a642979761523be419b
+      internalID: -272936800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_4
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 696
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb0ecaaf44c33344bbdb5d278444d762
+      internalID: 1443881919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 522
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c247c554f60e941b02f429f4181c3c
+      internalID: -84621983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_6
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 522
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d8d68bb5ab02c4c9b9cc35e7d092a2
+      internalID: 1952422733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_7
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 522
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74ad2676ed1e4144b95b9e27025fedb
+      internalID: -1644379290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_8
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 522
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce561e5b5e42cb4c97617d670d75c76
+      internalID: 318623147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_9
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 522
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 045d3a839d43e4e4c9350b84e4190460
+      internalID: 977528779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 348
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aafd6bbfa75e3354db6836a75de9a815
+      internalID: -184264492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_11
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 348
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75472aca86aa7d94eb45d53849c1f6f2
+      internalID: -60039983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_12
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 348
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d80fcd5076a03a4183dbaeedd1c533a
+      internalID: 115681563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_13
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 348
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cc587267fbe13944b75f588453387cf
+      internalID: 1384838183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_14
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 348
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a0cc5d99262194998aa19f47d91a54
+      internalID: 75576180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 174
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c20a1b231c5268144afce82d10e56562
+      internalID: -2016345000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_16
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 174
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fe6b0b3a6962f648ae33124e2de722d
+      internalID: -1891584685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_17
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 174
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66c34fddad8820d438c46489c1dffaf1
+      internalID: -269122777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_18
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 174
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96e0b186b1c9ce41b36d59323997ba8
+      internalID: 311293752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_19
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 174
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73e3c39a96ff275498d3ee02fb813662
+      internalID: -1867138904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02841d3fc9d77c7439c720913366eccc
+      internalID: -1626359392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_21
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 0
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ab5fe4e68d1374d9d18229f62ef6dc
+      internalID: 1534812890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_22
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 0
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d69e8d558578214198420ea39207fc1
+      internalID: -30593332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroAttack_23
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 0
+        width: 233
+        height: 174
+      alignment: 9
+      pivot: {x: 0.504, y: 0.243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac98c00bea34fc44d81145965f591c9e
+      internalID: 1610710984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      4_HeroAttack_0: -802263933
+      4_HeroAttack_1: 1685900103
+      4_HeroAttack_10: -184264492
+      4_HeroAttack_11: -60039983
+      4_HeroAttack_12: 115681563
+      4_HeroAttack_13: 1384838183
+      4_HeroAttack_14: 75576180
+      4_HeroAttack_15: -2016345000
+      4_HeroAttack_16: -1891584685
+      4_HeroAttack_17: -269122777
+      4_HeroAttack_18: 311293752
+      4_HeroAttack_19: -1867138904
+      4_HeroAttack_2: -222041429
+      4_HeroAttack_20: -1626359392
+      4_HeroAttack_21: 1534812890
+      4_HeroAttack_22: -30593332
+      4_HeroAttack_23: 1610710984
+      4_HeroAttack_3: -272936800
+      4_HeroAttack_4: 1443881919
+      4_HeroAttack_5: -84621983
+      4_HeroAttack_6: 1952422733
+      4_HeroAttack_7: -1644379290
+      4_HeroAttack_8: 318623147
+      4_HeroAttack_9: 977528779
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

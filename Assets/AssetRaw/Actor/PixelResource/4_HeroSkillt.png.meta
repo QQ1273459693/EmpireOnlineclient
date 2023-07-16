@@ -1,0 +1,765 @@
+fileFormatVersion: 2
+guid: 7a29888dcd6d48c42a1f6fdbdd400bf2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 4_HeroSkillt_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abbe1117c442ebb468def8267757f5f1
+      internalID: -758282409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_1
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d849ca059e3cf474e96bfc532118fc2b
+      internalID: 435370836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_2
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc44abf7d9aa35a4db17d195c2313cbd
+      internalID: -1353481687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_3
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5050f6416f3110549851bf4d103fd9dd
+      internalID: -1390482725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_4
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533c796cafe70b5428d9f0e76832954f
+      internalID: 1122516207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_5
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 2088
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc3cda32ea0bee04d9c19f71c3a9694c
+      internalID: 1837760498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6979fc20ec37dee4cb9257cdacbb150e
+      internalID: -742735754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_7
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0332e2bae02b3c9458dc14f98523be3b
+      internalID: 597674335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_8
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71b9e405198f00408a8ff9d9436303b
+      internalID: 1332603254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_9
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a7ea6b4f4fe30041bf137d99dc0be5c
+      internalID: 714468943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_10
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca02fd461e4015c48af8200c65ad6fce
+      internalID: 982314891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_11
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 1566
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f06884fa3be010f4b8993e4500a71fed
+      internalID: -581490177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34591e640b84214da5babddc2265ced
+      internalID: -798691326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_13
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acaa02db616177344b25f42cfb229bb0
+      internalID: 346487695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_14
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 619531dddaeb5934d82b79da4fe3c564
+      internalID: -1177235802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_15
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019a0e2db29a13048a6608cc5e433b64
+      internalID: -1689646642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_16
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3db0d08948c8bb44fb225f411800b051
+      internalID: 754909065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_17
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 1044
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da0eed7e010086c40a239e9f82a1c202
+      internalID: 215267785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c469b6e0c80114f9680425efc542ad
+      internalID: 268428641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_19
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a48c04ec4d65c434584349c4368b068a
+      internalID: -1266349508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_20
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b716ca20ab114c4ba33670e364f0928
+      internalID: 2018795037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_21
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f64e07cf7d463249bfe52bf03f2c701
+      internalID: 111030302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_22
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46b12e51011f8e14c9283c12d00f42bf
+      internalID: 1307598725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_23
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 522
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35aec8a1f21567447bb64fb2a5ebc6b3
+      internalID: -1465167335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb174f3efa884aa4099e02fb8f932997
+      internalID: 2074186841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_25
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5087d442ba9146845bd8223ef4733511
+      internalID: -968394972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_26
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 0
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d55f4960673dd4cb079084e0e35f4a
+      internalID: 1848528128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_27
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 0
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dbb514ca568e554b9524ac0da66827b
+      internalID: 1881565992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_HeroSkillt_28
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 0
+        width: 612
+        height: 522
+      alignment: 9
+      pivot: {x: 0.61, y: 0.41}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4a97dfa450acbf48a6e11bc2a8c08f6
+      internalID: 220207842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      4_HeroSkillt_0: -758282409
+      4_HeroSkillt_1: 435370836
+      4_HeroSkillt_10: 982314891
+      4_HeroSkillt_11: -581490177
+      4_HeroSkillt_12: -798691326
+      4_HeroSkillt_13: 346487695
+      4_HeroSkillt_14: -1177235802
+      4_HeroSkillt_15: -1689646642
+      4_HeroSkillt_16: 754909065
+      4_HeroSkillt_17: 215267785
+      4_HeroSkillt_18: 268428641
+      4_HeroSkillt_19: -1266349508
+      4_HeroSkillt_2: -1353481687
+      4_HeroSkillt_20: 2018795037
+      4_HeroSkillt_21: 111030302
+      4_HeroSkillt_22: 1307598725
+      4_HeroSkillt_23: -1465167335
+      4_HeroSkillt_24: 2074186841
+      4_HeroSkillt_25: -968394972
+      4_HeroSkillt_26: 1848528128
+      4_HeroSkillt_27: 1881565992
+      4_HeroSkillt_28: 220207842
+      4_HeroSkillt_3: -1390482725
+      4_HeroSkillt_4: 1122516207
+      4_HeroSkillt_5: 1837760498
+      4_HeroSkillt_6: -742735754
+      4_HeroSkillt_7: 597674335
+      4_HeroSkillt_8: 1332603254
+      4_HeroSkillt_9: 714468943
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GabrielBigardi.SpriteAnimator
 {
@@ -8,6 +9,8 @@ namespace GabrielBigardi.SpriteAnimator
         [SerializeField] private bool _playAutomatically = false;
         [SerializeField] private SpriteAnimationObject _spriteAnimationObject;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Image _spriteImag;
+        [SerializeField] private bool UI;
 
         private SpriteAnimation _currentAnimation;
         private float _animationTime = 0f;
@@ -38,15 +41,22 @@ namespace GabrielBigardi.SpriteAnimator
 
         private void LateUpdate()
         {
-            if (_paused || _spriteRenderer == null)
+            if (_paused /*|| _spriteRenderer == null*/)
                 return;
 
             Sprite currentFrame = UpdateAnimation(Time.deltaTime);
 
             if (currentFrame == null)
                 return;
-
-            _spriteRenderer.sprite = currentFrame;
+            if (UI)
+            {
+                _spriteImag.sprite = currentFrame;
+            }
+            else
+            {
+                _spriteRenderer.sprite = currentFrame;
+            }
+            
         }
 
         public SpriteAnimator Play(string name, int startFrame = 0)

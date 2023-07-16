@@ -31,6 +31,7 @@ public class ConfigConter
             heroData.Name = Data.Name;
             heroData.maxRage = Data.MaxRage;
             heroData.atkRange = Data.AtkRage;
+            heroData.agl = Data.Age;
             heroData.seatid = 0;//这个座位是根据自己设置的
             heroData.takeDamageRange = Data.TakeDamageRage;
             heroData.skillidArr.AddRange(Data.SkillidList);

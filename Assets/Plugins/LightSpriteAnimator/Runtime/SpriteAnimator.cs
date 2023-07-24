@@ -114,6 +114,10 @@ namespace GabrielBigardi.SpriteAnimator
 
             return this;
         }
+        public bool AnimationPlaying(string name)
+        {
+            return _currentAnimation.Name == name;
+        }
 
         public void Pause() => _paused = true;
 

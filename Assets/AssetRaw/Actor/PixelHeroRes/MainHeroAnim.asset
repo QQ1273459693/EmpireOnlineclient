@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: MainHeroAnim
   m_EditorClassIdentifier: 
   SpriteAnimations:
+  - Name: Idle
+    FPS: 10
+    Frames:
+    - {fileID: 21300000, guid: 5357b58e3fa5c054d9569fabba9aa53d, type: 3}
+    - {fileID: 21300000, guid: 7a83eece1e8b2244e9824dc5a44efddb, type: 3}
+    - {fileID: 21300000, guid: a450eea02c8271c419fab019c32e27c8, type: 3}
+    - {fileID: 21300000, guid: d90b19b1a21634048ae4836c032c97ce, type: 3}
+    - {fileID: 21300000, guid: 76c2a762f2911804e9b54ab5bbf034db, type: 3}
+    - {fileID: 21300000, guid: f2630c4ef0f5b8c4ab721d21d079bd33, type: 3}
+    SpriteAnimationType: 0
   - Name: Attack
     FPS: 18
     Frames:
@@ -29,13 +39,43 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d9110ae2cc12cb64f921119f2b314bb6, type: 3}
     - {fileID: 21300000, guid: 5c472c51e04ff96468b1257eb88f8af4, type: 3}
     SpriteAnimationType: 0
-  - Name: Idle
-    FPS: 10
+  - Name: BegingMove
+    FPS: 18
     Frames:
-    - {fileID: 21300000, guid: 5357b58e3fa5c054d9569fabba9aa53d, type: 3}
-    - {fileID: 21300000, guid: 7a83eece1e8b2244e9824dc5a44efddb, type: 3}
-    - {fileID: 21300000, guid: a450eea02c8271c419fab019c32e27c8, type: 3}
-    - {fileID: 21300000, guid: d90b19b1a21634048ae4836c032c97ce, type: 3}
-    - {fileID: 21300000, guid: 76c2a762f2911804e9b54ab5bbf034db, type: 3}
-    - {fileID: 21300000, guid: f2630c4ef0f5b8c4ab721d21d079bd33, type: 3}
+    - {fileID: 21300000, guid: 94638308e4baeee4bac5ad4fcdc01d57, type: 3}
+    - {fileID: 21300000, guid: d399418b86b75184fb093499718332e9, type: 3}
+    - {fileID: 21300000, guid: 5d0dc4f04a208124f9d1580ab41cfa78, type: 3}
+    SpriteAnimationType: 0
+  - Name: Moveing
+    FPS: 18
+    Frames:
+    - {fileID: 21300000, guid: 82d65c13a74b1524c9a70bb37f75752d, type: 3}
+    - {fileID: 21300000, guid: e7a3e5b2757f25e40a9f227698f38fd4, type: 3}
+    - {fileID: 21300000, guid: cff72dfaf194fd449824c990af97fb95, type: 3}
+    - {fileID: 21300000, guid: b5cabc42495322b458a7d09cbf8a3c02, type: 3}
+    - {fileID: 21300000, guid: 04db2e7ddc38ba9429db6050945aef38, type: 3}
+    - {fileID: 21300000, guid: cd30864a297219e4abd5090175f2d76c, type: 3}
+    - {fileID: 21300000, guid: 0c24c4121fc5d044fabc537216c67c4a, type: 3}
+    - {fileID: 21300000, guid: 6c5e1df73a49e324ebb0f7f19dc04dae, type: 3}
+    SpriteAnimationType: 0
+  - Name: MoveEnd
+    FPS: 25
+    Frames:
+    - {fileID: 21300000, guid: 8c7a7fce5564781409e39c094b0b27ba, type: 3}
+    - {fileID: 21300000, guid: 2dc866afb61b7d84daab153f2b6fbac2, type: 3}
+    - {fileID: 21300000, guid: abd7b67f06cd2ba48988c20c5fbfe959, type: 3}
+    - {fileID: 21300000, guid: 8a9c642162b5fab4a9d2a4fe232ead17, type: 3}
+    - {fileID: 21300000, guid: f28ecb3dc49676949a271e7a1946bc16, type: 3}
+    - {fileID: 21300000, guid: 898fd24cd88f54649948d8455bf30bf8, type: 3}
+    - {fileID: 21300000, guid: a8005298ffde4774aa2f47a16dc38cca, type: 3}
+    SpriteAnimationType: 0
+  - Name: Trun
+    FPS: 20
+    Frames:
+    - {fileID: 21300000, guid: 30eeccfa31f049d4eb2729ddeb279529, type: 3}
+    - {fileID: 21300000, guid: b7ae6c0e1a31fee4a81eaf00be64f715, type: 3}
+    - {fileID: 21300000, guid: 3d90db69421863443beb8d6c37fe1acb, type: 3}
+    - {fileID: 21300000, guid: e7c2353ee7e1d8143b1b7ac3cc9be109, type: 3}
+    - {fileID: 21300000, guid: d4685fe7cb62e754cb4c0f50b28f6009, type: 3}
+    - {fileID: 21300000, guid: 6921813e863b5ce4d9071dbcca15ed04, type: 3}
     SpriteAnimationType: 0

@@ -19,11 +19,12 @@ namespace GameLogic
         public SpriteAnimator animator;
         float m_LastPosX;
         Vector2 m_CurClickMousPos;
-        public Transform camrme;
         void OnEnable()
         {
             agent.OnDestinationReached += OnDestinationReached;
             agent.OnNavigationStarted += OnDestinationStart;
+            agent.OnNavigationPointReached += OnFFFFF;
+            agent.OnDestinationInvalid += On5555FFFFF;
         }
 
         void OnDisable()
@@ -35,6 +36,14 @@ namespace GameLogic
         {
             Application.targetFrameRate = 60;
             m_LastPosX = transform.position.x;
+        }
+        void OnFFFFF(Vector2 vector2)
+        {
+            Debug.Log("看下触发条件:"+vector2);
+        }
+        void On5555FFFFF()
+        {
+            animator.Play("Idle");
         }
         /// <summary>
         /// 寻路结束到达目的地
@@ -117,10 +126,6 @@ namespace GameLogic
                 //Debug.Log($"点击的位置:{Camera.main.ScreenToWorldPoint(Input.mousePosition)}");
                 agent.SetDestination(m_CurClickMousPos);
             }
-        }
-        private void LateUpdate()
-        {
-            camrme.position = transform.position;
         }
     }
 }

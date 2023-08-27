@@ -36,14 +36,20 @@ public interface ILogicSys
     void OnFixedUpdate();
 
     /// <summary>
+    /// 登录账号/角色时调用
+    /// </summary>
+    void OnRoleLogin();
+    
+    /// <summary>
     /// 清理数据接口，切换账号/角色时调用
     /// </summary>
     void OnRoleLogout();
 
     /// <summary>
-    /// OnDrawGizmos
+    /// 绘制调试接口
     /// </summary>
     void OnDrawGizmos();
+    
     /// <summary>
     /// 暂停游戏
     /// </summary>

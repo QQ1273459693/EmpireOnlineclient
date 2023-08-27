@@ -36,15 +36,15 @@ namespace GameProto
         /// <typeparam name="TKey">键。</typeparam>
         /// <typeparam name="TValue">值。</typeparam>
         /// <returns>是否拷贝成功。</returns>
-        public static bool CopyConfigDict<TKey, TValue>(ref Dictionary<TKey, TValue> dict,List<TValue> source, ConvertDictionaryKey<TKey, TValue> convKey)
+        public static bool CopyConfigDict<TKey, TValue>(ref Dictionary<TKey, TValue> dict, List<TValue> source, ConvertDictionaryKey<TKey, TValue> convKey)
         {
             if (source == null)
             {
                 return false;
             }
-            
+
             dict.Clear();
-            
+
             bool failed = false;
             for (int i = 0; i < source.Count; i++)
             {

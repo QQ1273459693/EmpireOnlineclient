@@ -20,26 +20,26 @@ public sealed partial class Tables
     public enemySpine.TbEnemySpine TbEnemySpine {get; }
     public enemyConfig.TbEnemyConfig TbEnemyConfig {get; }
 
-    public Tables(System.Func<string, JSONNode> loader)
+    public Tables(System.Func<string, ByteBuf> idxLoader, System.Func<string, ByteBuf> dataLoader)
     {
-        var tables = new System.Collections.Generic.Dictionary<string, object>();
-        TbItem = new item.TbItem(loader("item_tbitem")); 
-        tables.Add("item.TbItem", TbItem);
-        TbEquipment = new equipment.TbEquipment(loader("equipment_tbequipment")); 
-        tables.Add("equipment.TbEquipment", TbEquipment);
-        TbItemBgGround = new itemBackGround.TbItemBgGround(loader("itembackground_tbitembgground")); 
-        tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
-        TbEnemySpine = new enemySpine.TbEnemySpine(loader("enemyspine_tbenemyspine")); 
-        tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
-        TbEnemyConfig = new enemyConfig.TbEnemyConfig(loader("enemyconfig_tbenemyconfig")); 
-        tables.Add("enemyConfig.TbEnemyConfig", TbEnemyConfig);
-        PostInit();
+        //var tables = new System.Collections.Generic.Dictionary<string, object>();
+        //TbItem = new item.TbItem(idxLoader("item_tbitem")); 
+        //tables.Add("item.TbItem", TbItem);
+        //TbEquipment = new equipment.TbEquipment(loader("equipment_tbequipment")); 
+        //tables.Add("equipment.TbEquipment", TbEquipment);
+        //TbItemBgGround = new itemBackGround.TbItemBgGround(loader("itembackground_tbitembgground")); 
+        //tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
+        //TbEnemySpine = new enemySpine.TbEnemySpine(loader("enemyspine_tbenemyspine")); 
+        //tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
+        //TbEnemyConfig = new enemyConfig.TbEnemyConfig(loader("enemyconfig_tbenemyconfig")); 
+        //tables.Add("enemyConfig.TbEnemyConfig", TbEnemyConfig);
+        //PostInit();
 
-        TbItem.Resolve(tables); 
-        TbEquipment.Resolve(tables); 
-        TbItemBgGround.Resolve(tables); 
-        TbEnemySpine.Resolve(tables); 
-        TbEnemyConfig.Resolve(tables); 
+        //TbItem.Resolve(tables); 
+        //TbEquipment.Resolve(tables); 
+        //TbItemBgGround.Resolve(tables); 
+        //TbEnemySpine.Resolve(tables); 
+        //TbEnemyConfig.Resolve(tables); 
         PostResolve();
     }
 

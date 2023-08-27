@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TEngine
 {
     /// <summary>
-    /// 通过LogicSys来驱动且具备Unity完整生命周期的单例（不继承MonoBehaviour）
+    /// 通过LogicSys来驱动且具备Unity完整生命周期的单例（不继承MonoBehaviour）。
+    /// <remarks>Update、FixUpdate以及LateUpdate这些敏感帧更新需要加上对应的Attribute以最优化性能。</remarks>
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">完整生命周期的类型。</typeparam>
     public abstract class BehaviourSingleton<T> : BaseBehaviourSingleton where T : BaseBehaviourSingleton, new()
     {
         private static T _instance;
@@ -44,20 +46,31 @@ namespace TEngine
         {
         }
 
-        public virtual bool IsHaveLateUpdate()
-        {
-            return false;
-        }
-
         public virtual void Start()
         {
         }
 
+        /// <summary>
+        /// 帧更新。
+        /// <remarks>需要UpdateAttribute。</remarks>
+        /// </summary>
         public virtual void Update()
         {
         }
 
+        /// <summary>
+        /// 后帧更新。
+        /// <remarks>需要LateUpdateAttribute。</remarks>
+        /// </summary>
         public virtual void LateUpdate()
+        {
+        }
+        
+        /// <summary>
+        /// 物理帧更新。
+        /// <remarks>需要FixedUpdateAttribute。</remarks>
+        /// </summary>
+        public virtual void FixedUpdate()
         {
         }
 
@@ -84,12 +97,25 @@ namespace TEngine
         private readonly List<BaseBehaviourSingleton> _listStart = new List<BaseBehaviourSingleton>();
         private readonly List<BaseBehaviourSingleton> _listUpdate = new List<BaseBehaviourSingleton>();
         private readonly List<BaseBehaviourSingleton> _listLateUpdate = new List<BaseBehaviourSingleton>();
+        private readonly List<BaseBehaviourSingleton> _listFixedUpdate = new List<BaseBehaviourSingleton>();
 
         public void RegSingleton(BaseBehaviourSingleton inst)
         {
             Log.Assert(!_listInst.Contains(inst));
             _listInst.Add(inst);
             _listStart.Add(inst);
+            if (HadAttribute<UpdateAttribute>(inst.GetType()))
+            {
+                _listUpdate.Add(inst);
+            }
+            if (HadAttribute<LateUpdateAttribute>(inst.GetType()))
+            {
+                _listLateUpdate.Add(inst);
+            }
+            if (HadAttribute<FixedUpdateAttribute>(inst.GetType()))
+            {
+                _listFixedUpdate.Add(inst);
+            }
         }
 
         public void UnRegSingleton(BaseBehaviourSingleton inst)
@@ -129,7 +155,6 @@ namespace TEngine
         {
             var listStart = _listStart;
             var listToUpdate = _listUpdate;
-            var listToLateUpdate = _listLateUpdate;
             if (listStart.Count > 0)
             {
                 for (int i = 0; i < listStart.Count; i++)
@@ -139,12 +164,6 @@ namespace TEngine
 
                     inst.IsStart = true;
                     inst.Start();
-                    listToUpdate.Add(inst);
-
-                    if (inst.IsHaveLateUpdate())
-                    {
-                        listToLateUpdate.Add(inst);
-                    }
                 }
 
                 listStart.Clear();
@@ -171,6 +190,20 @@ namespace TEngine
 
                 TProfiler.BeginFirstSample(inst.GetType().FullName);
                 inst.LateUpdate();
+                TProfiler.EndFirstSample();
+            }
+        }
+        
+        public override void OnFixedUpdate()
+        {
+            var listFixedUpdate = _listFixedUpdate;
+            var listFixedUpdateCnt = listFixedUpdate.Count;
+            for (int i = 0; i < listFixedUpdateCnt; i++)
+            {
+                var inst = listFixedUpdate[i];
+
+                TProfiler.BeginFirstSample(inst.GetType().FullName);
+                inst.FixedUpdate();
                 TProfiler.EndFirstSample();
             }
         }
@@ -207,6 +240,13 @@ namespace TEngine
                 var inst = _listInst[i];
                 inst.OnDrawGizmos();
             }
+        }
+        
+        private bool HadAttribute<T>(Type type) where T:Attribute
+        {
+            T attribute = Attribute.GetCustomAttribute(type, typeof(T)) as T;
+
+            return attribute != null;
         }
     }
 }

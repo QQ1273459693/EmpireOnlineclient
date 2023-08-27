@@ -1,26 +1,31 @@
+using System.Collections.Generic;
+using System.Reflection;
 using GameBase;
 using GameLogic;
-using System.Collections.Generic;
 using TEngine;
 
 public partial class GameApp:Singleton<GameApp>
 {
+    private static List<Assembly> _hotfixAssembly;
+    
     /// <summary>
     /// 热更域App主入口。
     /// </summary>
     /// <param name="objects"></param>
     public static void Entrance(object[] objects)
     {
+        _hotfixAssembly = (List<Assembly>)objects[0];
         Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
         Log.Warning("======= Entrance GameApp =======");
         Instance.Init();
-        Instance.Start();//
+        Instance.Start();
         Utility.Unity.AddUpdateListener(Instance.Update);
         Utility.Unity.AddFixedUpdateListener(Instance.FixedUpdate);
         Utility.Unity.AddLateUpdateListener(Instance.LateUpdate);
         Utility.Unity.AddDestroyListener(Instance.OnDestroy);
         Utility.Unity.AddOnDrawGizmosListener(Instance.OnDrawGizmos);
         Utility.Unity.AddOnApplicationPauseListener(Instance.OnApplicationPause);
+        GameModule.Procedure.RestartProcedure(new GameLogic.OnEnterGameAppProcedure());
         Instance.StartGameLogic();
     }
 
@@ -32,7 +37,7 @@ public partial class GameApp:Singleton<GameApp>
     {
         L_BagSystemDate.Instance.m_Curlong = 1;
         L_BagSystemDate.Instance.LoadBagListData();
-        L_CharacterDataController.Instance.LoadCharacterData();    
+        L_CharacterDataController.Instance.LoadCharacterData();
         GameModule.UI.ShowUI<Normal_TapToStart>();
     }
 
@@ -67,15 +72,12 @@ public partial class GameApp:Singleton<GameApp>
 #endif
         }
     }
-    List<ILogicSys> listLogic;
-    int logicCnt;
+
     private void Start()
     {
         GameTime.StartFrame();
-        //var listLogic = _listLogicMgr;
-        //var logicCnt = listLogic.Count;
-        listLogic = _listLogicMgr;
-        logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -87,8 +89,8 @@ public partial class GameApp:Singleton<GameApp>
     {
         GameTime.StartFrame();
         TProfiler.BeginFirstSample("Update");
-        //listLogic = _listLogicMgr;
-        //logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -103,8 +105,8 @@ public partial class GameApp:Singleton<GameApp>
     {
         GameTime.StartFrame();
         TProfiler.BeginFirstSample("FixedUpdate");
-        //listLogic = _listLogicMgr;
-        //logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -119,8 +121,8 @@ public partial class GameApp:Singleton<GameApp>
     {
         GameTime.StartFrame();
         TProfiler.BeginFirstSample("LateUpdate");
-        //var listLogic = _listLogicMgr;
-        //var logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -134,8 +136,8 @@ public partial class GameApp:Singleton<GameApp>
     private void OnDestroy()
     {
         GameTime.StartFrame();
-        //var listLogic = _listLogicMgr;
-        //var logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -147,8 +149,8 @@ public partial class GameApp:Singleton<GameApp>
     {
 #if UNITY_EDITOR
         GameTime.StartFrame();
-        //var listLogic = _listLogicMgr;
-        //var logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];
@@ -159,8 +161,8 @@ public partial class GameApp:Singleton<GameApp>
 
     private void OnApplicationPause(bool isPause)
     {
-        //var listLogic = _listLogicMgr;
-        //var logicCnt = listLogic.Count;
+        var listLogic = _listLogicMgr;
+        var logicCnt = listLogic.Count;
         for (int i = 0; i < logicCnt; i++)
         {
             var logic = listLogic[i];

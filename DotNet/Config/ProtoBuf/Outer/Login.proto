@@ -1,0 +1,23 @@
+syntax = "proto3";
+package TEngine.Network.Message;
+/// 客户端发送消息请求注册账户
+message C2L_CreateRole // IRequest,L2C_CreateRole
+{
+	string UserName = 1;
+	string Password = 2;
+	uint SDKUID = 3;
+}
+message L2C_CreateRole // IResponse
+{
+	uint UID = 1;
+}
+/// 登陆上行
+message C2L_Login // IRequest,L2C_Login
+{
+	string UserName = 1;
+	string Password = 2;
+}
+message L2C_Login // IResponse
+{
+	uint UID = 1;
+}

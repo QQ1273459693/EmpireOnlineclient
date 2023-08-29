@@ -77,8 +77,8 @@ namespace TEngine
         protected bool isClearList = false; //是否清空列表
 
         // 对象池
-        protected Spawner spawner;//对象池组件
-        Dictionary<GameObject,SpawnHandle> spanHandleList = new Dictionary<GameObject, SpawnHandle>();
+        protected ResourcePackage package;//对象池组件
+        Dictionary<GameObject, AssetOperationHandle> spanHandleList = new Dictionary<GameObject, AssetOperationHandle>();
         //protected Stack<GameObject> Pool = new Stack<GameObject>();
         protected bool isInited = false;
 
@@ -101,8 +101,9 @@ namespace TEngine
 
         public virtual void Init(Action<GameObject, int> callBack, Action<GameObject, int> onClickCallBack)
         {
-            spawner = UniPooling.CreateSpawner("DefaultPackage");
-            spawner.CreateGameObjectPoolAsync(CellItemRes);//创建对象池,里面已经判断是否已经创建
+            //spawner = UniPooling.CreateSpawner("DefaultPackage");
+            //spawner.CreateGameObjectPoolAsync(CellItemRes);//创建对象池,里面已经判断是否已经创建
+            package = YooAssets.GetPackage("DefaultPackage");
             DisposeAll();
 
             FuncCallBackFunc = callBack;
@@ -462,7 +463,7 @@ namespace TEngine
         {
             foreach (var item in spanHandleList.Values)
             {
-                item.Restore();
+                item.Release();
             }
             spanHandleList.Clear();
         }
@@ -529,12 +530,15 @@ namespace TEngine
         //取出 cell
         protected virtual GameObject GetPoolsObj()
         {
-            SpawnHandle handle = spawner.SpawnSync(CellItemRes, content.transform);
-            GameObject cell = handle.GameObj;
+            AssetOperationHandle spawnHandle = package.LoadAssetSync<GameObject>(CellItemRes); /*.SpawnSync(m_ResName, m_RootGo);*/
+            GameObject cell = spawnHandle.InstantiateSync(content.transform);
+
+            //AssetOperationHandle handle = /*spawner.SpawnSync(CellItemRes, content.transform);*/
+            //GameObject cell = handle.GameObj;
             cell.transform.localScale = Vector3.one;
             if (!spanHandleList.ContainsKey(cell))
             {
-                spanHandleList.Add(cell, handle);
+                spanHandleList.Add(cell, spawnHandle);
             }
             //Log.Debug("SpanHandle列表长度是:"+ spanHandleList.Count);
 
@@ -554,7 +558,7 @@ namespace TEngine
             if (cell != null)
             {
                 //Log.Debug("没回收吗");
-                spanHandleList[cell].Restore();
+                spanHandleList[cell].Release();
                 spanHandleList.Remove(cell);
                 //Pool.Push(cell);
                 //SetActive(cell, false);

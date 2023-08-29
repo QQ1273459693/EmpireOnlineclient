@@ -177,6 +177,10 @@ namespace TEngine
         {
             return DUnityUtil.FindChild(trans, path);
         }
+        public void SetActive(GameObject obj,bool Active)
+        {
+            DUnityUtil.SetActive(obj,Active);
+        }
 
         public T FindChildComponent<T>(string path) where T : Component
         {

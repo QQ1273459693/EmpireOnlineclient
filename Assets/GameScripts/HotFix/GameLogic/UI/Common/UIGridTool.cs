@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using YooAsset;
 
 namespace TEngine
@@ -9,8 +10,8 @@ namespace TEngine
         public Transform m_RootGo;
         private string m_ResName;
         private List<GameObject> m_ElemList = new List<GameObject>();
-        Dictionary<GameObject,SpawnHandle> ListSpawnHandle = new Dictionary<GameObject, SpawnHandle>();
-        Spawner spawner;
+        Dictionary<GameObject, AssetOperationHandle> ListSpawnHandle = new Dictionary<GameObject, AssetOperationHandle>();
+        ResourcePackage package;
 
         private int m_Count;
         public int Count { get { return m_ElemList.Count; } }
@@ -18,8 +19,7 @@ namespace TEngine
         {
             m_RootGo = root.transform;
             m_ResName = resName;
-            spawner = UniPooling.CreateSpawner("DefaultPackage");
-            spawner.CreateGameObjectPoolAsync(resName);
+            package = YooAssets.GetPackage("DefaultPackage");
             //GameModule.ObjectPool.CreateMultiSpawnObjectPool<GameObject>("FF");
             //Game.ResourcesMgr.LoadBundleByType(EABType.ItemPrefab, resName);
             //m_TemplateGo = Game.ResourcesMgr.GetAssetByType<GameObject>(EABType.ItemPrefab, resName);
@@ -69,13 +69,14 @@ namespace TEngine
             //tmpNewElem.name = $"{m_TemplateGo.name}{m_ElemList.Count}";
             //tmpNewElem.SetActive(true);
             //tmpNewElem.transform.SetParent(m_RootGo.transform, false);
-            SpawnHandle spawnHandle = spawner.SpawnSync(m_ResName, m_RootGo);
-            spawnHandle.GameObj.transform.localScale = Vector3.one;
-            var Rect = spawnHandle.GameObj.GetComponent<RectTransform>();
+            AssetOperationHandle spawnHandle = package.LoadAssetSync<GameObject>(m_ResName); /*.SpawnSync(m_ResName, m_RootGo);*/
+            GameObject go = spawnHandle.InstantiateSync(m_RootGo);
+            //go.transform.localScale = Vector3.one;
+            var Rect = go.GetComponent<RectTransform>();
             Rect.anchoredPosition3D = new Vector3(0, 0, 0);
-            ListSpawnHandle.Add(spawnHandle.GameObj,spawnHandle);
-            m_ElemList.Add(spawnHandle.GameObj);
-            return spawnHandle.GameObj;
+            ListSpawnHandle.Add(go, spawnHandle);
+            m_ElemList.Add(go);
+            return go;
         }
         public void MoveToLast(int index)
         {
@@ -101,13 +102,13 @@ namespace TEngine
         {
             GameObject obj = m_ElemList[index];
             m_ElemList.RemoveAt(index);
-            ListSpawnHandle[obj].Restore();
+            ListSpawnHandle[obj].Release();
         }
 
         public void RemoveAndDespawn(GameObject obj)
         {
             m_ElemList.Remove(obj);
-            ListSpawnHandle[obj].Restore();
+            ListSpawnHandle[obj].Release();
         }
         public void Remove(GameObject obj)
         {
@@ -117,7 +118,7 @@ namespace TEngine
         {
             foreach (var item in ListSpawnHandle.Values)
             {
-                item.Restore();
+                item.Release();
             }
             ListSpawnHandle.Clear();
             m_ElemList.Clear();

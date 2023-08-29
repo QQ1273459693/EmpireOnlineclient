@@ -76,7 +76,10 @@ namespace TEngine
 
             return null;
         }
-
+        public static void SetActive(GameObject transform, bool active)
+        {
+            transform.SetActive(active);
+        }
         /// <summary>
         /// 根据名字找到子节点，主要用于dummy接口
         /// </summary>

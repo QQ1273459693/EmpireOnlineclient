@@ -3,6 +3,7 @@ using System.Reflection;
 using GameBase;
 using GameLogic;
 using TEngine;
+using TEngine.Core.Network;
 
 public partial class GameApp:Singleton<GameApp>
 {
@@ -35,10 +36,12 @@ public partial class GameApp:Singleton<GameApp>
     /// </summary>
     private void StartGameLogic()
     {
-        L_BagSystemDate.Instance.m_Curlong = 1;
-        L_BagSystemDate.Instance.LoadBagListData();
-        L_CharacterDataController.Instance.LoadCharacterData();
-        GameModule.UI.ShowUI<Normal_TapToStart>();
+        //L_BagSystemDate.Instance.m_Curlong = 1;
+        //L_BagSystemDate.Instance.LoadBagListData();
+        //L_CharacterDataController.Instance.LoadCharacterData();
+        ConnectController.Instance.OnConnectServer();
+        GameModule.UI.ShowUI<Main_Login>();
+        //GameModule.Resource.LoadSceneAsync("SC Pixel Art Top Down - Basic");
     }
 
     /// <summary>

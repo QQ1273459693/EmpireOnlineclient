@@ -53,7 +53,7 @@ namespace TEngine
 
         private void Start()
         {
-            RootModule rootModule = GameEntry.GetModule<RootModule>();
+            RootModule rootModule = GameModuleSystem.GetModule<RootModule>();
             if (rootModule == null)
             {
                 Log.Fatal("Base component is invalid.");
@@ -549,8 +549,19 @@ namespace TEngine
                     return window;
                 }
             }
-
             return null;
+        }
+        public T FindWindow<T>() where T: UIWindow
+        {
+            for (int i = 0; i < _stack.Count; i++)
+            {
+                UIWindow window = _stack[i];
+                if (window.GetType()== typeof(T))
+                {
+                    return window as T;
+                }
+            }
+            return default(T);
         }
         /// <summary>
         /// 这里是指定隐藏Normal层级1的窗口

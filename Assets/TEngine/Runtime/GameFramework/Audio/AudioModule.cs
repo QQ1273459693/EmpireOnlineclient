@@ -228,6 +228,8 @@ namespace TEngine
                 {
                     return;
                 }
+                
+                _audioCategories[(int)AudioType.Music].Enable = value;
 
                 // 音乐采用0音量方式，避免恢复播放时的复杂逻辑
                 if (value)
@@ -329,14 +331,14 @@ namespace TEngine
         /// </summary>
         private void Initialize()
         {
-            RootModule rootModule = GameEntry.GetModule<RootModule>();
+            RootModule rootModule = GameModuleSystem.GetModule<RootModule>();
             if (rootModule == null)
             {
                 Log.Fatal("Base component is invalid.");
                 return;
             }
 
-            ResourceManager = GameFrameworkEntry.GetModule<IResourceManager>();
+            ResourceManager = GameFrameworkModuleSystem.GetModule<IResourceManager>();
 
             if (m_InstanceRoot == null)
             {

@@ -39,7 +39,7 @@ namespace YooAsset
 				// 添加远程调试脚本
 				_driver.AddComponent<RemoteDebuggerInRuntime>();
 #endif
-				UniPooling.Initalize();
+
 				OperationSystem.Initialize();
 				DownloadSystem.Initialize();
 			}

@@ -325,7 +325,7 @@ namespace TEngine
             {
                 if (typeof(T) == typeof(GameObject))
                 {
-                    GameObject ret = assetHandleData.Handle.InstantiateSync();
+                    GameObject ret = assetHandleData.Handle.InstantiateSync(parent);
                     return ret as T;
                 }
                 else
@@ -379,11 +379,11 @@ namespace TEngine
                 }
             }
             
-            AssetOperationHandle handle = GameModule.Resource.LoadAssetAsyncHandle<GameObject>(assetName);
+            AssetOperationHandle handle = GameModule.Resource.LoadAssetAsyncHandle<T>(assetName);
 
             Reference(handle);
 
-            bool cancelOrFailed = await handle.ToUniTask(cancellationToken: cancellationToken).SuppressCancellationThrow();
+            bool cancelOrFailed = await handle.ToUniTask().AttachExternalCancellation(cancellationToken).SuppressCancellationThrow();
 
             if (cancelOrFailed)
             {

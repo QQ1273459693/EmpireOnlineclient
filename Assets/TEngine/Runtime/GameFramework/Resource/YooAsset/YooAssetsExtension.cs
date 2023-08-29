@@ -87,7 +87,7 @@ namespace YooAsset
 		/// <param name="assetInfo">资源信息</param>
 		public static RawFileOperationHandle LoadRawFileSync(AssetInfo assetInfo)
 		{
-			DebugCheckDefaultPackageValid();
+            DebugCheckDefaultPackageValid();
 			return _defaultPackage.LoadRawFileSync(assetInfo);
 		}
 

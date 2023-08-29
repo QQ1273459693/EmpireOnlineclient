@@ -19,15 +19,8 @@ namespace TEngine.Demo
         public bool IsLoginAddress;
 
         public Text Message;
-        public Button SendButton;
-        public Button SendRPCButton;
-        public Button ReceiveButton;
-        public Button SendAddressButton;
-        public Button SendAddressRPCButton;
-        public Button ReceiveAddressButton;
         public Button ConnentServerButton;
-        public Button LoginAddressButton;
-        public Button ReqUIInfoButton;
+        public Button ReqCreateRoleButton;
         public Button ReqLoginButton;
 
         IEnumerator Start()
@@ -47,15 +40,15 @@ namespace TEngine.Demo
             networkEntryComponent.Action = LogDebug;
             // 到这里为止框架就配置完成了
             // 下面是给每个按钮增加事件、不属于框架的部分了
-            SendButton.onClick.AddListener(OnSendButtonClick);
-            SendRPCButton.onClick.AddListener(() => OnSendRPCButtonClick().Coroutine());
-            ReceiveButton.onClick.AddListener(OnReceiveButtonClick);
-            SendAddressButton.onClick.AddListener(OnSendAddressButtonClick);
-            SendAddressRPCButton.onClick.AddListener(() => OnSendAddressRPCButtonClick().Coroutine());
-            ReceiveAddressButton.onClick.AddListener(OnReceiveAddressButtonClick);
-            LoginAddressButton.onClick.AddListener(() => OnLoginAddressButtonClick().Coroutine());
+            //SendButton.onClick.AddListener(OnSendButtonClick);
+            //SendRPCButton.onClick.AddListener(() => OnSendRPCButtonClick().Coroutine());
+            //ReceiveButton.onClick.AddListener(OnReceiveButtonClick);
+            //SendAddressButton.onClick.AddListener(OnSendAddressButtonClick);
+            //SendAddressRPCButton.onClick.AddListener(() => OnSendAddressRPCButtonClick().Coroutine());
+            //ReceiveAddressButton.onClick.AddListener(OnReceiveAddressButtonClick);
+            //LoginAddressButton.onClick.AddListener(() => OnLoginAddressButtonClick().Coroutine());
             ConnentServerButton.onClick.AddListener(OnConnectServerButtonClick);
-            ReqUIInfoButton.onClick.AddListener(()=> OnCeateRoleButtonClick().Coroutine());
+            ReqCreateRoleButton.onClick.AddListener(() => OnCeateRoleButtonClick().Coroutine());
             ReqLoginButton.onClick.AddListener(() => OnLoginButtonClick().Coroutine());
             //GameClient.Instance.RegisterMsgHandler(OuterOpcode.SendUIRsp, HandleGmRes);
         }
@@ -87,9 +80,9 @@ namespace TEngine.Demo
 
             var response = (L2C_CreateRole)await Scene.Session.Call(new C2L_CreateRole()
             {
-                 UserName="臭熊佬",
-                 Password="888F888",
-                 SDKUID=144 
+                UserName = "臭熊佬",
+                Password = "888F888",
+                SDKUID = 144
             });
 
 
@@ -112,7 +105,7 @@ namespace TEngine.Demo
             var response = (L2C_Login)await Scene.Session.Call(new C2L_Login()
             {
                  UserName = "臭熊佬",
-                 Password = "1273459693",
+                 Password = "1273459693"
             });
 
             if (response.ErrorCode == 0)
@@ -133,7 +126,7 @@ namespace TEngine.Demo
             IsConnect = false;
             LogError("无法连接到服务器");
         }
-        
+
         private void OnConnectDisconnect()
         {
             IsConnect = false;

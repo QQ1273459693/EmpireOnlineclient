@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TEngine;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -44,6 +45,8 @@ namespace GameLogic
         void InitModule()
         {
             InitModule(PlayerNetSys.Instance);
+            InitModule(ConnectController.Instance);
+            InitModule(LoginController.Instance);
         }
 
         /// <summary>

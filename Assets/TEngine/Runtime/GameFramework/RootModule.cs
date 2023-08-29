@@ -109,10 +109,10 @@ namespace TEngine
         {
             base.Awake();
             
+#if !UNITY_WEBGL
             BuglyManager.Instance.Init(Resources.Load<BuglyConfig>("BuglyConfig"));
+#endif
             
-            GameTime.StartFrame();
-
             InitTextHelper();
             InitVersionHelper();
             InitLogHelper();
@@ -139,8 +139,7 @@ namespace TEngine
 
         private void Update()
         {
-            GameTime.StartFrame();
-            GameFrameworkEntry.Update(GameTime.deltaTime, GameTime.unscaledDeltaTime);
+            GameFrameworkModuleSystem.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
         private void OnApplicationQuit()
@@ -151,7 +150,7 @@ namespace TEngine
 
         private void OnDestroy()
         {
-            GameFrameworkEntry.Shutdown();
+            GameFrameworkModuleSystem.Shutdown();
         }
 
         /// <summary>
@@ -319,13 +318,13 @@ namespace TEngine
         {
             Log.Warning("Low memory reported...");
 
-            ObjectPoolModule objectPoolModule = GameEntry.GetModule<ObjectPoolModule>();
+            ObjectPoolModule objectPoolModule = GameModuleSystem.GetModule<ObjectPoolModule>();
             if (objectPoolModule != null)
             {
                 objectPoolModule.Clear();
             }
 
-            ResourceModule ResourceModule = GameEntry.GetModule<ResourceModule>();
+            ResourceModule ResourceModule = GameModuleSystem.GetModule<ResourceModule>();
             if (ResourceModule != null)
             {
                 ResourceModule.ForceUnloadUnusedAssets(true);

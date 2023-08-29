@@ -93,7 +93,7 @@ namespace TEngine
                 Log.Error("Entrance procedure is invalid.");
                 yield break;
             }
-
+            Log.Info("正在初始化流程");
             m_ProcedureManager.Initialize(GameFrameworkModuleSystem.GetModule<IFsmManager>(), procedures);
 
             yield return new WaitForEndOfFrame();

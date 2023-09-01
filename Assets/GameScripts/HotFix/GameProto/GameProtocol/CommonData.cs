@@ -14,9 +14,17 @@ namespace TEngine
 	{
 		public uint OpCode() { return OuterOpcode.CharacterData; }
 		[ProtoMember(1)]
-		public int Level { get; set; }
+		public string Name { get; set; }
 		[ProtoMember(2)]
+		public int Gold { get; set; }
+		[ProtoMember(3)]
+		public int Diamond { get; set; }
+		[ProtoMember(4)]
+		public int Level { get; set; }
+		[ProtoMember(5)]
 		public int SkillPoints { get; set; }
+		[ProtoMember(6)]
+		public UnitAttr PlayerAttribute { get; set; }
 	}
 	/// <summary>
 	/// 单位属性
@@ -30,20 +38,24 @@ namespace TEngine
 		[ProtoMember(2)]
 		public int Mp { get; set; }
 		[ProtoMember(3)]
-		public int Attack { get; set; }
+		public int MaxHp { get; set; }
 		[ProtoMember(4)]
-		public int Defense { get; set; }
+		public int MaxMp { get; set; }
 		[ProtoMember(5)]
-		public int Shield { get; set; }
+		public int Attack { get; set; }
 		[ProtoMember(6)]
-		public int PhysicalHit { get; set; }
+		public int Defense { get; set; }
 		[ProtoMember(7)]
-		public int MagicPenetration { get; set; }
+		public int Shield { get; set; }
 		[ProtoMember(8)]
-		public int Evade { get; set; }
+		public int PhysicalHit { get; set; }
 		[ProtoMember(9)]
-		public int Speed { get; set; }
+		public int MagicPenetration { get; set; }
 		[ProtoMember(10)]
+		public int Evade { get; set; }
+		[ProtoMember(11)]
+		public int Speed { get; set; }
+		[ProtoMember(12)]
 		public int CriticalHit { get; set; }
 	}
 }

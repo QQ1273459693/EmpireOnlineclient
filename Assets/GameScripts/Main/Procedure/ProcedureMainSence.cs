@@ -16,7 +16,7 @@ namespace GameMain
             fsm=procedureOwner;
             GameEvent.AddEventListener(GameLogic.GameProcedureEvent.LoadFightStateEvent.EventId, ChangeFightState);
             Log.Debug("正式进入主场景");
-            GameModule.Resource.LoadSceneAsync("MainCity").Completed+=StartMain;
+            GameModule.Resource.LoadSceneAsync("SC Pixel Art Top Down - Basic").Completed+=StartMain;
             
             
         }

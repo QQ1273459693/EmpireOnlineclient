@@ -7,19 +7,13 @@ import "CommonData.proto";
 message L2C_EnterGame // IMessage
 {
 	CharacterData characterData 	= 1;//角色详情数据
-	repeated CurrencyIcon currency 	= 2;//游戏币
 }
 
-message CurrencyIcon
-{
-	int32 	ctype	      = 1;//游戏币类型:1金币,2:钻石
-	int32 	count		  = 2;//数量
-}
 
 ///更新游戏币
 message L2C_UpdateCurrency // IMessage
 {
-	repeated CurrencyIcon currency 	= 1;//游戏币
+	
 }
 
 ///玩家属性更新

@@ -18,22 +18,8 @@ namespace GameLogic
         public override void Init()
         {
             base.Init();
-            ////注册进入游戏消息回调。
-            GameClient.Instance.RegisterMsgHandler(OuterOpcode.L2C_EnterGame, OnEnterGamRes);
             ////注册注册账号消息回调。
             //GameClient.Instance.RegisterMsgHandler(OuterOpcode.L2C_Login, OnRegisterRes);
-        }
-        /// <summary>
-        /// 进入游戏
-        /// </summary>
-        /// <param name="response"></param>
-        public void OnEnterGamRes(IResponse response)
-        {
-            if (NetworkUtils.CheckError(response))
-            {
-                return;
-            }
-            L2C_EnterGame ret = (L2C_EnterGame)response;
         }
 
         #region 登陆模块
@@ -70,6 +56,10 @@ namespace GameLogic
             {
                 Log.Info($"游戏角色登陆成功!你的UID是:{Response.UID}");
                 GameClient.Instance.Status = GameClientStatus.StatusEnter;
+                GameApp.Instance.Scene.Session.Send(new H_C2G_PushMessageToClient()
+                {
+                    Message = "请推送角色数据给我"
+                });
             }
             else
             {

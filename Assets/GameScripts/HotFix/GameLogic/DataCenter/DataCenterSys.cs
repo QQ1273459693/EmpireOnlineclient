@@ -47,6 +47,7 @@ namespace GameLogic
             InitModule(PlayerNetSys.Instance);
             InitModule(ConnectController.Instance);
             InitModule(LoginController.Instance);
+            InitModule(GameDataController.Instance);
         }
 
         /// <summary>

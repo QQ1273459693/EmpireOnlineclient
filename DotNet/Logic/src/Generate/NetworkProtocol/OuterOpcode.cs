@@ -23,9 +23,8 @@ namespace TEngine
 		 public const int CharacterData = 100000004;
 		 public const int UnitAttr = 100000005;
 		 public const int L2C_EnterGame = 100000006;
-		 public const int CurrencyIcon = 100000007;
-		 public const int L2C_UpdateCurrency = 100000008;
-		 public const int L2C_PlayerNotifyUpdate = 100000009;
+		 public const int L2C_UpdateCurrency = 100000007;
+		 public const int L2C_PlayerNotifyUpdate = 100000008;
 		 public const int C2L_CreateRole = 110000006;
 		 public const int L2C_CreateRole = 160000006;
 		 public const int C2L_Login = 110000007;

@@ -15,17 +15,6 @@ namespace TEngine
 		public uint OpCode() { return OuterOpcode.L2C_EnterGame; }
 		[ProtoMember(1)]
 		public CharacterData characterData { get; set; }
-		[ProtoMember(2)]
-		public List<CurrencyIcon> currency = new List<CurrencyIcon>();
-	}
-	[ProtoContract]
-	public partial class CurrencyIcon : AProto
-	{
-		public uint OpCode() { return OuterOpcode.CurrencyIcon; }
-		[ProtoMember(1)]
-		public int ctype { get; set; }
-		[ProtoMember(2)]
-		public int count { get; set; }
 	}
 	/// <summary>
 	/// 更新游戏币
@@ -34,8 +23,6 @@ namespace TEngine
 	public partial class L2C_UpdateCurrency : AProto, IMessage
 	{
 		public uint OpCode() { return OuterOpcode.L2C_UpdateCurrency; }
-		[ProtoMember(1)]
-		public List<CurrencyIcon> currency = new List<CurrencyIcon>();
 	}
 	/// <summary>
 	/// 玩家属性更新

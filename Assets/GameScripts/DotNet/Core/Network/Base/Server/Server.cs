@@ -58,6 +58,7 @@ namespace TEngine
             {
                 var serverNetworkComponent = Scene.GetComponent<ServerNetworkComponent>();
                 var session = Session.Create(serverNetworkComponent.Network);
+                Log.Info("保存的服务器ID:" + targetServerId);
                 _sessions.Add(targetServerId, new ConnectInfo(session, null));
                 return session;
             }
@@ -85,6 +86,7 @@ namespace TEngine
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Id} targetServerId:{targetServerId}");
             },null);
+            Log.Info("保存的服务器ID:"+ targetServerId);
             _sessions.Add(targetServerId, new ConnectInfo(clientNetworkComponent.Session, clientNetworkComponent));
             return clientNetworkComponent.Session;
         }

@@ -56,13 +56,16 @@ namespace TEngine
             m_LvText.text = $"Lv.{m_CharacterData.Level}";
             m_GoldNumText.text = m_CharacterData.Gold.ToString();
             m_GemNumText.text=m_CharacterData.Diamond.ToString();
-
-            //m_ImageExpFill.fillAmount=m_CharacterData.PlayerAttribute.Hp
+            float HP= (float)m_CharacterData.PlayerAttribute.Hp / (float)m_CharacterData.PlayerAttribute.MaxHp; ;
+            m_ImageHpFill.fillAmount = HP;
+            m_ImageExpFill.fillAmount = (float)m_CharacterData.Exp / (float)100;
+            m_ImageMpFill.fillAmount = (float)m_CharacterData.PlayerAttribute.Mp / (float)m_CharacterData.PlayerAttribute.MaxMp;
         }
 
         public override void AfterShow()
         {
             base.AfterShow();
+            RefreshUI();
             Log.Debug("当前流程是:" + GameModule.Procedure.CurrentProcedure);
         }
         public override void BeforeClose()

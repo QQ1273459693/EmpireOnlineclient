@@ -22,7 +22,6 @@ namespace GameLogic
         {
             base.Init();
             Scene = GameApp.Instance.Scene;
-            Debug.LogError("链接控制进来");
         }
         public void OnConnectServer()
         {

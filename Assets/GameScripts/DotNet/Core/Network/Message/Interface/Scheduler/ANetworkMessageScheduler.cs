@@ -33,7 +33,7 @@ namespace TEngine.Core.Network
                 {
                     throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                 }
-
+               
                 switch (packInfo.ProtocolCode)
                 {
                     case Opcode.PingResponse:
@@ -59,7 +59,7 @@ namespace TEngine.Core.Network
                         
                         if (!session.RequestCallback.TryGetValue(packInfo.RpcId, out var action))
                         {
-                            Log.Error($"not found rpc {packInfo.RpcId}, response message: {aResponse.GetType().Name}");
+                            Log.Error($"not found rpc {packInfo.RpcId}, response message: {aResponse.GetType().Name} ProtocolCode:{packInfo.ProtocolCode}");
                             return;
                         }
                         

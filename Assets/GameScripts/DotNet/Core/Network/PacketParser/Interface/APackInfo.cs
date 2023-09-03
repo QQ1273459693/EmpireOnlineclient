@@ -14,7 +14,7 @@ namespace TEngine.Core.Network
         public IMemoryOwner<byte> MemoryOwner;
         public bool IsDisposed;
 
-        public static T Rent<T>() where T : APackInfo
+        public static T Rent<T>() where T : APackInfo, new()
         {
             var aPackInfo = Pool<T>.Rent();
             aPackInfo.IsDisposed = false;

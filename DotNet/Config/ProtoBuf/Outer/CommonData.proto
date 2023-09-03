@@ -11,21 +11,22 @@ message CharacterData
 	int32 Level					= 4;//等级
 	int32 SkillPoints			= 5;//技能点
 	UnitAttr PlayerAttribute 	= 6;//人物属性
+	int32 Exp			= 7;//经验值
 }
 
 ///单位属性
 message UnitAttr
 {
-	int32 Hp                         = 1;///生命
-	int32 Mp                         = 2;///法力值
+	int32 Hp                         = 1;//生命
+	int32 Mp                         = 2;//法力值
 	int32 MaxHp                      = 3;//最大生命值
 	int32 MaxMp                      = 4;//最大法力值
-	int32 Attack                     = 5;///攻击
-	int32 Defense                    = 6;///防御
-	int32 Shield                     = 7;///护甲
-	int32 PhysicalHit                = 8;///物理攻击命中
-	int32 MagicPenetration           = 9;///魔法穿透
-	int32 Evade                      = 10;///闪避
-	int32 Speed                      = 11;///出手速度
-	int32 CriticalHit             	 = 12;///暴击
+	int32 Attack                     = 5;//攻击
+	int32 Defense                    = 6;//防御
+	int32 Shield                     = 7;//护甲
+	int32 PhysicalHit                = 8;//物理攻击命中
+	int32 MagicPenetration           = 9;//魔法穿透
+	int32 Evade                      = 10;//闪避
+	int32 Speed                      = 11;//出手速度
+	int32 CriticalHit             	 = 12;//暴击
 }

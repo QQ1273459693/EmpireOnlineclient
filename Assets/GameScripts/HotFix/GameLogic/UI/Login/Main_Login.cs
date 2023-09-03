@@ -31,7 +31,7 @@ namespace TEngine
             TipsWnd_MessageBox.Show(TipsWnd_MessageBox.ButtonType.All, "是否确认登陆?", () =>
             {
                 Log.Info($"输入的账号:{m_UserNameText.text},密码:{m_PassWordText.text}");
-                LoginController.Instance.ReqLogin(m_UserNameText.text, m_PassWordText.text);
+                LoginController.Instance.ReqLogin("臭熊佬"/*m_UserNameText.text*/, "123456"/*m_PassWordText.text*/);
             });
             
             //GameEvent.Send(GameProcedureEvent.LoadMainStateEvent.EventId);
@@ -45,16 +45,20 @@ namespace TEngine
             });
             
         }
-
+        void LoadMainUI()
+        {
+            GameModule.UI.ShowUI<Main_NewCity>();
+            GameModule.UI.CloseWindow<Main_Login>();
+        }
         public override void AfterShow()
         {
             base.AfterShow();
-            //GameEvent.AddEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
+            GameEvent.AddEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
         }
         public override void BeforeClose()
         {
             base.BeforeClose();
-            //GameEvent.RemoveEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
+            GameEvent.RemoveEventListener(GameProcedureEvent.LoadMainCityUIEvent.EventId, LoadMainUI);
         }
     }
 }

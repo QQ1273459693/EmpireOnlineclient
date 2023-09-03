@@ -9,6 +9,8 @@ namespace TEngine.Core.Network
         {
             try
             {
+                DisposePackInfo = false;
+
                 switch (packInfo.ProtocolCode)
                 {
                     case > Opcode.InnerRouteResponse:

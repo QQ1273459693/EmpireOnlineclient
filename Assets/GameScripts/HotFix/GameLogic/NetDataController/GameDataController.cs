@@ -50,7 +50,6 @@ namespace GameLogic
                 Log.Info("进入游戏成功,玩家数据:" + message.characterData.ToJson());
                 Instance.m_CharacterData = message.characterData;
                 GameEvent.Send(GameProcedureEvent.LoadMainStateEvent.EventId);
-                GameModule.UI.CloseWindow<Main_Login>();
                 await FTask.CompletedTask;
             }
         }

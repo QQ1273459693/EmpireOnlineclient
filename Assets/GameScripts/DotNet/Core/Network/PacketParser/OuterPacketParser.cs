@@ -178,7 +178,6 @@ namespace TEngine.Core.Network
             {
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
-            
             memoryStream.Seek(0, SeekOrigin.Begin);
             memoryStream.Write(BitConverter.GetBytes(packetBodyCount));
             memoryStream.Write(BitConverter.GetBytes(opCode));

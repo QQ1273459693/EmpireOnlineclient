@@ -25,6 +25,8 @@ namespace TEngine
 		public int SkillPoints { get; set; }
 		[ProtoMember(6)]
 		public UnitAttr PlayerAttribute { get; set; }
+		[ProtoMember(7)]
+		public int Exp { get; set; }
 	}
 	/// <summary>
 	/// 单位属性

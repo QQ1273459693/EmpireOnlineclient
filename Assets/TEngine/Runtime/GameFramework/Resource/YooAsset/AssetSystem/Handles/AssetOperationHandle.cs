@@ -53,7 +53,8 @@ namespace YooAsset
 		/// </summary>
 		public void Release()
 		{
-			this.ReleaseInternal();
+
+            this.ReleaseInternal();
 		}
 
 		/// <summary>

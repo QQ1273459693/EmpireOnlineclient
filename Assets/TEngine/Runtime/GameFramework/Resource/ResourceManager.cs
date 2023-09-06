@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YooAsset;
+using UniFramework.Pooling;
 
 namespace TEngine
 {
@@ -124,6 +125,8 @@ namespace TEngine
             YooAssets.Initialize(new YooAssetsLogger());
             YooAssets.SetOperationSystemMaxTimeSlice(Milliseconds);
             YooAssets.SetCacheSystemCachedFileVerifyLevel(VerifyLevel);
+            //创建文西巴哥的对象池通用器
+            UniPooling.Initalize();
 
             // 创建默认的资源包
             string packageName = PackageName;

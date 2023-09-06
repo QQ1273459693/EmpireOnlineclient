@@ -37,14 +37,16 @@ namespace TEngine
 
             m_BagClickBtn = FindChild("Bottom/SystemList/Bag").gameObject;
 
-            //RegisterEventClick(mBtnBag,OnBagClick);
+            RegisterEventClick(m_BagClickBtn, OnBagClick);
             //RegisterEventClick(mFightBtn, OnFightClick);
             //m_btnClose.onClick.AddListener(OpenWindow/*UniTask.UnityAction(OnClickCloseBtn)*/);
         }
 
         void OnBagClick(GameObject obj, PointerEventData eventData)
         {
-            GameModule.UI.ShowUI<Normal_Bag>();
+            BagDataController.Instance.ReqGetBagInfo();
+
+            //GameModule.UI.ShowUI<Normal_Bag>();
         }
         void OnFightClick(GameObject obj, PointerEventData eventData)
         {
@@ -60,6 +62,13 @@ namespace TEngine
             m_ImageHpFill.fillAmount = HP;
             m_ImageExpFill.fillAmount = (float)m_CharacterData.Exp / (float)100;
             m_ImageMpFill.fillAmount = (float)m_CharacterData.PlayerAttribute.Mp / (float)m_CharacterData.PlayerAttribute.MaxMp;
+            var ItemData = ConfigLoader.Instance.Tables.TbItem1.DataList;
+            for (int i = 0; i < ItemData.Count; i++)
+            {
+                Log.Info($"第{i + 1}个物品,ID:{ItemData[i].Id},名称:{ItemData[i].Name}");
+            }
+
+
         }
 
         public override void AfterShow()

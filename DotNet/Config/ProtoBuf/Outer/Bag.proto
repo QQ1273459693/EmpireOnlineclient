@@ -1,0 +1,27 @@
+syntax = "proto3";
+package TEngine.Network.Message;
+
+import "item.proto";
+
+//获取背包信息
+message C2L_BagInfo // IRequest,L2C_BagInfo
+{
+	
+}
+
+message L2C_BagInfo // IResponse
+{
+	repeated Slot slot		 		= 1;//格子
+}
+//格子
+message Slot
+{
+	int64 idx						= 1;//格子索引
+	ItemData itemData				= 2;//道具信息
+}
+
+
+
+
+
+

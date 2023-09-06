@@ -48,6 +48,7 @@ namespace GameLogic
             InitModule(ConnectController.Instance);
             InitModule(LoginController.Instance);
             InitModule(GameDataController.Instance);
+            InitModule(BagDataController.Instance);
         }
 
         /// <summary>

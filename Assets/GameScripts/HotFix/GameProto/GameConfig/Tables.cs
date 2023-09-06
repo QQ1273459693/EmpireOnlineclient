@@ -6,40 +6,51 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using Bright.Serialization;
-using SimpleJSON;
+
 
 
 namespace GameConfig
 { 
-   
-public sealed partial class Tables
+public partial class Tables
 {
     public item.TbItem TbItem {get; }
     public equipment.TbEquipment TbEquipment {get; }
     public itemBackGround.TbItemBgGround TbItemBgGround {get; }
     public enemySpine.TbEnemySpine TbEnemySpine {get; }
     public enemyConfig.TbEnemyConfig TbEnemyConfig {get; }
+    public item1.TbItem1 TbItem1 {get; }
+    public equipmentBase.TbEquipmentBase TbEquipmentBase {get; }
+    public itemBackGround1.TbItemBgGround1 TbItemBgGround1 {get; }
 
-    public Tables(System.Func<string, ByteBuf> idxLoader, System.Func<string, ByteBuf> dataLoader)
+    public Tables(System.Func<string, ByteBuf> loader)
     {
-        //var tables = new System.Collections.Generic.Dictionary<string, object>();
-        //TbItem = new item.TbItem(idxLoader("item_tbitem")); 
-        //tables.Add("item.TbItem", TbItem);
-        //TbEquipment = new equipment.TbEquipment(loader("equipment_tbequipment")); 
-        //tables.Add("equipment.TbEquipment", TbEquipment);
-        //TbItemBgGround = new itemBackGround.TbItemBgGround(loader("itembackground_tbitembgground")); 
-        //tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
-        //TbEnemySpine = new enemySpine.TbEnemySpine(loader("enemyspine_tbenemyspine")); 
-        //tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
-        //TbEnemyConfig = new enemyConfig.TbEnemyConfig(loader("enemyconfig_tbenemyconfig")); 
-        //tables.Add("enemyConfig.TbEnemyConfig", TbEnemyConfig);
-        //PostInit();
+        var tables = new System.Collections.Generic.Dictionary<string, object>();
+        TbItem = new item.TbItem(loader("item_tbitem")); 
+        tables.Add("item.TbItem", TbItem);
+        TbEquipment = new equipment.TbEquipment(loader("equipment_tbequipment")); 
+        tables.Add("equipment.TbEquipment", TbEquipment);
+        TbItemBgGround = new itemBackGround.TbItemBgGround(loader("itembackground_tbitembgground")); 
+        tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
+        TbEnemySpine = new enemySpine.TbEnemySpine(loader("enemyspine_tbenemyspine")); 
+        tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
+        TbEnemyConfig = new enemyConfig.TbEnemyConfig(loader("enemyconfig_tbenemyconfig")); 
+        tables.Add("enemyConfig.TbEnemyConfig", TbEnemyConfig);
+        TbItem1 = new item1.TbItem1(loader("item1_tbitem1")); 
+        tables.Add("item1.TbItem1", TbItem1);
+        TbEquipmentBase = new equipmentBase.TbEquipmentBase(loader("equipmentbase_tbequipmentbase")); 
+        tables.Add("equipmentBase.TbEquipmentBase", TbEquipmentBase);
+        TbItemBgGround1 = new itemBackGround1.TbItemBgGround1(loader("itembackground1_tbitembgground1")); 
+        tables.Add("itemBackGround1.TbItemBgGround1", TbItemBgGround1);
 
-        //TbItem.Resolve(tables); 
-        //TbEquipment.Resolve(tables); 
-        //TbItemBgGround.Resolve(tables); 
-        //TbEnemySpine.Resolve(tables); 
-        //TbEnemyConfig.Resolve(tables); 
+        PostInit();
+        TbItem.Resolve(tables); 
+        TbEquipment.Resolve(tables); 
+        TbItemBgGround.Resolve(tables); 
+        TbEnemySpine.Resolve(tables); 
+        TbEnemyConfig.Resolve(tables); 
+        TbItem1.Resolve(tables); 
+        TbEquipmentBase.Resolve(tables); 
+        TbItemBgGround1.Resolve(tables); 
         PostResolve();
     }
 
@@ -50,6 +61,9 @@ public sealed partial class Tables
         TbItemBgGround.TranslateText(translator); 
         TbEnemySpine.TranslateText(translator); 
         TbEnemyConfig.TranslateText(translator); 
+        TbItem1.TranslateText(translator); 
+        TbEquipmentBase.TranslateText(translator); 
+        TbItemBgGround1.TranslateText(translator); 
     }
     
     partial void PostInit();

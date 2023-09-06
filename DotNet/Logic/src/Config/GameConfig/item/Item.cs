@@ -17,10 +17,13 @@ public sealed partial class Item :  Bright.Config.BeanBase
     {
         Id = _buf.ReadInt();
         Name = _buf.ReadString();
+        Icon = _buf.ReadString();
+        Overlapping = _buf.ReadBool();
         Price = _buf.ReadInt();
         UpgradeToItemId = _buf.ReadInt();
         if(_buf.ReadBool()){ ExpireTime = _buf.ReadInt(); } else { ExpireTime = null; }
-        Quality = (item.EQuality)_buf.ReadInt();
+        Quality = _buf.ReadInt();
+        Testquality = (item.EQuality)_buf.ReadInt();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);ExchangeList = new System.Collections.Generic.List<item.ItemExchange>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { item.ItemExchange _e0;  _e0 = item.ItemExchange.DeserializeItemExchange(_buf); ExchangeList.Add(_e0);}}
         ExchangeColumn = item.ItemExchange.DeserializeItemExchange(_buf);
         PostInit();
@@ -40,6 +43,14 @@ public sealed partial class Item :  Bright.Config.BeanBase
     /// </summary>
     public string Name { get; private set; }
     /// <summary>
+    /// 图标
+    /// </summary>
+    public string Icon { get; private set; }
+    /// <summary>
+    /// 是否可重叠
+    /// </summary>
+    public bool Overlapping { get; private set; }
+    /// <summary>
     /// 价格
     /// </summary>
     public int Price { get; private set; }
@@ -55,7 +66,11 @@ public sealed partial class Item :  Bright.Config.BeanBase
     /// <summary>
     /// 品质
     /// </summary>
-    public item.EQuality Quality { get; private set; }
+    public int Quality { get; private set; }
+    /// <summary>
+    /// 测试品质
+    /// </summary>
+    public item.EQuality Testquality { get; private set; }
     public System.Collections.Generic.List<item.ItemExchange> ExchangeList { get; private set; }
     /// <summary>
     /// 道具兑换配置
@@ -84,10 +99,13 @@ public sealed partial class Item :  Bright.Config.BeanBase
         return "{ "
         + "Id:" + Id + ","
         + "Name:" + Name + ","
+        + "Icon:" + Icon + ","
+        + "Overlapping:" + Overlapping + ","
         + "Price:" + Price + ","
         + "UpgradeToItemId:" + UpgradeToItemId + ","
         + "ExpireTime:" + ExpireTime + ","
         + "Quality:" + Quality + ","
+        + "Testquality:" + Testquality + ","
         + "ExchangeList:" + Bright.Common.StringUtil.CollectionToString(ExchangeList) + ","
         + "ExchangeColumn:" + ExchangeColumn + ","
         + "}";

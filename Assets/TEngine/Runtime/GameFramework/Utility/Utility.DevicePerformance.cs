@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WEBGL
+using UnityEngine;
 
 namespace TEngine
 {
@@ -24,7 +25,7 @@ namespace TEngine
                 {
                     //根据目前硬件配置三个平台设置了不一样的评判标准（仅个人意见）。
                     //CPU核心数。
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX
                     if (SystemInfo.processorCount <= 2)
 #elif UNITY_STANDALONE_OSX || UNITY_IPHONE
                     if (SystemInfo.processorCount < 2)
@@ -41,7 +42,7 @@ namespace TEngine
                         int graphicsMemorySize = SystemInfo.graphicsMemorySize;
                         //内存。
                         int systemMemorySize = SystemInfo.systemMemorySize;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX
                         if (graphicsMemorySize >= 4000 && systemMemorySize >= 8000)
                             return DevicePerformanceLevel.High;
                         else if (graphicsMemorySize >= 2000 && systemMemorySize >= 4000)
@@ -173,3 +174,4 @@ namespace TEngine
         }
     }
 }
+#endif

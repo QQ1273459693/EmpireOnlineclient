@@ -1,0 +1,19 @@
+syntax = "proto3";
+package TEngine.Network.Message;
+
+message ItemData
+{
+	int32 	count				= 1;//物品数量
+	Item 	item				= 2;//物品
+}
+
+message Item
+{
+	int32 		itemId 			= 1;//物品id
+	EquipData 	equipData		= 2;//装备数据
+}
+
+message EquipData
+{
+	int32 slv							= 1;//强化等级
+}

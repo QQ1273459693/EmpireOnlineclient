@@ -56,10 +56,6 @@ namespace GameLogic
             {
                 Log.Info($"游戏角色登陆成功!你的UID是:{Response.UID}");
                 GameClient.Instance.Status = GameClientStatus.StatusEnter;
-                GameApp.Instance.Scene.Session.Send(new H_C2G_PushMessageToClient()
-                {
-                    Message = "请推送角色数据给我"
-                });
             }
             else
             {

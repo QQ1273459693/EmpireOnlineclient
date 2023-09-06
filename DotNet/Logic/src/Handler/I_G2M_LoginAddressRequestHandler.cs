@@ -5,24 +5,24 @@ using TEngine.Core.Network;
 
 namespace TEngine.Logic
 {
-    public class Unit : Entity
+    public class Unit1 : Entity
     {
         public long GateRouteId;
     }
 
     public static class AddressManage
     {
-        public static readonly Dictionary<long, Unit> Units = new Dictionary<long, Unit>();
+        public static readonly Dictionary<long, Unit1> Units = new Dictionary<long, Unit1>();
 
-        public static Unit Add(Scene scene, long addressId, long gateRouteId)
+        public static Unit1 Add(Scene scene, long addressId, long gateRouteId)
         {
-            var unit = Entity.Create<Unit>(scene, addressId);
+            var unit = Entity.Create<Unit1>(scene, addressId);
             unit.GateRouteId = gateRouteId;
             Units.Add(unit.Id, unit);
             return unit;
         }
 
-        public static Unit? Get(long addressId)
+        public static Unit1? Get(long addressId)
         {
             return Units.TryGetValue(addressId, out var unit) ? unit : null;
         }

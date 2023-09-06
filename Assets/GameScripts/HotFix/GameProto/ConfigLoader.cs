@@ -21,7 +21,6 @@ public class ConfigLoader : Singleton<ConfigLoader>
             {
                 Load();
             }
-
             return _tables;
         }
     }
@@ -31,7 +30,7 @@ public class ConfigLoader : Singleton<ConfigLoader>
     /// </summary>
     public void Load()
     {
-        _tables = new Tables(LoadIdxByteBuf, LoadByteBuf);
+        _tables = new Tables(LoadByteBuf);
         _init = true;
     }
 
@@ -46,18 +45,6 @@ public class ConfigLoader : Singleton<ConfigLoader>
         byte[] ret = textAssets.bytes;
         return new ByteBuf(ret);
     }
-
-    /// <summary>
-    /// 加载懒加载Index。
-    /// </summary>
-    /// <param name="file"></param>
-    /// <returns></returns>
-    private ByteBuf LoadIdxByteBuf(string file)
-    {
-        var textAssets = GameModule.Resource.LoadAsset<TextAsset>($"Idx_{file}");
-        byte[] ret = textAssets.bytes;
-        return new ByteBuf(ret);
-    }
 }
 
 public class ConfigSystem : BaseLogicSys<ConfigSystem>
@@ -66,6 +53,13 @@ public class ConfigSystem : BaseLogicSys<ConfigSystem>
 
     public override bool OnInit()
     {
+        InitConfig();
         return base.OnInit();
     }
+
+    private void InitConfig()
+    {
+        ConfigLoader.Instance.Load();
+    }
 }
+

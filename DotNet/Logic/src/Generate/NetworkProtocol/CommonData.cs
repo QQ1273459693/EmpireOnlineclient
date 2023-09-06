@@ -12,7 +12,6 @@ namespace TEngine
 	[ProtoContract]
 	public partial class CharacterData : AProto
 	{
-		public uint OpCode() { return OuterOpcode.CharacterData; }
 		[ProtoMember(1)]
 		public string Name { get; set; }
 		[ProtoMember(2)]
@@ -34,7 +33,6 @@ namespace TEngine
 	[ProtoContract]
 	public partial class UnitAttr : AProto
 	{
-		public uint OpCode() { return OuterOpcode.UnitAttr; }
 		[ProtoMember(1)]
 		public int Hp { get; set; }
 		[ProtoMember(2)]

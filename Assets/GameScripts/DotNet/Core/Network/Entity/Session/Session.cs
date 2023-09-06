@@ -41,6 +41,7 @@ namespace TEngine.Core.Network
                 session.AddComponent<SessionIdleCheckerComponent>().Start(interval, timeOut);
             }
 #endif
+            Log.Info($"客户端链接成功!ID:{session.Id},NetworkID:{session.NetworkId}");
             Sessions.Add(session.Id, session);
         }
 

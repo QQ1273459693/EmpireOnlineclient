@@ -15,9 +15,13 @@ namespace GameConfig
 public sealed class Tables
 {
     public item.TbItem TbItem {get; private set; }
-    public Battle.TbSkill TbSkill {get; private set; }
-    public Battle.TbBuff TbBuff {get; private set; }
-    public Battle.TbBuffAttr TbBuffAttr {get; private set; }
+    public equipment.TbEquipment TbEquipment {get; private set; }
+    public itemBackGround.TbItemBgGround TbItemBgGround {get; private set; }
+    public enemySpine.TbEnemySpine TbEnemySpine {get; private set; }
+    public enemyConfig.TbEnemyConfig TbEnemyConfig {get; private set; }
+    public item1.TbItem1 TbItem1 {get; private set; }
+    public equipmentBase.TbEquipmentBase TbEquipmentBase {get; private set; }
+    public itemBackGround1.TbItemBgGround1 TbItemBgGround1 {get; private set; }
 
     public Tables() { }
     
@@ -26,25 +30,41 @@ public sealed class Tables
         var tables = new System.Collections.Generic.Dictionary<string, object>();
         TbItem = new item.TbItem(await loader("item_tbitem")); 
         tables.Add("item.TbItem", TbItem);
-        TbSkill = new Battle.TbSkill(await loader("battle_tbskill")); 
-        tables.Add("Battle.TbSkill", TbSkill);
-        TbBuff = new Battle.TbBuff(await loader("battle_tbbuff")); 
-        tables.Add("Battle.TbBuff", TbBuff);
-        TbBuffAttr = new Battle.TbBuffAttr(await loader("battle_tbbuffattr")); 
-        tables.Add("Battle.TbBuffAttr", TbBuffAttr);
+        TbEquipment = new equipment.TbEquipment(await loader("equipment_tbequipment")); 
+        tables.Add("equipment.TbEquipment", TbEquipment);
+        TbItemBgGround = new itemBackGround.TbItemBgGround(await loader("itembackground_tbitembgground")); 
+        tables.Add("itemBackGround.TbItemBgGround", TbItemBgGround);
+        TbEnemySpine = new enemySpine.TbEnemySpine(await loader("enemyspine_tbenemyspine")); 
+        tables.Add("enemySpine.TbEnemySpine", TbEnemySpine);
+        TbEnemyConfig = new enemyConfig.TbEnemyConfig(await loader("enemyconfig_tbenemyconfig")); 
+        tables.Add("enemyConfig.TbEnemyConfig", TbEnemyConfig);
+        TbItem1 = new item1.TbItem1(await loader("item1_tbitem1")); 
+        tables.Add("item1.TbItem1", TbItem1);
+        TbEquipmentBase = new equipmentBase.TbEquipmentBase(await loader("equipmentbase_tbequipmentbase")); 
+        tables.Add("equipmentBase.TbEquipmentBase", TbEquipmentBase);
+        TbItemBgGround1 = new itemBackGround1.TbItemBgGround1(await loader("itembackground1_tbitembgground1")); 
+        tables.Add("itemBackGround1.TbItemBgGround1", TbItemBgGround1);
 
         TbItem.Resolve(tables); 
-        TbSkill.Resolve(tables); 
-        TbBuff.Resolve(tables); 
-        TbBuffAttr.Resolve(tables); 
+        TbEquipment.Resolve(tables); 
+        TbItemBgGround.Resolve(tables); 
+        TbEnemySpine.Resolve(tables); 
+        TbEnemyConfig.Resolve(tables); 
+        TbItem1.Resolve(tables); 
+        TbEquipmentBase.Resolve(tables); 
+        TbItemBgGround1.Resolve(tables); 
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
         TbItem.TranslateText(translator); 
-        TbSkill.TranslateText(translator); 
-        TbBuff.TranslateText(translator); 
-        TbBuffAttr.TranslateText(translator); 
+        TbEquipment.TranslateText(translator); 
+        TbItemBgGround.TranslateText(translator); 
+        TbEnemySpine.TranslateText(translator); 
+        TbEnemyConfig.TranslateText(translator); 
+        TbItem1.TranslateText(translator); 
+        TbEquipmentBase.TranslateText(translator); 
+        TbItemBgGround1.TranslateText(translator); 
     }
 }
 

@@ -78,9 +78,9 @@ namespace TEngine
         protected bool isClearList = false; //是否清空列表
 
         // 对象池
-        Spawner spawner;
+        protected Spawner spawner;
         //protected ResourcePackage package;//对象池组件
-        Dictionary<GameObject, SpawnHandle> spanHandleList = new Dictionary<GameObject, SpawnHandle>();
+        protected Dictionary<GameObject, SpawnHandle> spanHandleList = new Dictionary<GameObject, SpawnHandle>();
         //protected Stack<GameObject> Pool = new Stack<GameObject>();
         protected bool isInited = false;
 
@@ -104,7 +104,7 @@ namespace TEngine
         public virtual void Init(Action<GameObject, int> callBack, Action<GameObject, int> onClickCallBack)
         {
             spawner = UniPooling.CreateSpawner("DefaultPackage");
-            var operation = spawner.CreateGameObjectPoolAsync(CellItemRes);
+            spawner.CreateGameObjectPoolAsync(CellItemRes);
             //spawner.CreateGameObjectPoolAsync(CellItemRes);//创建对象池,里面已经判断是否已经创建
             //package = YooAssets.GetPackage("DefaultPackage");
             DisposeAll();

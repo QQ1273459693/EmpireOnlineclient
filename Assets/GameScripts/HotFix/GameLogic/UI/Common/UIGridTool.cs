@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using UniFramework.Pooling;
 using UnityEngine;
 using UnityEngine.VFX;
 using YooAsset;
+using static Codice.CM.WorkspaceServer.WorkspaceTreeDataStore;
 
 namespace TEngine
 {
@@ -10,8 +12,8 @@ namespace TEngine
         public Transform m_RootGo;
         private string m_ResName;
         private List<GameObject> m_ElemList = new List<GameObject>();
-        Dictionary<GameObject, AssetOperationHandle> ListSpawnHandle = new Dictionary<GameObject, AssetOperationHandle>();
-        ResourcePackage package;
+        Dictionary<GameObject, SpawnHandle> ListSpawnHandle = new Dictionary<GameObject, SpawnHandle>();
+        protected Spawner spawner;
 
         private int m_Count;
         public int Count { get { return m_ElemList.Count; } }
@@ -19,7 +21,8 @@ namespace TEngine
         {
             m_RootGo = root.transform;
             m_ResName = resName;
-            package = YooAssets.GetPackage("DefaultPackage");
+            spawner = UniPooling.CreateSpawner("DefaultPackage");
+            spawner.CreateGameObjectPoolAsync(m_ResName);
             //GameModule.ObjectPool.CreateMultiSpawnObjectPool<GameObject>("FF");
             //Game.ResourcesMgr.LoadBundleByType(EABType.ItemPrefab, resName);
             //m_TemplateGo = Game.ResourcesMgr.GetAssetByType<GameObject>(EABType.ItemPrefab, resName);
@@ -69,12 +72,18 @@ namespace TEngine
             //tmpNewElem.name = $"{m_TemplateGo.name}{m_ElemList.Count}";
             //tmpNewElem.SetActive(true);
             //tmpNewElem.transform.SetParent(m_RootGo.transform, false);
-            AssetOperationHandle spawnHandle = package.LoadAssetSync<GameObject>(m_ResName); /*.SpawnSync(m_ResName, m_RootGo);*/
-            GameObject go = spawnHandle.InstantiateSync(m_RootGo);
+
+
+            SpawnHandle handle = spawner.SpawnSync(m_ResName, m_RootGo);
+            //AssetOperationHandle spawnHandle = package.LoadAssetSync<GameObject>(CellItemRes); /*.SpawnSync(m_ResName, m_RootGo);*/
+            //GameObject cell = spawnHandle.InstantiateSync(content.transform);
+            //AssetOperationHandle handle = /*spawner.SpawnSync(CellItemRes, content.transform);*/
+            GameObject go = handle.GameObj;
+
             //go.transform.localScale = Vector3.one;
             var Rect = go.GetComponent<RectTransform>();
             Rect.anchoredPosition3D = new Vector3(0, 0, 0);
-            ListSpawnHandle.Add(go, spawnHandle);
+            ListSpawnHandle.Add(go, handle);
             m_ElemList.Add(go);
             return go;
         }
@@ -102,13 +111,14 @@ namespace TEngine
         {
             GameObject obj = m_ElemList[index];
             m_ElemList.RemoveAt(index);
-            ListSpawnHandle[obj].Release();
+            ListSpawnHandle[obj].Restore();
         }
 
         public void RemoveAndDespawn(GameObject obj)
         {
             m_ElemList.Remove(obj);
-            ListSpawnHandle[obj].Release();
+            ListSpawnHandle[obj].Restore();
+            ListSpawnHandle.Remove(obj);
         }
         public void Remove(GameObject obj)
         {
@@ -118,7 +128,7 @@ namespace TEngine
         {
             foreach (var item in ListSpawnHandle.Values)
             {
-                item.Release();
+                item.Discard();
             }
             ListSpawnHandle.Clear();
             m_ElemList.Clear();

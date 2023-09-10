@@ -49,110 +49,25 @@ public class BagHDController
             var List=ConfigLoader.Instance.Tables.TbItem1.DataList;
 
             int Index = 1;
-            for (int i = 0; i < 26; i++)
+            
+
+            for (int j = 0; j < 100; j++)
             {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
+                for (int i = 0; i < 26; i++)
+                {
+                    Slot QQ = new Slot();
+                    QQ.idx = i;
+                    QQ.itemData = new ItemData();
+                    QQ.itemData.item = new Item();
+                    QQ.itemData.item.equipData = new EquipData();
+                    QQ.itemData.item.equipData.slv = 5;
+                    QQ.itemData.count = Index;
+                    QQ.itemData.item.itemId = List[i].Id;
+                    BagInfo.Slot.Add(QQ);
+                    Index++;
+                }
             }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                Slot QQ = new Slot();
-                QQ.idx = i;
-                QQ.itemData = new ItemData();
-                QQ.itemData.item = new Item();
-                QQ.itemData.item.equipData = new EquipData();
-                QQ.itemData.item.equipData.slv = 5;
-                QQ.itemData.count = Index;
-                QQ.itemData.item.itemId = List[i].Id;
-                BagInfo.Slot.Add(QQ);
-                Index++;
-            }
+
 
             await db.Save(BagInfo);
 

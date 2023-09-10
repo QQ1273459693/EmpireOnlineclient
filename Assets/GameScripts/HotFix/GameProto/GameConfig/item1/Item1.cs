@@ -18,11 +18,13 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
         Id = _buf.ReadInt();
         Name = _buf.ReadString();
         Desc = _buf.ReadString();
+        Type = _buf.ReadInt();
         Icon = _buf.ReadString();
         Overlapping = _buf.ReadBool();
         Price = _buf.ReadInt();
         BatchUseable = _buf.ReadBool();
         Quality = _buf.ReadInt();
+        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);ItemTipsDes = new System.Collections.Generic.List<item.ItemTipsDes>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { item.ItemTipsDes _e0;  _e0 = item.ItemTipsDes.DeserializeItemTipsDes(_buf); ItemTipsDes.Add(_e0);}}
         PostInit();
     }
 
@@ -44,6 +46,10 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
     /// </summary>
     public string Desc { get; private set; }
     /// <summary>
+    /// 道具类型
+    /// </summary>
+    public int Type { get; private set; }
+    /// <summary>
     /// 图标
     /// </summary>
     public string Icon { get; private set; }
@@ -63,17 +69,23 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
     /// 品质
     /// </summary>
     public int Quality { get; private set; }
+    /// <summary>
+    /// 道具UI效果描述
+    /// </summary>
+    public System.Collections.Generic.List<item.ItemTipsDes> ItemTipsDes { get; private set; }
 
     public const int __ID__ = -272648978;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)
     {
+        foreach(var _e in ItemTipsDes) { _e?.Resolve(_tables); }
         PostResolve();
     }
 
     public  void TranslateText(System.Func<string, string, string> translator)
     {
+        foreach(var _e in ItemTipsDes) { _e?.TranslateText(translator); }
     }
 
     public override string ToString()
@@ -82,11 +94,13 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "Name:" + Name + ","
         + "Desc:" + Desc + ","
+        + "Type:" + Type + ","
         + "Icon:" + Icon + ","
         + "Overlapping:" + Overlapping + ","
         + "Price:" + Price + ","
         + "BatchUseable:" + BatchUseable + ","
         + "Quality:" + Quality + ","
+        + "ItemTipsDes:" + Bright.Common.StringUtil.CollectionToString(ItemTipsDes) + ","
         + "}";
     }
     

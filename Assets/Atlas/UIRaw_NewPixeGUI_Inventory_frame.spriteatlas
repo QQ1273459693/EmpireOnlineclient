@@ -45,17 +45,25 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 21300000, guid: a01038fdfeb617c4ebc8d855f9f66a85, type: 3}
+    - {fileID: 21300000, guid: b60f983d825165a47aaae4eecdc9c638, type: 3}
     - {fileID: 21300000, guid: d02e0965b49f8864e8eace61fa28efa7, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - d02e0965b49f8864e8eace61fa28efa7: 21300000
+    - b60f983d825165a47aaae4eecdc9c638: 21300000
+    - a01038fdfeb617c4ebc8d855f9f66a85: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: d02e0965b49f8864e8eace61fa28efa7, type: 3}
+  - {fileID: 21300000, guid: b60f983d825165a47aaae4eecdc9c638, type: 3}
+  - {fileID: 21300000, guid: a01038fdfeb617c4ebc8d855f9f66a85, type: 3}
   m_PackedSpriteNamesToIndex:
   - frame_01
+  - Item Backing Deactivated 40x40
+  - Inventory Inset 44x44
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewPixeGUI_Inventory_frame
   m_IsVariant: 0

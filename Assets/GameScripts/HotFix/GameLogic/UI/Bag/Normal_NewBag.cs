@@ -21,7 +21,7 @@ namespace TEngine
         //数据层
         List<Slot> m_BagSlotList;//背包格子数据
         Dictionary<GameObject, ItemBox> dictionaryPool = new Dictionary<GameObject,ItemBox>();
-
+        long m_CurSlotIdx=-1;//当前选择的格子ID
 
 
         public override void ScriptGenerator()
@@ -51,14 +51,22 @@ namespace TEngine
                 itemPool.IntObj(cell);
                 itemPool.GetClickTipEvent().onClick.AddListener((go, arg) =>
                 {
-                    Log.Debug("点击的物品ID:"+ itemPool.item.item.itemId);
-                    //HeroSpineLoad.Equip(itemPool.item.item.itemID);
-                    //GameModule.UI.ShowUI<Popup_ItemTips, S_Item>(itemPool.item);
+                    if (m_CurSlotIdx!= itemPool.mIdx)
+                    {
+                        m_CurSlotIdx= itemPool.mIdx;
+                        TipsWnd_ItemTips.ShowTip(itemPool.item);
+                        Log.Debug("点击的物品ID:" + itemPool.item.item.itemId);
+                    }
+                    else
+                    {
+                        Log.Info("已经点击了");
+                    }
+                    
                 });
                 dictionaryPool.Add(cell,itemPool);
                 Log.Debug("添加预制体后的字典大小:"+ dictionaryPool.Count);
             }
-            itemPool.RefreshData(m_BagSlotList[index].itemData);
+            itemPool.RefreshData(m_BagSlotList[index].itemData, m_BagSlotList[index].idx);
         }
         /// <summary>
         /// 点击穿戴回调事件
@@ -66,8 +74,10 @@ namespace TEngine
         public override void AfterShow()
         {
             base.AfterShow();
+            m_CurSlotIdx = -1;
             //GameEvent.AddEventListener<int>("BagEquipWear", EquipWearEvent);
             RefreshBagCountNum();
+            Log.Info("背包长度是:"+ m_BagSlotList.Count);
             VerticalScroll.ShowList(m_BagSlotList.Count);
         }
         public override void BeforeClose()
@@ -75,10 +85,11 @@ namespace TEngine
             base.BeforeClose();
             //GameEvent.RemoveEventListener<int>("BagEquipWear", EquipWearEvent);
             Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);
-            var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemBox>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
+           // var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemBox>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
             foreach (var item in dictionaryPool.Values)
             {
-                UnSpawnPool.Unspawn(item);
+                GameModule.ObjectPool.GetObjectPoolByType<ItemBox>().Unspawn(item);
+                //UnSpawnPool.Unspawn(item);
             }
             dictionaryPool.Clear();
             VerticalScroll.ClearGameObject();

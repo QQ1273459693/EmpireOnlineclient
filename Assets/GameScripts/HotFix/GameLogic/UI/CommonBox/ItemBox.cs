@@ -24,6 +24,7 @@ namespace GameLogic
 
         //Êý¾Ý²ã
         public ItemData item;
+        public long mIdx;
 
         public void OnInit()
         {
@@ -49,9 +50,10 @@ namespace GameLogic
             }
             return m_EventTriggerListener;
         }
-        public void RefreshData(ItemData itemData)
+        public void RefreshData(ItemData itemData,long Idx)
         {
-            item=itemData;
+            mIdx=Idx;
+            item =itemData;
             var ItemBase = ConfigLoader.Instance.Tables.TbItem1.Get(itemData.item.itemId);
 
             var ItemBgBase = ConfigLoader.Instance.Tables.TbItemBgGround1.Get(ItemBase.Quality);

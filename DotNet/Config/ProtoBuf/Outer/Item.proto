@@ -15,5 +15,6 @@ message Item
 
 message EquipData
 {
-	int32 slv							= 1;//强化等级
+	int32 GemAttributeID				= 1;//宝石属性ID
+	int32 slv							= 2;//强化等级
 }

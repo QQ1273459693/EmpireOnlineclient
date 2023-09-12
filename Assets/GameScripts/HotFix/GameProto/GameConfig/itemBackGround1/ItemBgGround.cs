@@ -17,6 +17,7 @@ public sealed partial class ItemBgGround :  Bright.Config.BeanBase
     {
         Id = _buf.ReadInt();
         ItemBoxLine = _buf.ReadString();
+        QualityName = _buf.ReadString();
         ItemColor = _buf.ReadString();
         PostInit();
     }
@@ -34,6 +35,10 @@ public sealed partial class ItemBgGround :  Bright.Config.BeanBase
     /// 物品背景线框
     /// </summary>
     public string ItemBoxLine { get; private set; }
+    /// <summary>
+    /// 品质文字
+    /// </summary>
+    public string QualityName { get; private set; }
     /// <summary>
     /// 物品背景颜色
     /// </summary>
@@ -56,6 +61,7 @@ public sealed partial class ItemBgGround :  Bright.Config.BeanBase
         return "{ "
         + "Id:" + Id + ","
         + "ItemBoxLine:" + ItemBoxLine + ","
+        + "QualityName:" + QualityName + ","
         + "ItemColor:" + ItemColor + ","
         + "}";
     }

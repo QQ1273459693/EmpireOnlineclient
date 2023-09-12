@@ -37,6 +37,7 @@ namespace GameLogic
 
             if (Response.ErrorCode == 0)
             {
+                m_BagSlotList.Clear();
                 m_BagSlotList.AddRange(Response.slot);
                 Log.Info($"获取背包数据成功!长度是:{m_BagSlotList.Count}");
             }

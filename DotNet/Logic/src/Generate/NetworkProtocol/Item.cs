@@ -26,6 +26,8 @@ namespace TEngine
 	public partial class EquipData : AProto
 	{
 		[ProtoMember(1)]
+		public int GemAttributeID { get; set; }
+		[ProtoMember(2)]
 		public int slv { get; set; }
 	}
 }

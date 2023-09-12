@@ -49,23 +49,31 @@ public class BagHDController
             var List=ConfigLoader.Instance.Tables.TbItem1.DataList;
 
             int Index = 1;
-            
 
-            for (int j = 0; j < 100; j++)
+
+            for (int i = 29; i >= 0; i--)
             {
-                for (int i = 0; i < 26; i++)
+                Slot QQ = new Slot();
+                QQ.idx = i;
+                bool isEquip = List[i].Type == 4;
+                QQ.itemData = new ItemData();
+                QQ.itemData.item = new Item();
+                QQ.itemData.item.itemId = List[i].Id;
+                if (isEquip)
                 {
-                    Slot QQ = new Slot();
-                    QQ.idx = i;
-                    QQ.itemData = new ItemData();
-                    QQ.itemData.item = new Item();
+                    //是装备
                     QQ.itemData.item.equipData = new EquipData();
-                    QQ.itemData.item.equipData.slv = 5;
-                    QQ.itemData.count = Index;
-                    QQ.itemData.item.itemId = List[i].Id;
-                    BagInfo.Slot.Add(QQ);
-                    Index++;
+                    Random ran = new Random();
+                    QQ.itemData.item.equipData.GemAttributeID = ran.Next(0,10);
+                    QQ.itemData.item.equipData.slv = 4;
+                    QQ.itemData.count = 1;
                 }
+                else
+                {
+                    QQ.itemData.count = Index;
+                }
+                BagInfo.Slot.Add(QQ);
+                Index++;
             }
 
 

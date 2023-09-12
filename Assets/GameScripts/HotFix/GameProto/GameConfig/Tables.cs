@@ -21,6 +21,7 @@ public partial class Tables
     public item1.TbItem1 TbItem1 {get; }
     public equipmentBase.TbEquipmentBase TbEquipmentBase {get; }
     public itemBackGround1.TbItemBgGround1 TbItemBgGround1 {get; }
+    public fightingBase.TbFightingBase TbFightingBase {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
@@ -41,6 +42,8 @@ public partial class Tables
         tables.Add("equipmentBase.TbEquipmentBase", TbEquipmentBase);
         TbItemBgGround1 = new itemBackGround1.TbItemBgGround1(loader("itembackground1_tbitembgground1")); 
         tables.Add("itemBackGround1.TbItemBgGround1", TbItemBgGround1);
+        TbFightingBase = new fightingBase.TbFightingBase(loader("fightingbase_tbfightingbase")); 
+        tables.Add("fightingBase.TbFightingBase", TbFightingBase);
 
         PostInit();
         TbItem.Resolve(tables); 
@@ -51,6 +54,7 @@ public partial class Tables
         TbItem1.Resolve(tables); 
         TbEquipmentBase.Resolve(tables); 
         TbItemBgGround1.Resolve(tables); 
+        TbFightingBase.Resolve(tables); 
         PostResolve();
     }
 
@@ -64,6 +68,7 @@ public partial class Tables
         TbItem1.TranslateText(translator); 
         TbEquipmentBase.TranslateText(translator); 
         TbItemBgGround1.TranslateText(translator); 
+        TbFightingBase.TranslateText(translator); 
     }
     
     partial void PostInit();

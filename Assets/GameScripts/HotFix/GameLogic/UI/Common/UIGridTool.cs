@@ -79,10 +79,10 @@ namespace TEngine
             //GameObject cell = spawnHandle.InstantiateSync(content.transform);
             //AssetOperationHandle handle = /*spawner.SpawnSync(CellItemRes, content.transform);*/
             GameObject go = handle.GameObj;
-
+            go.transform.localScale = Vector3.one;
             //go.transform.localScale = Vector3.one;
-            var Rect = go.GetComponent<RectTransform>();
-            Rect.anchoredPosition3D = new Vector3(0, 0, 0);
+            go.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
+            //Rect.anchoredPosition3D = new Vector3(0, 0, 0);
             ListSpawnHandle.Add(go, handle);
             m_ElemList.Add(go);
             return go;
@@ -112,6 +112,7 @@ namespace TEngine
             GameObject obj = m_ElemList[index];
             m_ElemList.RemoveAt(index);
             ListSpawnHandle[obj].Restore();
+            ListSpawnHandle.Remove(obj);
         }
 
         public void RemoveAndDespawn(GameObject obj)

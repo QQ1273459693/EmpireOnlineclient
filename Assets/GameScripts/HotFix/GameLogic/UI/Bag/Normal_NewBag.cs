@@ -20,7 +20,7 @@ namespace TEngine
 
         //数据层
         List<Slot> m_BagSlotList;//背包格子数据
-        Dictionary<GameObject, ItemBox> dictionaryPool = new Dictionary<GameObject,ItemBox>();
+        Dictionary<GameObject,ItemBox> dictionaryPool = new Dictionary<GameObject,ItemBox>();
         long m_CurSlotIdx=-1;//当前选择的格子ID
 
 

@@ -20,4 +20,5 @@ message L2C_UpdateCurrency // IMessage
 message L2C_PlayerNotifyUpdate // IMessage
 {
 	CharacterData characterData 	= 1;//角色详情数据
+	int32 UpdateCase 				= 2;//角色更新枚举,0:全部,之后按照属性ID分段更新
 }

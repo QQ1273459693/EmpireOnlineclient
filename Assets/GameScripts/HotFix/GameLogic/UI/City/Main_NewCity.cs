@@ -70,7 +70,7 @@ namespace TEngine
 
 
         }
-
+        
         public override void AfterShow()
         {
             base.AfterShow();
@@ -80,6 +80,7 @@ namespace TEngine
         public override void BeforeClose()
         {
             base.BeforeClose();
+            
         }
     }
 }

@@ -19,6 +19,7 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
         Name = _buf.ReadString();
         Type = _buf.ReadInt();
         Icon = _buf.ReadString();
+        LevelLimit = _buf.ReadInt();
         Overlapping = _buf.ReadBool();
         Price = _buf.ReadInt();
         Quality = _buf.ReadInt();
@@ -47,6 +48,10 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
     /// 图标
     /// </summary>
     public string Icon { get; private set; }
+    /// <summary>
+    /// 等级限制
+    /// </summary>
+    public int LevelLimit { get; private set; }
     /// <summary>
     /// 是否可重叠
     /// </summary>
@@ -85,6 +90,7 @@ public sealed partial class Item1 :  Bright.Config.BeanBase
         + "Name:" + Name + ","
         + "Type:" + Type + ","
         + "Icon:" + Icon + ","
+        + "LevelLimit:" + LevelLimit + ","
         + "Overlapping:" + Overlapping + ","
         + "Price:" + Price + ","
         + "Quality:" + Quality + ","

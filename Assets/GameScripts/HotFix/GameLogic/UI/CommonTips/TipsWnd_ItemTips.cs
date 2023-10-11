@@ -6,11 +6,12 @@ using UnityEngine.EventSystems;
 using GameLogic;
 using TMPro;
 using System.Collections.Generic;
+using TEngine.Core.Network;
 
 namespace TEngine
 {
     [Window(UILayer.Tips)]
-    class TipsWnd_ItemTips : UIWindow,UIWindow.IInitData<ItemData>
+    class TipsWnd_ItemTips : UIWindow,UIWindow.IInitData<Slot>
     {
         GameObject m_CloseBtn;
         GameObject m_UseBtn;//使用按钮
@@ -28,8 +29,10 @@ namespace TEngine
         string[] EquipMentTranslate = { "大剑", "弓箭", "头盔" };
         string[] ItemTypeTranslate = { "道具", "货币", "材料","装备" };
         //数据层
+        Slot mSlot { get; set; }
         ItemData m_ItemData;
         ItemType m_ItemType;
+        int m_EquipPosIdx;//如果是装备则有装备位置
         List<common_ItemTipsTextPool> m_TipsEffectList = new List<common_ItemTipsTextPool>();
 
 
@@ -75,11 +78,16 @@ namespace TEngine
             m_ItemEffectGrid = new UIGridTool(m_ItemEffectRect.gameObject, "common_ItemTipsText");
 
             RegisterEventClick(m_CloseBtn, CancleBtn);
+            RegisterEventClick(m_WearBtn, WearOnBtn);
         }
 
         void CancleBtn(GameObject obj, PointerEventData eventData)
         {
             Close();
+        }
+        void WearOnBtn(GameObject obj, PointerEventData eventData)
+        {
+            BagDataController.Instance.ReqEquipWear(false, m_EquipPosIdx, mSlot.idx);
         }
 
         public override void AfterShow()
@@ -92,9 +100,10 @@ namespace TEngine
         /// <summary>
         /// 插入数据
         /// </summary>
-        public void SetRefreshInfo(ItemData itemData)
+        public void SetRefreshInfo(Slot slot)
         {
-            m_ItemData = itemData;
+            mSlot = slot;
+            m_ItemData = mSlot.itemData;
             RefreshInfo();
 
         }
@@ -141,6 +150,7 @@ namespace TEngine
             if (m_ItemType== ItemType.Equipment)
             {
                 var EquipBase = ConfigLoader.Instance.Tables.TbEquipmentBase.Get(ItemBase.Id);
+                m_EquipPosIdx = EquipBase.SlotPos;
                 textPool3.InitRefreshText(5, $"装备类型:{EquipMentTranslate[(int)(EquipBase.EquipType-1)]}");
                 //这件物品是装备
                 //有宝石介绍,有等级需求
@@ -209,21 +219,22 @@ namespace TEngine
             m_ItemEffectGrid.Clear();
         }
 
-        public void InitData(ItemData a)
+        public void InitData(Slot a)
         {
-            m_ItemData = a;
+            mSlot = a;
+            m_ItemData = mSlot.itemData;
         }
-        public static void ShowTip(ItemData itemData)
+        public static void ShowTip(Slot slot)
         {
             var Window=GameModule.UI.FindWindow<TipsWnd_ItemTips>();
             if (Window!=null&&Window.Visible)
             {
                 //窗口不为空并且已经显示
-                Window.SetRefreshInfo(itemData);
+                Window.SetRefreshInfo(slot);
             }
             else
             {
-                GameModule.UI.ShowUI<TipsWnd_ItemTips, ItemData>(itemData);
+                GameModule.UI.ShowUI<TipsWnd_ItemTips,Slot>(slot);
             }
         }
     }

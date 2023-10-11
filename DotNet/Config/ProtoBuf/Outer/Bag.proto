@@ -1,7 +1,7 @@
 syntax = "proto3";
 package TEngine.Network.Message;
 
-import "item.proto";
+import "CommonData.proto";
 
 //获取背包信息
 message C2L_BagInfo // IRequest,L2C_BagInfo
@@ -13,13 +13,26 @@ message L2C_BagInfo // IResponse
 {
 	repeated Slot slot		 		= 1;//格子
 }
-//格子
-message Slot
+
+//背包更新
+message L2C_BagUpdate // IMessage
 {
-	int64 idx						= 1;//格子索引
-	ItemData itemData				= 2;//道具信息
+	int32  UpdateType   			= 1;//更新类型,0:添加,1:删除,2:变更
+	repeated Slot info 				= 2;//格子信息，count=0则删除
 }
 
+//装备穿戴
+message C2L_EquipWear // IRequest,L2C_EquipWear
+{
+	bool OnWear						= 1;//穿戴或者卸载
+	int64 idx						= 2;//格子索引
+	int32 WearIdx					= 3;//装备位置
+}
+
+message L2C_EquipWear // IResponse
+{
+
+}
 
 
 

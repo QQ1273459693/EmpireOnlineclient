@@ -26,6 +26,27 @@ namespace TEngine
 		public UnitAttr PlayerAttribute { get; set; }
 		[ProtoMember(7)]
 		public int Exp { get; set; }
+		[ProtoMember(8)]
+		public List<CharEquipSlotData> EquipslotDat = new List<CharEquipSlotData>();
+	}
+	/// <summary>
+	/// 角色装备栏
+	/// </summary>
+	[ProtoContract]
+	public partial class CharEquipSlotData : AProto
+	{
+		[ProtoMember(1)]
+		public int Pos { get; set; }
+		[ProtoMember(2)]
+		public Slot slot { get; set; }
+	}
+	[ProtoContract]
+	public partial class Slot : AProto
+	{
+		[ProtoMember(1)]
+		public long idx { get; set; }
+		[ProtoMember(2)]
+		public ItemData itemData { get; set; }
 	}
 	/// <summary>
 	/// 单位属性
@@ -42,20 +63,44 @@ namespace TEngine
 		[ProtoMember(4)]
 		public int MaxMp { get; set; }
 		[ProtoMember(5)]
-		public int Attack { get; set; }
+		public int MeleeAk { get; set; }
 		[ProtoMember(6)]
-		public int Defense { get; set; }
+		public int RangeAk { get; set; }
 		[ProtoMember(7)]
-		public int Shield { get; set; }
+		public int MagicAk { get; set; }
 		[ProtoMember(8)]
-		public int PhysicalHit { get; set; }
+		public int MeDEF { get; set; }
 		[ProtoMember(9)]
-		public int MagicPenetration { get; set; }
+		public int RGDEF { get; set; }
 		[ProtoMember(10)]
-		public int Evade { get; set; }
+		public int MGDEF { get; set; }
 		[ProtoMember(11)]
-		public int Speed { get; set; }
+		public int ELMRES { get; set; }
 		[ProtoMember(12)]
+		public int CurseMgRES { get; set; }
+		[ProtoMember(13)]
+		public int Shield { get; set; }
+		[ProtoMember(14)]
+		public int PhysicalHit { get; set; }
+		[ProtoMember(15)]
+		public int EleMagicHit { get; set; }
+		[ProtoMember(16)]
+		public int CurseMagicHit { get; set; }
+		[ProtoMember(17)]
+		public int MagicPenetration { get; set; }
+		[ProtoMember(18)]
+		public int Evade { get; set; }
+		[ProtoMember(19)]
+		public int Speed { get; set; }
+		[ProtoMember(20)]
 		public int CriticalHit { get; set; }
+		[ProtoMember(21)]
+		public int MixDamage { get; set; }
+		[ProtoMember(22)]
+		public int MaxDamage { get; set; }
+		[ProtoMember(23)]
+		public int Tough { get; set; }
+		[ProtoMember(24)]
+		public int ArmorBreakingAT { get; set; }
 	}
 }

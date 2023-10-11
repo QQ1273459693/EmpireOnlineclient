@@ -16,6 +16,7 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
     public Equipment(ByteBuf _buf) 
     {
         Id = _buf.ReadInt();
+        SlotPos = _buf.ReadInt();
         EquipType = (equipment.EquipmentFlag)_buf.ReadInt();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Attribute = new System.Collections.Generic.List<equipmentBase.Attribute>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { equipmentBase.Attribute _e0;  _e0 = equipmentBase.Attribute.DeserializeAttribute(_buf); Attribute.Add(_e0);}}
         PostInit();
@@ -30,6 +31,10 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
     /// 这是id
     /// </summary>
     public int Id { get; private set; }
+    /// <summary>
+    /// 装备位置
+    /// </summary>
+    public int SlotPos { get; private set; }
     /// <summary>
     /// 装备类型
     /// </summary>
@@ -57,6 +62,7 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
     {
         return "{ "
         + "Id:" + Id + ","
+        + "SlotPos:" + SlotPos + ","
         + "EquipType:" + EquipType + ","
         + "Attribute:" + Bright.Common.StringUtil.CollectionToString(Attribute) + ","
         + "}";

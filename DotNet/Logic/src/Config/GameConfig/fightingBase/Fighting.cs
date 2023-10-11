@@ -9,42 +9,37 @@ using Bright.Serialization;
 using System.Collections.Generic;
 
 
-namespace GameConfig.itemBackGround1
+namespace GameConfig.fightingBase
 {
-public sealed partial class ItemBgGround :  Bright.Config.BeanBase 
+public sealed partial class Fighting :  Bright.Config.BeanBase 
 {
-    public ItemBgGround(ByteBuf _buf) 
+    public Fighting(ByteBuf _buf) 
     {
         Id = _buf.ReadInt();
-        ItemBoxLine = _buf.ReadString();
-        QualityName = _buf.ReadString();
-        ItemColor = _buf.ReadString();
+        Name = _buf.ReadString();
+        AttributeDes = _buf.ReadString();
         PostInit();
     }
 
-    public static ItemBgGround DeserializeItemBgGround(ByteBuf _buf)
+    public static Fighting DeserializeFighting(ByteBuf _buf)
     {
-        return new itemBackGround1.ItemBgGround(_buf);
+        return new fightingBase.Fighting(_buf);
     }
 
     /// <summary>
-    /// 品质ID
+    /// 属性ID
     /// </summary>
     public int Id { get; private set; }
     /// <summary>
-    /// 物品背景线框
+    /// 属性名
     /// </summary>
-    public string ItemBoxLine { get; private set; }
+    public string Name { get; private set; }
     /// <summary>
-    /// 品质文字
+    /// 属性描述
     /// </summary>
-    public string QualityName { get; private set; }
-    /// <summary>
-    /// 物品背景颜色
-    /// </summary>
-    public string ItemColor { get; private set; }
+    public string AttributeDes { get; private set; }
 
-    public const int __ID__ = -430099427;
+    public const int __ID__ = 1329668029;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)
@@ -60,9 +55,8 @@ public sealed partial class ItemBgGround :  Bright.Config.BeanBase
     {
         return "{ "
         + "Id:" + Id + ","
-        + "ItemBoxLine:" + ItemBoxLine + ","
-        + "QualityName:" + QualityName + ","
-        + "ItemColor:" + ItemColor + ","
+        + "Name:" + Name + ","
+        + "AttributeDes:" + AttributeDes + ","
         + "}";
     }
     

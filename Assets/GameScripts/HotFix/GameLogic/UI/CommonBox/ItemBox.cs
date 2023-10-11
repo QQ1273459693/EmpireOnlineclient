@@ -23,6 +23,7 @@ namespace GameLogic
 
 
         //Êý¾Ý²ã
+        public Slot mSlot { get; set; }
         public ItemData item;
         public long mIdx;
 
@@ -50,11 +51,12 @@ namespace GameLogic
             }
             return m_EventTriggerListener;
         }
-        public void RefreshData(ItemData itemData,long Idx)
+        public void RefreshData(Slot slot)
         {
-            mIdx=Idx;
-            item =itemData;
-            var ItemBase = ConfigLoader.Instance.Tables.TbItem1.Get(itemData.item.itemId);
+            mSlot=slot;
+            mIdx = mSlot.idx;
+            item = mSlot.itemData;
+            var ItemBase = ConfigLoader.Instance.Tables.TbItem1.Get(item.item.itemId);
 
             var ItemBgBase = ConfigLoader.Instance.Tables.TbItemBgGround1.Get(ItemBase.Quality);
             if (IconLoad == null)
@@ -73,7 +75,7 @@ namespace GameLogic
             {
                 BgLoad.LoadSprite(ItemBgBase.ItemBoxLine, m_ItemBG);
             }
-            m_NumText.text = itemData.count.ToString();
+            m_NumText.text = item.count.ToString();
         }
         public void OnSpawn()
         {

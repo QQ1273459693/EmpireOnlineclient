@@ -54,7 +54,8 @@ namespace TEngine
                     if (m_CurSlotIdx!= itemPool.mIdx)
                     {
                         m_CurSlotIdx= itemPool.mIdx;
-                        TipsWnd_ItemTips.ShowTip(itemPool.item);
+                        TipsWnd_ItemTips.ShowTip(itemPool.mSlot);
+                        m_CurSlotIdx = -1;
                         Log.Debug("点击的物品ID:" + itemPool.item.item.itemId);
                     }
                     else
@@ -66,26 +67,33 @@ namespace TEngine
                 dictionaryPool.Add(cell,itemPool);
                 Log.Debug("添加预制体后的字典大小:"+ dictionaryPool.Count);
             }
-            itemPool.RefreshData(m_BagSlotList[index].itemData, m_BagSlotList[index].idx);
+            itemPool.RefreshData(m_BagSlotList[index]);
         }
         /// <summary>
-        /// 点击穿戴回调事件
+        /// 背包更新
         /// </summary>
+        private void UpdateBagSlot()
+        {
+            RefreshBagCountNum();
+            VerticalScroll.ShowList(m_BagSlotList.Count);
+        }
         public override void AfterShow()
         {
             base.AfterShow();
+            GameEvent.AddEventListener(BagWndEvent.UpdateBagSlotEvent.EventId, UpdateBagSlot);
             m_CurSlotIdx = -1;
             //GameEvent.AddEventListener<int>("BagEquipWear", EquipWearEvent);
             RefreshBagCountNum();
-            Log.Info("背包长度是:"+ m_BagSlotList.Count);
+            //Log.Info("背包长度是:"+ m_BagSlotList.Count);
             VerticalScroll.ShowList(m_BagSlotList.Count);
         }
         public override void BeforeClose()
         {
             base.BeforeClose();
+            GameEvent.RemoveEventListener(BagWndEvent.UpdateBagSlotEvent.EventId, UpdateBagSlot);
             //GameEvent.RemoveEventListener<int>("BagEquipWear", EquipWearEvent);
-            Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);
-           // var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemBox>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
+            //Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);
+            // var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemBox>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
             foreach (var item in dictionaryPool.Values)
             {
                 GameModule.ObjectPool.GetObjectPoolByType<ItemBox>().Unspawn(item);

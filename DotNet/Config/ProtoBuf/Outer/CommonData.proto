@@ -1,17 +1,31 @@
 syntax = "proto3";
 package TEngine.Network.Message;
-
+import "item.proto";
 
 ///角色详细数据
 message CharacterData
 {
-	string Name 				= 1;//角色名
-	int32 Gold					= 2;//金币
-	int32 Diamond				= 3;//钻石
-	int32 Level					= 4;//等级
-	int32 SkillPoints			= 5;//技能点
-	UnitAttr PlayerAttribute 	= 6;//人物属性
-	int32 Exp			= 7;//经验值
+	string Name 						= 1;//角色名
+	int32 Gold							= 2;//金币
+	int32 Diamond						= 3;//钻石
+	int32 Level							= 4;//等级
+	int32 SkillPoints					= 5;//技能点
+	UnitAttr PlayerAttribute 			= 6;//人物属性
+	int32 Exp							= 7;//经验值
+	repeated CharEquipSlotData EquipslotDat = 8;//角色装备栏Slot
+}
+///角色装备栏
+message CharEquipSlotData
+{
+	int32 Pos 				= 1;//装备位置
+	Slot slot 				= 2;//装备Slot,空则是空
+}
+
+//背包格子
+message Slot
+{
+	int64 idx						= 1;//格子索引
+	ItemData itemData				= 2;//道具信息
 }
 
 ///单位属性
@@ -38,7 +52,7 @@ message UnitAttr
 	int32 Speed                      = 19;//出手速度
 	int32 CriticalHit             	 = 20;//暴击
 	int32 MixDamage             	 = 21;//最低武器伤害
-	int32 CriticalHit             	 = 22;//最高武器伤害
+	int32 MaxDamage             	 = 22;//最高武器伤害
 	int32 Tough             	     = 23;//强韧
 	int32 ArmorBreakingAT            = 24;//破甲能力
 }

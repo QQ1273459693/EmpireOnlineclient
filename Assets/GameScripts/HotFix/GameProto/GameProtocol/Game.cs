@@ -33,5 +33,7 @@ namespace TEngine
 		public uint OpCode() { return OuterOpcode.L2C_PlayerNotifyUpdate; }
 		[ProtoMember(1)]
 		public CharacterData characterData { get; set; }
+		[ProtoMember(2)]
+		public int UpdateCase { get; set; }
 	}
 }

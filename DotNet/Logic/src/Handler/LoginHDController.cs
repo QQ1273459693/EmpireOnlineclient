@@ -61,7 +61,7 @@ public class LoginHDController
             accountInfo.Password = req.Password;
             accountInfo.SDKUID = req.SDKUID;
             accountInfo.UID = uid;
-            db.Save(accountInfo);
+            await db.Save(accountInfo);
 
             await FTask.CompletedTask;
         }
@@ -97,20 +97,15 @@ public class LoginHDController
             Log.Debug($"玩家名:{request.UserName},登陆成功!");
 
             //分割
-            List<CharacterInfo> result1 = await db.Query<CharacterInfo>(t => t.UID == response.UID);
+            List<CharacterInfo> result1 = await db.Query<CharacterInfo>(t => t.UID == result[0].UID);
             CharacterInfo Info;
             if (result1.Count == 0)
             {
                 Log.Debug($"服务器还没有玩家UID:{response.UID}的数据!开始创建");
                 Info = Entity.Create<CharacterInfo>(session.Scene);
-                Info.UID = response.UID;
+                Info.UID = result[0].UID;
                 Info.UserName = request.UserName;
-                //Info.Level = 1;
-                //Info.Diamond = 55;
-                //Info.Gold = 999;
-                //Info.SkillPoints = 10;
-                //Info.UnitAttr=new int[] { 1, 2, 3, 4, 5, 6, 7 };
-                db.Save(Info);
+                await db.Save(Info);
             }
             else
             {
@@ -129,15 +124,31 @@ public class LoginHDController
             {
                 Hp = Info.UnitAttr[0],
                 Mp = Info.UnitAttr[1],
-                Attack = Info.UnitAttr[2],
-                Defense = Info.UnitAttr[3],
-                Shield = Info.UnitAttr[4],
-                PhysicalHit = Info.UnitAttr[5],
-                MagicPenetration = Info.UnitAttr[6],
-                Evade = Info.UnitAttr[7],
-                Speed = Info.UnitAttr[8],
-                CriticalHit = Info.UnitAttr[9]
+                MaxHp = Info.UnitAttr[2],
+                MaxMp = Info.UnitAttr[3],
+                MeleeAk = Info.UnitAttr[4],
+                RangeAk = Info.UnitAttr[5],
+                MagicAk = Info.UnitAttr[6],
+                MeDEF = Info.UnitAttr[7],
+                RGDEF = Info.UnitAttr[8],
+                MGDEF = Info.UnitAttr[4],
+                ELMRES = Info.UnitAttr[5],
+                CurseMgRES = Info.UnitAttr[6],
+                Shield = Info.UnitAttr[7],
+                PhysicalHit = Info.UnitAttr[8],
+                EleMagicHit = Info.UnitAttr[9],
+                CurseMagicHit = Info.UnitAttr[8],
+                MagicPenetration = Info.UnitAttr[4],
+                Evade = Info.UnitAttr[5],
+                Speed = Info.UnitAttr[6],
+                CriticalHit = Info.UnitAttr[7],
+                MixDamage = Info.UnitAttr[8],
+                MaxDamage = Info.UnitAttr[9],
+                Tough = Info.UnitAttr[8],
+                ArmorBreakingAT = Info.UnitAttr[9],
             };
+            data.Exp = Info.EXP;
+            data.EquipslotDat = Info.CharEquipSlots;
             l2C_EnterGame.characterData = data;
             session.Send(l2C_EnterGame);
             await FTask.CompletedTask;

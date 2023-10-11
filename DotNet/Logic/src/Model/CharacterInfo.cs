@@ -32,6 +32,11 @@ public class CharacterInfo : Entity
     //属性
     public int[] UnitAttr { get; set; }
 
+    public int EXP { get; set; }
+
+    public List<CharEquipSlotData> CharEquipSlots { get; set; }
+
+
     //public List<Ca>
     public void Awake()
     {
@@ -40,7 +45,15 @@ public class CharacterInfo : Entity
         Diamond = 999;
         Level = 1;
         SkillPoints = 55;
-        UnitAttr = new int[12] { 1, 2,500,540, 3, 4, 5 ,6,7,8,9,10};
+        UnitAttr = new int[24] { 1, 2,500,540, 3, 4, 5 ,6,7,8,9,10,1,1,1,1,1,1,1,11,1,1,1,1};
+        EXP = 0;
+        CharEquipSlots = new List<CharEquipSlotData>(6);
+        for (int i = 0; i < 6; i++)
+        {
+            CharEquipSlotData slotData = new CharEquipSlotData();
+            slotData.Pos = i;
+            CharEquipSlots.Add(slotData);
+        }
     }
 
 }

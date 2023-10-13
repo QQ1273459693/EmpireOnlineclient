@@ -171,7 +171,7 @@ public class BagHDController
                             if (CharSlot[i].slot!=null)
                             {
                                 Slot slot = CharSlot[i].slot;
-                                
+                                slot.idx = Bagresult[0].Slot.Count+1;
                                 Bagresult[0].Slot.Add(slot);
                                 CharSlot[i].slot = null!;
                                 Log.Debug("打开后背包数据ID:" + Bagresult[0].Id);

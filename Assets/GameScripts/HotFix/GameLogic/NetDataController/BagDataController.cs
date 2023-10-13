@@ -46,7 +46,7 @@ namespace GameLogic
             {
                 Log.Info("获取背包数据失败:" + Response.ErrorCode);
             }
-            GameModule.UI.ShowUI<Normal_NewBag>();
+            GameModule.UI.ShowUI<Normal_PlayerVisitWindow>();
 
         }
         /// <summary>

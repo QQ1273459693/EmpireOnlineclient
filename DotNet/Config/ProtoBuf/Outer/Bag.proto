@@ -17,7 +17,7 @@ message L2C_BagInfo // IResponse
 //背包更新
 message L2C_BagUpdate // IMessage
 {
-	int32  UpdateType   			= 1;//更新类型,0:添加,1:删除,2:变更
+	int32  UpdateType   			= 1;//更新类型,0:添加,1:删除,2:变更,3:有删有减,双执行
 	repeated Slot info 				= 2;//格子信息，count=0则删除
 }
 

@@ -16,7 +16,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
-using YooAsset;
 using UniFramework.Pooling;
 
 namespace TEngine
@@ -377,7 +376,7 @@ namespace TEngine
             }
 
             maxCount = num;
-            isInited = false;
+            isInited = true ;
 
             OnDragListener(Vector2.zero);
         }

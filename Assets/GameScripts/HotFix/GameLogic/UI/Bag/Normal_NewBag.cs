@@ -38,7 +38,7 @@ namespace TEngine
         }
         void RefreshBagCountNum()
         {
-            m_BagSlotList = BagDataController.Instance.m_BagSlotList;
+            m_BagSlotList = BagDataController.Instance.m_SortBagSlotList;
             //Log.Debug("看下长度:"+ BagGridList.Count);
             //m_BagCountText.text = $"{BagGridList.Count}/{200}"; 
         }

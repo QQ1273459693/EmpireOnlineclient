@@ -37,12 +37,13 @@ namespace GameLogic
         {
             m_GO=OBJ;
             IconImg = OBJ.transform.Find("EquipIcon").GetComponent<Image>();
+            
         }
         public EventTriggerListener GetClickTipEvent()
         {
             if (m_EventTriggerListener==null)
             {
-                m_EventTriggerListener = EventTriggerListener.Get(m_GO);
+                m_EventTriggerListener = EventTriggerListener.Get(IconImg.gameObject);
             }
             return m_EventTriggerListener;
         }
@@ -50,10 +51,12 @@ namespace GameLogic
         {
             if (slot==null)
             {
+                IconImg.color = Color.clear;
                 return;
             }
             mSlot=slot;
-            mIdx = mSlot.idx;
+            mSlot.idx = -1;
+            mIdx = -10;
             item = mSlot.itemData;
             var ItemBase = ConfigLoader.Instance.Tables.TbItem1.Get(item.item.itemId);
             if (IconLoad == null)
@@ -64,6 +67,7 @@ namespace GameLogic
             {
                 IconLoad.LoadSprite(ItemBase.Icon, IconImg);
             }
+            IconImg.color = Color.white;
         }
         public void OnSpawn()
         {
@@ -72,7 +76,7 @@ namespace GameLogic
 
         public void OnUnspawn()
         {
-            IconLoad.Clear();
+            IconLoad?.Clear();
             IconLoad = null;
             m_EventTriggerListener?.RemoveUIListener();
             m_EventTriggerListener = null;

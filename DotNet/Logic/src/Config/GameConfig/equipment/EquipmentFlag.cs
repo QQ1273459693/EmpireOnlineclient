@@ -16,41 +16,33 @@ namespace GameConfig.equipment
         /// </summary>
         Sword = 1,
         /// <summary>
-        /// 斧头武器类型
-        /// </summary>
-        Axe = 2,
-        /// <summary>
-        /// 弓箭武器类型
-        /// </summary>
-        Bow = 3,
-        /// <summary>
-        /// 法杖武器类型
-        /// </summary>
-        Wand = 4,
-        /// <summary>
         /// 护肩防具类型
         /// </summary>
-        Arm = 5,
+        Arm = 2,
         /// <summary>
         /// 胸甲防具类型
         /// </summary>
-        Armor = 6,
+        Armor = 3,
         /// <summary>
         /// 护盾防具类型
         /// </summary>
-        ShIeId = 7,
+        ShIeId = 4,
         /// <summary>
         /// 头盔防具类型
         /// </summary>
-        Helmet = 8,
+        Helmet = 5,
         /// <summary>
         /// 护肩防具类型
         /// </summary>
-        Shoulder = 9,
+        Shoulder = 6,
         /// <summary>
         /// 鞋子防具类型
         /// </summary>
-        Foot = 10,
+        Foot = 7,
+        /// <summary>
+        /// 护腿防具类型
+        /// </summary>
+        Leg = 8,
     }
 
 } 

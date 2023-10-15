@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using GameLogic;
 using TMPro;
 using System.Collections.Generic;
-using TEngine.Core.Network;
 
 namespace TEngine
 {
@@ -16,6 +15,7 @@ namespace TEngine
         GameObject m_CloseBtn;
         GameObject m_UseBtn;//使用按钮
         GameObject m_WearBtn;//穿戴装备按钮
+        Text m_WearBtnText;//穿戴卸载文本
         Text m_ItemInfoText;
         RectTransform m_ItemEffectRect;
         UIGridTool m_ItemEffectGrid;
@@ -26,7 +26,7 @@ namespace TEngine
         ImageLoad IconLoad;
         ImageLoad BgLoad;
 
-        string[] EquipMentTranslate = { "大剑", "弓箭", "头盔" };
+        string[] EquipMentTranslate = { "大剑", "护手", "胸甲", "护盾", "头盔", "护肩", "鞋子", "护腿" };
         string[] ItemTypeTranslate = { "道具", "货币", "材料","装备" };
         //数据层
         Slot mSlot { get; set; }
@@ -71,6 +71,7 @@ namespace TEngine
             m_CloseBtn = FindChild("Bg/Tips/Top/CloseBtn").gameObject;
             m_UseBtn = FindChild("Bg/Tips/ButtonList/UseBtn").gameObject;
             m_WearBtn = FindChild("Bg/Tips/ButtonList/WearBtn").gameObject;
+            m_WearBtnText = FindChildComponent<Text>(m_WearBtn.transform, "Text");
 
             m_ItemBG = FindChildComponent<Image>("Bg/Tips/Top/common_Item1");
             IconImg = FindChildComponent<Image>("Bg/Tips/Top/common_Item1/ItemIcon");
@@ -87,7 +88,8 @@ namespace TEngine
         }
         void WearOnBtn(GameObject obj, PointerEventData eventData)
         {
-            BagDataController.Instance.ReqEquipWear(false, m_EquipPosIdx, mSlot.idx);
+            BagDataController.Instance.ReqEquipWear(mSlot.idx>0?true:false, m_EquipPosIdx, mSlot.idx);
+            Close();
         }
 
         public override void AfterShow()
@@ -149,6 +151,8 @@ namespace TEngine
 
             if (m_ItemType== ItemType.Equipment)
             {
+                m_WearBtn.SetActive(true);
+                m_WearBtnText.text = mSlot.idx > 0 ? "穿戴" : "卸载";
                 var EquipBase = ConfigLoader.Instance.Tables.TbEquipmentBase.Get(ItemBase.Id);
                 m_EquipPosIdx = EquipBase.SlotPos;
                 textPool3.InitRefreshText(5, $"装备类型:{EquipMentTranslate[(int)(EquipBase.EquipType-1)]}");
@@ -181,6 +185,7 @@ namespace TEngine
             }
             else
             {
+                m_WearBtn.SetActive(false);
                 for (int i = 0; i < ItemBase.ItemTipsDes.Count; i++)
                 {
                     common_ItemTipsTextPool text = new common_ItemTipsTextPool();
@@ -190,6 +195,8 @@ namespace TEngine
                 //这件物品是非装备
                 textPool3.InitRefreshText(5, $"种类:{ItemTypeTranslate[ItemBase.Type-1]}");
             }
+            
+            
 
             Count = m_TipsEffectList.Count;
 

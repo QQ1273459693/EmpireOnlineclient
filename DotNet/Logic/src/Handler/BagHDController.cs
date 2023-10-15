@@ -54,7 +54,7 @@ public class BagHDController
             int Index = 1;
 
 
-            for (int i = 29; i >= 0; i--)
+            for (int i = 31; i >= 0; i--)
             {
                 Slot QQ = new Slot();
                 QQ.idx = i;
@@ -126,7 +126,6 @@ public class BagHDController
                 
                 if (Bagresult.Count > 0)
                 {
-                    Log.Debug("服务器有背包数据");
                     var mSlot = Bagresult[0].Slot;
                     for (int i = 0; i < mSlot.Count; i++)
                     {
@@ -139,12 +138,33 @@ public class BagHDController
                                 if (CharSlot[j].Pos==req.WearIdx)
                                 {
                                     //找到穿戴对应位置
-                                    CharSlot[j].slot = slot;
+                                    List<Slot> UpdateSlot = new List<Slot>();
+                                   
+
+                                    //先查看原本的位置是否有装备
+                                    Slot EQslot = CharSlot[j].slot;
+                                    if (EQslot != null)
+                                    {
+                                        //说明有
+                                        EQslot.idx= Bagresult[0].Slot.Count + 1;
+                                        EQslot.itemData.count = 1;
+                                        UpdateSlot.Add(EQslot);
+                                        Log.Info("原来的装备位置有装备,添加进背包");
+                                    }
+                                    else
+                                    {
+                                        Log.Info("原来的装备位置没有装备!!");
+                                    }
+                                     CharSlot[j].slot = slot;
+
                                     Bagresult[0].Slot.Remove(slot);
-                                    Log.Debug("打开后背包数据ID:" + Bagresult[0].Id);
+                                    //查看原本的位置是否有装备
                                     await db.Save(Bagresult[0]);
                                     await db.Save(CharResult);
-                                    SendUpdateBagSlot(session,1,slot);
+                                    slot.itemData.count = 0;
+                                    UpdateSlot.Add(slot);
+                                    Log.Debug("服务器Z穿戴装备成功!背部删除的Idx是:"+ slot.idx);
+                                    SendUpdateBagSlot(session,1, UpdateSlot);
                                     UpdateSendCharEquipSlot(session, CharSlot);
                                     break;
                                 }
@@ -162,7 +182,6 @@ public class BagHDController
                 
                 if (CharSlotResult.Count > 0)
                 {
-                    Log.Debug("服务器有背包数据");
                     
                     for (int i = 0; i < CharSlot.Count; i++)
                     {
@@ -170,15 +189,19 @@ public class BagHDController
                         {
                             if (CharSlot[i].slot!=null)
                             {
+                                List<Slot> UpdateSlot = new List<Slot>();
                                 Slot slot = CharSlot[i].slot;
                                 slot.idx = Bagresult[0].Slot.Count+1;
+                                slot.itemData.count = 1;
+                                UpdateSlot.Add(slot);
                                 Bagresult[0].Slot.Add(slot);
                                 CharSlot[i].slot = null!;
-                                Log.Debug("打开后背包数据ID:" + Bagresult[0].Id);
+                                //Log.Debug("打开后背包数据ID:" + Bagresult[0].Id);
                                 await db.Save(Bagresult[0]);
                                 await db.Save(CharResult);
-                                SendUpdateBagSlot(session,0,slot);
+                                SendUpdateBagSlot(session,0, UpdateSlot);
                                 UpdateSendCharEquipSlot(session, CharSlot);
+                                Log.Debug("服务器卸载装备成功!");
                             }
                             else
                             {
@@ -209,7 +232,7 @@ public class BagHDController
             session.Send(l2C_);
         }
         /// <summary>
-        /// 根据枚举值更新背包信息--更新类型,0:添加,1:删除,2:变更
+        /// 根据枚举值更新背包信息--更新类型,0:添加,1:删除,2:变更,3:有删有减,双执行
         /// </summary>
         /// <param name="session"></param>
         /// <param name="datas"></param>
@@ -219,14 +242,6 @@ public class BagHDController
             l2C_.UpdateType= UpdateType;
             l2C_.info = new List<Slot>();
             l2C_.info.AddRange(UpdateSlot);
-            session.Send(l2C_);
-        }
-        void SendUpdateBagSlot(Session session, int UpdateType,Slot UpdateSlot)
-        {
-            L2C_BagUpdate l2C_ = new L2C_BagUpdate();
-            l2C_.UpdateType = UpdateType;
-            l2C_.info = new List<Slot>();
-            l2C_.info.Add(UpdateSlot);
             session.Send(l2C_);
         }
     }

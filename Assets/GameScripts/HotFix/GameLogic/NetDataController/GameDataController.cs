@@ -49,7 +49,7 @@ namespace GameLogic
         {
             protected override async FTask Run(Session session, L2C_PlayerNotifyUpdate message)
             {
-                Log.Info("更新角色数据,枚举是:" + message.UpdateCase);
+                //Log.Info("更新角色数据,枚举是:" + message.UpdateCase);
                 switch (message.UpdateCase)
                 {
                     case 0://更新全部
@@ -57,8 +57,14 @@ namespace GameLogic
                         break;
                     case 8://更新装备栏
                         Instance.m_CharacterData.EquipslotDat = message.characterData.EquipslotDat;
+                        for (int i = 0; i < Instance.m_CharacterData.EquipslotDat.Count; i++)
+                        {
+                            var Data = Instance.m_CharacterData.EquipslotDat[i];
+                            //Log.Info($"位置{Data.Pos}的装备信息:不为空!{Data.slot!=null}");
+                        }
                         break;
                 }
+                GameEvent.Send(PlayerDataUpdateWndEvent.UpdateEquipSlot.EventId);
                 await FTask.CompletedTask;
             }
         }

@@ -2,13 +2,8 @@
 using TEngine.Core.Network;
 using TEngine.Core;
 using TEngine.Core.DataBase;
-using Amazon.Runtime.Internal;
-using System.Security.Cryptography;
-using Amazon.Runtime.Internal.Util;
-using System;
-using MongoDB.Driver.Core.Servers;
 using static TEngine.Logic.LoginHDController;
-using static System.Collections.Specialized.BitVector32;
+using TEngine.Helper;
 
 namespace TEngine.Logic;
 
@@ -52,12 +47,16 @@ public class BagHDController
             var List=ConfigLoader.Instance.Tables.TbItem1.DataList;
 
             int Index = 1;
+            GenerSnowIdHelper idworker = new GenerSnowIdHelper(1);
 
-
-            for (int i = 31; i >= 0; i--)
+            
+            
+            for (int i = 33; i >= 0; i--)
             {
+                long Time = idworker.nextId();
+                //Log.Info("生成的时间是:" + Time);
                 Slot QQ = new Slot();
-                QQ.idx = i;
+                QQ.idx = Time;
                 bool isEquip = List[i].Type == 4;
                 QQ.itemData = new ItemData();
                 QQ.itemData.item = new Item();
@@ -88,7 +87,17 @@ public class BagHDController
             await FTask.CompletedTask;
         }
     }
-
+    /// <summary>
+    /// 生成时间戳哦
+    /// </summary>
+    /// <returns></returns>
+    public static long GeneratorTime()
+    {
+        GenerSnowIdHelper idworker = new GenerSnowIdHelper(1);
+        long Time = idworker.nextId();
+        Log.Info("生成的时间是:"+Time);
+        return Time;
+    }
     /// <summary>
     /// 装备穿戴协议
     /// </summary>
@@ -120,6 +129,7 @@ public class BagHDController
             }
             var CharResult = CharSlotResult[0];
             var CharSlot = CharResult.CharEquipSlots;
+            GenerSnowIdHelper idworker = new GenerSnowIdHelper(1);
             if (req.OnWear)
             {
                 //穿戴,找寻背包装备
@@ -139,16 +149,25 @@ public class BagHDController
                                 {
                                     //找到穿戴对应位置
                                     List<Slot> UpdateSlot = new List<Slot>();
-                                   
 
+                                    for (int k = 0; k < Bagresult[0].Slot.Count; k++)
+                                    {
+                                        if (Bagresult[0].Slot[k].idx== slot.idx)
+                                        {
+                                            Bagresult[0].Slot.RemoveAt(k);
+                                            break;
+                                        }
+                                    }
+                                    
                                     //先查看原本的位置是否有装备
                                     Slot EQslot = CharSlot[j].slot;
                                     if (EQslot != null)
                                     {
                                         //说明有
-                                        EQslot.idx= Bagresult[0].Slot.Count + 1;
+                                        EQslot.idx = idworker.nextId();
                                         EQslot.itemData.count = 1;
                                         UpdateSlot.Add(EQslot);
+                                        Bagresult[0].Slot.Add(EQslot);
                                         Log.Info("原来的装备位置有装备,添加进背包");
                                     }
                                     else
@@ -157,7 +176,7 @@ public class BagHDController
                                     }
                                      CharSlot[j].slot = slot;
 
-                                    Bagresult[0].Slot.Remove(slot);
+                                    
                                     //查看原本的位置是否有装备
                                     await db.Save(Bagresult[0]);
                                     await db.Save(CharResult);

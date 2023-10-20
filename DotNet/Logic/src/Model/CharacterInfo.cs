@@ -45,7 +45,8 @@ public class CharacterInfo : Entity
         Diamond = 999;
         Level = 1;
         SkillPoints = 55;
-        UnitAttr = new int[24] { 1, 2,500,540, 3, 4, 5 ,6,7,8,9,10,1,1,1,1,1,1,1,11,1,1,1,1};
+        var InitRoleBase = ConfigLoader.Instance.Tables.TbInitialRoleAttrieBase.DataList[0];
+        UnitAttr = new int[24] { InitRoleBase.Hp, InitRoleBase.Mp, InitRoleBase.MaxHp, InitRoleBase.MaxMp,0,0,0,0,0,0,0,0,0,0, InitRoleBase.EleMagicHit, InitRoleBase.CurseMagicHit, 0,0,0,0,0,0,0,0};
         EXP = 0;
         CharEquipSlots = new List<CharEquipSlotData>(6);
         for (int i = 0; i < 6; i++)

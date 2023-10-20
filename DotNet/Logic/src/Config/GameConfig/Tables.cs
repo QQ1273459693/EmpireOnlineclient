@@ -23,6 +23,7 @@ public sealed class Tables
     public equipmentBase.TbEquipmentBase TbEquipmentBase {get; private set; }
     public itemBackGround1.TbItemBgGround1 TbItemBgGround1 {get; private set; }
     public fightingBase.TbFightingBase TbFightingBase {get; private set; }
+    public initialRoleAttrieBase.TbInitialRoleAttrieBase TbInitialRoleAttrieBase {get; private set; }
 
     public Tables() { }
     
@@ -47,6 +48,8 @@ public sealed class Tables
         tables.Add("itemBackGround1.TbItemBgGround1", TbItemBgGround1);
         TbFightingBase = new fightingBase.TbFightingBase(await loader("fightingbase_tbfightingbase")); 
         tables.Add("fightingBase.TbFightingBase", TbFightingBase);
+        TbInitialRoleAttrieBase = new initialRoleAttrieBase.TbInitialRoleAttrieBase(await loader("initialroleattriebase_tbinitialroleattriebase")); 
+        tables.Add("initialRoleAttrieBase.TbInitialRoleAttrieBase", TbInitialRoleAttrieBase);
 
         TbItem.Resolve(tables); 
         TbEquipment.Resolve(tables); 
@@ -57,6 +60,7 @@ public sealed class Tables
         TbEquipmentBase.Resolve(tables); 
         TbItemBgGround1.Resolve(tables); 
         TbFightingBase.Resolve(tables); 
+        TbInitialRoleAttrieBase.Resolve(tables); 
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
@@ -70,6 +74,7 @@ public sealed class Tables
         TbEquipmentBase.TranslateText(translator); 
         TbItemBgGround1.TranslateText(translator); 
         TbFightingBase.TranslateText(translator); 
+        TbInitialRoleAttrieBase.TranslateText(translator); 
     }
 }
 

@@ -52,6 +52,7 @@ namespace GameLogic
             if (slot==null)
             {
                 IconImg.color = Color.clear;
+                mSlot = null;
                 return;
             }
             mSlot=slot;

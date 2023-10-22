@@ -17,5 +17,17 @@ namespace GameLogic
                
             }
         }
+        /// <summary>
+        /// 更新角色属性
+        /// </summary>
+        public class UpdatePlayerUnitAttr : IMemory
+        {
+            public static readonly int EventId = StringId.StringToHash("UpdatePlayerUnitAttr");
+
+            public void Clear()
+            {
+
+            }
+        }
     }
 }

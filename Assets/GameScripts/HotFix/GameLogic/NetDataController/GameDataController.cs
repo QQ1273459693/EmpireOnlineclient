@@ -57,14 +57,16 @@ namespace GameLogic
                         break;
                     case 8://更新装备栏
                         Instance.m_CharacterData.EquipslotDat = message.characterData.EquipslotDat;
-                        for (int i = 0; i < Instance.m_CharacterData.EquipslotDat.Count; i++)
-                        {
-                            var Data = Instance.m_CharacterData.EquipslotDat[i];
-                            //Log.Info($"位置{Data.Pos}的装备信息:不为空!{Data.slot!=null}");
-                        }
+                        Instance.m_CharacterData.PlayerAttribute = message.characterData.PlayerAttribute;
+                        //for (int i = 0; i < Instance.m_CharacterData.EquipslotDat.Count; i++)
+                        //{
+                        //    var Data = Instance.m_CharacterData.EquipslotDat[i];
+                        //    //Log.Info($"位置{Data.Pos}的装备信息:不为空!{Data.slot!=null}");
+                        //}
+                        GameEvent.Send(PlayerDataUpdateWndEvent.UpdateEquipSlot.EventId);
+                        GameEvent.Send(PlayerDataUpdateWndEvent.UpdatePlayerUnitAttr.EventId);
                         break;
                 }
-                GameEvent.Send(PlayerDataUpdateWndEvent.UpdateEquipSlot.EventId);
                 await FTask.CompletedTask;
             }
         }

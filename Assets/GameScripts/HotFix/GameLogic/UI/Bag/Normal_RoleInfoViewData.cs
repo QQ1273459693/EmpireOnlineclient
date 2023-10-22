@@ -176,7 +176,11 @@ namespace TEngine
                 }
             }
         }
-        
+        private void UpdatePlayerUnitAttr()
+        {
+            m_CharData = GameDataController.Instance.m_CharacterData;
+            RefreshData(m_CharData.PlayerAttribute);
+        }
         public void AfterShow()
         {
             m_CharData = GameDataController.Instance.m_CharacterData;
@@ -191,12 +195,11 @@ namespace TEngine
             m_ExpText.text= $"{m_CharData.Exp}/{100}";
             RefreshData(Unitr);
 
-
-            //GameEvent.AddEventListener(BagWndEvent.UpdateBagSlotEvent.EventId, UpdateBagSlot);
+            GameEvent.AddEventListener(PlayerDataUpdateWndEvent.UpdatePlayerUnitAttr.EventId, UpdatePlayerUnitAttr);
         }
         public  void BeforeClose()
         {
-            //GameEvent.RemoveEventListener(BagWndEvent.UpdateBagSlotEvent.EventId, UpdateBagSlot);
+            GameEvent.RemoveEventListener(PlayerDataUpdateWndEvent.UpdatePlayerUnitAttr.EventId, UpdatePlayerUnitAttr);
         }
     }
 }

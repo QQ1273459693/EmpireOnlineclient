@@ -2,12 +2,7 @@
 using TEngine.Core.Network;
 using TEngine.Core;
 using TEngine.Core.DataBase;
-using Amazon.Runtime.Internal;
-using System.Security.Cryptography;
-using Amazon.Runtime.Internal.Util;
-using System;
-using MongoDB.Driver.Core.Servers;
-using static System.Formats.Asn1.AsnWriter;
+using TEngine.Helper;
 
 namespace TEngine.Logic;
 
@@ -120,35 +115,38 @@ public class LoginHDController
             data.Diamond = Info.Diamond;
             data.SkillPoints = Info.SkillPoints;
             data.Level = Info.Level;
-            data.PlayerAttribute = new UnitAttr
-            {
-                Hp = Info.UnitAttr[0],
-                Mp = Info.UnitAttr[1],
-                MaxHp = Info.UnitAttr[2],
-                MaxMp = Info.UnitAttr[3],
-                MeleeAk = Info.UnitAttr[4],
-                RangeAk = Info.UnitAttr[5],
-                MagicAk = Info.UnitAttr[6],
-                MeDEF = Info.UnitAttr[7],
-                RGDEF = Info.UnitAttr[8],
-                MGDEF = Info.UnitAttr[9],
-                ELMRES = Info.UnitAttr[10],
-                CurseMgRES = Info.UnitAttr[11],
-                Shield = Info.UnitAttr[12],
-                PhysicalHit = Info.UnitAttr[13],
-                EleMagicHit = Info.UnitAttr[14],
-                CurseMagicHit = Info.UnitAttr[15],
-                MagicPenetration = Info.UnitAttr[16],
-                Evade = Info.UnitAttr[17],
-                Speed = Info.UnitAttr[18],
-                CriticalHit = Info.UnitAttr[19],
-                MixDamage = Info.UnitAttr[20],
-                MaxDamage = Info.UnitAttr[21],
-                Tough = Info.UnitAttr[22],
-                ArmorBreakingAT = Info.UnitAttr[23],
-            };
+            
+            //data.PlayerAttribute = new UnitAttr
+            //{
+            //    Hp = Info.UnitAttr[0],
+            //    Mp = Info.UnitAttr[1],
+            //    MaxHp = Info.UnitAttr[2],
+            //    MaxMp = Info.UnitAttr[3],
+            //    MeleeAk = Info.UnitAttr[4],
+            //    RangeAk = Info.UnitAttr[5],
+            //    MagicAk = Info.UnitAttr[6],
+            //    MeDEF = Info.UnitAttr[7],
+            //    RGDEF = Info.UnitAttr[8],
+            //    MGDEF = Info.UnitAttr[9],
+            //    ELMRES = Info.UnitAttr[10],
+            //    CurseMgRES = Info.UnitAttr[11],
+            //    Shield = Info.UnitAttr[12],
+            //    PhysicalHit = Info.UnitAttr[13],
+            //    EleMagicHit = Info.UnitAttr[14],
+            //    CurseMagicHit = Info.UnitAttr[15],
+            //    MagicPenetration = Info.UnitAttr[16],
+            //    Evade = Info.UnitAttr[17],
+            //    Speed = Info.UnitAttr[18],
+            //    CriticalHit = Info.UnitAttr[19],
+            //    MixDamage = Info.UnitAttr[20],
+            //    MaxDamage = Info.UnitAttr[21],
+            //    Tough = Info.UnitAttr[22],
+            //    ArmorBreakingAT = Info.UnitAttr[23],
+            //};
             data.Exp = Info.EXP;
             data.EquipslotDat = Info.CharEquipSlots;
+            data.PlayerAttribute = GameAttributeCalculate.CalculateEquip(data.EquipslotDat);
+            Log.Info("看下传送前的护甲:"+ data.PlayerAttribute.Shield);
             l2C_EnterGame.characterData = data;
             session.Send(l2C_EnterGame);
             await FTask.CompletedTask;

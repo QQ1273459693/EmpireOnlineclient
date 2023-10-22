@@ -8,6 +8,7 @@ using UnityEngine.Pool;
 using GameLogic;
 using DG.Tweening;
 using System.Collections.Generic;
+using TEngine.Core;
 
 namespace TEngine
 {
@@ -161,6 +162,16 @@ namespace TEngine
             RefreshEquipBoxSlot();
             //Log.Info("背包长度是:"+ m_BagSlotList.Count);
             VerticalScroll.ShowList(m_BagSlotList.Count);
+
+            var Base = ConfigLoader.Instance.Tables.TbSwordSkillBase.DataList[0];
+
+            Log.Info($"技能名大小:{Base.Name.Count},描述大小:{Base.Des.Count}");
+            for (int i = 0; i < Base.Name.Count; i++)
+            {
+                Log.Info($"技能名:{Base.Name[i]},技能效果:{Base.Des[i]}");
+            }
+
+
         }
         public  void BeforeClose()
         {

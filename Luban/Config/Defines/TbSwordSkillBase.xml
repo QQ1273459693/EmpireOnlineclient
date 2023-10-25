@@ -1,0 +1,16 @@
+<module name="Tb.SwordSkill">
+	<bean name="Rect" comment="长方体数据" sep=",">
+		<var name="length" type="float" comment="长"/>
+		<var name="width" type="float" comment="宽"/>
+		<var name="height" type="float" comment="高"/>
+	</bean>
+	
+	<bean name="Rects" comment="长方体列表">
+		<var name="rects" type="(list#sep=,),Rect" comment="长方体列表"/>
+	</bean>
+	
+	
+	<bean name="RectList" comment="长方体主列表">
+		<var name="rectList" type="(list#sep=;),Rects" comment="长方体主列表"/>
+	</bean>
+</module>

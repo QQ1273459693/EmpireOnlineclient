@@ -1,16 +1,16 @@
 <module name="Tb.SwordSkill">
-	<bean name="Rect" comment="长方体数据" sep=",">
-		<var name="length" type="float" comment="长"/>
-		<var name="width" type="float" comment="宽"/>
-		<var name="height" type="float" comment="高"/>
+
+	<bean name="SwordSkill"  comment="剑士技能表">
+		<var name="Attribute" type="(array#sep=|),SkillAttrArray" comment="技能等级列表"/>
 	</bean>
 	
-	<bean name="Rects" comment="长方体列表">
-		<var name="rects" type="(list#sep=,),Rect" comment="长方体列表"/>
-	</bean>
+	<bean name="SkillAttr" comment="技能属性" sep=",">
+		<var name="AttriID" type="int" comment="属性ID"/>
+		<var name="Value" type="int" comment="值"/>
+		<var name="Percent" type="int" comment="是否是百分比"/>
+	</bean>	
 	
-	
-	<bean name="RectList" comment="长方体主列表">
-		<var name="rectList" type="(list#sep=;),Rects" comment="长方体主列表"/>
+	<bean name="SkillAttrArray" comment="列表所有技能属性">
+		<var name="SkillAttrs" type="(array#sep=;),SkillAttr" comment="列表技能属性"/>
 	</bean>
 </module>

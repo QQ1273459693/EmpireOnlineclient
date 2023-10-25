@@ -9,6 +9,7 @@ using GameLogic;
 using DG.Tweening;
 using System.Collections.Generic;
 using TEngine.Core;
+using System.Linq;
 
 namespace TEngine
 {
@@ -164,7 +165,6 @@ namespace TEngine
             VerticalScroll.ShowList(m_BagSlotList.Count);
 
             var Base = ConfigLoader.Instance.Tables.TbSwordSkillBase.DataList[0];
-
             Log.Info($"技能名大小:{Base.Name.Count},描述大小:{Base.Des.Count}");
             for (int i = 0; i < Base.Name.Count; i++)
             {
@@ -178,7 +178,7 @@ namespace TEngine
             GameEvent.RemoveEventListener(BagWndEvent.UpdateBagSlotEvent.EventId, UpdateBagSlot);
             GameEvent.RemoveEventListener(PlayerDataUpdateWndEvent.UpdateEquipSlot.EventId, UpdateEquipSlot);
             //GameEvent.RemoveEventListener<int>("BagEquipWear", EquipWearEvent);
-            //Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);
+            //Log.Debug("退出前的字典大小是:"+ dictionaryPool.Count);2
             // var UnSpawnPool = GameModule.ObjectPool.GetObjectPoolByType<ItemBox>();// GameModule.ObjectPool.m_ObjectPoolManager.GetObjectPoolByType(typeof(ItemPool));
             foreach (var item in dictionaryPool.Values)
             {

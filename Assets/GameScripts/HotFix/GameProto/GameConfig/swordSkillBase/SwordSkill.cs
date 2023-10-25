@@ -20,7 +20,7 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
         SkillType = _buf.ReadInt();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Name = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Name.Add(_e0);}}
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Des = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Des.Add(_e0);}}
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Attribute = new System.Collections.Generic.List<PassSkillBase.Attribute>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { PassSkillBase.Attribute _e0;  _e0 = PassSkillBase.Attribute.DeserializeAttribute(_buf); Attribute.Add(_e0);}}
+        {int __n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Attribute = new Tb.SwordSkill.SkillAttrArray[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { Tb.SwordSkill.SkillAttrArray __e0;__e0 = Tb.SwordSkill.SkillAttrArray.DeserializeSkillAttrArray(_buf); Attribute[__index0] = __e0;}}
         PostInit();
     }
 
@@ -50,9 +50,9 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
     /// </summary>
     public System.Collections.Generic.List<string> Des { get; private set; }
     /// <summary>
-    /// 装备属性
+    /// 技能属性
     /// </summary>
-    public System.Collections.Generic.List<PassSkillBase.Attribute> Attribute { get; private set; }
+    public Tb.SwordSkill.SkillAttrArray[] Attribute { get; private set; }
 
     public const int __ID__ = 2093513917;
     public override int GetTypeId() => __ID__;

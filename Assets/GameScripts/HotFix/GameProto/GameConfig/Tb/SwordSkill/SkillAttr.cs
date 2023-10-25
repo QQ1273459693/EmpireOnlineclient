@@ -9,37 +9,40 @@ using Bright.Serialization;
 using System.Collections.Generic;
 
 
-namespace GameConfig.PassSkillBase
+namespace GameConfig.Tb.SwordSkill
 {
-public sealed partial class Attribute :  Bright.Config.BeanBase 
+/// <summary>
+/// 技能属性
+/// </summary>
+public sealed partial class SkillAttr :  Bright.Config.BeanBase 
 {
-    public Attribute(ByteBuf _buf) 
+    public SkillAttr(ByteBuf _buf) 
     {
-        AttriId = _buf.ReadInt();
+        AttriID = _buf.ReadInt();
         Value = _buf.ReadInt();
         Percent = _buf.ReadInt();
         PostInit();
     }
 
-    public static Attribute DeserializeAttribute(ByteBuf _buf)
+    public static SkillAttr DeserializeSkillAttr(ByteBuf _buf)
     {
-        return new PassSkillBase.Attribute(_buf);
+        return new Tb.SwordSkill.SkillAttr(_buf);
     }
 
     /// <summary>
-    /// 技能属性值,对应单位属性表
+    /// 属性ID
     /// </summary>
-    public int AttriId { get; private set; }
+    public int AttriID { get; private set; }
     /// <summary>
-    /// 属性值
+    /// 值
     /// </summary>
     public int Value { get; private set; }
     /// <summary>
-    /// 0:不是百分比,1:是百分比
+    /// 是否是百分比
     /// </summary>
     public int Percent { get; private set; }
 
-    public const int __ID__ = 148521055;
+    public const int __ID__ = 1389160488;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)
@@ -54,7 +57,7 @@ public sealed partial class Attribute :  Bright.Config.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "AttriId:" + AttriId + ","
+        + "AttriID:" + AttriID + ","
         + "Value:" + Value + ","
         + "Percent:" + Percent + ","
         + "}";

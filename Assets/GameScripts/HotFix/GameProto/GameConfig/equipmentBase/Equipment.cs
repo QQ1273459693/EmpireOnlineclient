@@ -18,7 +18,8 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
         Id = _buf.ReadInt();
         SlotPos = _buf.ReadInt();
         EquipType = (equipment.EquipmentFlag)_buf.ReadInt();
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Attribute = new System.Collections.Generic.List<equipmentBase.Attribute>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { equipmentBase.Attribute _e0;  _e0 = equipmentBase.Attribute.DeserializeAttribute(_buf); Attribute.Add(_e0);}}
+        BaseAttriBute = Tb.EquipmentBase.BaseArrayEquipBute.DeserializeBaseArrayEquipBute(_buf);
+        Attribute = Tb.EquipmentBase.ArrayEquipBute.DeserializeArrayEquipBute(_buf);
         PostInit();
     }
 
@@ -40,22 +41,28 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
     /// </summary>
     public equipment.EquipmentFlag EquipType { get; private set; }
     /// <summary>
+    /// 装备基础属性
+    /// </summary>
+    public Tb.EquipmentBase.BaseArrayEquipBute BaseAttriBute { get; private set; }
+    /// <summary>
     /// 装备属性
     /// </summary>
-    public System.Collections.Generic.List<equipmentBase.Attribute> Attribute { get; private set; }
+    public Tb.EquipmentBase.ArrayEquipBute Attribute { get; private set; }
 
     public const int __ID__ = -128995393;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)
     {
-        foreach(var _e in Attribute) { _e?.Resolve(_tables); }
+        BaseAttriBute?.Resolve(_tables);
+        Attribute?.Resolve(_tables);
         PostResolve();
     }
 
     public  void TranslateText(System.Func<string, string, string> translator)
     {
-        foreach(var _e in Attribute) { _e?.TranslateText(translator); }
+        BaseAttriBute?.TranslateText(translator);
+        Attribute?.TranslateText(translator);
     }
 
     public override string ToString()
@@ -64,7 +71,8 @@ public sealed partial class Equipment :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "SlotPos:" + SlotPos + ","
         + "EquipType:" + EquipType + ","
-        + "Attribute:" + Bright.Common.StringUtil.CollectionToString(Attribute) + ","
+        + "BaseAttriBute:" + BaseAttriBute + ","
+        + "Attribute:" + Attribute + ","
         + "}";
     }
     

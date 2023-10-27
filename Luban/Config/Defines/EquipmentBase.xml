@@ -1,0 +1,22 @@
+<module name="Tb.EquipmentBase">
+	
+	<bean name="AttriBute" comment="装备属性" sep=",">
+		<var name="AttriID" type="int" comment="属性ID"/>
+		<var name="Value" type="int" comment="值"/>
+		<var name="Percent" type="int" comment="是否是百分比"/>
+	</bean>
+
+	<bean name="WeaponAttri" comment="基本属性" sep=",">
+		<var name="AttriID" type="int" comment="属性ID"/>
+		<var name="MixValue" type="int" comment="伤害值1"/>
+		<var name="MaxValue" type="int" comment="伤害值2"/>
+	</bean>	
+	
+	<bean name="ArrayEquipBute">
+		<var name="MainAttribute" type="(list#sep=;),AttriBute" comment="装备列表属性值"/>
+	</bean>
+	
+	<bean name="BaseArrayEquipBute">
+		<var name="BaseAttribute" type="(list#sep=;),WeaponAttri" comment="基本装备属性列表值"/>
+	</bean>
+</module>

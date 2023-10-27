@@ -58,14 +58,14 @@ public static class GameAttributeCalculate
             {
                 if (charEquip[i].slot!=null)
                 {
-                    //表明有装备
+                    //表明有装备,主属性计算
                     int EquipID = charEquip[i].slot.itemData.item.itemId;
-                    var EquipAttriBute = ConfigLoader.Instance.Tables.TbEquipmentBase.DataMap[EquipID].Attribute;
+                    var EquipAttriBute = ConfigLoader.Instance.Tables.TbEquipmentBase.DataMap[EquipID].Attribute.MainAttribute;
                     for (int j = 0; j < EquipAttriBute.Count; j++)
                     {
                         var Bute = EquipAttriBute[j];
                         int[] ValueOrPercen;
-                        if (m_Unitru.TryGetValue(Bute.AttriId,out ValueOrPercen))
+                        if (m_Unitru.TryGetValue(Bute.AttriID,out ValueOrPercen))
                         {
                             if (Bute.Percent==0)
                             {
@@ -91,7 +91,43 @@ public static class GameAttributeCalculate
                                 //是百分比
                                 ints[1]= Bute.Value;
                             }
-                            m_Unitru.Add(Bute.AttriId, ints);
+                            m_Unitru.Add(Bute.AttriID, ints);
+                        }
+                    }
+
+                    //基础属性计算
+                    var BaseAttriBute = ConfigLoader.Instance.Tables.TbEquipmentBase.DataMap[EquipID].BaseAttriBute.BaseAttribute;
+                    for (int k = 0; k < BaseAttriBute.Count; k++)
+                    {
+                        var Bute = BaseAttriBute[k];
+                        int[] Value;
+                        if (m_Unitru.TryGetValue(Bute.AttriID, out Value))
+                        {
+                            if (Bute.AttriID==20)//这里写死是武器伤害
+                            {
+                                Value[0] += Bute.MixValue;
+                                Value[1] += Bute.MaxValue;
+                            }
+                            else
+                            {
+                                Value[0]+= Bute.MixValue;
+                            }
+                        }
+                        else
+                        {
+                            int[] ints = new int[2];
+                            if (Bute.AttriID == 20)//这里写死是武器伤害
+                            {
+                                ints[0]= Bute.MixValue;
+                                ints[1]= Bute.MaxValue;
+                            }
+                            else
+                            {
+                                ints[0] = Bute.MixValue;
+                                ints[1] = 0;
+                            }
+                            Log.Info($"加载的基本属性ID:{Bute.AttriID}");
+                            m_Unitru.Add(Bute.AttriID, ints);
                         }
                     }
                 }
@@ -168,10 +204,11 @@ public static class GameAttributeCalculate
                     BackUnitAttr.CriticalHit = PercentBaseValue;
                     break;
                 case 20:
-                    BackUnitAttr.MixDamage = PercentBaseValue;
+                    BackUnitAttr.MixDamage = item.Value[0];//额外写
+                    BackUnitAttr.MaxDamage = item.Value[1];//额外写法
                     break;
                 case 21:
-                    BackUnitAttr.MaxDamage = PercentBaseValue;
+                    //BackUnitAttr.MaxDamage = item.Value[1];//额外写法
                     break;
                 case 22:
                     BackUnitAttr.Tough = PercentBaseValue;

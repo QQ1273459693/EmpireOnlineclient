@@ -170,14 +170,38 @@ namespace TEngine
                     textPool5.InitRefreshText(4,$"宝石效果:{ConfigLoader.Instance.Tables.TbFightingBase.Get(m_ItemData.item.equipData.GemAttributeID).Name}:+{450+ m_ItemData.item.equipData.GemAttributeID}");
                     m_TipsEffectList.Add(textPool5);
                 }
-                for (int i = 0; i < EquipBase.Attribute.Count; i++)
+
+                //基础属性字段文本
+                var BaseButeList = EquipBase.BaseAttriBute.BaseAttribute;
+                for (int i = 0; i < BaseButeList.Count; i++)
                 {
                     common_ItemTipsTextPool text = new common_ItemTipsTextPool();
-                    var Value = ConfigLoader.Instance.Tables.TbFightingBase.Get(EquipBase.Attribute[i].AttriId);
-                    var Data = EquipBase.Attribute[i];
-                    text.InitRefreshText(6 + i, $"效果:{Value.Name}+{Data.Value}{(Data.Percent == 1 ? "%" : "")}");
+                    var Bute = BaseButeList[i];
+                    //这里应该写死,如果是武器伤害就单行显示,另外一种是魔法武器伤害都是单行显示
+                    var Value = ConfigLoader.Instance.Tables.TbFightingBase.Get(Bute.AttriID);
+                    if (Value.Id == 20)
+                    {
+                        //是近战武器伤害直接显示 :200-300
+                        text.InitRefreshText(6 + i, $"攻击力:{Bute.MixValue}~{Bute.MaxValue}");
+                    }
+                    else
+                    {
+                        text.InitRefreshText(6 + i, $"{Value.Name}:+{Bute.MixValue}");
+                    }
                     m_TipsEffectList.Add(text);
                 }
+
+                for (int i = 0; i < EquipBase.Attribute.MainAttribute.Count; i++)
+                {
+                    common_ItemTipsTextPool text = new common_ItemTipsTextPool();
+                    var Bute = EquipBase.Attribute.MainAttribute[i];
+                    var Value = ConfigLoader.Instance.Tables.TbFightingBase.Get(Bute.AttriID);
+                    text.InitRefreshText(7 + i, $"效果:{Value.Name}+{Bute.Value}{(Bute.Percent == 1 ? "%" : "")}");
+                    m_TipsEffectList.Add(text);
+                }
+
+                
+
 
                 common_ItemTipsTextPool textPool100 = new common_ItemTipsTextPool();
                 textPool100.InitRefreshText(20, $"需求:{ItemBase.LevelLimit}级");

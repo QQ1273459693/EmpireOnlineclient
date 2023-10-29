@@ -36,6 +36,10 @@ public class CharacterInfo : Entity
 
     public List<CharEquipSlotData> CharEquipSlots { get; set; }
 
+    public List<SkillData> PassiveSkills { get; set; }
+    public List<SkillData> ActiveSkills { get; set; }
+    public List<SkillData> AutoSkills { get; set; }    
+
 
     //public List<Ca>
     public void Awake()
@@ -55,6 +59,9 @@ public class CharacterInfo : Entity
             slotData.Pos = i;
             CharEquipSlots.Add(slotData);
         }
+        PassiveSkills = new List<SkillData>();
+        ActiveSkills = new List<SkillData>();
+        AutoSkills = new List<SkillData>();
     }
 
 }

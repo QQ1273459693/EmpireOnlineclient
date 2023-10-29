@@ -28,6 +28,27 @@ namespace TEngine
 		public int Exp { get; set; }
 		[ProtoMember(8)]
 		public List<CharEquipSlotData> EquipslotDat = new List<CharEquipSlotData>();
+		[ProtoMember(9)]
+		public List<SkillData> PassiveSkills = new List<SkillData>();
+		[ProtoMember(10)]
+		public List<SkillData> ActiveSkills = new List<SkillData>();
+		[ProtoMember(11)]
+		public List<SkillData> AutoSkills = new List<SkillData>();
+	}
+	/// <summary>
+	/// 角色技能数据
+	/// </summary>
+	[ProtoContract]
+	public partial class SkillData : AProto
+	{
+		[ProtoMember(1)]
+		public int SkID { get; set; }
+		[ProtoMember(2)]
+		public int ReceID { get; set; }
+		[ProtoMember(3)]
+		public int SkillType { get; set; }
+		[ProtoMember(4)]
+		public int Lv { get; set; }
 	}
 	/// <summary>
 	/// 角色装备栏

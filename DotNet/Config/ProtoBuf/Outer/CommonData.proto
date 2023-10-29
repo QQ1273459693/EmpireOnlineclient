@@ -13,7 +13,20 @@ message CharacterData
 	UnitAttr PlayerAttribute 			= 6;//人物属性
 	int32 Exp							= 7;//经验值
 	repeated CharEquipSlotData EquipslotDat = 8;//角色装备栏Slot
+	repeated SkillData PassiveSkills 	= 9;//被动技能组
+	repeated SkillData ActiveSkills 	= 10;//主动技能组
+	repeated SkillData AutoSkills 		= 11;//自动释放技能组
 }
+
+///角色技能数据
+message SkillData
+{
+	int32 SkID 				= 1;//技能ID
+	int32 ReceID 			= 2;//职业类型
+	int32 SkillType 		= 3;//技能类型
+	int32 Lv 				= 4;//技能等级
+}
+
 ///角色装备栏
 message CharEquipSlotData
 {

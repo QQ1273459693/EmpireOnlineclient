@@ -62,6 +62,31 @@ public class CharacterInfo : Entity
         PassiveSkills = new List<SkillData>();
         ActiveSkills = new List<SkillData>();
         AutoSkills = new List<SkillData>();
+
+        //测试用,把技能全加进去
+        var SkillBase = ConfigLoader.Instance.Tables.TbSwordSkillBase.DataList;
+        for (int i = 0; i < SkillBase.Count; i++)
+        {
+            SkillData skillData = new SkillData();
+            skillData.Lv = i+5;
+            skillData.ReceID = 0;
+            skillData.SkID = SkillBase[i].Id;
+            skillData.SkillType = SkillBase[i].SkillType;
+            switch (SkillBase[i].SkillType)
+            {
+                case 0://被动技能
+                    PassiveSkills.Add(skillData);
+                    break;
+                case 1://主动技能
+                    ActiveSkills.Add(skillData);
+                    break;
+                case 2://自动技能
+                    AutoSkills.Add(skillData);
+                    break;
+            }
+        }
+        //测试用
+
     }
 
 }

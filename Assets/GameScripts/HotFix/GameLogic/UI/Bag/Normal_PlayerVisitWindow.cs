@@ -18,6 +18,7 @@ namespace TEngine
 
         Normal_BagViewData BagWindow = new Normal_BagViewData();
         Normal_RoleInfoViewData RoleInfoWindow=new Normal_RoleInfoViewData();
+        Normal_SkillInfoViewData SkillInfoWindow = new Normal_SkillInfoViewData();
 
         public override void ScriptGenerator()
         {
@@ -34,7 +35,7 @@ namespace TEngine
             //数据页签加载
             BagWindow.Init(FindChild("Normal_NewBag").gameObject);
             RoleInfoWindow.Init(FindChild("Normal_RoleInfo").gameObject);
-
+            SkillInfoWindow.Init(FindChild("Normal_SkillInfo").gameObject);
 
         }
         void OnExitClick(GameObject obj, PointerEventData eventData)
@@ -54,12 +55,14 @@ namespace TEngine
             //数据页签加载
             BagWindow.AfterShow();
             RoleInfoWindow.AfterShow();
+            SkillInfoWindow.AfterShow();
         }
         public override void BeforeClose()
         {
             base.BeforeClose();
             BagWindow.BeforeClose();
             RoleInfoWindow.BeforeClose();
+            SkillInfoWindow.BeforeClose();
         }
     }
 }

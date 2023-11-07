@@ -45,17 +45,37 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 21300000, guid: a066a86ffc65001468914157b275c5a5, type: 3}
+    - {fileID: 21300000, guid: cc457d1b3bd1b8b42a6eaf4b805892c6, type: 3}
+    - {fileID: 21300000, guid: de398c2dc86eacc4aaadbb4d65a2e68c, type: 3}
+    - {fileID: 21300000, guid: 5c047bea57b02a74d8a81dc35722977a, type: 3}
+    - {fileID: 21300000, guid: 743fe91c40d7f6344a5a20a20104286b, type: 3}
     - {fileID: 21300000, guid: 94132407f669ac14cbd2c99962b1d5eb, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - 94132407f669ac14cbd2c99962b1d5eb: 21300000
+    - 5c047bea57b02a74d8a81dc35722977a: 21300000
+    - cc457d1b3bd1b8b42a6eaf4b805892c6: 21300000
+    - 743fe91c40d7f6344a5a20a20104286b: 21300000
+    - de398c2dc86eacc4aaadbb4d65a2e68c: 21300000
+    - a066a86ffc65001468914157b275c5a5: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 94132407f669ac14cbd2c99962b1d5eb, type: 3}
+  - {fileID: 21300000, guid: 5c047bea57b02a74d8a81dc35722977a, type: 3}
+  - {fileID: 21300000, guid: cc457d1b3bd1b8b42a6eaf4b805892c6, type: 3}
+  - {fileID: 21300000, guid: 743fe91c40d7f6344a5a20a20104286b, type: 3}
+  - {fileID: 21300000, guid: de398c2dc86eacc4aaadbb4d65a2e68c, type: 3}
+  - {fileID: 21300000, guid: a066a86ffc65001468914157b275c5a5, type: 3}
   m_PackedSpriteNamesToIndex:
   - board_07
+  - board_05
+  - board_02
+  - board_06
+  - board_03
+  - board_01
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewPixeGUI_Inventory_board
   m_IsVariant: 0

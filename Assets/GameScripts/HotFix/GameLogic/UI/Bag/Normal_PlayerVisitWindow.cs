@@ -12,7 +12,7 @@ namespace TEngine
         GameObject m_Close;
         Toggle m_BagToggle;
         Toggle m_RoleInfoToggle;
-
+        Toggle m_SkillInfoToggle;
 
 
 
@@ -25,12 +25,13 @@ namespace TEngine
             m_Close= FindChild("Close").gameObject;
             m_BagToggle = FindChildComponent<Toggle>("TagList/Tag (1)");
             m_RoleInfoToggle= FindChildComponent<Toggle>("TagList/Tag");
+            m_SkillInfoToggle= FindChildComponent<Toggle>("TagList/Tag (2)");
 
             RegisterEventClick(m_Close, OnExitClick);
 
             m_BagToggle.onValueChanged.AddListener(BagToggleValue);
             m_RoleInfoToggle.onValueChanged.AddListener(RoleInfoToggleValue);
-
+            m_SkillInfoToggle.onValueChanged.AddListener(SkillInfoToggleValue);
 
             //数据页签加载
             BagWindow.Init(FindChild("Normal_NewBag").gameObject);
@@ -47,7 +48,14 @@ namespace TEngine
         }
         void RoleInfoToggleValue(bool isOn)
         {
-
+            
+        }
+        void SkillInfoToggleValue(bool isOn)
+        {
+            if (isOn)
+            {
+                SkillInfoWindow.ClickRefresh();
+            }
         }
         public override void AfterShow()
         {

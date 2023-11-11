@@ -245,7 +245,7 @@ public class BagHDController
         {
             L2C_PlayerNotifyUpdate l2C_ = new L2C_PlayerNotifyUpdate();
             CharacterData data = new CharacterData();
-            data.PlayerAttribute = GameAttributeCalculate.CalculateEquip(datas);
+            data.PlayerAttribute= GameAttributeCalculate.CalculateEquip(data.PlayerAttribute,datas);
             data.EquipslotDat = datas;
             l2C_.characterData = data;
             l2C_.UpdateCase = 8;

@@ -24,7 +24,7 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
         {int __n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Attribute = new Tb.SwordSkill.SkillAttrArray[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { Tb.SwordSkill.SkillAttrArray __e0;__e0 = Tb.SwordSkill.SkillAttrArray.DeserializeSkillAttrArray(_buf); Attribute[__index0] = __e0;}}
         AttackType = (SKILL.TYPE)_buf.ReadInt();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);AttackParam = new System.Collections.Generic.List<Tb.SwordSkill.SkillFontValue>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.SwordSkill.SkillFontValue _e0;  _e0 = Tb.SwordSkill.SkillFontValue.DeserializeSkillFontValue(_buf); AttackParam.Add(_e0);}}
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);SkillParam = new System.Collections.Generic.List<Tb.SwordSkill.SkillParamValue>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.SwordSkill.SkillParamValue _e0;  _e0 = Tb.SwordSkill.SkillParamValue.DeserializeSkillParamValue(_buf); SkillParam.Add(_e0);}}
+        {int __n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);SkillParam = new Tb.SwordSkill.SkillParamArray[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { Tb.SwordSkill.SkillParamArray __e0;__e0 = Tb.SwordSkill.SkillParamArray.DeserializeSkillParamArray(_buf); SkillParam[__index0] = __e0;}}
         PostInit();
     }
 
@@ -72,7 +72,7 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
     /// <summary>
     /// 技能执行参数
     /// </summary>
-    public System.Collections.Generic.List<Tb.SwordSkill.SkillParamValue> SkillParam { get; private set; }
+    public Tb.SwordSkill.SkillParamArray[] SkillParam { get; private set; }
 
     public const int __ID__ = 2093513917;
     public override int GetTypeId() => __ID__;

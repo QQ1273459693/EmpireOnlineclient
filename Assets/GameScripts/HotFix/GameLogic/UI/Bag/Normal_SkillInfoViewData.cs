@@ -40,6 +40,8 @@ namespace TEngine
             Image m_SkillIcon;
             ImageLoad m_ImageLoad;
             Text m_LvText;
+            EventTriggerListener m_EventTriggerListener;
+            public SkillData skill;
             public void Init(GameObject OBJ)
             {
                 m_Slot = OBJ;
@@ -47,8 +49,17 @@ namespace TEngine
                 m_SkillIcon = DUnityUtil.FindChildComponent<Image>(OBJ.transform, "Icon");
                 m_LvText= DUnityUtil.FindChildComponent<Text>(OBJ.transform, "Text (Legacy) (1)");
             }
+            public EventTriggerListener GetClickTipEvent()
+            {
+                if (m_EventTriggerListener == null)
+                {
+                    m_EventTriggerListener = EventTriggerListener.Get(m_Slot);
+                }
+                return m_EventTriggerListener;
+            }
             public void Refresh(SkillData skillData)
             {
+                skill=skillData;
                 var SkillBase = ConfigLoader.Instance.Tables.TbSwordSkillBase.Get(skillData.SkID);
                 m_SkillNameText.text = SkillBase.Name[skillData.Lv];
                 m_LvText.text = skillData.Lv + "级";
@@ -63,6 +74,8 @@ namespace TEngine
             }
             public void Dipose()
             {
+                m_EventTriggerListener?.RemoveUIListener();
+                m_EventTriggerListener = null;
                 m_ImageLoad?.Clear();
                 m_ImageLoad = null;
             }
@@ -86,24 +99,22 @@ namespace TEngine
             m_AutoGridTool = new UIGridTool(m_AutoObj.gameObject, "common_SkillSlot");
 
         }
-        public async void AfterShow()
+        public void AfterShow()
         {
             var m_CharData = GameDataController.Instance.m_CharacterData;
             m_PassivityGridTool.GenerateElem(m_CharData.PassiveSkills.Count);
             m_InitiativeGridTool.GenerateElem(m_CharData.ActiveSkills.Count);
             m_AutoGridTool.GenerateElem(m_CharData.AutoSkills.Count);
 
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_PassivityObj);
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_InitiativeObj);
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_AutoObj);
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_AutoObjP);
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_InitiativeObjP);
-            //LayoutRebuilder.ForceRebuildLayoutImmediate(m_PassivityObjP);
-
             for (int i = 0; i < m_CharData.PassiveSkills.Count; i++)
             {
                 Common_SkillSlot common_Skill = new Common_SkillSlot();
                 common_Skill.Init(m_PassivityGridTool.Get(i));
+                common_Skill.GetClickTipEvent().onClick.AddListener((go, arg) =>
+                {
+                    GameModule.UI.ShowUI<TipsWnd_TipsInfo, SkillData>(common_Skill.skill);
+
+                });
                 common_Skill.Refresh(m_CharData.PassiveSkills[i]);
             }
 
@@ -111,6 +122,11 @@ namespace TEngine
             {
                 Common_SkillSlot common_Skill = new Common_SkillSlot();
                 common_Skill.Init(m_InitiativeGridTool.Get(i));
+                common_Skill.GetClickTipEvent().onClick.AddListener((go, arg) =>
+                {
+                    GameModule.UI.ShowUI<TipsWnd_TipsInfo, SkillData>(common_Skill.skill);
+
+                });
                 common_Skill.Refresh(m_CharData.ActiveSkills[i]);
             }
 
@@ -118,11 +134,25 @@ namespace TEngine
             {
                 Common_SkillSlot common_Skill = new Common_SkillSlot();
                 common_Skill.Init(m_AutoGridTool.Get(i));
+                common_Skill.GetClickTipEvent().onClick.AddListener((go, arg) =>
+                {
+                    GameModule.UI.ShowUI<TipsWnd_TipsInfo, SkillData>(common_Skill.skill);
+
+                });
                 common_Skill.Refresh(m_CharData.AutoSkills[i]);
             }
-            await UniTask.Delay(1000);
             Log.Info("已经点击了");
+           
+        }
+        public void ClickRefresh()
+        {
             LayoutRebuilder.ForceRebuildLayoutImmediate(m_Content);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_PassivityObj);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_InitiativeObj);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_AutoObj);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_AutoObjP);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_InitiativeObjP);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_PassivityObjP);
         }
         public  void BeforeClose()
         {

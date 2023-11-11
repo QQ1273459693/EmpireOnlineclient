@@ -303,7 +303,7 @@ namespace TEngine
         }
         public OpenWindowOperation ShowUI<T,A>(A a) where T : UIWindow
         {
-            var operation = ShowWindow<T,A>(a);//TestInitShow(typeof(T));
+            var operation = ShowWindow<T,A>(a);
             if (operation != null)
             {
                 operation.WaitForAsyncComplete();

@@ -123,5 +123,9 @@ namespace TEngine
 		public int Tough { get; set; }
 		[ProtoMember(24)]
 		public int ArmorBreakingAT { get; set; }
+		[ProtoMember(25)]
+		public int SwordDamageAdd { get; set; }
+		[ProtoMember(26)]
+		public int KnifeBreakingAT { get; set; }
 	}
 }

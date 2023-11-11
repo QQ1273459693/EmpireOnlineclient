@@ -68,4 +68,6 @@ message UnitAttr
 	int32 MaxDamage             	 = 22;//最高武器伤害
 	int32 Tough             	     = 23;//强韧
 	int32 ArmorBreakingAT            = 24;//破甲能力
+	int32 SwordDamageAdd           	 = 25;//剑类武器伤害
+	int32 KnifeBreakingAT            = 26;//刀类武器伤害
 }

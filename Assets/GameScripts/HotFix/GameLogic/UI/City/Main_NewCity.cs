@@ -55,7 +55,7 @@ namespace TEngine
             m_LvText.text = $"Lv.{m_CharacterData.Level}";
             m_GoldNumText.text = m_CharacterData.Gold.ToString();
             m_GemNumText.text=m_CharacterData.Diamond.ToString();
-            float HP= (float)m_CharacterData.PlayerAttribute.Hp / (float)m_CharacterData.PlayerAttribute.MaxHp; ;
+            float HP= (float)m_CharacterData.PlayerAttribute.Hp / (float)m_CharacterData.PlayerAttribute.MaxHp;
             m_ImageHpFill.fillAmount = HP;
             m_ImageExpFill.fillAmount = (float)m_CharacterData.Exp / (float)100;
             m_ImageMpFill.fillAmount = (float)m_CharacterData.PlayerAttribute.Mp / (float)m_CharacterData.PlayerAttribute.MaxMp;

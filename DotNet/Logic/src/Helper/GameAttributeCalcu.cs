@@ -1,4 +1,9 @@
-﻿using static TEngine.Logic.LoginHDController;
+﻿using Amazon.Runtime.Internal.Transform;
+using Amazon.Runtime.Internal.Util;
+using GameConfig.item;
+using GameConfig.item1;
+using System;
+using static TEngine.Logic.LoginHDController;
 
 namespace TEngine.Helper;
 
@@ -6,16 +11,17 @@ public static class GameAttributeCalculate
 {
     static UnitAttr unit;
     static int[] m_UnitAttrValue;
+
     /// <summary>
-    /// 计算装备全部属性
+    /// 初始化属性
     /// </summary>
-    public static UnitAttr CalculateEquip(List<CharEquipSlotData> charEquip)
+    static void InitUnit()
     {
-        if (unit==null)
+        if (unit == null)
         {
             var InitRoleBase = ConfigLoader.Instance.Tables.TbInitialRoleAttrieBase.DataList[0];
             //初始创建
-            m_UnitAttrValue = new int[24] { InitRoleBase.Hp, InitRoleBase.Mp, InitRoleBase.MaxHp, InitRoleBase.MaxMp, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, InitRoleBase.EleMagicHit, InitRoleBase.CurseMagicHit, 0, 0, 0, 0, 0, 0, 0, 0 };
+            m_UnitAttrValue = new int[26] { InitRoleBase.Hp, InitRoleBase.Mp, InitRoleBase.MaxHp, InitRoleBase.MaxMp, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, InitRoleBase.EleMagicHit, InitRoleBase.CurseMagicHit, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
             unit = new UnitAttr
             {
@@ -43,15 +49,19 @@ public static class GameAttributeCalculate
                 MaxDamage = m_UnitAttrValue[21],
                 Tough = m_UnitAttrValue[22],
                 ArmorBreakingAT = m_UnitAttrValue[23],
+                SwordDamageAdd = m_UnitAttrValue[24],
+                KnifeBreakingAT = m_UnitAttrValue[25],
             };
         }
+    }
+    /// <summary>
+    /// 计算装备全部属性
+    /// </summary>
+    public static UnitAttr CalculateEquip(UnitAttr BackUnitAttr, List<CharEquipSlotData> charEquip)
+    {
 
-
-
-
-
-
-        Dictionary<int, int[]> m_Unitru = new Dictionary<int, int[]>(); 
+        Dictionary<int, int[]> m_Unitru = new Dictionary<int, int[]>();
+        int m_WeaponType = -1;//当前穿戴的武器类型
         if (charEquip!=null)
         {
             for (int i = 0; i < charEquip.Count; i++) 
@@ -60,7 +70,13 @@ public static class GameAttributeCalculate
                 {
                     //表明有装备,主属性计算
                     int EquipID = charEquip[i].slot.itemData.item.itemId;
-                    var EquipAttriBute = ConfigLoader.Instance.Tables.TbEquipmentBase.DataMap[EquipID].Attribute.MainAttribute;
+                    var EquipBse = ConfigLoader.Instance.Tables.TbEquipmentBase.DataMap[EquipID];
+                    if (EquipBse.SlotPos==0)
+                    {
+                        //是武器部位
+                        m_WeaponType = (int)EquipBse.EquipType;
+                    }
+                    var EquipAttriBute = EquipBse.Attribute.MainAttribute;
                     for (int j = 0; j < EquipAttriBute.Count; j++)
                     {
                         var Bute = EquipAttriBute[j];
@@ -134,8 +150,11 @@ public static class GameAttributeCalculate
                
             }
         }
-        UnitAttr BackUnitAttr = new UnitAttr();
-        BackUnitAttr = InitUnitAttrValue(BackUnitAttr);
+        if (BackUnitAttr==null)
+        {
+            Log.Error("错误的属性赋值!!!");
+            return null;
+        }
         foreach (var item in m_Unitru)
         {
             int BaseValue = item.Value[0];
@@ -144,82 +163,260 @@ public static class GameAttributeCalculate
             switch (item.Key)
             {
                 case 0:
-                    BackUnitAttr.Hp = PercentBaseValue;
+                    BackUnitAttr.Hp += PercentBaseValue;
                     break;
                 case 1:
-                    BackUnitAttr.Mp = PercentBaseValue;
+                    BackUnitAttr.Mp += PercentBaseValue;
                     break;
                 case 2:
-                    BackUnitAttr.MaxHp = PercentBaseValue;
+                    BackUnitAttr.MaxHp += PercentBaseValue;
                     break;
                 case 3:
-                    BackUnitAttr.MaxMp = PercentBaseValue;
+                    BackUnitAttr.MaxMp += PercentBaseValue;
                     break;
                 case 4:
-                    BackUnitAttr.MeleeAk = PercentBaseValue;
+                    BackUnitAttr.MeleeAk += PercentBaseValue;
                     break;
                 case 5:
-                    BackUnitAttr.RangeAk = PercentBaseValue;
+                    BackUnitAttr.RangeAk += PercentBaseValue;
                     break;
                 case 6:
-                    BackUnitAttr.MagicAk = PercentBaseValue;
+                    BackUnitAttr.MagicAk += PercentBaseValue;
                     break;
                 case 7:
-                    BackUnitAttr.MeDEF = PercentBaseValue;
+                    BackUnitAttr.MeDEF += PercentBaseValue;
                     break;
                 case 8:
-                    BackUnitAttr.RGDEF = PercentBaseValue;
+                    BackUnitAttr.RGDEF += PercentBaseValue;
                     break;
                 case 9:
-                    BackUnitAttr.MGDEF = PercentBaseValue;
+                    BackUnitAttr.MGDEF += PercentBaseValue;
                     break;
                 case 10:
-                    BackUnitAttr.ELMRES = PercentBaseValue;
+                    BackUnitAttr.ELMRES += PercentBaseValue;
                     break;
                 case 11:
-                    BackUnitAttr.CurseMgRES = PercentBaseValue;
+                    BackUnitAttr.CurseMgRES += PercentBaseValue;
                     break;
                 case 12:
-                    BackUnitAttr.Shield = PercentBaseValue;
+                    BackUnitAttr.Shield += PercentBaseValue;
                     break;
                 case 13:
-                    BackUnitAttr.PhysicalHit = PercentBaseValue;
+                    BackUnitAttr.PhysicalHit += PercentBaseValue;
                     break;
                 case 14:
-                    BackUnitAttr.EleMagicHit = PercentBaseValue;
+                    BackUnitAttr.EleMagicHit += PercentBaseValue;
                     break;
                 case 15:
-                    BackUnitAttr.CurseMagicHit = PercentBaseValue;
+                    BackUnitAttr.CurseMagicHit += PercentBaseValue;
                     break;
                 case 16:
-                    BackUnitAttr.MagicPenetration = PercentBaseValue;
+                    BackUnitAttr.MagicPenetration += PercentBaseValue;
                     break;
                 case 17:
-                    BackUnitAttr.Evade = PercentBaseValue;
+                    BackUnitAttr.Evade += PercentBaseValue;
                     break;
                 case 18:
-                    BackUnitAttr.Speed = PercentBaseValue;
+                    BackUnitAttr.Speed += PercentBaseValue;
                     break;
                 case 19:
-                    BackUnitAttr.CriticalHit = PercentBaseValue;
+                    BackUnitAttr.CriticalHit += PercentBaseValue;
                     break;
                 case 20:
-                    BackUnitAttr.MixDamage = item.Value[0];//额外写
-                    BackUnitAttr.MaxDamage = item.Value[1];//额外写法
+                    BackUnitAttr.MixDamage += item.Value[0];//额外写,这里单独加上 武器伤害属性
+                    BackUnitAttr.MaxDamage += item.Value[1];//额外写法,这里单独加上 武器伤害属性
                     break;
                 case 21:
                     //BackUnitAttr.MaxDamage = item.Value[1];//额外写法
                     break;
                 case 22:
-                    BackUnitAttr.Tough = PercentBaseValue;
+                    BackUnitAttr.Tough += PercentBaseValue;
                     break;
                 case 23:
                     BackUnitAttr.ArmorBreakingAT = PercentBaseValue;
                     break;
+                case 101:
+                    BackUnitAttr.SwordDamageAdd += PercentBaseValue;
+                    break;
+                case 102:
+                    BackUnitAttr.KnifeBreakingAT += PercentBaseValue;
+                    break;
             }
             Log.Info($"属性ID:{item.Key},基础加成是:{BaseValue},百分比加成:{PercentValue},结算值是:{PercentBaseValue}");
         }
-        Log.Info($"看下护甲值{BackUnitAttr.Shield}");
+        //这里单独拉出来再重新加上武器伤害百分比
+        if (m_WeaponType>0)
+        {
+            //证明部位有武器
+            switch (m_WeaponType)
+            {
+                case 1://大剑
+                    int MixValue = BackUnitAttr.MixDamage;
+                    int MAXValue = BackUnitAttr.MaxDamage;
+                    Log.Info($"原先武器的最低伤害:{MixValue},最高伤害:{MAXValue},剑类武器加成值:{BackUnitAttr.SwordDamageAdd}");
+                    float PercentValue = (float)BackUnitAttr.SwordDamageAdd / 100;
+                    int PercentBaseValue = (int)(MixValue + Math.Round(MixValue * PercentValue));
+                    int PercentBaseValue1 = (int)(MAXValue + Math.Round(MAXValue * PercentValue));
+
+                    Log.Info($"计算后的武器的最低伤害:{PercentBaseValue},最高伤害:{PercentBaseValue1}");
+                    BackUnitAttr.MixDamage = PercentBaseValue;
+                    BackUnitAttr.MaxDamage = PercentBaseValue1;
+                    Log.Info("到这里了吗");
+                    break;
+            }
+        }
+        
+
+        return BackUnitAttr;
+    }
+    /// <summary>
+    /// 计算被动技能加成
+    /// </summary>
+    /// <returns></returns>
+    public static UnitAttr CalculatePassSkill(UnitAttr BackUnitAttr, List<SkillData> SkillList)
+    {
+        InitUnit();
+        if (BackUnitAttr==null)
+        {
+            BackUnitAttr = new UnitAttr();
+            BackUnitAttr = InitUnitAttrValue(BackUnitAttr);
+        }
+
+
+
+        Dictionary<int, int[]> m_Unitru = new Dictionary<int, int[]>();
+        for (int i = 0; i < SkillList.Count; i++)
+        {
+            var SkillData = SkillList[i];
+            if (SkillData.SkillType==0)
+            {
+                //是被动技能
+                var SkillBase = ConfigLoader.Instance.Tables.TbSwordSkillBase.Get(SkillData.SkID).Attribute[SkillData.Lv].SkillAttrs;
+                for (int j = 0; j < SkillBase.Length; j++)
+                {
+                    var Parma = SkillBase[j];
+                    Log.Info($"技能属性ID:{Parma.AttriID},技能值:{Parma.Value}");
+                    int[] Value;
+                    if (m_Unitru.TryGetValue(Parma.AttriID, out Value))
+                    {
+                        if (Parma.Percent == 1)
+                        {
+                            //是百分比
+                            Value[1] += Parma.Value;
+                        }
+                        else
+                        {
+                            //非百分比
+                            Value[0] += Parma.Value;
+                        }
+                    }
+                    else
+                    {
+                        int[] ints = new int[2];
+                        if (Parma.Percent==1)
+                        {
+                            //是百分比
+                            ints[0] = 0;
+                            ints[1] = Parma.Value;
+                        }
+                        else
+                        {
+                            //非百分比
+                            ints[0] = Parma.Value;
+                            ints[1] = 0;
+                        }
+                        m_Unitru.Add(Parma.AttriID, ints);
+                    }
+                }
+            }
+        }
+        foreach (var item in m_Unitru)
+        {
+            int BaseValue = item.Value[0];
+            float PercentValue = item.Value[1] / 100;
+            int PercentBaseValue = (int)(BaseValue + Math.Round(BaseValue * PercentValue));
+            switch (item.Key)
+            {
+                case 0:
+                    //BackUnitAttr.Hp = PercentBaseValue;
+                    break;
+                case 1:
+                    //BackUnitAttr.Mp = PercentBaseValue;
+                    break;
+                case 2:
+                    BackUnitAttr.MaxHp+= PercentBaseValue;
+                    break;
+                case 3:
+                    BackUnitAttr.MaxMp += PercentBaseValue;
+                    break;
+                case 4:
+                    BackUnitAttr.MeleeAk += PercentBaseValue;
+                    break;
+                case 5:
+                    BackUnitAttr.RangeAk += PercentBaseValue;
+                    break;
+                case 6:
+                    BackUnitAttr.MagicAk += PercentBaseValue;
+                    break;
+                case 7:
+                    BackUnitAttr.MeDEF += PercentBaseValue;
+                    break;
+                case 8:
+                    BackUnitAttr.RGDEF += PercentBaseValue;
+                    break;
+                case 9:
+                    BackUnitAttr.MGDEF += PercentBaseValue;
+                    break;
+                case 10:
+                    BackUnitAttr.ELMRES += PercentBaseValue;
+                    break;
+                case 11:
+                    BackUnitAttr.CurseMgRES += PercentBaseValue;
+                    break;
+                case 12:
+                    BackUnitAttr.Shield += PercentBaseValue;
+                    break;
+                case 13:
+                    BackUnitAttr.PhysicalHit += PercentBaseValue;
+                    break;
+                case 14:
+                    BackUnitAttr.EleMagicHit += PercentBaseValue;
+                    break;
+                case 15:
+                    BackUnitAttr.CurseMagicHit += PercentBaseValue;
+                    break;
+                case 16:
+                    BackUnitAttr.MagicPenetration += PercentBaseValue;
+                    break;
+                case 17:
+                    BackUnitAttr.Evade += PercentBaseValue;
+                    break;
+                case 18:
+                    BackUnitAttr.Speed += PercentBaseValue;
+                    break;
+                case 19:
+                    BackUnitAttr.CriticalHit += PercentBaseValue;
+                    break;
+                case 20:
+                    break;
+                case 21:
+                    break;
+                case 22:
+                    BackUnitAttr.Tough += PercentBaseValue;
+                    break;
+                case 23:
+                    BackUnitAttr.ArmorBreakingAT += PercentBaseValue;
+                    break;
+                case 101://剑类武器伤害,应该都是百分比
+                    BackUnitAttr.SwordDamageAdd+= item.Value[1];//额外写
+                    Log.Info("刀类添加了,现在值是:"+ BackUnitAttr.SwordDamageAdd);
+                    break;
+                case 102://刀类武器伤害,应该都是百分比
+                    BackUnitAttr.KnifeBreakingAT += item.Value[1];//额外写
+                    break;
+            }
+        }
+
         return BackUnitAttr;
     }
     /// <summary>

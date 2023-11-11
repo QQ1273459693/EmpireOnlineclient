@@ -117,10 +117,12 @@ public class LoginHDController
             data.Level = Info.Level;
             data.Exp = Info.EXP;
             data.EquipslotDat = Info.CharEquipSlots;
-            data.PlayerAttribute = GameAttributeCalculate.CalculateEquip(data.EquipslotDat);
             data.PassiveSkills = Info.PassiveSkills;
             data.ActiveSkills = Info.ActiveSkills;
             data.AutoSkills = Info.AutoSkills;
+            data.PlayerAttribute= GameAttributeCalculate.CalculatePassSkill(data.PlayerAttribute,data.PassiveSkills);//先计算自身技能属性
+            //GameAttributeCalculate.CalculateEquip(data.EquipslotDat)
+            data.PlayerAttribute= GameAttributeCalculate.CalculateEquip(data.PlayerAttribute,data.EquipslotDat);//再计算装备属性
             l2C_EnterGame.characterData = data;
             session.Send(l2C_EnterGame);
             await FTask.CompletedTask;

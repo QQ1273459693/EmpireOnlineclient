@@ -41,6 +41,8 @@ namespace TEngine
 
         void OnBagClick(GameObject obj, PointerEventData eventData)
         {
+            GameEvent.Send(GameLogic.GameProcedureEvent.LoadFightStateEvent.EventId);
+            return;
             BagDataController.Instance.ReqGetBagInfo();
 
             //GameModule.UI.ShowUI<Normal_Bag>();

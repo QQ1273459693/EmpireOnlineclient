@@ -1,0 +1,8 @@
+<module name="Tb.TbEnemyModel">
+
+	<bean name="SkillValue" comment="技能回合参数" sep=",">
+		<var name="PassSkill" type="int" comment="被动技能ID"/>
+		<var name="ActiveSkill" type="int" comment="主动技能ID"/>
+	</bean>
+	
+</module>

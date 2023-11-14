@@ -24,6 +24,8 @@ public partial class Tables
     public fightingBase.TbFightingBase TbFightingBase {get; }
     public initialRoleAttrieBase.TbInitialRoleAttrieBase TbInitialRoleAttrieBase {get; }
     public swordSkillBase.TbSwordSkillBase TbSwordSkillBase {get; }
+    public enemySkillBase.TbEnemySkillBase TbEnemySkillBase {get; }
+    public enemyModelBase.TbEnemyModelBase TbEnemyModelBase {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
@@ -50,6 +52,10 @@ public partial class Tables
         tables.Add("initialRoleAttrieBase.TbInitialRoleAttrieBase", TbInitialRoleAttrieBase);
         TbSwordSkillBase = new swordSkillBase.TbSwordSkillBase(loader("swordskillbase_tbswordskillbase")); 
         tables.Add("swordSkillBase.TbSwordSkillBase", TbSwordSkillBase);
+        TbEnemySkillBase = new enemySkillBase.TbEnemySkillBase(loader("enemyskillbase_tbenemyskillbase")); 
+        tables.Add("enemySkillBase.TbEnemySkillBase", TbEnemySkillBase);
+        TbEnemyModelBase = new enemyModelBase.TbEnemyModelBase(loader("enemymodelbase_tbenemymodelbase")); 
+        tables.Add("enemyModelBase.TbEnemyModelBase", TbEnemyModelBase);
 
         PostInit();
         TbItem.Resolve(tables); 
@@ -63,6 +69,8 @@ public partial class Tables
         TbFightingBase.Resolve(tables); 
         TbInitialRoleAttrieBase.Resolve(tables); 
         TbSwordSkillBase.Resolve(tables); 
+        TbEnemySkillBase.Resolve(tables); 
+        TbEnemyModelBase.Resolve(tables); 
         PostResolve();
     }
 
@@ -79,6 +87,8 @@ public partial class Tables
         TbFightingBase.TranslateText(translator); 
         TbInitialRoleAttrieBase.TranslateText(translator); 
         TbSwordSkillBase.TranslateText(translator); 
+        TbEnemySkillBase.TranslateText(translator); 
+        TbEnemyModelBase.TranslateText(translator); 
     }
     
     partial void PostInit();

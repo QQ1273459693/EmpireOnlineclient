@@ -16,12 +16,12 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     public EnemySkill(ByteBuf _buf) 
     {
         Id = _buf.ReadInt();
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Name = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Name.Add(_e0);}}
+        Name = _buf.ReadString();
         Icon = _buf.ReadString();
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Des = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Des.Add(_e0);}}
+        Des = _buf.ReadString();
         AttackType = (SKILL.TYPE)_buf.ReadInt();
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);AttackParam = new System.Collections.Generic.List<Tb.SwordSkill.SkillFontValue>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.SwordSkill.SkillFontValue _e0;  _e0 = Tb.SwordSkill.SkillFontValue.DeserializeSkillFontValue(_buf); AttackParam.Add(_e0);}}
-        {int __n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);SkillParam = new Tb.SwordSkill.SkillParamArray[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { Tb.SwordSkill.SkillParamArray __e0;__e0 = Tb.SwordSkill.SkillParamArray.DeserializeSkillParamArray(_buf); SkillParam[__index0] = __e0;}}
+        AttackParam = Tb.SwordSkill.SkillFontValue.DeserializeSkillFontValue(_buf);
+        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);SkillParam = new System.Collections.Generic.List<Tb.SwordSkill.SkillParamArray>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.SwordSkill.SkillParamArray _e0;  _e0 = Tb.SwordSkill.SkillParamArray.DeserializeSkillParamArray(_buf); SkillParam.Add(_e0);}}
         PostInit();
     }
 
@@ -37,7 +37,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     /// <summary>
     /// 技能名称
     /// </summary>
-    public System.Collections.Generic.List<string> Name { get; private set; }
+    public string Name { get; private set; }
     /// <summary>
     /// 图标
     /// </summary>
@@ -45,7 +45,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     /// <summary>
     /// 技能描述
     /// </summary>
-    public System.Collections.Generic.List<string> Des { get; private set; }
+    public string Des { get; private set; }
     /// <summary>
     /// 技能攻击类型
     /// </summary>
@@ -53,25 +53,25 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     /// <summary>
     /// 技能前置参数
     /// </summary>
-    public System.Collections.Generic.List<Tb.SwordSkill.SkillFontValue> AttackParam { get; private set; }
+    public Tb.SwordSkill.SkillFontValue AttackParam { get; private set; }
     /// <summary>
     /// 技能执行参数
     /// </summary>
-    public Tb.SwordSkill.SkillParamArray[] SkillParam { get; private set; }
+    public System.Collections.Generic.List<Tb.SwordSkill.SkillParamArray> SkillParam { get; private set; }
 
     public const int __ID__ = 1647609885;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)
     {
-        foreach(var _e in AttackParam) { _e?.Resolve(_tables); }
+        AttackParam?.Resolve(_tables);
         foreach(var _e in SkillParam) { _e?.Resolve(_tables); }
         PostResolve();
     }
 
     public  void TranslateText(System.Func<string, string, string> translator)
     {
-        foreach(var _e in AttackParam) { _e?.TranslateText(translator); }
+        AttackParam?.TranslateText(translator);
         foreach(var _e in SkillParam) { _e?.TranslateText(translator); }
     }
 
@@ -79,11 +79,11 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     {
         return "{ "
         + "Id:" + Id + ","
-        + "Name:" + Bright.Common.StringUtil.CollectionToString(Name) + ","
+        + "Name:" + Name + ","
         + "Icon:" + Icon + ","
-        + "Des:" + Bright.Common.StringUtil.CollectionToString(Des) + ","
+        + "Des:" + Des + ","
         + "AttackType:" + AttackType + ","
-        + "AttackParam:" + Bright.Common.StringUtil.CollectionToString(AttackParam) + ","
+        + "AttackParam:" + AttackParam + ","
         + "SkillParam:" + Bright.Common.StringUtil.CollectionToString(SkillParam) + ","
         + "}";
     }

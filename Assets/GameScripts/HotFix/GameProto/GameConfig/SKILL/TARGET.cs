@@ -7,27 +7,23 @@
 //------------------------------------------------------------------------------
 
 
-namespace GameConfig.ATTACK
+namespace GameConfig.SKILL
 { 
     [System.Flags]
-    public enum RANGE
+    public enum TARGET
     {
         /// <summary>
-        /// 全屏范围
+        /// 全屏
         /// </summary>
-        ALL = 1,
+        None = 1,
         /// <summary>
-        /// 自身
+        /// 队伍
         /// </summary>
-        SELF = 2,
+        TEAM = 2,
         /// <summary>
-        /// 单人
+        /// 敌方
         /// </summary>
-        SOLO = 3,
-        /// <summary>
-        /// 十字范围
-        /// </summary>
-        CROSS = 4,
+        ENEMY = 3,
     }
 
 } 

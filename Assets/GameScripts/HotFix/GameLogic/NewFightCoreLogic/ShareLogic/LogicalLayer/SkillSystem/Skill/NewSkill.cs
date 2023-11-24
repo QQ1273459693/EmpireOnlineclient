@@ -11,21 +11,19 @@ public class NewSkill
 
     private HeroLogic mSkillOwner;//技能拥有者
 
-    private SkillConfig mSkillCfg;
+    private NewSkillConfig mSkillCfg;
 
     private LogicObject mSkillTarget;
 
-    private bool mIsNormalAtk; //是否是普通攻击
 
     public NewSkill(int skillid, LogicObject skillOwner, bool isNoramlAtk)
     {
         Skillid = skillid;
         mSkillOwner = (HeroLogic)skillOwner;
-        mSkillCfg = SkillConfigConter.LoadSkillConfig(skillid);
-        mIsNormalAtk = isNoramlAtk;
+        //mSkillCfg = NewSkillConfig.LoadSkillConfig(skillid);
         if (mSkillCfg == null)
         {
-            Debuger.LogError("技能配置不存在 技能id：" + skillid);
+            Log.Error("技能配置不存在 技能id：" + skillid);
         }
 
     }

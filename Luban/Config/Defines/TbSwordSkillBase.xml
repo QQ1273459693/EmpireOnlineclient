@@ -12,7 +12,8 @@
 
 	<bean name="SkillFontValue" comment="技能前置参数" sep=",">
 		<var name="MP" type="int" comment="MP消耗"/>
-		<var name="ATKRAG" type="int" comment="目标范围值"/>
+		<var name="Target" type="int" comment="目标"/>
+		<var name="RANGE" type="int" comment="范围"/>
 		<var name="Round" type="int" comment="持续回合"/>
 	</bean>
 	

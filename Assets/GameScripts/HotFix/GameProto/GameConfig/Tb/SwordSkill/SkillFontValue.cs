@@ -19,7 +19,8 @@ public sealed partial class SkillFontValue :  Bright.Config.BeanBase
     public SkillFontValue(ByteBuf _buf) 
     {
         MP = _buf.ReadInt();
-        ATKRAG = _buf.ReadInt();
+        Target = _buf.ReadInt();
+        RANGE = _buf.ReadInt();
         Round = _buf.ReadInt();
         PostInit();
     }
@@ -34,9 +35,13 @@ public sealed partial class SkillFontValue :  Bright.Config.BeanBase
     /// </summary>
     public int MP { get; private set; }
     /// <summary>
-    /// 目标范围值
+    /// 目标
     /// </summary>
-    public int ATKRAG { get; private set; }
+    public int Target { get; private set; }
+    /// <summary>
+    /// 范围
+    /// </summary>
+    public int RANGE { get; private set; }
     /// <summary>
     /// 持续回合
     /// </summary>
@@ -58,7 +63,8 @@ public sealed partial class SkillFontValue :  Bright.Config.BeanBase
     {
         return "{ "
         + "MP:" + MP + ","
-        + "ATKRAG:" + ATKRAG + ","
+        + "Target:" + Target + ","
+        + "RANGE:" + RANGE + ","
         + "Round:" + Round + ","
         + "}";
     }

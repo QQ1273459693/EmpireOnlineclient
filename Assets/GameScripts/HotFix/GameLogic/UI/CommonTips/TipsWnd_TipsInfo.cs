@@ -53,7 +53,7 @@ namespace TEngine
                     var SkillParma = SkillBase.AttackParam[m_SkillData.Lv];
                     Des += $"\nMP消耗:{SkillParma.MP}";
                     Des += $"\n种类:{SkillTypeName(SkillBase.AttackType)}";
-                    Des += $"\n目标范围:{SkillRadiusName(SkillParma.ATKRAG)}";
+                    Des += $"\n目标范围:{SkillRadiusName(SkillParma.RANGE)}";
                     for (int i = 0; i < DesSpit.Length; i++)
                     {
                         var Data = SkillData1[i];
@@ -67,7 +67,7 @@ namespace TEngine
                     var SkillParma2 = SkillBase.AttackParam[m_SkillData.Lv];
                     Des += $"\nMP消耗:{SkillParma2.MP}";
                     Des += $"\n种类:{SkillTypeName(SkillBase.AttackType)}";
-                    Des += $"\n目标范围:{SkillRadiusName(SkillParma2.ATKRAG)}";
+                    Des += $"\n目标范围:{SkillRadiusName(SkillParma2.RANGE)}";
                     for (int i = 0; i < DesSpit.Length; i++)
                     {
                         var Data = SkillData2[i];

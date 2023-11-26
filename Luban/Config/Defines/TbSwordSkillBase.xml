@@ -17,7 +17,7 @@
 		<var name="Round" type="int" comment="持续回合"/>
 	</bean>
 	
-	<bean name="SkillParamValue" comment="技能内置参数" sep=",">
+	<bean name="SkillParamValue" comment="技能内置参数" sep="-">
 		<var name="ATTACKTP" type="int" comment="属性类型值"/>
 		<var name="Value" type="int" comment="属性值"/>
 		<var name="Percent" type="bool" comment="是否是百分比"/>

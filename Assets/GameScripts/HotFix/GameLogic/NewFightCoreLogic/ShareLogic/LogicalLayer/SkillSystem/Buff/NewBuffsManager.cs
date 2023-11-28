@@ -3,21 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffsManager : Singleton<BuffsManager>, ILogicBehaviour
+public class NewBuffsManager : Singleton<NewBuffsManager>, ILogicBehaviour
 {
-    private List<BuffLogic> mBuffList = new List<BuffLogic>();
+    private List<NewBuffLogic> mBuffList = new List<NewBuffLogic>();
     public void OnCreate()
     {
 
     }
 
-    public BuffLogic CreateBuff(int buffid, LogicObject buffaddTarget, LogicObject attacker)
+    public NewBuffLogic CreateBuff(int buffid, LogicObject buffaddTarget, LogicObject attacker)
     {
         Debuger.Log("创建一个Buff  buffid:" + buffid);
-        BuffLogic buff = new BuffLogic(buffid, buffaddTarget, attacker);
+        NewBuffLogic buff = new NewBuffLogic(buffid, buffaddTarget, attacker);
         buff.OnCreate();
         mBuffList.Add(buff);
-
         return buff;
     }
     public void OnLogicFrameUpdate()
@@ -37,14 +36,14 @@ public class BuffsManager : Singleton<BuffsManager>, ILogicBehaviour
             }
         }
     }
-    public void RemoveBuff(BuffLogic buff)
+    public void RemoveBuff(NewBuffLogic buff)
     {
         if (mBuffList.Contains(buff))
         {
             mBuffList.Remove(buff);
         }
     }
-    public void DestroyBuff(BuffLogic buff)
+    public void DestroyBuff(NewBuffLogic buff)
     {
         buff.ownerHero.RemoveBuff(buff);
     }

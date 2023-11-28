@@ -13,7 +13,7 @@ namespace GameConfig.SKILL
     public enum TARGET
     {
         /// <summary>
-        /// 全屏
+        /// 无
         /// </summary>
         None = 1,
         /// <summary>
@@ -24,6 +24,14 @@ namespace GameConfig.SKILL
         /// 敌方
         /// </summary>
         ENEMY = 3,
+        /// <summary>
+        /// 自身
+        /// </summary>
+        SELF = 4,
+        /// <summary>
+        /// 全屏
+        /// </summary>
+        ALL = 5,
     }
 
 } 

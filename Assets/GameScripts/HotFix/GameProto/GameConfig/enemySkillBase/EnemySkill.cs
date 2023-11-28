@@ -21,7 +21,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
         Des = _buf.ReadString();
         AttackType = (SKILL.TYPE)_buf.ReadInt();
         AttackParam = Tb.SwordSkill.SkillFontValue.DeserializeSkillFontValue(_buf);
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);SkillParam = new System.Collections.Generic.List<Tb.SwordSkill.SkillParamArray>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.SwordSkill.SkillParamArray _e0;  _e0 = Tb.SwordSkill.SkillParamArray.DeserializeSkillParamArray(_buf); SkillParam.Add(_e0);}}
+        SkillParam = Tb.EnemySkill.SkillParamArray.DeserializeSkillParamArray(_buf);
         PostInit();
     }
 
@@ -57,7 +57,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     /// <summary>
     /// 技能执行参数
     /// </summary>
-    public System.Collections.Generic.List<Tb.SwordSkill.SkillParamArray> SkillParam { get; private set; }
+    public Tb.EnemySkill.SkillParamArray SkillParam { get; private set; }
 
     public const int __ID__ = 1647609885;
     public override int GetTypeId() => __ID__;
@@ -65,14 +65,14 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     public  void Resolve(Dictionary<string, object> _tables)
     {
         AttackParam?.Resolve(_tables);
-        foreach(var _e in SkillParam) { _e?.Resolve(_tables); }
+        SkillParam?.Resolve(_tables);
         PostResolve();
     }
 
     public  void TranslateText(System.Func<string, string, string> translator)
     {
         AttackParam?.TranslateText(translator);
-        foreach(var _e in SkillParam) { _e?.TranslateText(translator); }
+        SkillParam?.TranslateText(translator);
     }
 
     public override string ToString()
@@ -84,7 +84,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
         + "Des:" + Des + ","
         + "AttackType:" + AttackType + ","
         + "AttackParam:" + AttackParam + ","
-        + "SkillParam:" + Bright.Common.StringUtil.CollectionToString(SkillParam) + ","
+        + "SkillParam:" + SkillParam + ","
         + "}";
     }
     

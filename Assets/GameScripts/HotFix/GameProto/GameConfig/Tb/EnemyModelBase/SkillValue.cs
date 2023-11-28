@@ -9,7 +9,7 @@ using Bright.Serialization;
 using System.Collections.Generic;
 
 
-namespace GameConfig.Tb.TbEnemyModel
+namespace GameConfig.Tb.EnemyModelBase
 {
 /// <summary>
 /// 技能回合参数
@@ -25,7 +25,7 @@ public sealed partial class SkillValue :  Bright.Config.BeanBase
 
     public static SkillValue DeserializeSkillValue(ByteBuf _buf)
     {
-        return new Tb.TbEnemyModel.SkillValue(_buf);
+        return new Tb.EnemyModelBase.SkillValue(_buf);
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public sealed partial class SkillValue :  Bright.Config.BeanBase
     /// </summary>
     public int ActiveSkill { get; private set; }
 
-    public const int __ID__ = 845985791;
+    public const int __ID__ = -670903620;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)

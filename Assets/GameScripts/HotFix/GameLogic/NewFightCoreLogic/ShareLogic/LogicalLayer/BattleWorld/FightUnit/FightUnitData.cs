@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 /// <summary>
@@ -8,9 +9,12 @@ using UnityEngine;
 /// </summary>
 public class FightUnitData
 {
+    public List<FightUnitSkill> m_PassSkillList;//被动技能数据
+    public List<FightUnitSkill> m_ActiveSkillList;//主动技能数据
     public FightUnitData()
     {
-
+        m_PassSkillList=new List<FightUnitSkill>();
+        m_ActiveSkillList=new List<FightUnitSkill>();
     }
     public int ID { get; set; }
     /// <summary>

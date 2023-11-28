@@ -6,7 +6,9 @@
 		<var name="Round" type="int" comment="持续回合"/>
 	</bean>
 	
-	<bean name="SkillParamValue" comment="技能内置参数" sep=",">
+	<bean name="SkillParamValue" comment="技能内置参数" sep="-">
+		<var name="SKTAR" type="int" comment="技能目标"/>
+		<var name="SKRANGE" type="int" comment="技能范围"/>
 		<var name="ATTACKTP" type="int" comment="属性类型值"/>
 		<var name="Value" type="int" comment="属性值"/>
 		<var name="Percent" type="bool" comment="是否是百分比"/>
@@ -15,6 +17,6 @@
 	
 	
 	<bean name="SkillParamArray" comment="技能执行内置属性数组">
-		<var name="SkilParams" type="(array#sep=;),SkillParamValue" comment="执行技能属性"/>
+		<var name="SkilParams" type="(list#sep=|),SkillParamValue" comment="执行技能属性"/>
 	</bean>
 </module>

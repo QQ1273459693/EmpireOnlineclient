@@ -6,7 +6,7 @@ using UnityEngine;
 public class NewWorldManager
 {
 
-    private static BattleWorld mBattleWorld;
+    private static NewBattleWorld mBattleWorld;
     public static List<FightUnitData> lastheroDataList;
     public static List<FightUnitData> lastEnemyDataList;
     public static int lastBattleid;
@@ -44,21 +44,21 @@ public class NewWorldManager
         //    }
         //}
 
-        //CreateBattleWord(playerHeroList, enemyHeroList,888);
+        CreateBattleWord(playerHeroList,enemyHeroList);
     }
     public static void Update()
     {
         if (mBattleWorld != null)
         {
-            mBattleWorld.Update();
+            mBattleWorld.Update(); 
         }
     }
 
-    public static void CreateBattleWord(List<HeroData> herolist, List<HeroData> enemylist, int battleSite,int battleid=1,System.Action<BattleWorld> battleEndCallBack =null,bool isPlayBack=false)
+    public static void CreateBattleWord(List<FightUnitData> herolist, List<FightUnitData> enemylist,System.Action<NewBattleWorld> battleEndCallBack =null)
     {
         Debug.Log("创建英雄列表:" + herolist.Count + " 敌人列表:" + enemylist.Count);
         WorldManager.DestroyWorld();
-        mBattleWorld = new BattleWorld();
+        mBattleWorld = new NewBattleWorld();
         //for (int i = 0; i < herolist.Count; i++)
         //{
         //    lastheroDataList.Add(herolist[i]);
@@ -69,9 +69,7 @@ public class NewWorldManager
         //}
         //lastheroDataList = herolist;
         //lastEnemyDataList = enemylist;
-        lastBattleid = battleid;
-        lastRandomSiteid = battleSite;
-        mBattleWorld.OnCreateWorld(herolist, enemylist, battleSite,battleid, battleEndCallBack);
+        mBattleWorld.OnCreateWorld(herolist, enemylist,battleEndCallBack);
     }
 
     public static void DestroyWorld()

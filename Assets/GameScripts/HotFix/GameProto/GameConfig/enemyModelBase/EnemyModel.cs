@@ -19,7 +19,7 @@ public sealed partial class EnemyModel :  Bright.Config.BeanBase
         Name = _buf.ReadString();
         ResName = _buf.ReadString();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Des = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); Des.Add(_e0);}}
-        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);PassivitySkill = new System.Collections.Generic.List<Tb.TbEnemyModel.SkillValue>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.TbEnemyModel.SkillValue _e0;  _e0 = Tb.TbEnemyModel.SkillValue.DeserializeSkillValue(_buf); PassivitySkill.Add(_e0);}}
+        {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);PassivitySkill = new System.Collections.Generic.List<Tb.EnemyModelBase.SkillValue>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { Tb.EnemyModelBase.SkillValue _e0;  _e0 = Tb.EnemyModelBase.SkillValue.DeserializeSkillValue(_buf); PassivitySkill.Add(_e0);}}
         PostInit();
     }
 
@@ -47,7 +47,7 @@ public sealed partial class EnemyModel :  Bright.Config.BeanBase
     /// <summary>
     /// 技能回合参数
     /// </summary>
-    public System.Collections.Generic.List<Tb.TbEnemyModel.SkillValue> PassivitySkill { get; private set; }
+    public System.Collections.Generic.List<Tb.EnemyModelBase.SkillValue> PassivitySkill { get; private set; }
 
     public const int __ID__ = 524401949;
     public override int GetTypeId() => __ID__;

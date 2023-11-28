@@ -32,7 +32,7 @@ public abstract class LogicBehaviour
     /// <summary>
     /// 开始行动,分自动技能和主动技能
     /// </summary>
-    public virtual void BeginAction(bool isAutoSkill) { }
+    public virtual void BeginAction(bool isAutoSkill, UnitActionEnum unitActionEnum) { }
     /// <summary>
     /// 行动结束
     /// </summary>

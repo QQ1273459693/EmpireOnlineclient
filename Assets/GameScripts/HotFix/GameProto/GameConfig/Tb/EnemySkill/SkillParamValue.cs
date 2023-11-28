@@ -9,7 +9,7 @@ using Bright.Serialization;
 using System.Collections.Generic;
 
 
-namespace GameConfig.Tb.SwordSkill
+namespace GameConfig.Tb.EnemySkill
 {
 /// <summary>
 /// 技能内置参数
@@ -29,7 +29,7 @@ public sealed partial class SkillParamValue :  Bright.Config.BeanBase
 
     public static SkillParamValue DeserializeSkillParamValue(ByteBuf _buf)
     {
-        return new Tb.SwordSkill.SkillParamValue(_buf);
+        return new Tb.EnemySkill.SkillParamValue(_buf);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public sealed partial class SkillParamValue :  Bright.Config.BeanBase
     /// </summary>
     public int BUFFID { get; private set; }
 
-    public const int __ID__ = -1366351397;
+    public const int __ID__ = -1393910480;
     public override int GetTypeId() => __ID__;
 
     public  void Resolve(Dictionary<string, object> _tables)

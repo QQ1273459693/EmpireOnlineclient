@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
@@ -6,23 +6,23 @@ public class NewSkillConfig
 {
     public int Skillid;                     //技能ID 
     public string SkillName;                //技能名称 
-    public int[] AddBuffs;                  //添加的buff
     public string SkillDes;                 //技能描述
-    public int Value;//值
     public int Lv;
     public int NeedMp;//MP消耗
     public int Round;//持续回合
+    public List<NewBuffConfig> BuffConfigList=new List<NewBuffConfig>();
+
+
+
     public SkillReleaseType SkillReleaseType { get; set; }
-    public SkillDamageType SkillDamageType { get; set; }
-    public SkillATKType SkillATKType { get; set; }
+    //public SkillDamageType SkillDamageType { get; set; }
     public SkillTarget SkillTarget { get; set; }
     public SkillRadiusType SkillRadiusType { get; set; }
+
     /// <summary>
     /// 根据不同技能表加载技能
     /// </summary>
-    /// <param name="SkillBaseType">技能表类型</param>
-    /// <param name="ID">技能ID</param>
-    void LoadSkillConfig(int SkillBaseType,int ID,int SkillLv)
+    public NewSkillConfig(int SkillBaseType,int ID,int SkillLv)
     {
         switch (SkillBaseType)
         {
@@ -61,13 +61,51 @@ public class NewSkillConfig
 
 
                 //技能释放
-                var SkillRealseData= SkillBase.SkillParam[SkillLv];
-                //SkillATKType = SkillRealseData.
+                var SkillRealseData= SkillBase.SkillParam[SkillLv].SkilParams;
+                BuffConfigList.Clear();
+                for (int i = 0; i < SkillRealseData.Length; i++)
+                {
+                    var SkillData = SkillRealseData[i];
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, SkillData.Value,(NewBuffState)SkillData.BUFFID,(BUFFATKType)SkillData.ATTACKTP);
+                    BuffConfigList.Add(buffConfig);
+                }
                 //技能释放
 
                 break;
             case 101:
                 //怪物表
+                var EnemySkillBase = ConfigLoader.Instance.Tables.TbEnemySkillBase.Get(Skillid);
+                if (EnemySkillBase == null)
+                {
+                    Log.Error("怪物表读取错误,没有这个ID!:" + Skillid);
+                    return;
+                }
+                Skillid = ID;
+                Lv = SkillLv;
+                SkillName = EnemySkillBase.Name;
+                SkillDes = EnemySkillBase.Des;
+
+
+                //技能前置
+                SkillReleaseType = (SkillReleaseType)(int)EnemySkillBase.AttackType;
+                var EnemyFontData = EnemySkillBase.AttackParam;
+                NeedMp = EnemyFontData.MP;
+                SkillTarget = (SkillTarget)EnemyFontData.Target;
+                SkillRadiusType = (SkillRadiusType)EnemyFontData.RANGE;
+                Round = EnemyFontData.Round;
+                //技能前置
+
+
+                //技能释放
+                var EnemySkillRealseData = EnemySkillBase.SkillParam.SkilParams;
+                BuffConfigList.Clear();
+                for (int i = 0; i < EnemySkillRealseData.Count; i++)
+                {
+                    var m_SkillData = EnemySkillRealseData[i];
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, m_SkillData.Value, (NewBuffState)m_SkillData.BUFFID, (BUFFATKType)m_SkillData.ATTACKTP);
+                    BuffConfigList.Add(buffConfig);
+                }
+                //技能释放
 
                 break;
         }
@@ -105,90 +143,20 @@ public enum SkillReleaseType
     SUBSIDIARY = 6,
 }
 
-/// <summary>
-/// 伤害类型
-/// </summary>
-public enum SkillDamageType
-{ 
-    /// <summary>
-    /// 普通
-    /// </summary>
-    NomalDamage,
-    /// <summary>
-    /// 百分比
-    /// </summary>
-    Percentage,
-}
-
-
-/// <summary>
-/// 技能实际攻击类型
-/// </summary>
-public enum SkillATKType
-{
-    /// <summary>
-    /// 最大血量百分比或者普通血量
-    /// </summary>
-    HP=1,
-    /// <summary>
-    /// 最大MP百分比或者普通MP
-    /// </summary>
-    MP = 2,
-    /// <summary>
-    /// 近战攻击力
-    /// </summary>
-    MEATK = 3,
-    /// <summary>
-    /// 魔法攻击力
-    /// </summary>
-    MAGATK = 4,
-    /// <summary>
-    /// 近战防御力
-    /// </summary>
-    MEDFS = 5,
-    /// <summary>
-    /// 魔法防御力
-    /// </summary>
-    MAGDFS = 6,
-    /// <summary>
-    /// 元素抗性
-    /// </summary>
-    ELMRES = 7,
-    /// <summary>
-    /// 诅咒抗性
-    /// </summary>
-    CURSERES = 8,
-    /// <summary>
-    /// 物理攻击命中
-    /// </summary>
-    PHYHIT = 9,
-    /// <summary>
-    /// 元素命中
-    /// </summary>
-    ELMHIT = 10,
-    /// <summary>
-    /// 闪避
-    /// </summary>
-    EVADE = 11,
-    /// <summary>
-    /// 出手速度
-    /// </summary>
-    SPEED = 12,
-    /// <summary>
-    /// 暴击
-    /// </summary>
-    CRITHIT = 13,
-    /// <summary>
-    /// 强韧
-    /// </summary>
-    TOUGH = 14,
-    /// <summary>
-    /// 破甲能力
-    /// </summary>
-    ARMRBK = 15,
-
-}
-
+///// <summary>
+///// 伤害类型
+///// </summary>
+//public enum SkillDamageType
+//{ 
+//    /// <summary>
+//    /// 普通
+//    /// </summary>
+//    NomalDamage=0,
+//    /// <summary>
+//    /// 百分比
+//    /// </summary>
+//    Percentage=1,
+//}
 
 /// <summary>
 /// 技能作用目标
@@ -198,15 +166,23 @@ public enum SkillTarget
     /// <summary>
     /// 不限范围
     /// </summary>
-    None,
+    None=1,
     /// <summary>
     /// 友方
     /// </summary>
-    Teammate,
+    Teammate=2,
     /// <summary>
     /// 敌方
     /// </summary>
-    Enemy,
+    Enemy=3,
+    /// <summary>
+    /// 自身
+    /// </summary>
+    SELF = 4,
+    /// <summary>
+    /// 全屏
+    /// </summary>
+    ALL = 5,
 }
 /// <summary>
 /// 技能范围类型
@@ -214,19 +190,15 @@ public enum SkillTarget
 public enum SkillRadiusType
 {
     /// <summary>
-    /// 全屏
+    /// 全部
     /// </summary>
     ALL = 1,
     /// <summary>
-    /// 自身
-    /// </summary>
-    SELF = 2,
-    /// <summary>
     /// 单人
     /// </summary>
-    SOLO = 3,
+    SOLO = 2,
     /// <summary>
     /// 十字范围
     /// </summary>
-    CROSS = 4,
+    CROSS = 3,
 }

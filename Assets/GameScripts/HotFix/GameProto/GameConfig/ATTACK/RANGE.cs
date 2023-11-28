@@ -13,21 +13,17 @@ namespace GameConfig.ATTACK
     public enum RANGE
     {
         /// <summary>
-        /// 全屏范围
+        /// 全部范围
         /// </summary>
         ALL = 1,
         /// <summary>
-        /// 自身
-        /// </summary>
-        SELF = 2,
-        /// <summary>
         /// 单人
         /// </summary>
-        SOLO = 3,
+        SOLO = 2,
         /// <summary>
         /// 十字范围
         /// </summary>
-        CROSS = 4,
+        CROSS = 3,
     }
 
 } 

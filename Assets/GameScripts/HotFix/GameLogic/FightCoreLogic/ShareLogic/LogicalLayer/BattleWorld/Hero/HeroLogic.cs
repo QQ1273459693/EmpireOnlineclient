@@ -57,9 +57,9 @@ public class HeroLogic : LogicObject
         //HeroRender.UpdateAnger_HUD(rage.RawFloat);
 #endif
     }
-    public override void BeginAction(bool isAutoSkill)
+    public override void BeginAction(bool isAutoSkill, UnitActionEnum unitActionEnum)
     {
-        base.BeginAction(isAutoSkill);
+        base.BeginAction(isAutoSkill, unitActionEnum);
         //如果处于被控状态中，跳过当前回合动作
         if (objectState == LogicObjectState.Death || IsBeContrl())
         {

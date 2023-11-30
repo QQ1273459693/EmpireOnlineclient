@@ -11,41 +11,41 @@ public class NewBuffConfig
     public int BuffValue;//技能BUFF值
 
 
-    public NewBuffConfig(int Round,int m_BuffValue,NewBuffState m_buffState, BUFFATKType m_bUFFATKType)
+    public NewBuffConfig(int Round,int m_BuffValue, NewBuffType m_buffType, BUFFATKType m_bUFFATKType)
     {
         buffDurationRound=Round;
-        buffState=m_buffState;
+        buffType = m_buffType;
         BUFFATKType=m_bUFFATKType;
         BuffValue = m_BuffValue;
 
-        switch (m_buffState)
+        switch (m_buffType)
         {
-            case NewBuffState.None:
-                buffType = NewBuffType.None;
+            case NewBuffType.None:
+                buffState = NewBuffState.None;
                 break;
-            case NewBuffState.INVINCIBLE:
-                buffType = NewBuffType.Buff;
+            case NewBuffType.INVINCIBLE:
+                buffState = NewBuffState.Buff;
                 break;
-            case NewBuffState.PHY_ATK_NOT:
-                buffType = NewBuffType.Buff;
+            case NewBuffType.PHY_ATK_NOT:
+                buffState = NewBuffState.Buff;
                 break;
-            case NewBuffState.MAG_ATK_NOT:
-                buffType = NewBuffType.Buff;
+            case NewBuffType.MAG_ATK_NOT:
+                buffState = NewBuffState.Buff;
                 break;
-            case NewBuffState.IMTY_LMBE_CHAOS_SKLL:
-                buffType = NewBuffType.Buff;
+            case NewBuffType.IMTY_LMBE_CHAOS_SKLL:
+                buffState = NewBuffState.Buff;
                 break;
-            case NewBuffState.DEBUFF_FIRE:
-                buffType = NewBuffType.DeBuff;
+            case NewBuffType.DEBUFF_FIRE:
+                buffState = NewBuffState.DeBuff;
                 break;
-            case NewBuffState.SKILL_SILENT:
-                buffType = NewBuffType.DeBuff;
+            case NewBuffType.SKILL_SILENT:
+                buffState = NewBuffState.DeBuff;
                 break;
-            case NewBuffState.IMMOBILIZE:
-                buffType = NewBuffType.DeBuff;
+            case NewBuffType.IMMOBILIZE:
+                buffState = NewBuffState.DeBuff;
                 break;
-            case NewBuffState.PONED:
-                buffType = NewBuffType.DeBuff;
+            case NewBuffType.PONED:
+                buffState = NewBuffState.DeBuff;
                 break;
         }
 
@@ -54,7 +54,7 @@ public class NewBuffConfig
 
 
 }
-public enum NewBuffState
+public enum NewBuffType
 {
     /// <summary>
     /// 无
@@ -98,7 +98,7 @@ public enum NewBuffState
     PONED,
 
 }
-public enum NewBuffType
+public enum NewBuffState
 {
     /// <summary>
     /// 无类型buff

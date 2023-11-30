@@ -66,7 +66,7 @@ public class NewSkillConfig
                 for (int i = 0; i < SkillRealseData.Length; i++)
                 {
                     var SkillData = SkillRealseData[i];
-                    NewBuffConfig buffConfig = new NewBuffConfig(Round, SkillData.Value,(NewBuffState)SkillData.BUFFID,(BUFFATKType)SkillData.ATTACKTP);
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, SkillData.Value,(NewBuffType)SkillData.BUFFID,(BUFFATKType)SkillData.ATTACKTP);
                     BuffConfigList.Add(buffConfig);
                 }
                 //技能释放
@@ -102,7 +102,7 @@ public class NewSkillConfig
                 for (int i = 0; i < EnemySkillRealseData.Count; i++)
                 {
                     var m_SkillData = EnemySkillRealseData[i];
-                    NewBuffConfig buffConfig = new NewBuffConfig(Round, m_SkillData.Value, (NewBuffState)m_SkillData.BUFFID, (BUFFATKType)m_SkillData.ATTACKTP);
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, m_SkillData.Value, (NewBuffType)m_SkillData.BUFFID, (BUFFATKType)m_SkillData.ATTACKTP);
                     BuffConfigList.Add(buffConfig);
                 }
                 //技能释放

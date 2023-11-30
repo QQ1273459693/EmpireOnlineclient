@@ -1,55 +1,179 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 public class NewBattleRule
 {
+    static int[,] SelfArray2D = { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 }, { 9, 10 } };
+    static int[,] EnemyArray2D = { { 11, 12 }, { 13, 14 }, { 15, 16 }, { 17, 18 }, { 19, 20 } };
+
+
+    /// <summary>
+    /// 根据十字范围选取目标位置
+    /// </summary>
+    /// <returns></returns>
+    public static List<int> GetCrossRage(int TargetSeatID)
+    {
+        bool isSelf = true;
+        if (TargetSeatID > 10)
+        {
+            //是敌方
+            TargetSeatID = TargetSeatID - 10;
+            isSelf = false;
+        }
+        List<int> result = new List<int>();
+        int ArrayIndx = (int)Math.Ceiling((float)TargetSeatID / (float)2) - 1;//获取所在数组索引
+        if (isSelf)
+        {
+            result.Add(SelfArray2D[ArrayIndx, 0]);
+            result.Add(SelfArray2D[ArrayIndx, 1]);
+        }
+        else
+        {
+            result.Add(EnemyArray2D[ArrayIndx, 0]);
+            result.Add(EnemyArray2D[ArrayIndx, 1]);
+        }
+
+
+        //获取上范围
+        if (ArrayIndx != 0)
+        {
+            if (isSelf)
+            {
+                result.Add(SelfArray2D[ArrayIndx - 1, TargetSeatID % 2 == 0 ? 1 : 0]);
+            }
+            else
+            {
+                result.Add(EnemyArray2D[ArrayIndx - 1, TargetSeatID % 2 == 0 ? 1 : 0]);
+            }
+
+        }
+
+        //取下范围
+        if (ArrayIndx != 4)
+        {
+            if (isSelf)
+            {
+                result.Add(SelfArray2D[ArrayIndx + 1, TargetSeatID % 2 == 0 ? 1 : 0]);
+            }
+            else
+            {
+                result.Add(EnemyArray2D[ArrayIndx + 1, TargetSeatID % 2 == 0 ? 1 : 0]);
+            }
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// 通过攻击类型获取攻击目标
     /// </summary>
-    /// <param name="skillAttackType"></param>
-    /// <param name="herolist">攻击目标列表</param>
-    /// <param name="attackerSeatid">攻击者座位id</param>
     /// <returns></returns>
-    public static List<FightUnitLogic> GetAttackListByAttackType(SkillAttackType skillAttackType, List<FightUnitLogic> herolist, int attackerSeatid)
+    public static List<FightUnitLogic> GetAttackListByAttackType(SkillTarget SkillTarget, SkillRadiusType SkillRadiusType,int AttackSeatid,int TargetSeatid)
     {
         List<FightUnitLogic> attackList = new List<FightUnitLogic>();
-        switch (skillAttackType)
+        List<FightUnitLogic> herolist=null;
+        switch (SkillTarget)
         {
-            case SkillAttackType.SingTarget:
-                attackList.Add(GetNomalAttackTarget(herolist, attackerSeatid));
-                return attackList;
-            case SkillAttackType.AllHero:
-                return GetHeroSurvivalList(herolist);
-            case SkillAttackType.BackRowHero:
-                attackList = GetBackRowHero(herolist);
-                //后排英雄全部阵亡则攻击前排英雄
-                if (attackList.Count == 0)
-                    attackList = GetForntRowHero(herolist);
-                return GetHeroSurvivalList(attackList);
-            case SkillAttackType.ForntRowHero:
-                attackList = GetForntRowHero(herolist);
-                attackList = GetHeroSurvivalList(attackList);
-                //如果前排英雄已经全部阵亡，就攻击后排
-                if (attackList.Count == 0)
-                    attackList = GetBackRowHero(herolist);
-                return GetHeroSurvivalList(attackList); ;
-            case SkillAttackType.SameColumnHero:
-                int[] targetArr = GetAttackSeatArr(attackerSeatid);
-                attackList.Add(herolist[targetArr[0]]);
-                attackList.Add(herolist[targetArr[1]]);
-                attackList = GetHeroSurvivalList(attackList);
-                if (attackList.Count == 0)
+            case SkillTarget.None://真正全屏
+                herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.ALL);
+                break;
+            case SkillTarget.Teammate://友方
+                herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.Self);
+                break;
+            case SkillTarget.Enemy://敌方
+                herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.Enemy);
+                break;
+            case SkillTarget.SELF://自身
+                herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.Self);
+                for (int i = 0; i < herolist.Count; i++)
                 {
-                    attackList.Add(herolist[targetArr[2]]);
-                    attackList.Add(herolist[targetArr[3]]);
-                    attackList = GetHeroSurvivalList(attackList);
-                    if (attackList.Count == 0)
-                        attackList.Add(herolist[targetArr[4]]);
+                    if (herolist[i].SeatID== AttackSeatid)
+                    {
+                        attackList.Add(herolist[i]);
+                        break;
+                    }
                 }
-                return GetHeroSurvivalList(attackList);
+                break;
         }
-        Debuger.LogError("没有查询到有效攻击目标");
+        herolist = GetHeroSurvivalList(herolist);
+        if (SkillTarget!= SkillTarget.SELF)
+        {
+            //在自身范围的时候就已经赛选完成了
+            if (herolist == null)
+            {
+                Log.Error("错误!获取攻击列表为空");
+                return null;
+            }
+            switch (SkillRadiusType)
+            {
+                case SkillRadiusType.ALL://全部
+                    attackList.AddRange(herolist);
+                    break;
+                case SkillRadiusType.SOLO://单人
+                    for (int i = 0; i < herolist.Count; i++)
+                    {
+                        if (herolist[i].SeatID == AttackSeatid)
+                        {
+                            attackList.Add(herolist[i]);
+                            break;
+                        }
+                    }
+                    break;
+                case SkillRadiusType.CROSS://十字范围
+                    var CrossList=GetCrossRage(TargetSeatid);
+                    for (int i = 0; i < CrossList.Count; i++)
+                    {
+                        int SeatID = CrossList[i];
+                        for (int j = 0; j < herolist.Count; j++)
+                        {
+                            if (herolist[j].SeatID == SeatID)
+                            {
+                                attackList.Add(herolist[j]);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+        //switch (skillAttackType)
+        //{
+        //    case SkillAttackType.SingTarget:
+        //        attackList.Add(GetNomalAttackTarget(herolist, attackerSeatid));
+        //        return attackList;
+        //    case SkillAttackType.AllHero:
+        //        return GetHeroSurvivalList(herolist);
+        //    case SkillAttackType.BackRowHero:
+        //        attackList = GetBackRowHero(herolist);
+        //        //后排英雄全部阵亡则攻击前排英雄
+        //        if (attackList.Count == 0)
+        //            attackList = GetForntRowHero(herolist);
+        //        return GetHeroSurvivalList(attackList);
+        //    case SkillAttackType.ForntRowHero:
+        //        attackList = GetForntRowHero(herolist);
+        //        attackList = GetHeroSurvivalList(attackList);
+        //        //如果前排英雄已经全部阵亡，就攻击后排
+        //        if (attackList.Count == 0)
+        //            attackList = GetBackRowHero(herolist);
+        //        return GetHeroSurvivalList(attackList); ;
+        //    case SkillAttackType.SameColumnHero:
+        //        int[] targetArr = GetAttackSeatArr(attackerSeatid);
+        //        attackList.Add(herolist[targetArr[0]]);
+        //        attackList.Add(herolist[targetArr[1]]);
+        //        attackList = GetHeroSurvivalList(attackList);
+        //        if (attackList.Count == 0)
+        //        {
+        //            attackList.Add(herolist[targetArr[2]]);
+        //            attackList.Add(herolist[targetArr[3]]);
+        //            attackList = GetHeroSurvivalList(attackList);
+        //            if (attackList.Count == 0)
+        //                attackList.Add(herolist[targetArr[4]]);
+        //        }
+        //        return GetHeroSurvivalList(attackList);
+        //}
         return attackList;
     }
     public static List<FightUnitLogic> GetForntRowHero(List<FightUnitLogic> herolist)

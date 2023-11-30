@@ -105,12 +105,11 @@ public class NewSkill
     /// <returns></returns>
     public List<FightUnitLogic> CalculationAndCauseDamage()
     {
-        List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(mSkillCfg.skillAttackType
-            , NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(mSkillOwner, (HeroTeamEnum)mSkillCfg.roleTragetType), mSkillOwner.HeroData.seatid);
+        List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(mSkillCfg.SkillTarget, mSkillCfg.SkillRadiusType, mSkillOwner.SeatID, mSkillOwner.TargetSeatID);
 
         foreach (var item in logicslist)
         {
-            VInt damage = NewBattleDataCalculatConter.CalculatDamage(mSkillCfg, mSkillOwner, (FightUnitLogic)item);
+            VInt damage = NewBattleDataCalculatConter.CalculatDamage(mSkillCfg, mSkillOwner,item);
             item.TakeDamageRage();
             if (damage != 0)
             {
@@ -130,13 +129,13 @@ public class NewSkill
     //附加buff
     public void AdditionBuffToTargets(List<FightUnitLogic> attackTargetlist)
     {
-        if (mSkillCfg.addBuffs != null && mSkillCfg.addBuffs.Length > 0)
+        if (mSkillCfg.BuffConfigList != null && mSkillCfg.BuffConfigList.Count > 0)
         {
             for (int i = 0; i < attackTargetlist.Count; i++)
             {
-                for (int j = 0; j < mSkillCfg.addBuffs.Length; j++)
+                for (int j = 0; j < mSkillCfg.BuffConfigList.Count; j++)
                 {
-                    BuffsManager.Instance.CreateBuff(mSkillCfg.addBuffs[j], attackTargetlist[i], mSkillOwner);
+                    NewBuffsManager.Instance.CreateBuff(mSkillCfg.addBuffs[j], attackTargetlist[i], mSkillOwner);
                 }
             }
         }

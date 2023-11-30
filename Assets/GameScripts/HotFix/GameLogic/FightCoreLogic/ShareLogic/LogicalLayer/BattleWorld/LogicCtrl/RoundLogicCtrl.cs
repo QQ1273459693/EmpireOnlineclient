@@ -89,7 +89,7 @@ public class RoundLogicCtrl : ILogicBehaviour
         HeroLogic heroLogic = mHeroAttackQueue.Dequeue();
         Debuger.Log("开始行动 行动Heroid：" + heroLogic.HeroData.id + " heroState:" + heroLogic.objectState);
         heroLogic.OnActionEndListener = HeroActionEnd;
-        heroLogic.BeginAction(isAutoSkillEnd);
+        heroLogic.BeginAction(isAutoSkillEnd, UnitActionEnum.Defense);
     }
     public void HeroActionEnd()
     {

@@ -11,13 +11,14 @@ public class NewBuffsManager : Singleton<NewBuffsManager>, ILogicBehaviour
 
     }
 
-    public NewBuffLogic CreateBuff(int buffid, LogicObject buffaddTarget, LogicObject attacker)
+    public void CreateBuff(List<NewBuffConfig> BuffConfigList, LogicObject buffaddTarget, LogicObject attacker)
     {
-        Debuger.Log("创建一个Buff  buffid:" + buffid);
-        NewBuffLogic buff = new NewBuffLogic(buffid, buffaddTarget, attacker);
-        buff.OnCreate();
-        mBuffList.Add(buff);
-        return buff;
+        for (int i = 0; i < BuffConfigList.Count; i++)
+        {
+            NewBuffLogic buff = new NewBuffLogic(BuffConfigList[i], buffaddTarget, attacker);
+            buff.OnCreate();
+            mBuffList.Add(buff);
+        }
     }
     public void OnLogicFrameUpdate()
     {

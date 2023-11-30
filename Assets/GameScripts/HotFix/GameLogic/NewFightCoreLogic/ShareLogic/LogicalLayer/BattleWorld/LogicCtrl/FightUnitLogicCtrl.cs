@@ -70,18 +70,20 @@ public class FightUnitLogicCtrl : ILogicBehaviour
     /// </summary>
     /// <param name="team"></param>
     /// <returns></returns>
-    public List<FightUnitLogic> GetHeroListByTeam(HeroLogic attacker, HeroTeamEnum attackTeam)
+    public List<FightUnitLogic> GetHeroListByTeam(FightUnitTeamEnum attackTeam)
     {
-        switch (attacker.HeroTeam)
+        switch (attackTeam)
         {
-            case HeroTeamEnum.Self:
-                return attackTeam== HeroTeamEnum.Self?mHeroList: mEnemyList;
+            case FightUnitTeamEnum.Self:
+                return mHeroList;
 
-            case HeroTeamEnum.Enemy:
-                return attackTeam == HeroTeamEnum.Enemy ? mHeroList : mEnemyList ;
+            case FightUnitTeamEnum.Enemy:
+                return mEnemyList ;
+            case FightUnitTeamEnum.ALL:
+                return AllHeroList;
         }
         return null;
-        }
+    }
 
 
     public bool HerosIsDeath(HeroTeamEnum team)

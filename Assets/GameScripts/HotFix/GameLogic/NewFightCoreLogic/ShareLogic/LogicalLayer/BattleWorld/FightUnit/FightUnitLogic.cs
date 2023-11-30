@@ -8,12 +8,15 @@ public enum NewAnimState
     StopAnim,
     RePlayAnim,
 }
+/// <summary>
+/// 战斗单位队伍
+/// </summary>
 
-public enum NewHeroTeamEnum
+public enum FightUnitTeamEnum
 {
-    None,
-    Self,
-    Enemy,
+    ALL,//全部队伍
+    Self,//友方
+    Enemy,//敌方
 }
 /// <summary>
 /// 单位行动状态
@@ -85,6 +88,7 @@ public class FightUnitLogic : LogicObject
     public VInt Tough { get { return tough; } }
     public VInt ArmorBreakingAT { get { return armorBreakingAT; } }
     public int ID => HeroData.ID;
+    public int SeatID => HeroData.SeatId;
     public FightUnitData HeroData { get; private set; }
     public HeroTeamEnum HeroTeam { get; private set; }
 #if RENDER_LOGIC
@@ -98,9 +102,8 @@ public class FightUnitLogic : LogicObject
     protected List<FightUnitSkill> mPassSkillArr=> HeroData.m_PassSkillList;
     protected List<FightUnitSkill> mActiveSkillArr => HeroData.m_ActiveSkillList;
     //当前我自身的回合数
-    
     protected int RoundID;
-
+    public int TargetSeatID;//本回合点击目标单位ID
 
     public FightUnitLogic(FightUnitData heroData, HeroTeamEnum heroTeam)
     {

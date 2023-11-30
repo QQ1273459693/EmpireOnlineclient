@@ -1,16 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using System;
 /// <summary>
 /// 战斗数据计算中心
 /// </summary>
 public class NewBattleDataCalculatConter
 {
-    private static VInt MAX = new VInt(100);
+    /// <summary>
+    /// 查看是否能被攻击,被攻击的类型是什么
+    /// </summary>
+    public enum BeAttackEnum
+    {
+        /// <summary>
+        /// 可以直接进行攻击
+        /// </summary>
+        None = 1,
+        /// <summary>
+        /// 无法攻击,无敌状态
+        /// </summary>
+        Invalid = 2,
+        /// <summary>
+        /// 闪避
+        /// </summary>
+        Evade = 3,
+    }
     public static VInt CalculatDamage(NewSkillConfig skilCfg, FightUnitLogic attacker, FightUnitLogic attackTarget)
     {
-        VInt rawDamge = new VInt(0);
+        VInt RealDAG = new VInt(100);
+        switch (skilCfg.SkillReleaseType)
+        {
+            case SkillReleaseType.SwordType://剑类攻击,实际是近战攻击
+                VInt WeaponDamge = RandomNum(attacker.MixDamage,attacker.MaxDamage);//武器伤害
+                VInt RealATK = WeaponDamge+attacker.MeleeAk;//近战攻击力=武器伤害+攻击者的近战攻击
+                VInt TargetDEF = Math.Min(0, (int)attackTarget.MeDEF - (int)attacker.ArmorBreakingAT);//被攻击目标的防御力=目标防御力-攻击者的破甲能力,最小值是0
+                VInt MeATK= Math.Min(1, (int)RealATK - (int)TargetDEF);//攻击减去防御力结果伤害
+                RealDAG = MeATK - MeATK * (attackTarget.Tough/1000);//减去强韧值
+
+                break;
+            case SkillReleaseType.Close_Combat://近战攻击
+                break;
+            case SkillReleaseType.Magic_Attack://魔法攻击
+                break;
+            case SkillReleaseType.Curse://诅咒攻击
+                break;
+            case SkillReleaseType.CURE://治疗
+                break;
+            case SkillReleaseType.SUBSIDIARY://辅助
+                break;
+        }
         //switch (skilCfg.damageType)
         //{
         //    case DamageType.NomalDamage:
@@ -38,7 +73,7 @@ public class NewBattleDataCalculatConter
 
         //}
 
-        return rawDamge;
+        return RealDAG;
     }
 
     public static VInt CalculatDamage(BuffConfig buffCfg, HeroLogic attacker, HeroLogic attackTarget)
@@ -80,4 +115,44 @@ public class NewBattleDataCalculatConter
 
         return rawDamge;
     }
+    public static BeAttackEnum IsCanBeAttack(SkillReleaseType ReleaseType, FightUnitLogic attacker, FightUnitLogic attackTarget)
+    {
+        BeAttackEnum beAttack= BeAttackEnum.None;
+        switch (ReleaseType)
+        {
+            case SkillReleaseType.SwordType://剑类攻击,实际是近战攻击
+                //先查看被攻击者是否是无敌状态
+                if (attackTarget.GetBuffCount)
+                {
+
+                }
+
+                //VInt WeaponDamge = RandomNum(attacker.MixDamage, attacker.MaxDamage);//武器伤害
+                //int 
+
+
+                break;
+            case SkillReleaseType.Close_Combat://近战攻击
+
+
+                break;
+            case SkillReleaseType.Magic_Attack://魔法攻击
+                break;
+        }
+
+
+
+        return beAttack;
+    }
+    /// <summary>
+    /// 随机范围取值
+    /// </summary>
+    /// <returns></returns>
+    static VInt RandomNum(VInt Mix, VInt Max)
+    {
+        Random rand = new Random();
+        return rand.Next((int)Mix,(int)Max);
+    }
+
 }
+

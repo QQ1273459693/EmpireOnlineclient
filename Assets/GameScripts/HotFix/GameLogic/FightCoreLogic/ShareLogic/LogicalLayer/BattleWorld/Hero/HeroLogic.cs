@@ -10,7 +10,7 @@ public enum AnimState
 
 public enum HeroTeamEnum
 {
-    None,
+    All,
     Self,
     Enemy,
 }

@@ -7,20 +7,20 @@ using UnityEngine;
 public class NewBuffLogic : LogicObject
 {
     public int Buffid { get; private set; }
-    public BuffConfig BuffConfig { get; private set; }
+    public NewBuffConfig BuffConfig { get; private set; }
 
     protected LogicObject mOwner;//Buff拥有者
     protected LogicObject mAttacker;//进攻者 添加buff的人
     public FightUnitLogic ownerHero;
 
     public int mCurBuffSurvivalRoundCount;//当前buff存活的回合
-
-    private int mCurRealTime;//当前buff生效实时时间
-    private int mCurAccTime;//当前buff累计生效时间
+    //private int mCurRealTime;//当前buff生效实时时间
+    //private int mCurAccTime;//当前buff累计生效时间
  
-    public NewBuffLogic(int buffid, LogicObject owner, LogicObject attacker)
+    public NewBuffLogic(NewBuffConfig BuffConfig,LogicObject owner,LogicObject attacker)
     {
-        this.Buffid = buffid;
+        //this.Buffid = buffid;
+        this.BuffConfig = BuffConfig;
         this.mOwner = owner;
         this.mAttacker = attacker;
         this.ownerHero = (FightUnitLogic)owner;
@@ -28,14 +28,14 @@ public class NewBuffLogic : LogicObject
     public override void OnCreate()
     {
         objectState = LogicObjectState.Survival;
-        BuffConfig = SkillConfigConter.LoadBuffConfig(Buffid);
         //BuffConfig = ResourcesManager.Instance.LoadAsset<BuffConfig>("Buff/" + Buffid);
-        Log.Error($"开始创建Buff:{BuffConfig.buffName}----------------------");
+        //Log.Error($"开始创建Buff:{BuffConfig.buffName}----------------------");
         //伤害类型为回合开始结束的在施加buff的一瞬间就要把buff添加表现出来
-        if (BuffConfig.buffTriggerType == BuffTriggerType.Damage_RoundStart || BuffConfig.buffTriggerType == BuffTriggerType.Damage_ActionEnd)
-        {
-            AddBuffAndEffect();
-        }
+        //if (BuffConfig.buffTriggerType == BuffTriggerType.Damage_RoundStart || BuffConfig.buffTriggerType == BuffTriggerType.Damage_ActionEnd)
+        //{
+        //    AddBuffAndEffect();
+        //}
+        AddBuffAndEffect();
 
 #if CLIENT_LOGIC
 #else
@@ -45,7 +45,7 @@ public class NewBuffLogic : LogicObject
         {
             OnDestroy();
             BuffsManager.Instance.RemoveBuff(this);
-        }
+        } 
 #endif
     }
     /// <summary>
@@ -220,17 +220,24 @@ public class NewBuffLogic : LogicObject
     {
         if (BuffConfig.damageType != BuffDamageType.None)
         {
-            VInt damage = BattleDataCalculatConter.CalculatDamage(BuffConfig, (HeroLogic)mAttacker, (HeroLogic)mOwner);
-            HeroLogic hero = mOwner as HeroLogic;
+            VInt damage = NewBattleDataCalculatConter.CalculatDamage(BuffConfig, (HeroLogic)mAttacker, (FightUnitLogic)mOwner);
+            FightUnitLogic hero = mOwner as FightUnitLogic;
             Debuger.Log("Trigger Buff Damage :"+damage);
             hero.BuffDamage(damage, BuffConfig);
         }
     }
     /// <summary>
-    /// 创建buff特效
+    /// 创建buff效果和特效
     /// </summary>
     public virtual void AddBuffAndEffect()
     {
+        //先看是增益buff还是减益Buff或者是无Buff单纯属性加成
+        switch (BuffConfig.buffState)
+        {
+
+        }
+
+
 
         bool isTrigger = BuffConfig.buffTriggerProbability == 100;
         if (BuffConfig.buffTriggerProbability > 0 && BuffConfig.buffTriggerProbability < 100)
@@ -259,7 +266,7 @@ public class NewBuffLogic : LogicObject
 #endif      
             if (Buffid == 10081)
             {
-                Debuger.Log("冰冻buff  id：" + Buffid + "冰冻敌人：" + isTrigger + " targetHeroid:" + ownerHero.id);
+                Debuger.Log("冰冻buff  id：" + Buffid + "冰冻敌人：" + isTrigger + " targetHeroid:" + ownerHero.ID);
             }
             //相同的buff在次添加，重置所有相同buff的持续回合
             if (alreadAddBuffCount!=0)
@@ -291,6 +298,6 @@ public class NewBuffLogic : LogicObject
         Debuger.Log("释放Buff资源：" + Buffid);
         objectState = LogicObjectState.Death;
         RenderObj?.OnRelease();
-        BuffsManager.Instance.DestroyBuff(this);
+        NewBuffsManager.Instance.DestroyBuff(this);
     }
 }

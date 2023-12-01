@@ -312,14 +312,14 @@ public class FightUnitLogic : LogicObject
     /// <returns></returns>
     public bool IsBeContrl()
     {
-        for (int i = 0; i < haveBuffList.Count; i++)
-        {
-            if (haveBuffList[i].BuffConfig.buffType == BuffType.Control)
-            {
-                Debug.Log("BeContrl objectState:" + haveBuffList[i].objectState + "  SurvivalRound:" + haveBuffList[i].mCurBuffSurvivalRoundCount);
-                return true;
-            }
-        }
+        //for (int i = 0; i < haveBuffList.Count; i++)
+        //{
+        //    if (haveBuffList[i]. .BuffConfig.buffType == BuffType.Control)
+        //    {
+        //        Debug.Log("BeContrl objectState:" + haveBuffList[i].objectState + "  SurvivalRound:" + haveBuffList[i].mCurBuffSurvivalRoundCount);
+        //        return true;
+        //    }
+        //}
         return false;
     }
     #endregion

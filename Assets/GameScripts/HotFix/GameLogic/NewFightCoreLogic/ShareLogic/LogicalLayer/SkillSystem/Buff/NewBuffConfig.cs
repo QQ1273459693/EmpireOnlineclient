@@ -5,8 +5,8 @@ using UnityEngine;
 public class NewBuffConfig
 {
     public int buffDurationRound { get; set; }         //Buff持续回合
-    public NewBuffType buffType;               //Buff类型
-    public NewBuffState buffState;             //buff状态
+    public NewBuffType buffType { get; set; }                //Buff类型
+    public NewBuffState buffState { get; set; }              //buff状态
     public BUFFATKType BUFFATKType { get; set; }
     public int BuffValue;//技能BUFF值
 
@@ -48,11 +48,7 @@ public class NewBuffConfig
                 buffState = NewBuffState.DeBuff;
                 break;
         }
-
-
-    }
-
-
+    } 
 }
 public enum NewBuffType
 {
@@ -112,6 +108,20 @@ public enum NewBuffState
     /// 减益Buff
     /// </summary>
     DeBuff=2,
+}
+/// <summary>
+/// Buff控制类型
+/// </summary>
+public enum BuffControlState
+{
+    /// <summary>
+    /// 无控制
+    /// </summary>
+    None = 0,
+    /// <summary>
+    /// 有控制(目前只有定身,封魔,混乱)
+    /// </summary>
+    Control = 1,
 }
 
 /// <summary>

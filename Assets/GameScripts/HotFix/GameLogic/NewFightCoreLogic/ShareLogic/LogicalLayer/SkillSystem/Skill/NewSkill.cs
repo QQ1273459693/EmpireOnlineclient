@@ -135,7 +135,7 @@ public class NewSkill
             {
                 for (int j = 0; j < mSkillCfg.BuffConfigList.Count; j++)
                 {
-                    NewBuffsManager.Instance.CreateBuff(mSkillCfg.addBuffs[j], attackTargetlist[i], mSkillOwner);
+                    NewBuffsManager.Instance.CreateBuff(mSkillCfg.BuffConfigList, attackTargetlist[i], mSkillOwner);
                 }
             }
         }

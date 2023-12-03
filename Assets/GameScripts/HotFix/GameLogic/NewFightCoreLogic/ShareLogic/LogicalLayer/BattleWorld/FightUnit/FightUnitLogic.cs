@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
+
 public enum NewAnimState
 {
     StopAnim,
@@ -50,7 +52,7 @@ public class FightUnitLogic : LogicObject
     protected VInt medef;
     protected VInt rgdef;
     protected VInt mgdef;
-    protected VInt eLMRES;
+    protected VInt elmres;
     protected VInt curseMgRES;
     protected VInt shield;
     protected VInt physicalHit;
@@ -73,7 +75,7 @@ public class FightUnitLogic : LogicObject
     public VInt MeDEF { get { return medef; } }
     public VInt RGDEF { get { return rgdef; } }
     public VInt MGDEF { get { return mgdef; } }
-    public VInt ELMRES { get { return eLMRES; } }
+    public VInt ELMRES { get { return elmres; } }
     public VInt CurseMgRES { get { return curseMgRES; } }
     public VInt Shield { get { return shield; } }
     public VInt PhysicalHit { get { return physicalHit; } }
@@ -119,7 +121,7 @@ public class FightUnitLogic : LogicObject
         medef = heroData.MeDEF;
         rgdef = heroData.MeDEF;
         mgdef=heroData.MGDEF;
-        eLMRES=heroData.ELMRES;
+        elmres = heroData.ELMRES;
         curseMgRES = heroData.CurseMgRES;
         shield=heroData.Shield;
         physicalHit=heroData.PhysicalHit;
@@ -223,38 +225,38 @@ public class FightUnitLogic : LogicObject
         Log.Info($"添加的BuffID:{buff.Buffid},被添加的战斗单位是---{HeroData.Name}---ID:{HeroData.ID}");
         int buffid = buff.Buffid;
         //如果buff最大的叠加次数已经达到，那么就不进行叠加
-        if (buff.BuffConfig.maxStackingNum >= 1)
-        {
-            int count = 0;
-            for (int i = 0; i < haveBuffList.Count; i++)
-            {
-                if (haveBuffList[i].Buffid == buffid)
-                {
-                    count++;
-                }
-            }
-            if (count >= buff.BuffConfig.maxStackingNum)
-            {
-                Log.Info($"buff以达到最大叠加个数 buffid{buffid},BUFF名称:{buff.BuffConfig.buffName}");
-                return;
-            }
-            haveBuffList.Add(buff);
-        }
-        else
-            haveBuffList.Add(buff);
+        //if (buff.BuffConfig.maxStackingNum >= 1)
+        //{
+        //    int count = 0;
+        //    for (int i = 0; i < haveBuffList.Count; i++)
+        //    {
+        //        if (haveBuffList[i].Buffid == buffid)
+        //        {
+        //            count++;
+        //        }
+        //    }
+        //    if (count >= buff.BuffConfig.maxStackingNum)
+        //    {
+        //        Log.Info($"buff以达到最大叠加个数 buffid{buffid},BUFF名称:{buff.BuffConfig.buffName}");
+        //        return;
+        //    }
+        //    haveBuffList.Add(buff);
+        //}
+        //else
+        //    haveBuffList.Add(buff);
 #if RENDER_LOGIC
         //增益buff或减益buff都有buff图标
-        if (buff.BuffConfig.buffType != BuffType.DamageBuff)
-        {
-            HeroRender.Add_BuffIcon(buff.BuffConfig);
-        }
+        //if (buff.BuffConfig.buffType != BuffType.DamageBuff)
+        //{
+        //    HeroRender.Add_BuffIcon(buff.BuffConfig);
+        //}
 #endif
     }
     public void RemoveBuff(NewBuffLogic buff)
     {
         haveBuffList.Remove(buff);
 #if RENDER_LOGIC
-        HeroRender.Remove_BuffIcon(buff.BuffConfig.buffIcon);
+        //HeroRender.Remove_BuffIcon(buff.BuffConfig.buffIcon);
 #endif
     }
 
@@ -351,6 +353,456 @@ public class FightUnitLogic : LogicObject
     public void BuffDamage(VInt hp, BuffConfig buffCfg)
     {
         DamageHP(hp, buffCfg);
+    }
+    /// <summary>
+    /// 属性值增删
+    /// </summary>
+    public void AttriAddBuff(BUFFATKType BuffState,int Value,bool isPercent)
+    {
+        VInt RealValue = new VInt(100);
+        switch (BuffState)
+        {
+            case BUFFATKType.HP:
+                //先看是不是百分比,再看是否是增删
+                if (isPercent)
+                {
+                    //血量百分比只能是最大值
+                    RealValue= MAXHP * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    hp += RealValue;
+                    if (hp>MAXHP)
+                    {
+                        hp = MAXHP;
+                    }
+                }
+                else
+                {
+                    //删
+                    hp -= RealValue;
+                    if (hp<0)
+                    {
+                        hp = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MP:
+                if (isPercent)
+                {
+                    //血量百分比只能是最大值
+                    RealValue = MAXMP * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    mp += RealValue;
+                    if (mp > MAXMP)
+                    {
+                        mp = MAXMP;
+                    }
+                }
+                else
+                {
+                    //删
+                    mp -= RealValue;
+                    if (mp < 0)
+                    {
+                        mp = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MEATK:
+                if (isPercent)
+                {
+                    RealValue = meleeak * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    meleeak += RealValue;
+                }
+                else
+                {
+                    //删
+                    meleeak -= RealValue;
+                    if (meleeak < 0)
+                    {
+                        meleeak = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MAGATK:
+                if (isPercent)
+                {
+                    RealValue = magicak * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    magicak += RealValue;
+                }
+                else
+                {
+                    //删
+                    magicak -= RealValue;
+                    if (magicak < 0)
+                    {
+                        magicak = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MEDFS:
+                if (isPercent)
+                {
+                    RealValue = medef * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    medef += RealValue;
+                }
+                else
+                {
+                    //删
+                    medef -= RealValue;
+                    if (medef < 0)
+                    {
+                        medef = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MAGDFS:
+                if (isPercent)
+                {
+                    RealValue = mgdef * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    mgdef += RealValue;
+                }
+                else
+                {
+                    //删
+                    mgdef -= RealValue;
+                    if (mgdef < 0)
+                    {
+                        mgdef = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.ELMRES:
+                if (isPercent)
+                {
+                    RealValue = elmres * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    elmres += RealValue;
+                }
+                else
+                {
+                    //删
+                    elmres -= RealValue;
+                    if (elmres < 0)
+                    {
+                        elmres = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.CURSERES:
+                if (isPercent)
+                {
+                    RealValue = curseMgRES * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    curseMgRES += RealValue;
+                }
+                else
+                {
+                    //删
+                    curseMgRES -= RealValue;
+                    if (curseMgRES < 0)
+                    {
+                        curseMgRES = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.PHYHIT:
+                if (isPercent)
+                {
+                    RealValue = physicalHit * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    physicalHit += RealValue;
+                }
+                else
+                {
+                    //删
+                    physicalHit -= RealValue;
+                    if (physicalHit < 0)
+                    {
+                        physicalHit = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.ELMHIT:
+                if (isPercent)
+                {
+                    RealValue = eleMagicHit * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    eleMagicHit += RealValue;
+                }
+                else
+                {
+                    //删
+                    eleMagicHit -= RealValue;
+                    if (eleMagicHit < 0)
+                    {
+                        eleMagicHit = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.CURSEHIT:
+                if (isPercent)
+                {
+                    RealValue = curseMagicHit * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    curseMagicHit += RealValue;
+                }
+                else
+                {
+                    //删
+                    curseMagicHit -= RealValue;
+                    if (curseMagicHit < 0)
+                    {
+                        curseMagicHit = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.MagicPenetration:
+                if (isPercent)
+                {
+                    RealValue = magicPenetration * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    magicPenetration += RealValue;
+                    if (magicPenetration>500)
+                    {
+                        magicPenetration = 500;
+                    }
+                }
+                else
+                {
+                    //删
+                    magicPenetration -= RealValue;
+                    if (magicPenetration < 0)
+                    {
+                        magicPenetration = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.EVADE:
+                if (isPercent)
+                {
+                    RealValue = evade * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    evade += RealValue;
+                }
+                else
+                {
+                    //删
+                    evade -= RealValue;
+                    if (evade < 0)
+                    {
+                        evade = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.SPEED:
+                if (isPercent)
+                {
+                    RealValue = speed * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    speed += RealValue;
+                }
+                else
+                {
+                    //删
+                    speed -= RealValue;
+                    if (speed < 0)
+                    {
+                        speed = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.CRITHIT:
+                if (isPercent)
+                {
+                    RealValue = criticalHit * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    criticalHit += RealValue;
+                }
+                else
+                {
+                    //删
+                    criticalHit -= RealValue;
+                    if (criticalHit < 0)
+                    {
+                        criticalHit = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.TOUGH:
+                if (isPercent)
+                {
+                    RealValue = tough * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    tough += RealValue;
+                }
+                else
+                {
+                    //删
+                    tough -= RealValue;
+                    if (tough < 0)
+                    {
+                        tough = 0;
+                    }
+                }
+                break;
+            case BUFFATKType.ARMRBK:
+                if (isPercent)
+                {
+                    RealValue = armorBreakingAT * (VInt)((float)Value / 100);
+                }
+                else
+                {
+                    //非百分比
+                    RealValue = (VInt)Value;
+                }
+                if (Value > 0)
+                {
+                    //增
+                    armorBreakingAT += RealValue;
+                }
+                else
+                {
+                    //删
+                    armorBreakingAT -= RealValue;
+                    if (armorBreakingAT < 0)
+                    {
+                        armorBreakingAT = 0;
+                    }
+                }
+                break;
+        }
     }
     public void DamageHP(VInt damagehp, BuffConfig buffCfg = null)
     {

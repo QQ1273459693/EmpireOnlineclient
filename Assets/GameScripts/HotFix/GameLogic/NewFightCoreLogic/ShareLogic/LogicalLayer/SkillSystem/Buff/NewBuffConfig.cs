@@ -9,14 +9,16 @@ public class NewBuffConfig
     public NewBuffState buffState { get; set; }              //buff状态
     public BUFFATKType BUFFATKType { get; set; }
     public int BuffValue;//技能BUFF值
+    public bool Percent { get; set; }//是否是百分比
 
 
-    public NewBuffConfig(int Round,int m_BuffValue, NewBuffType m_buffType, BUFFATKType m_bUFFATKType)
+    public NewBuffConfig(int Round,int m_BuffValue,bool percent,NewBuffType m_buffType, BUFFATKType m_bUFFATKType)
     {
         buffDurationRound=Round;
         buffType = m_buffType;
         BUFFATKType=m_bUFFATKType;
         BuffValue = m_BuffValue;
+        Percent = percent;
 
         switch (m_buffType)
         {
@@ -170,25 +172,33 @@ public enum BUFFATKType
     /// </summary>
     ELMHIT = 10,
     /// <summary>
+    /// 诅咒魔法命中
+    /// </summary>
+    CURSEHIT = 11,
+    /// <summary>
+    /// 魔法穿透力
+    /// </summary>
+    MagicPenetration = 13,
+    /// <summary>
     /// 闪避
     /// </summary>
-    EVADE = 11,
+    EVADE = 14,
     /// <summary>
     /// 出手速度
     /// </summary>
-    SPEED = 12,
+    SPEED = 15,
     /// <summary>
     /// 暴击
     /// </summary>
-    CRITHIT = 13,
+    CRITHIT = 16,
     /// <summary>
     /// 强韧
     /// </summary>
-    TOUGH = 14,
+    TOUGH = 17,
     /// <summary>
     /// 破甲能力
     /// </summary>
-    ARMRBK = 15,
+    ARMRBK = 18,
 
 }
 

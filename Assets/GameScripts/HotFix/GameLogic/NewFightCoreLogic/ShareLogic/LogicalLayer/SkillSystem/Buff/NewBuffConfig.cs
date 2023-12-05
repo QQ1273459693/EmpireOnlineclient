@@ -10,46 +10,23 @@ public class NewBuffConfig
     public BUFFATKType BUFFATKType { get; set; }
     public int BuffValue;//技能BUFF值
     public bool Percent { get; set; }//是否是百分比
+    public int BUFFTAG { get; set; }//BUFF目标
+    public int BUFFRAG { get; set; }//BUFF范围
+    public bool isSelfBuff { get; set; }//是否是对自身施加Buff
 
 
-    public NewBuffConfig(int Round,int m_BuffValue,bool percent,NewBuffType m_buffType, BUFFATKType m_bUFFATKType)
+    public NewBuffConfig(int Round,int m_BuffValue,bool percent,NewBuffType m_buffType, BUFFATKType m_bUFFATKType,int Bufftarget,int BuffRange)
     {
         buffDurationRound=Round;
         buffType = m_buffType;
         BUFFATKType=m_bUFFATKType;
         BuffValue = m_BuffValue;
         Percent = percent;
+        BUFFTAG=Bufftarget;
+        BUFFRAG = BuffRange;
+        isSelfBuff =(SkillTarget)BUFFTAG== SkillTarget.SELF;
+        buffState = BuffBattleRule.GetBuffStateByBuffType(m_buffType);
 
-        switch (m_buffType)
-        {
-            case NewBuffType.None:
-                buffState = NewBuffState.None;
-                break;
-            case NewBuffType.INVINCIBLE:
-                buffState = NewBuffState.Buff;
-                break;
-            case NewBuffType.PHY_ATK_NOT:
-                buffState = NewBuffState.Buff;
-                break;
-            case NewBuffType.MAG_ATK_NOT:
-                buffState = NewBuffState.Buff;
-                break;
-            case NewBuffType.IMTY_LMBE_CHAOS_SKLL:
-                buffState = NewBuffState.Buff;
-                break;
-            case NewBuffType.DEBUFF_FIRE:
-                buffState = NewBuffState.DeBuff;
-                break;
-            case NewBuffType.SKILL_SILENT:
-                buffState = NewBuffState.DeBuff;
-                break;
-            case NewBuffType.IMMOBILIZE:
-                buffState = NewBuffState.DeBuff;
-                break;
-            case NewBuffType.PONED:
-                buffState = NewBuffState.DeBuff;
-                break;
-        }
     } 
 }
 public enum NewBuffType
@@ -178,27 +155,27 @@ public enum BUFFATKType
     /// <summary>
     /// 魔法穿透力
     /// </summary>
-    MagicPenetration = 13,
+    MagicPenetration = 12,
     /// <summary>
     /// 闪避
     /// </summary>
-    EVADE = 14,
+    EVADE = 13,
     /// <summary>
     /// 出手速度
     /// </summary>
-    SPEED = 15,
+    SPEED = 14,
     /// <summary>
     /// 暴击
     /// </summary>
-    CRITHIT = 16,
+    CRITHIT = 15,
     /// <summary>
     /// 强韧
     /// </summary>
-    TOUGH = 17,
+    TOUGH = 16,
     /// <summary>
     /// 破甲能力
     /// </summary>
-    ARMRBK = 18,
+    ARMRBK = 17,
 
 }
 

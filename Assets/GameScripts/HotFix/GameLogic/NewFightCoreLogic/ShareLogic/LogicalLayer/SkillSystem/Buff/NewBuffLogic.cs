@@ -35,7 +35,22 @@ public class NewBuffLogic : LogicObject
         //{
         //    AddBuffAndEffect();
         //}
-        AddBuffAndEffect();
+
+        //自身添加属性buff有点特殊,列如:猎人先攻扰乱射击技能 目标敌方全部,敌方出手减少100,自身技能命中-100,代表的是 本轮大回合内,出手减少100,包括主动技能回合,技能命中减少只在自动回合内,主动回合不触发
+        //遇到是自身枚举的BUFF,默认回合结束移除,buff创建立即添加
+        if (BuffConfig.isSelfBuff)
+        {
+            //自身瞬间buff添加
+
+        }
+        else
+        {
+            AddBuffAndEffect();
+        }
+
+
+
+        
 
 #if CLIENT_LOGIC
 #else
@@ -232,23 +247,22 @@ public class NewBuffLogic : LogicObject
     public virtual void AddBuffAndEffect()
     {
         //先看是增益buff还是减益Buff或者是无Buff单纯属性加成
-        FightUnitLogic hero = mOwner as FightUnitLogic;
-        switch (BuffConfig.buffState)
-        {
-            case NewBuffState.None:
-                //单纯属性增加
-                hero.AttriAddBuff(BuffConfig.BUFFATKType, BuffConfig.BuffValue, BuffConfig.Percent);
-                break;
-            case NewBuffState.Buff:
-                hero.AttriAddBuff(BuffConfig.BUFFATKType, BuffConfig.BuffValue, BuffConfig.Percent);
-                //增益BUFF,查看队列插入情况
-                break;
-            case NewBuffState.DeBuff:
-                hero.AttriAddBuff(BuffConfig.BUFFATKType, BuffConfig.BuffValue, BuffConfig.Percent);
-                //减益BUFF,先看是不是控制buff再看被赋予者能否被控制
-                break;
-        }
-
+        //switch (BuffConfig.buffState)
+        //{
+        //    case NewBuffState.None:
+        //        //单纯属性增加
+        //        hero.AttriAddBuff(BuffConfig.BUFFATKType,BuffConfig.BuffValue, BuffConfig.Percent);
+        //        break;
+        //    case NewBuffState.Buff:
+        //        hero.AttriAddBuff(BuffConfig.BUFFATKType,BuffConfig.BuffValue, BuffConfig.Percent);
+        //        //增益BUFF,查看队列插入情况
+        //        break;
+        //    case NewBuffState.DeBuff:
+        //        //减益BUFF,先看是不是控制buff再看被赋予者能否被控制
+        //        hero.AttriAddBuff(BuffConfig.BUFFATKType, BuffConfig.BuffValue, BuffConfig.Percent);
+        //        break;
+        //}
+        ownerHero.AttriAddBuff(BuffConfig.BUFFATKType, BuffConfig.BuffValue, BuffConfig.Percent);
 
 
         bool isTrigger = BuffConfig.buffTriggerProbability == 100;

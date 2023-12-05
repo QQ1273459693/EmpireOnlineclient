@@ -1,8 +1,4 @@
 ﻿using GameBase;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class NewSkillManager : Singleton<NewSkillManager>, ILogicBehaviour
 {
     

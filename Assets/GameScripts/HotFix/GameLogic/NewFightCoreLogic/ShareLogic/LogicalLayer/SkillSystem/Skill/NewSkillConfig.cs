@@ -10,8 +10,8 @@ public class NewSkillConfig
     public int Lv;
     public int NeedMp;//MP消耗
     public int Round;//持续回合
-    public List<NewBuffConfig> BuffConfigList=new List<NewBuffConfig>();
-
+    public List<NewBuffConfig> BuffConfigList=new List<NewBuffConfig>();//非自身Buff添加列表
+    public List<NewBuffConfig> SelfBuffList = new List<NewBuffConfig>();//自身Buff添加列表
 
 
     public SkillReleaseType SkillReleaseType { get; set; }
@@ -38,8 +38,7 @@ public class NewSkillConfig
                 Lv = SkillLv;
                 if (Lv>= SkillBase.Name.Count)
                 {
-                    Log.Error("剑士表ID技能名称长度越界!:"+ Skillid);
-                    return;
+                    Log.Error("剑士表ID技能名称长度越界!:"+ Skillid);                    return;
                 }
                 SkillName = SkillBase.Name[SkillLv];
                 if (Lv >= SkillBase.Des.Count)
@@ -63,11 +62,21 @@ public class NewSkillConfig
                 //技能释放
                 var SkillRealseData= SkillBase.SkillParam[SkillLv].SkilParams;
                 BuffConfigList.Clear();
+                SelfBuffList.Clear();
                 for (int i = 0; i < SkillRealseData.Length; i++)
                 {
                     var SkillData = SkillRealseData[i];
-                    NewBuffConfig buffConfig = new NewBuffConfig(Round, SkillData.Value, SkillData.Percent,(NewBuffType)SkillData.BUFFID,(BUFFATKType)SkillData.ATTACKTP);
-                    BuffConfigList.Add(buffConfig);
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, SkillData.Value, SkillData.Percent,(NewBuffType)SkillData.BUFFID,(BUFFATKType)SkillData.ATTACKTP, SkillData.SKTAR, SkillData.SKRANGE);
+                    if ((SkillTarget)SkillData.SKTAR== SkillTarget.SELF)
+                    {
+                        //属于自身BUFF
+                        SelfBuffList.Add(buffConfig);
+                    }
+                    else
+                    {
+                        BuffConfigList.Add(buffConfig);
+                    }
+                    
                 }
                 //技能释放
 
@@ -99,11 +108,20 @@ public class NewSkillConfig
                 //技能释放
                 var EnemySkillRealseData = EnemySkillBase.SkillParam.SkilParams;
                 BuffConfigList.Clear();
+                SelfBuffList.Clear();
                 for (int i = 0; i < EnemySkillRealseData.Count; i++)
                 {
                     var m_SkillData = EnemySkillRealseData[i];
-                    NewBuffConfig buffConfig = new NewBuffConfig(Round, m_SkillData.Value, m_SkillData.Percent,(NewBuffType)m_SkillData.BUFFID, (BUFFATKType)m_SkillData.ATTACKTP);
-                    BuffConfigList.Add(buffConfig);
+                    NewBuffConfig buffConfig = new NewBuffConfig(Round, m_SkillData.Value, m_SkillData.Percent,(NewBuffType)m_SkillData.BUFFID, (BUFFATKType)m_SkillData.ATTACKTP, m_SkillData.SKTAR, m_SkillData.SKRANGE);
+                    if ((SkillTarget)m_SkillData.SKTAR == SkillTarget.SELF)
+                    {
+                        //属于自身BUFF
+                        SelfBuffList.Add(buffConfig);
+                    }
+                    else
+                    {
+                        BuffConfigList.Add(buffConfig);
+                    }
                 }
                 //技能释放
 

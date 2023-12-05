@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using TEngine;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static NewBattleDataCalculatConter;
 
 public class NewSkill
 {
@@ -61,12 +63,20 @@ public class NewSkill
 #if CLIENT_LOGIC
         CreateSkillEffect();//创建技能特效
 #endif
+        //先添加自身瞬时添加的buff
+        for (int j = 0; j < mSkillCfg.SelfBuffList.Count; j++)
+        {
+            NewBuffsManager.Instance.CreateBuff(mSkillCfg.SelfBuffList, mSkillOwner, mSkillOwner);
+        }
+        //先添加自身瞬时添加的buff
+
+
         List<FightUnitLogic> attackTargetlist = CalculationAndCauseDamage(); //计算伤害并造成伤害
 
 #if CLIENT_LOGIC
         //CreateSKillHitEffect(attackTargetlist);//创建技能击中特效
 #endif
-        AdditionBuffToTargets(attackTargetlist); //添加buff到攻击目标
+        //AdditionBuffToTargets(attackTargetlist); //添加buff到攻击目标
         SkillEnd();
         //if (mSkillCfg.skillAttackDurationMS > 0)
         //    LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillAttackDurationMS, () => { MoveToSeat(SkillEnd); });
@@ -109,24 +119,64 @@ public class NewSkill
 
         foreach (var item in logicslist)
         {
-            VInt damage = NewBattleDataCalculatConter.CalculatDamage(mSkillCfg, mSkillOwner,item);
-            item.TakeDamageRage();
-            if (damage != 0)
+            BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(mSkillCfg.SkillReleaseType, mSkillOwner, item);
+            VInt damage;
+            switch (beAttack)
             {
-                if (mSkillCfg.roleTragetType == RoleTargetType.Teammate)
-                {
-                    item.DamageHP(-damage);
-                }
-                else
-                {
+                case BeAttackEnum.Auxiliary:
+                    AdditionBuffToTargets(item);
+                    break;
+                case BeAttackEnum.MeleeATK:
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack,mSkillOwner, item);
                     item.DamageHP(damage);
-                }
-                Debuger.Log("damage:" + damage.RawInt);
+                    AdditionBuffToTargets(item);
+                    break;
+                case BeAttackEnum.MAGATK:
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack,mSkillOwner, item);
+                    item.DamageHP(damage);
+                    AdditionBuffToTargets(item);
+                    break;
+                case BeAttackEnum.CURSEATK:
+                    AdditionBuffToTargets(item);
+                    break;
+                case BeAttackEnum.Invalid:
+                    //无敌状态(无敌,物理无敌,魔法无敌)
+                    item.BeInvalidByAttack();
+                    break;
+                case BeAttackEnum.Evade:
+                    //被闪避了
+                    item.BeEvade();
+                    break;
+                case BeAttackEnum.ELEMagicPenetrationAttack://元素魔法穿透
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                    item.DamageHP(damage);
+                    break;
+                case BeAttackEnum.CURSEMagicPenetrationAttack://诅咒魔法穿透
+                    AdditionBuffToTargets(item);
+                    break;
             }
+        }
+        foreach (var item in logicslist)
+        {
+            VInt damage = NewBattleDataCalculatConter.CalculatDamage(mSkillCfg, mSkillOwner,item);
+            //if (damage != 0)
+            //{
+            //    if (mSkillCfg.roleTragetType == RoleTargetType.Teammate)
+            //    {
+            //        item.DamageHP(-damage);
+            //    }
+            //    else
+            //    {
+            //        item.DamageHP(damage);
+            //    }
+            //    Debuger.Log("damage:" + damage.RawInt);
+            //}
         }
         return logicslist;
     }
-    //附加buff
+    /// <summary>
+    /// 附加BUFF给对象列表
+    /// </summary>
     public void AdditionBuffToTargets(List<FightUnitLogic> attackTargetlist)
     {
         if (mSkillCfg.BuffConfigList != null && mSkillCfg.BuffConfigList.Count > 0)
@@ -137,6 +187,19 @@ public class NewSkill
                 {
                     NewBuffsManager.Instance.CreateBuff(mSkillCfg.BuffConfigList, attackTargetlist[i], mSkillOwner);
                 }
+            }
+        }
+    }
+    /// <summary>
+    /// 附加Buff给单个对象
+    /// </summary>
+    public void AdditionBuffToTargets(FightUnitLogic attackTarget)
+    {
+        if (mSkillCfg.BuffConfigList != null && mSkillCfg.BuffConfigList.Count > 0)
+        {
+            for (int j = 0; j < mSkillCfg.BuffConfigList.Count; j++)
+            {
+                NewBuffsManager.Instance.CreateBuff(mSkillCfg.BuffConfigList, attackTarget, mSkillOwner);
             }
         }
     }

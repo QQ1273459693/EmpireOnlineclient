@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public enum NewAnimState
 {
@@ -97,7 +96,9 @@ public class FightUnitLogic : LogicObject
     public FightUnitRender HeroRender { get { return (FightUnitRender)RenderObj; } }
 #endif
 
-    public List<NewBuffLogic> haveBuffList = new List<NewBuffLogic>();
+    public List<NewBuffLogic> DeBuffList = new List<NewBuffLogic>(3);//减益Debuff列表
+    public List<NewBuffLogic> BuffList = new List<NewBuffLogic>(3);//增益BUFF列表
+    public List<NewBuffLogic> NoneBuffList = new List<NewBuffLogic>();//无状态Buff列表
     /// <summary>
     /// 技能数组
     /// </summary>
@@ -106,6 +107,7 @@ public class FightUnitLogic : LogicObject
     //当前我自身的回合数
     protected int RoundID;
     public int TargetSeatID;//本回合点击目标单位ID
+    public int MaxBUFFCount=3;//减益和增益buff列表最大数量
 
     public FightUnitLogic(FightUnitData heroData, HeroTeamEnum heroTeam)
     {
@@ -164,6 +166,10 @@ public class FightUnitLogic : LogicObject
                 var SkillData = mPassSkillArr[RoundID % mPassSkillArr.Count];
                 NewSkillManager.Instance.ReleaseSkill(SkillData, this);
             }
+            else
+            {
+                ActionEnd();
+            }
         }
         else
         {
@@ -202,17 +208,34 @@ public class FightUnitLogic : LogicObject
     public override void RoundStartEvent(int round)
     {
         base.RoundStartEvent(round);
-        for (int i = 0; i < haveBuffList.Count; i++)
+        for (int i = 0; i < NoneBuffList.Count; i++)
         {
-            haveBuffList[i].RoundStartEvent(round);
+            NoneBuffList[i].RoundStartEvent(round);
         }
+        for (int i = 0; i < DeBuffList.Count; i++)
+        {
+            DeBuffList[i].RoundStartEvent(round);
+        }
+        for (int i = 0; i < BuffList.Count; i++)
+        {
+            BuffList[i].RoundStartEvent(round);
+        }
+
     }
     public override void RoundEndEvent()
     {
         base.RoundEndEvent();
-        for (int i = 0; i < haveBuffList.Count; i++)
+        for (int i = 0; i < NoneBuffList.Count; i++)
         {
-            haveBuffList[i].RoundEndEvent();
+            NoneBuffList[i].RoundEndEvent();
+        }
+        for (int i = 0; i < BuffList.Count; i++)
+        {
+            BuffList[i].RoundEndEvent();
+        }
+        for (int i = 0; i < DeBuffList.Count; i++)
+        {
+            DeBuffList[i].RoundEndEvent();
         }
     }
     #region 技能相关API
@@ -224,7 +247,29 @@ public class FightUnitLogic : LogicObject
     {
         Log.Info($"添加的BuffID:{buff.Buffid},被添加的战斗单位是---{HeroData.Name}---ID:{HeroData.ID}");
         int buffid = buff.Buffid;
-        //如果buff最大的叠加次数已经达到，那么就不进行叠加
+        //如果增益buff或者减益Buff最大的叠加次数已经达到，那么就移除进队列
+        switch (buff.BuffConfig.buffState)
+        {
+            case NewBuffState.None:
+                NoneBuffList.Add(buff);
+                break;
+            case NewBuffState.Buff:
+                if (BuffList.Count==MaxBUFFCount)
+                {
+                    //已经最大值移除最后一个
+                    BuffList.RemoveAt(MaxBUFFCount-1);
+                }
+                BuffList.Insert(0, buff);
+                break;
+            case NewBuffState.DeBuff:
+                if (DeBuffList.Count == MaxBUFFCount)
+                {
+                    //已经最大值移除最后一个
+                    DeBuffList.RemoveAt(MaxBUFFCount - 1);
+                }
+                DeBuffList.Insert(0, buff);
+                break;
+        }
         //if (buff.BuffConfig.maxStackingNum >= 1)
         //{
         //    int count = 0;
@@ -254,7 +299,19 @@ public class FightUnitLogic : LogicObject
     }
     public void RemoveBuff(NewBuffLogic buff)
     {
-        haveBuffList.Remove(buff);
+        switch (buff.BuffConfig.buffState)
+        {
+            case NewBuffState.None:
+                NoneBuffList.Remove(buff);
+                break;
+            case NewBuffState.Buff:
+                BuffList.Remove(buff);
+                break;
+            case NewBuffState.DeBuff:
+                DeBuffList.Remove(buff);
+                break;
+        }
+        
 #if RENDER_LOGIC
         //HeroRender.Remove_BuffIcon(buff.BuffConfig.buffIcon);
 #endif
@@ -264,33 +321,83 @@ public class FightUnitLogic : LogicObject
     public int GetBuffCount(int buffid)
     {
         int buffCount = 0;
-        for (int i = 0; i < haveBuffList.Count; i++)
-        {
-            if (haveBuffList[i].Buffid == buffid)
-            {
-                buffCount++;
-            }
-        }
+        //for (int i = 0; i < haveBuffList.Count; i++)
+        //{
+        //    if (haveBuffList[i].Buffid == buffid)
+        //    {
+        //        buffCount++;
+        //    }
+        //}
         return buffCount;
+    }
+    /// <summary>
+    /// 查看是否有某种Buff状态类型
+    /// </summary>
+    /// <returns></returns>
+    public bool GetBuffTypeByEnum(NewBuffType BuffType)
+    {
+        bool buffHas=false;
+        switch (BuffBattleRule.GetBuffStateByBuffType(BuffType))
+        {
+            case NewBuffState.None:
+                for (int i = 0; i < NoneBuffList.Count; i++)
+                {
+                    if (NoneBuffList[i].BuffConfig.buffType== BuffType)
+                    {
+                        buffHas = true;
+                        break;
+                    }
+                }
+                break;
+            case NewBuffState.DeBuff:
+                for (int i = 0; i < DeBuffList.Count; i++)
+                {
+                    if (DeBuffList[i].BuffConfig.buffType == BuffType)
+                    {
+                        buffHas = true;
+                        break;
+                    }
+                }
+                break;
+            case NewBuffState.Buff:
+                for (int i = 0; i < BuffList.Count; i++)
+                {
+                    if (BuffList[i].BuffConfig.buffType == BuffType)
+                    {
+                        buffHas = true;
+                        break;
+                    }
+                }
+                break;
+        }
+        return buffHas;
     }
     /// <summary>
     /// 刷新buff持续回合
     /// </summary>
-    public void RefershtBuffDurationRound(int buffid)
-    {
-        for (int i = 0; i < haveBuffList.Count; i++)
-        {
-            if (haveBuffList[i].Buffid == buffid)
-            {
-                haveBuffList[i].ResetBuffSurvivalRoundCount();
-            }
-        }
-    }
+    //public void RefershtBuffDurationRound(int buffid)
+    //{
+    //    for (int i = 0; i < NoneBuffList.Count; i++)
+    //    {
+    //        if (NoneBuffList[i].Buffid == buffid)
+    //        {
+    //            NoneBuffList[i].ResetBuffSurvivalRoundCount();
+    //        }
+    //    }
+    //}
     public void ClearBuff()
     {
-        for (int i = haveBuffList.Count - 1; i >= 0; i--)
+        for (int i = NoneBuffList.Count - 1; i >= 0; i--)
         {
-            haveBuffList[i].OnDestroy();
+            NoneBuffList[i].OnDestroy();
+        }
+        for (int i = BuffList.Count - 1; i >= 0; i--)
+        {
+            BuffList[i].OnDestroy();
+        }
+        for (int i = DeBuffList.Count - 1; i >= 0; i--)
+        {
+            DeBuffList[i].OnDestroy();
         }
     }
     /// <summary>
@@ -298,9 +405,17 @@ public class FightUnitLogic : LogicObject
     /// </summary>
     public void OnMoveActionEnd()
     {
-        for (int i = 0; i < haveBuffList.Count; i++)
+        for (int i = 0; i < NoneBuffList.Count; i++)
         {
-            haveBuffList[i].ActionEndEvent();
+            NoneBuffList[i].ActionEndEvent();
+        }
+        for (int i = 0; i < BuffList.Count; i++)
+        {
+            BuffList[i].ActionEndEvent();
+        }
+        for (int i = 0; i < DeBuffList.Count; i++)
+        {
+            DeBuffList[i].ActionEndEvent();
         }
         ActionEnd();
     }
@@ -359,7 +474,7 @@ public class FightUnitLogic : LogicObject
     /// </summary>
     public void AttriAddBuff(BUFFATKType BuffState,int Value,bool isPercent)
     {
-        VInt RealValue = new VInt(100);
+        VInt RealValue;
         switch (BuffState)
         {
             case BUFFATKType.HP:
@@ -830,6 +945,18 @@ public class FightUnitLogic : LogicObject
         HeroRender.UpdateHP_HUD(damagehp.RawInt, hp.RawInt, hpValue, buffCfg);
 #endif
 
+    }
+    /// <summary>
+    /// 被闪避
+    /// </summary>
+    public void BeEvade()
+    {
+    }
+    /// <summary>
+    /// 被攻击无效
+    /// </summary>
+    public void BeInvalidByAttack()
+    {
     }
     public void HeroDeath()
     {

@@ -73,7 +73,7 @@ public class NewBattleWorld
         while (mAccumulatedLoigcRunTime > mNextLogicFrameTime)
         {
             //更新逻辑帧显示
-            BattleWordNodes.Instance.roundWindow.UpdateLogicFrameCount();
+            //BattleWordNodes.Instance.roundWindow.UpdateLogicFrameCount();
 
             //一个逻辑帧
             LogicFrameUpdate();
@@ -105,7 +105,7 @@ public class NewBattleWorld
         ActionManager.Instance.OnLogicFrameUpdate();
         LogicTimeManager.Instance.OnLogicFrameUpdate();
         //BulletManager.Instance.OnLogicFrameUpdate();
-        BuffsManager.Instance.OnLogicFrameUpdate();
+        NewBuffsManager.Instance.OnLogicFrameUpdate();
     }
     public void PauseBattle()
     {

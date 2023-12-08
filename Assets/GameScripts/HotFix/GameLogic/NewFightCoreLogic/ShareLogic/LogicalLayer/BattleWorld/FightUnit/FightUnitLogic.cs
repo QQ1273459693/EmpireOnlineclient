@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
+using static NewBattleDataCalculatConter;
 
 public enum NewAnimState
 {
@@ -92,6 +93,8 @@ public class FightUnitLogic : LogicObject
     public int SeatID => HeroData.SeatId;
     public FightUnitData HeroData { get; private set; }
     public HeroTeamEnum HeroTeam { get; private set; }
+    public string Name { get; private set; }
+    public int WeaponType { get; private set; }
 #if RENDER_LOGIC
     public FightUnitRender HeroRender { get { return (FightUnitRender)RenderObj; } }
 #endif
@@ -112,6 +115,8 @@ public class FightUnitLogic : LogicObject
     public FightUnitLogic(FightUnitData heroData, HeroTeamEnum heroTeam)
     {
         HeroData = heroData;
+        Name=heroData.Name;
+        WeaponType=heroData.WeaponType;
         HeroTeam = heroTeam;
         MAXHP = heroData.MaxHp;
         MAXMP = heroData.MaxMp;
@@ -152,15 +157,30 @@ public class FightUnitLogic : LogicObject
     {
         base.BeginAction(isAutoSkill, unitActionEnum);
         //如果处于被控状态中，跳过当前回合动作
-        if (objectState == LogicObjectState.Death || IsBeContrl())
+        //先看有没有负面BUFF,这里负面BUFF优先级是定身最高,有定身和混乱的前提下会优先定身
+        if (objectState == LogicObjectState.Death|| GetBuffTypeByEnum(NewBuffType.IMMOBILIZE))
         {
-            //Debuger.Log("Hero Be Conterl No Release Skill Heroid:" + id + "roundid:" + CurRound);
             ActionEnd();
             return;
         }
+        else if(GetBuffTypeByEnum(NewBuffType.CHAOS))
+        {
+            //混乱中,全屏目标随机一个
+            List<FightUnitLogic> attackList = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.ALL);
+            attackList = NewBattleRule.GetHeroSurvivalList(attackList);
+            if (attackList.Count>0)
+            {
+                int Index=LogicRandom.Instance.Range(0, attackList.Count - 1);
+                CauseDamageFightUnitList(attackList[Index], (SkillReleaseType)WeaponType);
+            }
+            else
+            {
+                Log.Error("一个存活的也没有了");
+            } 
+        }
         if (!isAutoSkill)
         {
-            //说明还是自动技能回合
+            //说明还是自动技能回合,并且没有被封魔的情况下
             if (mPassSkillArr.Count>0)
             {
                 var SkillData = mPassSkillArr[RoundID % mPassSkillArr.Count];
@@ -177,6 +197,15 @@ public class FightUnitLogic : LogicObject
             switch (unitActionEnum)
             {
                 case UnitActionEnum.NormalAttack://普通攻击
+                    List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(SkillTarget.ALL, SkillRadiusType.SOLO, SeatID, TargetSeatID);
+                    if (logicslist.Count>0)
+                    {
+                        CauseDamageFightUnitList(logicslist[0], (SkillReleaseType)WeaponType);
+                    }
+                    else
+                    {
+                        Log.Error("一个存活的也没有了");
+                    }
                     break;
                 case UnitActionEnum.Skill://释放技能
                     var SkillData = mActiveSkillArr[RoundID % mActiveSkillArr.Count];
@@ -194,6 +223,42 @@ public class FightUnitLogic : LogicObject
         //float rate = (rage / MaxRage).RawFloat;
         //HeroRender.UpdateAnger_HUD(rate);
 #endif
+    }
+    /// <summary>
+    /// 对目标施展普通伤害
+    /// </summary>
+    /// <returns></returns>
+    void CauseDamageFightUnitList(FightUnitLogic fightUnitLogic, SkillReleaseType AttackType)
+    {
+        BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(AttackType, this, fightUnitLogic);
+        VInt damage;
+        switch (beAttack)
+        {
+            case BeAttackEnum.MeleeATK:
+                damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, this, fightUnitLogic);
+                fightUnitLogic.DamageHP(damage);
+                break;
+            case BeAttackEnum.MAGATK:
+                damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, this, fightUnitLogic);
+                fightUnitLogic.DamageHP(damage);
+                break;
+            case BeAttackEnum.CURSEATK:
+                break;
+            case BeAttackEnum.Invalid:
+                //无敌状态(无敌,物理无敌,魔法无敌)
+                fightUnitLogic.BeInvalidByAttack();
+                break;
+            case BeAttackEnum.Evade:
+                //被闪避了
+                fightUnitLogic.BeEvade();
+                break;
+            case BeAttackEnum.ELEMagicPenetrationAttack://元素魔法穿透
+                damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, this,fightUnitLogic);
+                fightUnitLogic.DamageHP(damage);
+                break;
+            case BeAttackEnum.CURSEMagicPenetrationAttack://诅咒魔法穿透
+                break;
+        }
     }
     /// <summary>
     /// 该单位行动结束
@@ -429,9 +494,9 @@ public class FightUnitLogic : LogicObject
     /// <returns></returns>
     public bool IsBeContrl()
     {
-        //for (int i = 0; i < haveBuffList.Count; i++)
+        //for (int i = 0; i < DeBuffList.Count; i++)
         //{
-        //    if (haveBuffList[i]. .BuffConfig.buffType == BuffType.Control)
+        //    if (DeBuffList[i].BuffConfig.buffState)
         //    {
         //        Debug.Log("BeContrl objectState:" + haveBuffList[i].objectState + "  SurvivalRound:" + haveBuffList[i].mCurBuffSurvivalRoundCount);
         //        return true;
@@ -467,7 +532,7 @@ public class FightUnitLogic : LogicObject
     }
     public void BuffDamage(VInt hp, BuffConfig buffCfg)
     {
-        DamageHP(hp, buffCfg);
+        DamageHP(hp);
     }
     /// <summary>
     /// 属性值增删
@@ -489,24 +554,12 @@ public class FightUnitLogic : LogicObject
                     //非百分比
                     RealValue = (VInt)Value;
                 }
-                if (Value > 0)
-                {
-                    //增
-                    hp += RealValue;
-                    if (hp>MAXHP)
-                    {
-                        hp = MAXHP;
-                    }
-                }
-                else
+                if (Value < 0)
                 {
                     //删
-                    hp -= RealValue;
-                    if (hp<0)
-                    {
-                        hp = 0;
-                    }
+                    RealValue *= -1;
                 }
+                DamageHP(RealValue);
                 break;
             case BUFFATKType.MP:
                 if (isPercent)
@@ -519,24 +572,12 @@ public class FightUnitLogic : LogicObject
                     //非百分比
                     RealValue = (VInt)Value;
                 }
-                if (Value > 0)
-                {
-                    //增
-                    mp += RealValue;
-                    if (mp > MAXMP)
-                    {
-                        mp = MAXMP;
-                    }
-                }
-                else
+                if (Value < 0)
                 {
                     //删
-                    mp -= RealValue;
-                    if (mp < 0)
-                    {
-                        mp = 0;
-                    }
+                    RealValue *= -1;
                 }
+                DamageMP(RealValue);
                 break;
             case BUFFATKType.MEATK:
                 if (isPercent)
@@ -919,32 +960,69 @@ public class FightUnitLogic : LogicObject
                 break;
         }
     }
-    public void DamageHP(VInt damagehp, BuffConfig buffCfg = null)
+    /// <summary>
+    /// 血量增删专用
+    /// </summary>
+    public void DamageHP(VInt damagehp)
     {
         if (damagehp==0)
         {
             return;
         }
-
-        hp -= damagehp;
-        if (hp <= 0)
+        if (damagehp>0)
         {
-            hp = 0;
-            //英雄死亡
-            HeroDeath();
-            return;
+            //增
+            hp += damagehp;
+            if (hp > MAXHP)
+            {
+                hp = MAXHP;
+            }
         }
         else
         {
-            //PlayAnim("BeAttack");
+            //删
+            hp -= damagehp;
+            if (hp < 0)
+            {
+                hp = 0;
+                HeroDeath();
+                return;
+            }
         }
         Log.Info($"战斗单位:{HeroData.Name},剩余血量:{hp}");
 #if RENDER_LOGIC
         //把伤害数值、血量的百分比传给渲染层 更新渲染数据
         float hpValue = hp.RawFloat / MAXHP.RawFloat;
-        HeroRender.UpdateHP_HUD(damagehp.RawInt, hp.RawInt, hpValue, buffCfg);
+        HeroRender.UpdateHP_HUD(damagehp.RawInt, hp.RawInt, hpValue);
 #endif
-
+    }
+    /// <summary>
+    /// 法力增删专用
+    /// </summary>
+    public void DamageMP(VInt damagehp)
+    {
+        if (damagehp == 0)
+        {
+            return;
+        }
+        if (damagehp > 0)
+        {
+            //增
+            mp += damagehp;
+            if (mp > MAXMP)
+            {
+                mp = MAXMP;
+            }
+        }
+        else
+        {
+            //删
+            mp -= damagehp;
+            if (mp < 0)
+            {
+                mp = 0;
+            }
+        }
     }
     /// <summary>
     /// 被闪避

@@ -115,7 +115,7 @@ public class NewBattleRule
                 case SkillRadiusType.SOLO://单人
                     for (int i = 0; i < herolist.Count; i++)
                     {
-                        if (herolist[i].SeatID == AttackSeatid)
+                        if (herolist[i].SeatID == TargetSeatid)
                         {
                             attackList.Add(herolist[i]);
                             break;
@@ -194,7 +194,7 @@ public class NewBattleRule
     /// <summary>
     /// 获取存活列表
     /// </summary>
-    private static List<FightUnitLogic> GetHeroSurvivalList(List<FightUnitLogic> herolist)
+    public static List<FightUnitLogic> GetHeroSurvivalList(List<FightUnitLogic> herolist)
     {
         List<FightUnitLogic> attackList = new List<FightUnitLogic>();
         foreach (var item in herolist)

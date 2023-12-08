@@ -12,7 +12,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     /// <summary>
     /// 最大回合id
     /// </summary>
-    public int MaxRoundID { get; private set; } = 15;
+    public int MaxRoundID { get; private set; } = 30;
     /// <summary>
     /// 英雄攻击队列
     /// </summary>
@@ -26,7 +26,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         mHeroLogicCtrl = NewBattleWorld.Instance.heroLogic;
         //回合开始
 #if CLIENT_LOGIC
-        BattleWordNodes.Instance.roundWindow.RoundStart();
+        //BattleWordNodes.Instance.roundWindow.RoundStart();
 #endif
         LogicTimeManager.Instance.DelayCall(2000, NextRoundStart);
     }
@@ -42,7 +42,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         RoundId++;
 #if CLIENT_LOGIC
         //显示下一关卡
-        BattleWordNodes.Instance.roundWindow.NextRound(RoundId);
+        //BattleWordNodes.Instance.roundWindow.NextRound(RoundId);
 #endif
         for (int i = 0; i < mHeroLogicCtrl.AllHeroList.Count; i++)
         {
@@ -92,7 +92,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         FightUnitLogic heroLogic = mHeroAttackQueue.Dequeue();
         Log.Info("开始行动 行动Heroid：" + heroLogic.HeroData.Name + " heroState:" + heroLogic.objectState);
         heroLogic.OnActionEndListener = HeroActionEnd;
-        heroLogic.BeginAction(isAutoSkillEnd);
+        heroLogic.BeginAction(isAutoSkillEnd,UnitActionEnum.Skill);
     }
     /// <summary>
     /// 战斗单位行动结束
@@ -110,7 +110,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         if (mHeroLogicCtrl.HerosIsDeath(HeroTeamEnum.Self))
         {
 #if CLIENT_LOGIC
-            HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
+            //HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
 #endif
             //BattleWorld.Instance.BattleEnd(false);
             //enemy Win

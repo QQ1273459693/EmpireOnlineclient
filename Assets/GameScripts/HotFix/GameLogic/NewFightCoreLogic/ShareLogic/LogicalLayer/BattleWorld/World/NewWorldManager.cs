@@ -24,7 +24,6 @@ public class NewWorldManager
         List<FightUnitData> playerHeroList = new List<FightUnitData>();
         List<FightUnitData> enemyHeroList = new List<FightUnitData>();
 
-
         //for (int i = 0; i < 3; i++)
         //{
 
@@ -48,10 +47,7 @@ public class NewWorldManager
     }
     public static void Update()
     {
-        if (mBattleWorld != null)
-        {
-            mBattleWorld.Update(); 
-        }
+        mBattleWorld?.Update();
     }
 
     public static void CreateBattleWord(List<FightUnitData> herolist, List<FightUnitData> enemylist,System.Action<NewBattleWorld> battleEndCallBack =null)

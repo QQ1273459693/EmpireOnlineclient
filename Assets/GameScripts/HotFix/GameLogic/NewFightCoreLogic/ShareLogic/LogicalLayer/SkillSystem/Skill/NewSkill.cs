@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using TEngine;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 using static NewBattleDataCalculatConter;
 
 public class NewSkill
@@ -110,13 +108,21 @@ public class NewSkill
 //#endif
     }
     /// <summary>
-    /// 计算并造成伤害
+    /// 计算要施展的目标列表
     /// </summary>
     /// <returns></returns>
     public List<FightUnitLogic> CalculationAndCauseDamage()
     {
         List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(mSkillCfg.SkillTarget, mSkillCfg.SkillRadiusType, mSkillOwner.SeatID, mSkillOwner.TargetSeatID);
-
+        CauseDamageFightUnitList(logicslist);
+        return logicslist;
+    }
+    /// <summary>
+    /// 对目标列表施展伤害技能并附加技能BUFF
+    /// </summary>
+    /// <returns></returns>
+    void CauseDamageFightUnitList(List<FightUnitLogic> logicslist)
+    {
         foreach (var item in logicslist)
         {
             BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(mSkillCfg.SkillReleaseType, mSkillOwner, item);
@@ -127,12 +133,12 @@ public class NewSkill
                     AdditionBuffToTargets(item);
                     break;
                 case BeAttackEnum.MeleeATK:
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack,mSkillOwner, item);
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
                     item.DamageHP(damage);
                     AdditionBuffToTargets(item);
                     break;
                 case BeAttackEnum.MAGATK:
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack,mSkillOwner, item);
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
                     item.DamageHP(damage);
                     AdditionBuffToTargets(item);
                     break;
@@ -156,23 +162,6 @@ public class NewSkill
                     break;
             }
         }
-        foreach (var item in logicslist)
-        {
-            VInt damage = NewBattleDataCalculatConter.CalculatDamage(mSkillCfg, mSkillOwner,item);
-            //if (damage != 0)
-            //{
-            //    if (mSkillCfg.roleTragetType == RoleTargetType.Teammate)
-            //    {
-            //        item.DamageHP(-damage);
-            //    }
-            //    else
-            //    {
-            //        item.DamageHP(damage);
-            //    }
-            //    Debuger.Log("damage:" + damage.RawInt);
-            //}
-        }
-        return logicslist;
     }
     /// <summary>
     /// 附加BUFF给对象列表

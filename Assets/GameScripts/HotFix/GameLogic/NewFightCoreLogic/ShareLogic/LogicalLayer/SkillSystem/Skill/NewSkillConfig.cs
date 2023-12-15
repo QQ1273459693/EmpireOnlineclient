@@ -24,6 +24,7 @@ public class NewSkillConfig
     /// </summary>
     public NewSkillConfig(int SkillBaseType,int ID,int SkillLv)
     {
+        Skillid = ID;
         switch (SkillBaseType)
         {
             case 1:
@@ -34,7 +35,7 @@ public class NewSkillConfig
                     Log.Error("剑士表读取错误,没有这个ID!:"+ Skillid);
                     return;
                 }
-                Skillid = ID;
+                
                 Lv = SkillLv;
                 if (Lv>= SkillBase.Name.Count)
                 {
@@ -89,7 +90,6 @@ public class NewSkillConfig
                     Log.Error("怪物表读取错误,没有这个ID!:" + Skillid);
                     return;
                 }
-                Skillid = ID;
                 Lv = SkillLv;
                 SkillName = EnemySkillBase.Name;
                 SkillDes = EnemySkillBase.Des;

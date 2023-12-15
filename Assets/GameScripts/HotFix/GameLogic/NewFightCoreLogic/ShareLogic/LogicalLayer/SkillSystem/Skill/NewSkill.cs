@@ -24,13 +24,15 @@ public class NewSkill
         {
             Log.Error("技能配置不存在 技能id"+ skillid);
         }
+        else
+        {
+            Log.Info("技能配置加载成功!:"+ skillid);
+        }
     }
     public void ReleaseSkill()
     {
         if (mSkillCfg == null)
             return;
-
-
         Log.Info("释放技能" + mSkillCfg.SkillName);
         PlayAnimation(TriggerSkill);
         //if (mSkillCfg.skillType == SkillType.MoveToAttack || mSkillCfg.skillType == SkillType.MoveToEnemyConter || mSkillCfg.skillType == SkillType.MoveToConter)//移动攻击形技能
@@ -200,7 +202,7 @@ public class NewSkill
         //{
         //    heroHPStr += mHeroLogicCtrl.AllHeroList[i].id + " Hero HP:" + mHeroLogicCtrl.AllHeroList[i].HP + "    怒气值:" + mHeroLogicCtrl.AllHeroList[i].Rage + "\n";
         //}
-        //Log.Info("技能释放完成：" + mSkillCfg.skillid + "\n所有英雄怒气值：\n" + heroHPStr);
+        Log.Info("技能释放完成：" + mSkillCfg.SkillName);
 
         //Debuger.Log("技能释放完成：" + mSkillCfg.skillid);
         mSkillOwner.OnMoveActionEnd();
@@ -208,3 +210,4 @@ public class NewSkill
 
 
 }
+ 

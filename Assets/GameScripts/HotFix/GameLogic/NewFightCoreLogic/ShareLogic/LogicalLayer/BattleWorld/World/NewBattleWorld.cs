@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 public class NewBattleWorld
@@ -100,12 +101,12 @@ public class NewBattleWorld
     }
     public void LogicFrameUpdate()
     {
-        //Debuger.Log("LogicFrameid:"+FrameSyncConfig.LogicFrameid + " mNextLogicFrameTime:"+ mNextLogicFrameTime);
+        Log.Debug("当前帧数:"+FrameSyncConfig.LogicFrameid + " 下一次逻辑帧时间:"+ mNextLogicFrameTime);
         heroLogic?.OnLogicFrameUpdate();
         ActionManager.Instance.OnLogicFrameUpdate();
         LogicTimeManager.Instance.OnLogicFrameUpdate();
         //BulletManager.Instance.OnLogicFrameUpdate();
-        NewBuffsManager.Instance.OnLogicFrameUpdate();
+        //NewBuffsManager.Instance.OnLogicFrameUpdate();
     }
     public void PauseBattle()
     {
@@ -145,8 +146,8 @@ public class NewBattleWorld
         //BattleWordNodes.Instance.battleResultWindow.SetBattleRsult(result.isWin);
 #endif
         DestroyWorld();
-        BuffsManager.Instance.OnDestroy();
-        SkillManager.Instance.OnDestroy();
+        NewBuffsManager.Instance.OnDestroy();
+        NewSkillManager.Instance.OnDestroy();
     }
  
     public void DestroyWorld()
@@ -154,8 +155,8 @@ public class NewBattleWorld
 
         heroLogic.OnDestroy();
         roundLoigc.OnDestroy();
-        BuffsManager.Instance.OnDestroy();
-        SkillManager.Instance.OnDestroy();
+        NewBuffsManager.Instance.OnDestroy();
+        NewSkillManager.Instance.OnDestroy();
         LogicTimeManager.Instance.OnDestroy();
     }
 }

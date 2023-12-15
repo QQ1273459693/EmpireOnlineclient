@@ -1,4 +1,6 @@
 ﻿using GameBase;
+using TEngine;
+
 public class NewSkillManager : Singleton<NewSkillManager>, ILogicBehaviour
 {
     
@@ -18,7 +20,6 @@ public class NewSkillManager : Singleton<NewSkillManager>, ILogicBehaviour
     public NewSkill ReleaseSkill(FightUnitSkill fightUnitSkill, LogicObject skillOwner)
     {
         NewSkill skill = new NewSkill(fightUnitSkill.SkillBaseTypeID, fightUnitSkill.SkID, fightUnitSkill.Lv, skillOwner);
-
         skill.ReleaseSkill();
         return skill;
     }

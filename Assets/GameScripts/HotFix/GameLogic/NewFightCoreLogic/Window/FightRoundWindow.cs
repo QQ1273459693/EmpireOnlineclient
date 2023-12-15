@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace GameLogic
 {
-    public class FightRoundWindow : MonoBehaviour
+    public class FightRoundWindow : SingletonMono<FightRoundWindow>
     {
         public Camera Camera3D;
         public Camera UiCamera;
@@ -17,9 +17,14 @@ namespace GameLogic
         public List<GameObject> LeftFightUnitList;
         public List<GameObject> RightFightUnitList;
         public Transform m_TestUI;
+
+
+
         // Start is called before the first frame update
         void Start()
         {
+            NewWorldManager.Initialize();
+            return;
             Vector3 ScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera3D, m_TestUI.position);
             //LeftFightUnitList[i].transform.position = worldPosition;
             Vector3 vector3 = new Vector3(544.68F, 467.85F,0);
@@ -97,10 +102,11 @@ namespace GameLogic
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("×ø±êÊÇ:" + Input.mousePosition);
-            }
+            NewWorldManager.Update();
+        }
+        private void OnDestroy()
+        {
+            NewWorldManager.DestroyWorld();
         }
     }
 }

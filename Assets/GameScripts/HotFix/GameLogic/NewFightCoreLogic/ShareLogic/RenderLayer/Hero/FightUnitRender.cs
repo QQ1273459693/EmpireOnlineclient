@@ -11,12 +11,11 @@ using System;
 public class FightUnitRender : RenderObject
 {
     public FightUnitData HeroData { get; private set; }
-    public HeroTeamEnum heroTeam;
+    public FightUnitTeamEnum heroTeam;
     //SpineAnimBox spineAnimBox;//骨骼模型
-    PixelHeroBox pixelHeroBox;//像素模型
-    Image m_HpFill;
+    FightUnitBox pixelHeroBox;//像素模型
 
-    public void SetHeroData(FightUnitData heroData, HeroTeamEnum heroTeam)
+    public void SetHeroData(FightUnitData heroData, FightUnitTeamEnum heroTeam)
     {
         this.HeroData = heroData;
         this.heroTeam = heroTeam;
@@ -25,10 +24,11 @@ public class FightUnitRender : RenderObject
     
     public void Initlizate()
     {
-        pixelHeroBox= GameModule.ObjectPool.GetObjectPool<PixelHeroBox>().Spawn();
+        //注意 这里的GameObject是UI格子位置,非战斗单位gameobject
+        pixelHeroBox= GameModule.ObjectPool.GetObjectPool<FightUnitBox>().Spawn();
         pixelHeroBox.Initialize(gameObject.transform);
-        pixelHeroBox.RefreshData(ConfigLoader.Instance.Tables.TbEnemySpine.DataMap[HeroData.ID].PixelResName, heroTeam == HeroTeamEnum.Self);
-
+        pixelHeroBox.RefreshData(HeroData.ResName, heroTeam == FightUnitTeamEnum.Self, HeroData.Hp, HeroData.MaxHp);
+        gameObject = pixelHeroBox.GO;//这里才是真的战斗单位渲染OBJ
 
         //spineAnimBox = GameModule.ObjectPool.GetObjectPool<SpineAnimBox>().Spawn();
         //spineAnimBox.IntObj(gameObject);
@@ -59,41 +59,41 @@ public class FightUnitRender : RenderObject
 
     public void UpdateHP_HUD(int damage, float hpRateValue, float Hpfill,BuffConfig buffCfg=null)
     {
-        if (damage != 0)
-        {
-            var DamageBox = GameModule.ObjectPool.GetObjectPool<HudDamageTipsPool>().Spawn();
-            DamageBox.Init();
-            //Debuger.LogError($"看下物体名称:{spineAnimBox.GO.name},目标位置:{spineAnimBox.m_HudPos}");
-            DamageBox.AdjustPos(damage, pixelHeroBox.m_HudPos /*spineAnimBox.m_HudPos*/, buffCfg);
-            m_HpFill.DOFillAmount(Hpfill, 0.45F);
-        }
-        else
-        {
-            //第一次加载HUD
-            Vector3 tmpVec31 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, pixelHeroBox.m_HudPos  /*spineAnimBox.m_HudPos*/);
+        //if (damage != 0)
+        //{
+        //    var DamageBox = GameModule.ObjectPool.GetObjectPool<HudDamageTipsPool>().Spawn();
+        //    DamageBox.Init();
+        //    //Debuger.LogError($"看下物体名称:{spineAnimBox.GO.name},目标位置:{spineAnimBox.m_HudPos}");
+        //    DamageBox.AdjustPos(damage, pixelHeroBox.m_HudPos /*spineAnimBox.m_HudPos*/, buffCfg);
+        //    m_HpFill.DOFillAmount(Hpfill, 0.45F);
+        //}
+        //else
+        //{
+        //    //第一次加载HUD
+        //    Vector3 tmpVec31 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, pixelHeroBox.m_HudPos  /*spineAnimBox.m_HudPos*/);
 
-            RectTransform HpObj = heroTeam == HeroTeamEnum.Self ? BattleWordNodes.Instance.heroUIHpFill[HeroData.SeatId] : BattleWordNodes.Instance.enemyUIHpFill[HeroData.SeatId];
+        //    RectTransform HpObj = heroTeam == FightUnitTeamEnum.Self ? BattleWordNodes.Instance.heroUIHpFill[HeroData.SeatId] : BattleWordNodes.Instance.enemyUIHpFill[HeroData.SeatId];
 
-            m_HpFill = HpObj.transform.Find("Image").GetComponent<Image>();
-            m_HpFill.fillAmount = 1;
-            HpObj.gameObject.SetActive(true);
+        //    m_HpFill = HpObj.transform.Find("Image").GetComponent<Image>();
+        //    m_HpFill.fillAmount = 1;
+        //    HpObj.gameObject.SetActive(true);
 
-            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(HpObj, tmpVec31, BattleWordNodes.Instance.UiCamera, out tmpVec31))
-            {
-                HpObj.transform.position = tmpVec31;
-            }
-        }
+        //    if (RectTransformUtility.ScreenPointToWorldPointInRectangle(HpObj, tmpVec31, BattleWordNodes.Instance.UiCamera, out tmpVec31))
+        //    {
+        //        HpObj.transform.position = tmpVec31;
+        //    }
+        //}
         pixelHeroBox.UpdateHp_Hud(damage, hpRateValue);
         //spineAnimBox.UpdateHp_Hud(damage, hpRateValue);
 
         //生成Buff伤害提示
-        if (buffCfg != null)
-        {
-            BuffTextItem buffDamageTex = null;//ResourcesManager.Instance.LoadObject<BuffTextItem>("Prefabs/HUD/DeBuffItemText", BattleWordNodes.Instance.HUDWindow);
-            //buffDamageTex.transform.localPosition = new Vector3(pos.x, pos.y  );
-            //buffDamageTex.transform.localScale = Vector3.one;
-            //buffDamageTex.PlaybuffDamageAnim(buffCfg);
-        }
+        //if (buffCfg != null)
+        //{
+        //    BuffTextItem buffDamageTex = null;//ResourcesManager.Instance.LoadObject<BuffTextItem>("Prefabs/HUD/DeBuffItemText", BattleWordNodes.Instance.HUDWindow);
+        //    //buffDamageTex.transform.localPosition = new Vector3(pos.x, pos.y  );
+        //    //buffDamageTex.transform.localScale = Vector3.one;
+        //    //buffDamageTex.PlaybuffDamageAnim(buffCfg);
+        //}
     }
     public void Add_BuffIcon(BuffConfig buffcfg)
     {
@@ -115,12 +115,12 @@ public class FightUnitRender : RenderObject
     {
         pixelHeroBox.UpdateHp_Hud(0,0);
         //spineAnimBox.UpdateHp_Hud(0, 0);
-        m_HpFill.DOFillAmount(0, 0.45F).OnComplete(() =>
-        {
-            m_HpFill.transform.parent.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-        });
-
+        //m_HpFill.DOFillAmount(0, 0.45F).OnComplete(() =>
+        //{
+        //    m_HpFill.transform.parent.gameObject.SetActive(false);
+        //    gameObject.SetActive(false);
+        //});
+        gameObject.SetActive(false);
     }
 
     public override void OnRelease()

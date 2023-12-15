@@ -8,11 +8,12 @@ public class FightUnitSkill
     public int RaceID { get; set; }
     public int SkillType { get; set; }
     public int Lv { get; set; }
-    public FightUnitSkill(int ID,int mRaceID,int mSkillType,int mLv)
+    public FightUnitSkill(int ID,int mRaceID,int mSkillType,int mLv,int TypeID=1)
     {
         SkID=ID;
         RaceID=mRaceID;
         SkillType=mSkillType;
         Lv=mLv;
+        SkillBaseTypeID = TypeID;
     }
 }

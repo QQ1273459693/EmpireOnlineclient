@@ -39,7 +39,7 @@ namespace GameConfig.BUFF
         /// <summary>
         /// 定身
         /// </summary>
-        DEBUFF_LMBE = 7,
+        DEBUFF_IMMOBILIZE = 7,
         /// <summary>
         /// 混乱
         /// </summary>

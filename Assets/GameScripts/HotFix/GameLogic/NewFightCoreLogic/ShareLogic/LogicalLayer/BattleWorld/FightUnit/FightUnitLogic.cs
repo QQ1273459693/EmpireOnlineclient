@@ -92,7 +92,7 @@ public class FightUnitLogic : LogicObject
     public int ID => HeroData.ID;
     public int SeatID => HeroData.SeatId;
     public FightUnitData HeroData { get; private set; }
-    public HeroTeamEnum HeroTeam { get; private set; }
+    public FightUnitTeamEnum UnitTeam { get; private set; }
     public string Name { get; private set; }
     public int WeaponType { get; private set; }
 #if RENDER_LOGIC
@@ -112,12 +112,12 @@ public class FightUnitLogic : LogicObject
     public int TargetSeatID;//本回合点击目标单位ID
     public int MaxBUFFCount=3;//减益和增益buff列表最大数量
 
-    public FightUnitLogic(FightUnitData heroData, HeroTeamEnum heroTeam)
+    public FightUnitLogic(FightUnitData heroData, FightUnitTeamEnum heroTeam)
     {
         HeroData = heroData;
         Name=heroData.Name;
         WeaponType=heroData.WeaponType;
-        HeroTeam = heroTeam;
+        UnitTeam = heroTeam;
         MAXHP = heroData.MaxHp;
         MAXMP = heroData.MaxMp;
         hp = heroData.Hp;
@@ -160,7 +160,7 @@ public class FightUnitLogic : LogicObject
         //先看有没有负面BUFF,这里负面BUFF优先级是定身最高,有定身和混乱的前提下会优先定身
         if (objectState == LogicObjectState.Death|| GetBuffTypeByEnum(NewBuffType.IMMOBILIZE))
         {
-            ActionEnd();
+            OnMoveActionEnd();
             return;
         }
         else if(GetBuffTypeByEnum(NewBuffType.CHAOS))
@@ -176,24 +176,33 @@ public class FightUnitLogic : LogicObject
             else
             {
                 Log.Error("一个存活的也没有了");
-            } 
+            }
+            OnMoveActionEnd();
+            return;
         }
+        bool SkillSilent = GetBuffTypeByEnum(NewBuffType.SKILL_SILENT);
         if (!isAutoSkill)
         {
             //说明还是自动技能回合,并且没有被封魔的情况下
-            if (mPassSkillArr.Count>0)
+            if (mPassSkillArr.Count>0&& !SkillSilent)
             {
                 var SkillData = mPassSkillArr[RoundID % mPassSkillArr.Count];
+                Log.Info("到这里了");
                 NewSkillManager.Instance.ReleaseSkill(SkillData, this);
             }
             else
             {
-                ActionEnd();
+                if (SkillSilent)
+                {
+                    //被封魔了
+                }
+                OnMoveActionEnd();
             }
         }
         else
         {
             //已经到主动回合了
+            Log.Info("到这里了FFFFF");
             switch (unitActionEnum)
             {
                 case UnitActionEnum.NormalAttack://普通攻击
@@ -206,14 +215,25 @@ public class FightUnitLogic : LogicObject
                     {
                         Log.Error("一个存活的也没有了");
                     }
+                    OnMoveActionEnd();
                     break;
                 case UnitActionEnum.Skill://释放技能
-                    var SkillData = mActiveSkillArr[RoundID % mActiveSkillArr.Count];
-                    NewSkillManager.Instance.ReleaseSkill(SkillData, this);
+                    if (!SkillSilent)
+                    {
+                        var SkillData = mActiveSkillArr[RoundID % mActiveSkillArr.Count];
+                        NewSkillManager.Instance.ReleaseSkill(SkillData, this);
+                    }
+                    else
+                    {
+                        //被封魔了
+                        OnMoveActionEnd();
+                    }
                     break;
                 case UnitActionEnum.Defense://防御
+                    OnMoveActionEnd();
                     break;
                 case UnitActionEnum.Escape://逃跑
+                    OnMoveActionEnd();
                     break;
             }
         }
@@ -267,6 +287,7 @@ public class FightUnitLogic : LogicObject
     {
         base.ActionEnd();
         RoundID++;
+        Log.Info("回合已经添加:"+RoundID);
         OnActionEndListener?.Invoke();
     }
 
@@ -1040,7 +1061,7 @@ public class FightUnitLogic : LogicObject
     {
 
         objectState = LogicObjectState.Death;
-        List<HeroLogic> heroLogicList = BattleWorld.Instance.heroLogic.AllHeroList;
+        List<FightUnitLogic> heroLogicList = NewBattleWorld.Instance.heroLogic.AllHeroList;
         int heroSvlCount = 0;
         foreach (var item in heroLogicList)
         {

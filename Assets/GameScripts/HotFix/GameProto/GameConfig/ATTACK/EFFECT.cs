@@ -53,25 +53,29 @@ namespace GameConfig.ATTACK
         /// </summary>
         ELMHIT = 10,
         /// <summary>
-        /// 闪避
+        /// 诅咒命中
         /// </summary>
-        EVADE = 11,
+        CURSEHIT = 11,
+        /// <summary>
+        /// 魔法穿透
+        /// </summary>
+        MagicPenetration = 12,
         /// <summary>
         /// 出手速度
         /// </summary>
-        SPEED = 12,
+        SPEED = 13,
         /// <summary>
         /// 暴击
         /// </summary>
-        CRITHIT = 13,
+        CRITHIT = 14,
         /// <summary>
         /// 强韧
         /// </summary>
-        TOUGH = 14,
+        TOUGH = 15,
         /// <summary>
         /// 破甲
         /// </summary>
-        ARMRBK = 15,
+        ARMRBK = 16,
     }
 
 } 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameLogic;
+using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
@@ -18,8 +19,8 @@ public class FightUnitLogicCtrl : ILogicBehaviour
         mHeroList = new List<FightUnitLogic>();
         mEnemyList = new List<FightUnitLogic>();
 #if CLIENT_LOGIC
-        CreateHerosByList(herolist, mHeroList, BattleWordNodes.Instance.heroTransArr, HeroTeamEnum.Self);
-        CreateHerosByList(enemylist, mEnemyList, BattleWordNodes.Instance.enemyTransArr, HeroTeamEnum.Enemy);
+        CreateHerosByList(herolist, mHeroList, FightRoundWindow.Instance.LeftPosRect, FightUnitTeamEnum.Self);
+        CreateHerosByList(enemylist, mEnemyList, FightRoundWindow.Instance.RightPosRect, FightUnitTeamEnum.Enemy);
 
 #else
         CreateHerosByList(herolist, mHeroList, null, HeroTeamEnum.Self);
@@ -32,18 +33,18 @@ public class FightUnitLogicCtrl : ILogicBehaviour
        /// <summary>
     /// 通过数据列表创建英雄
     /// </summary>
-    public void CreateHerosByList(List<FightUnitData> herolist, List<FightUnitLogic> herologiclist, Transform[] parents, HeroTeamEnum heroTeam)
+    public void CreateHerosByList(List<FightUnitData> herolist, List<FightUnitLogic> herologiclist, List<Transform> parents, FightUnitTeamEnum TeamEnum)
     {
         //初始化英雄
         foreach (var heroData in herolist)
         {
             Log.Info("初始化-------战斗单位ID:"+heroData.ID);
-            FightUnitLogic heroLogic = new FightUnitLogic(heroData, heroTeam);
+            FightUnitLogic heroLogic = new FightUnitLogic(heroData, TeamEnum);
 #if RENDER_LOGIC
             FightUnitRender heroRender = new FightUnitRender();
             heroRender.SetLogicObject(heroLogic, parents[heroData.SeatId].gameObject);
             heroLogic.SetRenderObject(heroRender);
-            heroRender.SetHeroData(heroData, heroTeam);
+            heroRender.SetHeroData(heroData, TeamEnum);
 
 #endif
             heroLogic.OnCreate();
@@ -86,10 +87,10 @@ public class FightUnitLogicCtrl : ILogicBehaviour
     }
 
 
-    public bool HerosIsDeath(HeroTeamEnum team)
+    public bool HerosIsDeath(FightUnitTeamEnum team)
     {
-        Debuger.Log("HeroIsDeath:"+ "mHeroList.Count" + mHeroList.Count +"  enemyCount:"+mEnemyList.Count);
-        List<FightUnitLogic> herolist = team == HeroTeamEnum.Self ? mHeroList : mEnemyList;
+        Log.Info("HeroIsDeath:"+ "mHeroList.Count" + mHeroList.Count +"  enemyCount:"+mEnemyList.Count);
+        List<FightUnitLogic> herolist = team == FightUnitTeamEnum.Self ? mHeroList : mEnemyList;
         for (int i = 0; i < herolist.Count; i++)
         {
             if (herolist[i].objectState!= LogicObjectState.Death)

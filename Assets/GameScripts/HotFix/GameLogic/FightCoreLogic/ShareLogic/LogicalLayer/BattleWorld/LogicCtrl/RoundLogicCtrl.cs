@@ -35,14 +35,14 @@ public class RoundLogicCtrl : ILogicBehaviour
     /// </summary>
     public void NextRoundStart()
     {
-        if (BattleWorld.Instance.battleEnd)
+        if (NewBattleWorld.Instance.battleEnd)
         {
             return;
         }
         RoundId++;
 #if CLIENT_LOGIC
         //显示下一关卡
-        BattleWordNodes.Instance.roundWindow.NextRound(RoundId);
+        //BattleWordNodes.Instance.roundWindow.NextRound(RoundId);
 #endif
         for (int i = 0; i < mHeroLogicCtrl.AllHeroList.Count; i++)
         {
@@ -93,7 +93,6 @@ public class RoundLogicCtrl : ILogicBehaviour
     }
     public void HeroActionEnd()
     {
-        Log.Debug("此回合结束,开始下一回合:" + RoundId);
         StartNextHeroAttack();
     }
     /// <summary>

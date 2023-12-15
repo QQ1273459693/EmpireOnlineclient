@@ -26,6 +26,10 @@ public class FightUnitData
     /// </summary>
     public string Name { get; set; }
     /// <summary>
+    /// 资源名称
+    /// </summary>
+    public string ResName { get; set; }
+    /// <summary>
     /// 武器类型
     /// </summary>
     public int WeaponType { get; set; }

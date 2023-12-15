@@ -24,6 +24,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     public void OnCreate()
     {
         mHeroLogicCtrl = NewBattleWorld.Instance.heroLogic;
+        Log.Info("游戏战斗回合开始!");
         //回合开始
 #if CLIENT_LOGIC
         //BattleWordNodes.Instance.roundWindow.RoundStart();
@@ -68,7 +69,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     /// </summary>
     public void StartNextHeroAttack()
     {
-        if (CheckBattleIsOver() || NewBattleWorld.Instance.battleEnd)
+        if (CheckBattleIsOver() || NewBattleWorld.Instance.battleEnd|| RoundId>=MaxRoundID)
         {
             return;
         }
@@ -90,16 +91,16 @@ public class NewRoundLogicCtrl : ILogicBehaviour
             
         }
         FightUnitLogic heroLogic = mHeroAttackQueue.Dequeue();
-        Log.Info("开始行动 行动Heroid：" + heroLogic.HeroData.Name + " heroState:" + heroLogic.objectState);
+        Log.Info("开始行动 行动单位：" + heroLogic.HeroData.Name + " 单位状态:" + heroLogic.objectState);
         heroLogic.OnActionEndListener = HeroActionEnd;
-        heroLogic.BeginAction(isAutoSkillEnd,UnitActionEnum.Skill);
+        heroLogic.BeginAction(isAutoSkillEnd, UnitActionEnum.Skill);
     }
     /// <summary>
     /// 战斗单位行动结束
     /// </summary>
     public void HeroActionEnd()
     {
-        Log.Debug("此回合结束,开始下一回合:" + RoundId);
+        Log.Info("此回合结束,开始下一回合:" + RoundId);
         StartNextHeroAttack();
     }
     /// <summary>
@@ -107,7 +108,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     /// </summary>
     public bool CheckBattleIsOver()
     {
-        if (mHeroLogicCtrl.HerosIsDeath(HeroTeamEnum.Self))
+        if (mHeroLogicCtrl.HerosIsDeath(FightUnitTeamEnum.Self))
         {
 #if CLIENT_LOGIC
             //HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
@@ -118,7 +119,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
             return true;
         }
 
-        if (mHeroLogicCtrl.HerosIsDeath(HeroTeamEnum.Enemy))
+        if (mHeroLogicCtrl.HerosIsDeath(FightUnitTeamEnum.Enemy))
         {
 #if CLIENT_LOGIC
             //HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);

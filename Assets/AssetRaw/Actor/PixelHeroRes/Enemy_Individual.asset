@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fafcc6bd2ee94ebe9ac341b986e7a, type: 3}
+  m_Name: Enemy_Individual
+  m_EditorClassIdentifier: 
+  SpriteAnimations:
+  - Name: Attack
+    FPS: 15
+    Frames:
+    - {fileID: 530706828, guid: 118adae683a496649bd364420ebad443, type: 3}
+    - {fileID: 630541863, guid: 118adae683a496649bd364420ebad443, type: 3}
+    - {fileID: -963358738, guid: 118adae683a496649bd364420ebad443, type: 3}
+    - {fileID: 114968366, guid: 118adae683a496649bd364420ebad443, type: 3}
+    - {fileID: -955901843, guid: 118adae683a496649bd364420ebad443, type: 3}
+    SpriteAnimationType: 0
+  - Name: Hurt
+    FPS: 15
+    Frames:
+    - {fileID: 1527799098, guid: b226c66dd280d4843b5dfe8226806591, type: 3}
+    - {fileID: -1234055428, guid: b226c66dd280d4843b5dfe8226806591, type: 3}
+    - {fileID: 1219544160, guid: b226c66dd280d4843b5dfe8226806591, type: 3}
+    - {fileID: -1523656124, guid: b226c66dd280d4843b5dfe8226806591, type: 3}
+    SpriteAnimationType: 0
+  - Name: Move
+    FPS: 15
+    Frames:
+    - {fileID: -910190048, guid: eb3592957fc0fd143b9089f0e3ee04be, type: 3}
+    - {fileID: 676096601, guid: eb3592957fc0fd143b9089f0e3ee04be, type: 3}
+    - {fileID: 721786081, guid: eb3592957fc0fd143b9089f0e3ee04be, type: 3}
+    - {fileID: -828907872, guid: eb3592957fc0fd143b9089f0e3ee04be, type: 3}
+    SpriteAnimationType: 0
+  - Name: Idle
+    FPS: 15
+    Frames:
+    - {fileID: -1308436807, guid: 7707df9c20619bc41915cdee58310de6, type: 3}
+    - {fileID: 1797799742, guid: 7707df9c20619bc41915cdee58310de6, type: 3}
+    - {fileID: -350909974, guid: 7707df9c20619bc41915cdee58310de6, type: 3}
+    - {fileID: -293025968, guid: 7707df9c20619bc41915cdee58310de6, type: 3}
+    SpriteAnimationType: 0

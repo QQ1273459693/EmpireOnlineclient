@@ -19,8 +19,8 @@ public class FightUnitLogicCtrl : ILogicBehaviour
         mHeroList = new List<FightUnitLogic>();
         mEnemyList = new List<FightUnitLogic>();
 #if CLIENT_LOGIC
-        CreateHerosByList(herolist, mHeroList, FightRoundWindow.Instance.LeftPosRect, FightUnitTeamEnum.Self);
-        CreateHerosByList(enemylist, mEnemyList, FightRoundWindow.Instance.RightPosRect, FightUnitTeamEnum.Enemy);
+        CreateHerosByList(herolist, mHeroList, FightRoundWindow.Instance.LeftFightList, FightUnitTeamEnum.Self);
+        CreateHerosByList(enemylist, mEnemyList, FightRoundWindow.Instance.RightFightList, FightUnitTeamEnum.Enemy);
 
 #else
         CreateHerosByList(herolist, mHeroList, null, HeroTeamEnum.Self);

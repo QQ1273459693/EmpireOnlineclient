@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fafcc6bd2ee94ebe9ac341b986e7a, type: 3}
+  m_Name: Enemy_MimicChest
+  m_EditorClassIdentifier: 
+  SpriteAnimations:
+  - Name: Idle
+    FPS: 15
+    ActionFrame: -1
+    Frames:
+    - {fileID: -643674475, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: -395385221, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: -756869439, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: 662309123, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: 2025973654, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: 1694939145, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: -213808818, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    - {fileID: -817600841, guid: 117651f5c12429847a2f89f614b1303f, type: 3}
+    SpriteAnimationType: 0
+  - Name: Hurt
+    FPS: 15
+    ActionFrame: -1
+    Frames:
+    - {fileID: 1650999382, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 886158706, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: -1863079371, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 1986125037, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 895358448, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 1140024718, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 831780211, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    - {fileID: 1462752569, guid: 96edb55b9524cbf4f8d4029ac1440fc9, type: 3}
+    SpriteAnimationType: 1
+  - Name: Death
+    FPS: 15
+    ActionFrame: -1
+    Frames:
+    - {fileID: 53651260, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 13703735, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 438201948, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 1081960307, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 2119945966, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: -1159377977, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 1353987131, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 208751058, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 2135736722, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 909799970, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: 447006032, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    - {fileID: -647933602, guid: 2bb30efe0c1eb5d4196080671ac15b39, type: 3}
+    SpriteAnimationType: 0
+  - Name: Move
+    FPS: 15
+    ActionFrame: -1
+    Frames:
+    - {fileID: -1521968941, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: 516569813, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: -1720729734, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: 113761138, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: 222169800, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: -326305573, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: -979234170, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    - {fileID: 530260152, guid: 70018c74fd90f9b45a3beab97b30aad7, type: 3}
+    SpriteAnimationType: 0
+  - Name: Attack
+    FPS: 15
+    ActionFrame: 5
+    Frames:
+    - {fileID: -768663611, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -1754978177, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 511999719, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1586064076, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1646092342, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 172773091, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -1155975440, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1779358530, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 91773336, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -129949166, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 769918770, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1892593999, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -677199385, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    SpriteAnimationType: 1
+  - Name: AuxiliarySkill
+    FPS: 30
+    ActionFrame: -1
+    Frames:
+    - {fileID: -768663611, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -1754978177, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 511999719, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1586064076, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1646092342, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 172773091, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -1155975440, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1779358530, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 91773336, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -129949166, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 769918770, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: 1892593999, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    - {fileID: -677199385, guid: e63ed01bbc6fd1e4299706e1ce6e7b06, type: 3}
+    SpriteAnimationType: 0

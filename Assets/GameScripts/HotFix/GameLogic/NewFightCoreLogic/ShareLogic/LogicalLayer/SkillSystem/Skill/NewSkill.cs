@@ -1,6 +1,9 @@
-﻿using System;
+﻿using DG.Tweening;
+using GameLogic;
+using System;
 using System.Collections.Generic;
 using TEngine;
+using UnityEngine;
 using static NewBattleDataCalculatConter;
 
 public class NewSkill
@@ -59,9 +62,28 @@ public class NewSkill
     /// </summary>
     public void TriggerSkill()
     {
+        //这里当做测试目标
+
+        List<FightUnitLogic> attackList = new List<FightUnitLogic>();
+        List<FightUnitLogic> herolist = null;
+        if (mSkillOwner.UnitTeam== FightUnitTeamEnum.Self)
+        {
+            //是自己
+            herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.Enemy);
+        }
+        else
+        {
+            //是敌方
+            herolist = NewBattleWorld.Instance.heroLogic.GetHeroListByTeam(FightUnitTeamEnum.Self);
+        }
+        herolist = NewBattleRule.GetHeroSurvivalList(herolist);
+        Vector3 TargetPos= herolist[0].HeroRender.gameObject.transform.position;
+
+        //测试用
+
 
 #if CLIENT_LOGIC
-        CreateSkillEffect();//创建技能特效
+        //CreateSkillEffect();//创建技能特效
 #endif
         //先添加自身瞬时添加的buff
         for (int j = 0; j < mSkillCfg.SelfBuffList.Count; j++)
@@ -70,44 +92,131 @@ public class NewSkill
         }
         //先添加自身瞬时添加的buff
 
+        switch (mSkillCfg.SkillReleaseType)
+        {
+            case SkillReleaseType.SwordType://剑类攻击(近战)
+                switch (mSkillCfg.SkillRadiusType)
+                {
+                    case SkillRadiusType.ALL://移动到中心
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, FightRoundWindow.Instance.AttackCenter.position);
+                        break;
+                    case SkillRadiusType.CROSS://移动到目标范围
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, TargetPos);
+                        break;
+                    case SkillRadiusType.SOLO://移动到目标范围
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, TargetPos);
+                        break;
+                }
+                mSkillOwner.HeroRender.PlayUITips(1);
+                break;
+            case SkillReleaseType.Ranged_Combat://远程攻击
+                MoveTarget(() => {
+                    CauseDamageStart();
+                }, Vector3.zero);
+                mSkillOwner.HeroRender.PlayUITips(1);
+                break;
+            case SkillReleaseType.Close_Combat://近战攻击
+                switch (mSkillCfg.SkillRadiusType)
+                {
+                    case SkillRadiusType.ALL://移动到中心
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, FightRoundWindow.Instance.AttackCenter.position);
+                        break;
+                    case SkillRadiusType.CROSS://移动到目标范围
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, TargetPos);
+                        break;
+                    case SkillRadiusType.SOLO://移动到目标范围
+                        MoveTarget(() => {
+                            CauseDamageStart();
+                        }, TargetPos);
+                        break;
+                }
+                mSkillOwner.HeroRender.PlayUITips(1);
+                break;
+            case SkillReleaseType.Magic_Attack:
+                mSkillOwner.HeroRender.PlayUITips(2);
+                mSkillOwner.PlayAnim("Attack", () =>
+                {
+                    CauseDamageStart();
+                });
+                break;
+            case SkillReleaseType.Curse:
+                mSkillOwner.HeroRender.PlayUITips(2);
+                mSkillOwner.PlayAnim("Attack", () =>
+                {
+                    CauseDamageStart();
+                });
+                
+                break;
+            case SkillReleaseType.CURE:
+                mSkillOwner.HeroRender.PlayUITips(2);
+                mSkillOwner.PlayAnim("AuxiliarySkill");
+                CauseDamageStart();
+                break;
+            case SkillReleaseType.SUBSIDIARY:
+                mSkillOwner.HeroRender.PlayUITips(2);
+                mSkillOwner.PlayAnim("AuxiliarySkill");
+                CauseDamageStart();
+                break;
+        }
 
-        List<FightUnitLogic> attackTargetlist = CalculationAndCauseDamage(); //计算伤害并造成伤害
+        //List<FightUnitLogic> attackTargetlist = CalculationAndCauseDamage(); //计算伤害并造成伤害
 
 #if CLIENT_LOGIC
         //CreateSKillHitEffect(attackTargetlist);//创建技能击中特效
 #endif
         //AdditionBuffToTargets(attackTargetlist); //添加buff到攻击目标
-        SkillEnd();
+
+        LogicTimeManager.Instance.DelayCall(1700, () => { SkillEnd(); });
         //if (mSkillCfg.skillAttackDurationMS > 0)
         //    LogicTimeManager.Instance.DelayCall((VInt)mSkillCfg.skillAttackDurationMS, () => { MoveToSeat(SkillEnd); });
         //else
         //    MoveToSeat(SkillEnd);
     }
     /// <summary>
+    /// 移动完成开始造成伤害
+    /// </summary>
+    public void CauseDamageStart()
+    {
+        CalculationAndCauseDamage();
+        //SkillEnd();
+    }
+
+    public void MoveTarget(Action moveFinish,Vector3 TargetPos)
+    {
+#if CLIENT_LOGIC
+#endif
+        mSkillOwner.HeroRender.FightAnimMovePos(TargetPos, moveFinish);
+        //Debuger.Log("MoveAttackTarget : targetPos:" + targetPos.vec3 + " 移动目标id：" + ((HeroLogic)mSkillTarget).id + " 目标状态:" + ((HeroLogic)mSkillTarget).objectState);
+        //MoveToAction action = new MoveToAction(mSkillOwner, TargetPos, (VInt)mSkillCfg.skillShakeBeforeTimeMS, moveFinish);
+        //ActionManager.Instance.RunAction(action);
+    }
+    /// <summary>
     /// 创建技能特效
     /// </summary>
-    public void CreateSkillEffect()
+    public void CreateSkillEffect(FightUnitRender render)
     {
-//#if CLIENT_LOGIC
-//        if (!string.IsNullOrEmpty(mSkillCfg.skillEffect))
-//        {
-//            GameObject skillEffect = null;//ResourcesManager.Instance.LoadObject("Prefabs/SkillEffect/" + mSkillCfg.skillEffect);
-//            if (mSkillOwner.HeroTeam == HeroTeamEnum.Enemy)
-//            {
-//                Vector3 angle = skillEffect.transform.eulerAngles;
-//                angle.y = 180;
-//                skillEffect.transform.eulerAngles = angle;
-//            }
-//            if (mSkillCfg.skillAttackType == SkillAttackType.AllHero)
-//            {
-//                skillEffect.GetComponent<SkillEffect>().SetEffectPos(VInt3.zero);
-//            }
-//            else
-//            {
-//                skillEffect.GetComponent<SkillEffect>().SetEffectPos(mSkillOwner.LogicPosition);
-//            }
-//        }
-//#endif
+#if CLIENT_LOGIC
+        if (mSkillCfg.SkillVFXID>0)
+        {
+            var VFXBase=ConfigLoader.Instance.Tables.TBVFXSkillModelBase.Get(mSkillCfg.SkillVFXID);
+            if (VFXBase==null)
+            {
+                Log.Error("没有找到特效配置文件ID:"+ mSkillCfg.SkillVFXID);
+                return;
+            }
+            EFX_ParticleHelp.GenerParticle(VFXBase.ResName,render.m_Vector3Pos);
+        }
+#endif
     }
     /// <summary>
     /// 计算要施展的目标列表
@@ -115,7 +224,7 @@ public class NewSkill
     /// <returns></returns>
     public List<FightUnitLogic> CalculationAndCauseDamage()
     {
-        List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(mSkillCfg.SkillTarget, mSkillCfg.SkillRadiusType, mSkillOwner.SeatID, mSkillOwner.TargetSeatID);
+        List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(mSkillCfg.SkillTarget, mSkillCfg.SkillRadiusType,mSkillOwner);
         CauseDamageFightUnitList(logicslist);
         return logicslist;
     }
@@ -125,42 +234,61 @@ public class NewSkill
     /// <returns></returns>
     void CauseDamageFightUnitList(List<FightUnitLogic> logicslist)
     {
+        Log.Info("目标列表大小:"+ logicslist.Count);
         foreach (var item in logicslist)
         {
             BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(mSkillCfg.SkillReleaseType, mSkillOwner, item);
-            VInt damage;
+            int damage;
+            CreateSkillEffect(item.HeroRender);
             switch (beAttack)
             {
                 case BeAttackEnum.Auxiliary:
                     AdditionBuffToTargets(item);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}释放了---辅助BUFF");
                     break;
                 case BeAttackEnum.MeleeATK:
                     damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
                     item.DamageHP(damage);
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行近战攻击伤害---{damage}");
+                    AdditionBuffToTargets(item);
+                    break;
+                case BeAttackEnum.RangeATK:
+                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                    item.DamageHP(damage);
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行远程攻击伤害---{damage}");
                     AdditionBuffToTargets(item);
                     break;
                 case BeAttackEnum.MAGATK:
                     damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
                     item.DamageHP(damage);
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行魔法攻击伤害---{damage}");
                     AdditionBuffToTargets(item);
                     break;
                 case BeAttackEnum.CURSEATK:
                     AdditionBuffToTargets(item);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒攻击");
                     break;
                 case BeAttackEnum.Invalid:
                     //无敌状态(无敌,物理无敌,魔法无敌)
                     item.BeInvalidByAttack();
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}无敌状态");
                     break;
                 case BeAttackEnum.Evade:
                     //被闪避了
                     item.BeEvade();
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}被闪避");
                     break;
                 case BeAttackEnum.ELEMagicPenetrationAttack://元素魔法穿透
                     damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
                     item.DamageHP(damage);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行元素穿透魔法攻击伤害---{damage}");
                     break;
                 case BeAttackEnum.CURSEMagicPenetrationAttack://诅咒魔法穿透
                     AdditionBuffToTargets(item);
+                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒穿透魔法攻击伤害---");
                     break;
             }
         }

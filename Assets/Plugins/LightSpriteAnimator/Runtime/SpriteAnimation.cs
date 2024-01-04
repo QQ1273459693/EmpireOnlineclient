@@ -15,6 +15,7 @@ namespace GabrielBigardi.SpriteAnimator
     {
         public string Name = "";
         public int FPS = 0;
+        public int ActionFrame = -1;
         public List<Sprite> Frames = new();
         public SpriteAnimationType SpriteAnimationType = SpriteAnimationType.Looping;
     }

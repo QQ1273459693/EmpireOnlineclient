@@ -24,6 +24,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     public void OnCreate()
     {
         mHeroLogicCtrl = NewBattleWorld.Instance.heroLogic;
+        RoundId = 0;
         Log.Info("游戏战斗回合开始!");
         //回合开始
 #if CLIENT_LOGIC
@@ -36,7 +37,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     /// </summary>
     public void NextRoundStart()
     {
-        if (NewBattleWorld.Instance.battleEnd)
+        if (NewBattleWorld.Instance.battleEnd || RoundId >= MaxRoundID)
         {
             return;
         }
@@ -67,9 +68,9 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     /// <summary>
     /// 下一个战斗单位开始行动
     /// </summary>
-    public void StartNextHeroAttack()
+    public void StartNextHeroAttack(bool A=false)
     {
-        if (CheckBattleIsOver() || NewBattleWorld.Instance.battleEnd|| RoundId>=MaxRoundID)
+        if (CheckBattleIsOver() || NewBattleWorld.Instance.battleEnd)
         {
             return;
         }
@@ -88,7 +89,6 @@ public class NewRoundLogicCtrl : ILogicBehaviour
                 NextRoundStart();
                 return;
             }
-            
         }
         FightUnitLogic heroLogic = mHeroAttackQueue.Dequeue();
         Log.Info("开始行动 行动单位：" + heroLogic.HeroData.Name + " 单位状态:" + heroLogic.objectState);
@@ -101,7 +101,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     public void HeroActionEnd()
     {
         Log.Info("此回合结束,开始下一回合:" + RoundId);
-        StartNextHeroAttack();
+        StartNextHeroAttack(true);
     }
     /// <summary>
     /// 检测战斗是否结束

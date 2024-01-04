@@ -18,6 +18,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
         Id = _buf.ReadInt();
         Name = _buf.ReadString();
         Icon = _buf.ReadString();
+        VFXID = _buf.ReadInt();
         Des = _buf.ReadString();
         AttackType = (SKILL.TYPE)_buf.ReadInt();
         AttackParam = Tb.SwordSkill.SkillFontValue.DeserializeSkillFontValue(_buf);
@@ -42,6 +43,10 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
     /// 图标
     /// </summary>
     public string Icon { get; private set; }
+    /// <summary>
+    /// 技能特效ID
+    /// </summary>
+    public int VFXID { get; private set; }
     /// <summary>
     /// 技能描述
     /// </summary>
@@ -81,6 +86,7 @@ public sealed partial class EnemySkill :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "Name:" + Name + ","
         + "Icon:" + Icon + ","
+        + "VFXID:" + VFXID + ","
         + "Des:" + Des + ","
         + "AttackType:" + AttackType + ","
         + "AttackParam:" + AttackParam + ","

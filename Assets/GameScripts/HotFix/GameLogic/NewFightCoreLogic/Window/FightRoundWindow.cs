@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,33 @@ namespace GameLogic
         public List<Transform> LeftPosRect;
         public List<Transform> RightPosRect;
         public Transform Fight;
-
+        public List<Transform> FightList;
         public List<GameObject> LeftFightUnitList;
         public List<GameObject> RightFightUnitList;
-        public Transform m_TestUI;
+        public RectTransform m_TestUI;
 
+        public Transform AttackCenter;
+        public float Distance;
+        public float YDistance;
+        public Transform FightWorldCanvas;
 
+        public Transform LeftFightRoot;
+        public Transform LeftFightRoot_1;
+        public Transform RightFightRoot;
+        public Transform RightFightRoot_1;
+        public List<Transform> LeftFightList;
+        public List<Transform> LeftFightList_1;
+        public List<Transform> RightFightList;
+        public List<Transform> RightFightList_1;
+        public Transform FightUIRoot;
+        public RectTransform Canvas;
+        public GameObject ParticleSystemRoot;
+        public GameObject HUDTextSystemRoot;
 
         // Start is called before the first frame update
         void Start()
         {
+            
             NewWorldManager.Initialize();
             return;
             Vector3 ScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera3D, m_TestUI.position);
@@ -90,6 +108,120 @@ namespace GameLogic
             //    //    HpObj.transform.position = SS;
             //    //}
             //}   
+        }
+        public void SwitchFightPos(int LeftFightCount,int RightFightCount)
+        {
+            Vector2 min = Camera.main.ViewportToWorldPoint(Vector2.zero);
+            Vector2 max = Camera.main.ViewportToWorldPoint(Vector2.one);
+            float LeftX = min.x + Distance;
+            float RightX = max.x - Distance;
+            float Height = max.y - (YDistance * 2);
+            float YDis = max.y * 2 / FightList.Count;
+            float CenterPos = max.y;
+
+            Debug.Log($"ÆÁÄ»¿í:{Screen.width},¸ß:{Screen.height},×óÏÂ½Ç:{min},ÓÒÉÏ½Ç:{max}");
+            for (int i = 0; i < LeftFightList.Count; i++)
+            {
+                LeftFightList[i].gameObject.SetActive(true);
+            }
+            for (int i = 0; i < RightFightList.Count; i++)
+            {
+                RightFightList[i].gameObject.SetActive(true);
+            }
+            switch (LeftFightCount)
+            {
+                case 1:
+                    LeftFightList[0].position = new Vector3(LeftX, 0);
+                    //Òþ²Ø
+                    LeftFightList[1].gameObject.SetActive(false);
+                    LeftFightList[2].gameObject.SetActive(false);
+                    LeftFightList[3].gameObject.SetActive(false);
+                    LeftFightList[4].gameObject.SetActive(false);
+                    break;
+                case 2:
+                    float YD = Height / (float)3;
+                    LeftFightList[0].position = new Vector3(LeftX, YD);
+                    LeftFightList[1].position = new Vector3(LeftX, -YD);
+                    //Òþ²Ø
+                    LeftFightList[2].gameObject.SetActive(false);
+                    LeftFightList[3].gameObject.SetActive(false);
+                    LeftFightList[4].gameObject.SetActive(false);
+                    break;
+                case 3:
+                    float YD1 = (Height / (float)2) + YDistance;
+                    LeftFightList[0].position = new Vector3(LeftX, 0);
+                    LeftFightList[1].position = new Vector3(LeftX, YD1);
+                    LeftFightList[2].position = new Vector3(LeftX, -YD1);
+                    //Òþ²Ø
+                    LeftFightList[3].gameObject.SetActive(false);
+                    LeftFightList[4].gameObject.SetActive(false);
+                    break;
+                case 4:
+                    float YD2 = Height / (float)3;
+                    LeftFightList[0].position = new Vector3(LeftX, YD2);
+                    LeftFightList[1].position = new Vector3(LeftX, YD2 * 3);
+                    LeftFightList[2].position = new Vector3(LeftX, -YD2);
+                    LeftFightList[3].position = new Vector3(LeftX, -YD2 * 3);
+                    //Òþ²Ø
+                    LeftFightList[4].gameObject.SetActive(false);
+                    break;
+                case 5:
+                    float YD3 = Height / (float)3;
+                    LeftFightList[0].position = new Vector3(LeftX, 0);
+                    LeftFightList[1].position = new Vector3(LeftX, YD3 * 2);
+                    LeftFightList[2].position = new Vector3(LeftX, YD3 * 4);
+                    LeftFightList[3].position = new Vector3(LeftX, -YD3 * 2);
+                    LeftFightList[4].position = new Vector3(LeftX, -YD3 * 4);
+                    break;
+            }
+
+            //ÓÒ±ß
+            switch (RightFightCount)
+            {
+                case 1:
+                    RightFightList[0].position = new Vector3(RightX, 0);
+                    //Òþ²Ø
+                    RightFightList[1].gameObject.SetActive(false);
+                    RightFightList[2].gameObject.SetActive(false);
+                    RightFightList[3].gameObject.SetActive(false);
+                    RightFightList[4].gameObject.SetActive(false);
+                    break;
+                case 2:
+                    float YD = Height / (float)3;
+                    RightFightList[0].position = new Vector3(RightX, YD);
+                    RightFightList[1].position = new Vector3(RightX, -YD);
+                    //Òþ²Ø
+                    RightFightList[2].gameObject.SetActive(false);
+                    RightFightList[3].gameObject.SetActive(false);
+                    RightFightList[4].gameObject.SetActive(false);
+                    break;
+                case 3:
+                    float YD1 = (Height / (float)2) + YDistance;
+                    RightFightList[0].position = new Vector3(RightX, 0);
+                    RightFightList[1].position = new Vector3(RightX, YD1);
+                    RightFightList[2].position = new Vector3(RightX, -YD1);
+                    //Òþ²Ø
+                    RightFightList[3].gameObject.SetActive(false);
+                    RightFightList[4].gameObject.SetActive(false);
+                    break;
+                case 4:
+                    float YD2 = Height / (float)3;
+                    RightFightList[0].position = new Vector3(RightX, YD2);
+                    RightFightList[1].position = new Vector3(RightX, YD2 * 3);
+                    RightFightList[2].position = new Vector3(RightX, -YD2);
+                    RightFightList[3].position = new Vector3(RightX, -YD2 * 3);
+                    //Òþ²Ø
+                    RightFightList[4].gameObject.SetActive(false);
+                    break;
+                case 5:
+                    float YD3 = Height / (float)3;
+                    RightFightList[0].position = new Vector3(RightX, 0);
+                    RightFightList[1].position = new Vector3(RightX, YD3 * 2);
+                    RightFightList[2].position = new Vector3(RightX, YD3 * 4);
+                    RightFightList[3].position = new Vector3(RightX, -YD3 * 2);
+                    RightFightList[4].position = new Vector3(RightX, -YD3 * 4);
+                    break;
+            }
         }
         public Vector2 WorldToScreenPoint(Vector3 worldPoint)
         {

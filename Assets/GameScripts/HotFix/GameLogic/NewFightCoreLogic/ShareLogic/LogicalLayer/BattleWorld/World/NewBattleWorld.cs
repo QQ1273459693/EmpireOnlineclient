@@ -101,12 +101,12 @@ public class NewBattleWorld
     }
     public void LogicFrameUpdate()
     {
-        Log.Debug("当前帧数:"+FrameSyncConfig.LogicFrameid + " 下一次逻辑帧时间:"+ mNextLogicFrameTime);
+        //Log.Debug("当前帧数:"+FrameSyncConfig.LogicFrameid + " 下一次逻辑帧时间:"+ mNextLogicFrameTime);
         heroLogic?.OnLogicFrameUpdate();
         ActionManager.Instance.OnLogicFrameUpdate();
         LogicTimeManager.Instance.OnLogicFrameUpdate();
         //BulletManager.Instance.OnLogicFrameUpdate();
-        //NewBuffsManager.Instance.OnLogicFrameUpdate();
+        NewBuffsManager.Instance.OnLogicFrameUpdate();
     }
     public void PauseBattle()
     {

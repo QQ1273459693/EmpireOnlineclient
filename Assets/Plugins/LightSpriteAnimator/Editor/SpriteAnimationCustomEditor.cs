@@ -24,7 +24,7 @@ namespace GabrielBigardi.SpriteAnimator
     {
         public override void OnInspectorGUI()
         {
-            if (GUILayout.Button("Open Editor"))
+            if (GUILayout.Button("打开动画窗口"))
             {
                 SpriteAnimationEditorWindow.Open((SpriteAnimationObject)target);
             }

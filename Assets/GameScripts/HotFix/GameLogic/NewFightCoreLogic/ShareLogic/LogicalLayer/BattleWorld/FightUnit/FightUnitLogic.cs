@@ -44,51 +44,51 @@ public enum UnitActionEnum
 }
 public class FightUnitLogic : LogicObject
 {
-    protected VInt hp;
-    protected VInt mp;
-    protected VInt meleeak;
-    protected VInt rangeak;
-    protected VInt magicak;
-    protected VInt medef;
-    protected VInt rgdef;
-    protected VInt mgdef;
-    protected VInt elmres;
-    protected VInt curseMgRES;
-    protected VInt shield;
-    protected VInt physicalHit;
-    protected VInt eleMagicHit;
-    protected VInt curseMagicHit;
-    protected VInt magicPenetration;
-    protected VInt evade;
-    protected VInt speed;
-    protected VInt criticalHit;
-    protected VInt tough;
-    protected VInt armorBreakingAT;
+    protected int hp;
+    protected int mp;
+    protected int meleeak;
+    protected int rangeak;
+    protected int magicak;
+    protected int medef;
+    protected int rgdef;
+    protected int mgdef;
+    protected int elmres;
+    protected int curseMgRES;
+    protected int shield;
+    protected int physicalHit;
+    protected int eleMagicHit;
+    protected int curseMagicHit;
+    protected int magicPenetration;
+    protected int evade;
+    protected int speed;
+    protected int criticalHit;
+    protected int tough;
+    protected int armorBreakingAT;
 
-    public VInt HP { get { return hp; } }
-    public VInt MAXHP { get; protected set; }
-    public VInt MP { get { return mp; } }
-    public VInt MAXMP { get; protected set; }
-    public VInt MeleeAk { get { return meleeak; } }
-    public VInt RangeAk { get { return rangeak; } }
-    public VInt MagicAk { get { return magicak; } }
-    public VInt MeDEF { get { return medef; } }
-    public VInt RGDEF { get { return rgdef; } }
-    public VInt MGDEF { get { return mgdef; } }
-    public VInt ELMRES { get { return elmres; } }
-    public VInt CurseMgRES { get { return curseMgRES; } }
-    public VInt Shield { get { return shield; } }
-    public VInt PhysicalHit { get { return physicalHit; } }
-    public VInt EleMagicHit { get { return eleMagicHit; } }
-    public VInt CurseMagicHit { get { return curseMagicHit; } }
-    public VInt MagicPenetration { get { return magicPenetration; } }
-    public VInt Evade { get { return evade; } }
-    public VInt Speed { get { return speed; } }
-    public VInt CriticalHit { get { return criticalHit; } }
-    public VInt MixDamage { get; protected set; }
-    public VInt MaxDamage { get; protected set; }
-    public VInt Tough { get { return tough; } }
-    public VInt ArmorBreakingAT { get { return armorBreakingAT; } }
+    public int HP { get { return hp; } }
+    public int MAXHP { get; protected set; }
+    public int MP { get { return mp; } }
+    public int MAXMP { get; protected set; }
+    public int MeleeAk { get { return meleeak; } }
+    public int RangeAk { get { return rangeak; } }
+    public int MagicAk { get { return magicak; } }
+    public int MeDEF { get { return medef; } }
+    public int RGDEF { get { return rgdef; } }
+    public int MGDEF { get { return mgdef; } }
+    public int ELMRES { get { return elmres; } }
+    public int CurseMgRES { get { return curseMgRES; } }
+    public int Shield { get { return shield; } }
+    public int PhysicalHit { get { return physicalHit; } }
+    public int EleMagicHit { get { return eleMagicHit; } }
+    public int CurseMagicHit { get { return curseMagicHit; } }
+    public int MagicPenetration { get { return magicPenetration; } }
+    public int Evade { get { return evade; } }
+    public int Speed { get { return speed; } }
+    public int CriticalHit { get { return criticalHit; } }
+    public int MixDamage { get; protected set; }
+    public int MaxDamage { get; protected set; }
+    public int Tough { get { return tough; } }
+    public int ArmorBreakingAT { get { return armorBreakingAT; } }
     public int ID => HeroData.ID;
     public int SeatID => HeroData.SeatId;
     public FightUnitData HeroData { get; private set; }
@@ -160,7 +160,7 @@ public class FightUnitLogic : LogicObject
         //先看有没有负面BUFF,这里负面BUFF优先级是定身最高,有定身和混乱的前提下会优先定身
         if (objectState == LogicObjectState.Death|| GetBuffTypeByEnum(NewBuffType.IMMOBILIZE))
         {
-            OnMoveActionEnd();
+            ActionEnd();
             return;
         }
         else if(GetBuffTypeByEnum(NewBuffType.CHAOS))
@@ -177,7 +177,7 @@ public class FightUnitLogic : LogicObject
             {
                 Log.Error("一个存活的也没有了");
             }
-            OnMoveActionEnd();
+            ActionEnd();
             return;
         }
         bool SkillSilent = GetBuffTypeByEnum(NewBuffType.SKILL_SILENT);
@@ -187,7 +187,6 @@ public class FightUnitLogic : LogicObject
             if (mPassSkillArr.Count>0&& !SkillSilent)
             {
                 var SkillData = mPassSkillArr[RoundID % mPassSkillArr.Count];
-                Log.Info("到这里了");
                 NewSkillManager.Instance.ReleaseSkill(SkillData, this);
             }
             else
@@ -196,17 +195,16 @@ public class FightUnitLogic : LogicObject
                 {
                     //被封魔了
                 }
-                OnMoveActionEnd();
+                ActionEnd();
             }
         }
         else
         {
             //已经到主动回合了
-            Log.Info("到这里了FFFFF");
             switch (unitActionEnum)
             {
                 case UnitActionEnum.NormalAttack://普通攻击
-                    List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(SkillTarget.ALL, SkillRadiusType.SOLO, SeatID, TargetSeatID);
+                    List<FightUnitLogic> logicslist = NewBattleRule.GetAttackListByAttackType(SkillTarget.ALL, SkillRadiusType.SOLO,this);
                     if (logicslist.Count>0)
                     {
                         CauseDamageFightUnitList(logicslist[0], (SkillReleaseType)WeaponType);
@@ -215,25 +213,29 @@ public class FightUnitLogic : LogicObject
                     {
                         Log.Error("一个存活的也没有了");
                     }
-                    OnMoveActionEnd();
+                    ActionEnd();
                     break;
                 case UnitActionEnum.Skill://释放技能
                     if (!SkillSilent)
                     {
                         var SkillData = mActiveSkillArr[RoundID % mActiveSkillArr.Count];
+                        if (Name== "魔法女巫")
+                        {
+                            Log.Info($"回合数:{RoundID},数量:{mActiveSkillArr.Count},结果:{RoundID % mActiveSkillArr.Count}");
+                        }
                         NewSkillManager.Instance.ReleaseSkill(SkillData, this);
                     }
                     else
                     {
                         //被封魔了
-                        OnMoveActionEnd();
+                        ActionEnd();
                     }
                     break;
                 case UnitActionEnum.Defense://防御
-                    OnMoveActionEnd();
+                    ActionEnd();
                     break;
                 case UnitActionEnum.Escape://逃跑
-                    OnMoveActionEnd();
+                    ActionEnd();
                     break;
             }
         }
@@ -251,10 +253,14 @@ public class FightUnitLogic : LogicObject
     void CauseDamageFightUnitList(FightUnitLogic fightUnitLogic, SkillReleaseType AttackType)
     {
         BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(AttackType, this, fightUnitLogic);
-        VInt damage;
+        int damage;
         switch (beAttack)
         {
             case BeAttackEnum.MeleeATK:
+                damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, this, fightUnitLogic);
+                fightUnitLogic.DamageHP(damage);
+                break;
+            case BeAttackEnum.RangeATK:
                 damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, this, fightUnitLogic);
                 fightUnitLogic.DamageHP(damage);
                 break;
@@ -286,14 +292,13 @@ public class FightUnitLogic : LogicObject
     public override void ActionEnd()
     {
         base.ActionEnd();
-        RoundID++;
-        Log.Info("回合已经添加:"+RoundID);
         OnActionEndListener?.Invoke();
     }
 
     public override void RoundStartEvent(int round)
     {
         base.RoundStartEvent(round);
+        RoundID++;
         for (int i = 0; i < NoneBuffList.Count; i++)
         {
             NoneBuffList[i].RoundStartEvent(round);
@@ -486,6 +491,7 @@ public class FightUnitLogic : LogicObject
             DeBuffList[i].OnDestroy();
         }
     }
+
     /// <summary>
     /// 行动结束
     /// </summary>
@@ -505,7 +511,6 @@ public class FightUnitLogic : LogicObject
         }
         ActionEnd();
     }
-
     #endregion
 
     #region 状态相关
@@ -551,7 +556,7 @@ public class FightUnitLogic : LogicObject
     {
         //UpdateAnger(HeroData.atkRange);
     }
-    public void BuffDamage(VInt hp, BuffConfig buffCfg)
+    public void BuffDamage(int hp, BuffConfig buffCfg)
     {
         DamageHP(hp);
     }
@@ -560,7 +565,7 @@ public class FightUnitLogic : LogicObject
     /// </summary>
     public void AttriAddBuff(BUFFATKType BuffState,int Value,bool isPercent)
     {
-        VInt RealValue;
+        int RealValue;
         switch (BuffState)
         {
             case BUFFATKType.HP:
@@ -568,12 +573,12 @@ public class FightUnitLogic : LogicObject
                 if (isPercent)
                 {
                     //血量百分比只能是最大值
-                    RealValue= MAXHP * (VInt)((float)Value / 100);
+                    RealValue= MAXHP * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value < 0)
                 {
@@ -586,12 +591,12 @@ public class FightUnitLogic : LogicObject
                 if (isPercent)
                 {
                     //血量百分比只能是最大值
-                    RealValue = MAXMP * (VInt)((float)Value / 100);
+                    RealValue = MAXMP * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value < 0)
                 {
@@ -603,12 +608,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.MEATK:
                 if (isPercent)
                 {
-                    RealValue = meleeak * (VInt)((float)Value / 100);
+                    RealValue = meleeak * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value > 0)
                 {
@@ -628,12 +633,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.MAGATK:
                 if (isPercent)
                 {
-                    RealValue = magicak * (VInt)((float)Value / 100);
+                    RealValue = magicak * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value > 0)
                 {
@@ -653,12 +658,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.MEDFS:
                 if (isPercent)
                 {
-                    RealValue = medef * (VInt)((float)Value / 100);
+                    RealValue = medef * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value > 0)
                 {
@@ -678,12 +683,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.MAGDFS:
                 if (isPercent)
                 {
-                    RealValue = mgdef * (VInt)((float)Value / 100);
+                    RealValue = mgdef * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = (int)Value;
                 }
                 if (Value > 0)
                 {
@@ -703,12 +708,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.ELMRES:
                 if (isPercent)
                 {
-                    RealValue = elmres * (VInt)((float)Value / 100);
+                    RealValue = elmres * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -728,12 +733,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.CURSERES:
                 if (isPercent)
                 {
-                    RealValue = curseMgRES * (VInt)((float)Value / 100);
+                    RealValue = curseMgRES * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -753,12 +758,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.PHYHIT:
                 if (isPercent)
                 {
-                    RealValue = physicalHit * (VInt)((float)Value / 100);
+                    RealValue = physicalHit * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -778,12 +783,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.ELMHIT:
                 if (isPercent)
                 {
-                    RealValue = eleMagicHit * (VInt)((float)Value / 100);
+                    RealValue = eleMagicHit * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -803,12 +808,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.CURSEHIT:
                 if (isPercent)
                 {
-                    RealValue = curseMagicHit * (VInt)((float)Value / 100);
+                    RealValue = curseMagicHit * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -828,12 +833,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.MagicPenetration:
                 if (isPercent)
                 {
-                    RealValue = magicPenetration * (VInt)((float)Value / 100);
+                    RealValue = magicPenetration * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -857,12 +862,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.EVADE:
                 if (isPercent)
                 {
-                    RealValue = evade * (VInt)((float)Value / 100);
+                    RealValue = evade * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -882,12 +887,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.SPEED:
                 if (isPercent)
                 {
-                    RealValue = speed * (VInt)((float)Value / 100);
+                    RealValue = speed * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -907,12 +912,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.CRITHIT:
                 if (isPercent)
                 {
-                    RealValue = criticalHit * (VInt)((float)Value / 100);
+                    RealValue = criticalHit * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -932,12 +937,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.TOUGH:
                 if (isPercent)
                 {
-                    RealValue = tough * (VInt)((float)Value / 100);
+                    RealValue = tough * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -957,12 +962,12 @@ public class FightUnitLogic : LogicObject
             case BUFFATKType.ARMRBK:
                 if (isPercent)
                 {
-                    RealValue = armorBreakingAT * (VInt)((float)Value / 100);
+                    RealValue = armorBreakingAT * (int)((float)Value / 100);
                 }
                 else
                 {
                     //非百分比
-                    RealValue = (VInt)Value;
+                    RealValue = Value;
                 }
                 if (Value > 0)
                 {
@@ -984,43 +989,45 @@ public class FightUnitLogic : LogicObject
     /// <summary>
     /// 血量增删专用
     /// </summary>
-    public void DamageHP(VInt damagehp)
+    public void DamageHP(int damagehp)
     {
+        
         if (damagehp==0)
         {
             return;
         }
+        hp += damagehp;
         if (damagehp>0)
         {
             //增
-            hp += damagehp;
             if (hp > MAXHP)
             {
                 hp = MAXHP;
             }
+            Log.Info($"战斗单位:{Name}恢复HP:{damagehp}");
         }
         else
         {
+            Log.Info($"战斗单位:{Name}受到的伤害是:{damagehp}");
             //删
-            hp -= damagehp;
+            BeAttack();
             if (hp < 0)
             {
                 hp = 0;
                 HeroDeath();
-                return;
             }
         }
         Log.Info($"战斗单位:{HeroData.Name},剩余血量:{hp}");
 #if RENDER_LOGIC
         //把伤害数值、血量的百分比传给渲染层 更新渲染数据
-        float hpValue = hp.RawFloat / MAXHP.RawFloat;
-        HeroRender.UpdateHP_HUD(damagehp.RawInt, hp.RawInt, hpValue);
+        float hpValue = (float)hp /(float)MAXHP;
+        HeroRender.UpdateHP_HUD(damagehp,hp, hpValue);
 #endif
     }
     /// <summary>
     /// 法力增删专用
     /// </summary>
-    public void DamageMP(VInt damagehp)
+    public void DamageMP(int damagehp)
     {
         if (damagehp == 0)
         {
@@ -1039,6 +1046,7 @@ public class FightUnitLogic : LogicObject
         {
             //删
             mp -= damagehp;
+            BeAttack();
             if (mp < 0)
             {
                 mp = 0;
@@ -1050,6 +1058,14 @@ public class FightUnitLogic : LogicObject
     /// </summary>
     public void BeEvade()
     {
+        HeroRender.PlayUITips(3);
+    }
+    /// <summary>
+    /// 被攻击
+    /// </summary>
+    public void BeAttack()
+    {
+        PlayAnim("Hurt",null);
     }
     /// <summary>
     /// 被攻击无效
@@ -1073,22 +1089,23 @@ public class FightUnitLogic : LogicObject
         Log.Error($"战斗单位:{HeroData.Name},ID:{HeroData.ID},剩余存活个数:{heroSvlCount}");
 #if RENDER_LOGIC
         HeroRender.HeroDeath();
+        HeroRender.PlayDeath();
 #endif
         ClearBuff();
     }
-    public void PlayAnim(string animName)
+    public void PlayAnim(string animName,Action AnimFinishAction=null)
     {
 #if RENDER_LOGIC
-        HeroRender.PlayAnim(animName);
+        HeroRender.PlayAnim(animName, AnimFinishAction);
 #endif
     }
     /// <summary>
     /// 新播放动画
     /// </summary>
     /// <param name="animName"></param>
-    public void NewPlayAnim(string animName,Vector3 TargetPos,Action DamageAction)
+    public void NewPlayAnim(string animName,Action DamageAction)
     {
-        HeroRender.NewPlayAnim(animName,TargetPos,DamageAction);
+        HeroRender.NewPlayAnim(animName,DamageAction);
     }
     public void SetAnimState(AnimState state)
     {

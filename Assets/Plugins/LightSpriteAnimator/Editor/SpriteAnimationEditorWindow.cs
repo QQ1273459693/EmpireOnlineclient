@@ -17,7 +17,7 @@ namespace GabrielBigardi.SpriteAnimator
 
         public static void Open(SpriteAnimationObject spriteAnimationObject)
         {
-            SpriteAnimationEditorWindow window = GetWindow<SpriteAnimationEditorWindow>("Sprite Animation Editor");
+            SpriteAnimationEditorWindow window = GetWindow<SpriteAnimationEditorWindow>("精灵动画窗口编辑");
             window._serializedObject = new SerializedObject(spriteAnimationObject);
             window._spriteAnimationObject = spriteAnimationObject;
             window._selectedProperty = null;
@@ -163,6 +163,8 @@ namespace GabrielBigardi.SpriteAnimator
             DrawField("FPS", true);
             DrawField("Frames", true);
             DrawField("SpriteAnimationType", true);
+            EditorGUILayout.LabelField("动画关键帧数Action", labelStyle);
+            DrawField("ActionFrame", true);
             // and so on...
 
             EditorGUILayout.EndVertical();

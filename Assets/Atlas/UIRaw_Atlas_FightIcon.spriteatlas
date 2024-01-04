@@ -45,21 +45,17 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 21300000, guid: 6beb88ed7b452124183cab8c873e89e2, type: 3}
-    - {fileID: 21300000, guid: f830b056d87a4f34692ae63d8dd44c23, type: 3}
+    - {fileID: 21300000, guid: ee4277d628ecbe444a9b58ec149f45cd, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
-    - f830b056d87a4f34692ae63d8dd44c23: 21300000
-    - 6beb88ed7b452124183cab8c873e89e2: 21300000
+    - ee4277d628ecbe444a9b58ec149f45cd: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: f830b056d87a4f34692ae63d8dd44c23, type: 3}
-  - {fileID: 21300000, guid: 6beb88ed7b452124183cab8c873e89e2, type: 3}
+  - {fileID: 21300000, guid: ee4277d628ecbe444a9b58ec149f45cd, type: 3}
   m_PackedSpriteNamesToIndex:
-  - SkillUITips
-  - AttackUITips
+  - EvadeUITips
   m_RenderDataMap: {}
   m_Tag: UIRaw_Atlas_FightIcon
   m_IsVariant: 0

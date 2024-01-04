@@ -18,6 +18,7 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
         Id = _buf.ReadInt();
         RaceID = _buf.ReadInt();
         SkillType = _buf.ReadInt();
+        VFXID = _buf.ReadInt();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Name = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Name.Add(_e0);}}
         Icon = _buf.ReadString();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Des = new System.Collections.Generic.List<string>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { string _e0;  _e0 = _buf.ReadString(); Des.Add(_e0);}}
@@ -45,6 +46,10 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
     /// 技能类型
     /// </summary>
     public int SkillType { get; private set; }
+    /// <summary>
+    /// 特效ID
+    /// </summary>
+    public int VFXID { get; private set; }
     /// <summary>
     /// 技能名称
     /// </summary>
@@ -98,6 +103,7 @@ public sealed partial class SwordSkill :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "RaceID:" + RaceID + ","
         + "SkillType:" + SkillType + ","
+        + "VFXID:" + VFXID + ","
         + "Name:" + Bright.Common.StringUtil.CollectionToString(Name) + ","
         + "Icon:" + Icon + ","
         + "Des:" + Bright.Common.StringUtil.CollectionToString(Des) + ","

@@ -10,9 +10,10 @@ public class NewSkillConfig
     public int Lv;
     public int NeedMp;//MP消耗
     public int Round;//持续回合
+    public int SkillVFXID;//技能特效ID
     public List<NewBuffConfig> BuffConfigList=new List<NewBuffConfig>();//非自身Buff添加列表
     public List<NewBuffConfig> SelfBuffList = new List<NewBuffConfig>();//自身Buff添加列表
-
+    
 
     public SkillReleaseType SkillReleaseType { get; set; }
     //public SkillDamageType SkillDamageType { get; set; }
@@ -35,7 +36,7 @@ public class NewSkillConfig
                     Log.Error("剑士表读取错误,没有这个ID!:"+ Skillid);
                     return;
                 }
-                
+                SkillVFXID = SkillBase.VFXID;
                 Lv = SkillLv;
                 if (Lv>= SkillBase.Name.Count)
                 {
@@ -90,6 +91,7 @@ public class NewSkillConfig
                     Log.Error("怪物表读取错误,没有这个ID!:" + Skillid);
                     return;
                 }
+                SkillVFXID = EnemySkillBase.VFXID;
                 Lv = SkillLv;
                 SkillName = EnemySkillBase.Name;
                 SkillDes = EnemySkillBase.Des;
@@ -127,6 +129,7 @@ public class NewSkillConfig
 
                 break;
         }
+        Log.Info($"技能{SkillName}加载,类型1:{SkillReleaseType},类型2:{SkillTarget},类型3:{SkillRadiusType}");
     }
 }
 
@@ -144,21 +147,25 @@ public enum SkillReleaseType
     /// </summary>
     Close_Combat = 2,
     /// <summary>
+    /// 远程攻击
+    /// </summary>
+    Ranged_Combat = 3,
+    /// <summary>
     /// 魔法攻击
     /// </summary>
-    Magic_Attack = 3,
+    Magic_Attack = 4,
     /// <summary>
     /// 诅咒魔法攻击
     /// </summary>
-    Curse = 4,
+    Curse = 5,
     /// <summary>
     /// 治疗
     /// </summary>
-    CURE = 5,
+    CURE = 6,
     /// <summary>
     /// 辅助(权限最高的类型)
     /// </summary>
-    SUBSIDIARY = 6,
+    SUBSIDIARY = 7,
 }
 
 ///// <summary>

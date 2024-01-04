@@ -14,6 +14,7 @@ public class FightUnitRender : RenderObject
     public FightUnitTeamEnum heroTeam;
     //SpineAnimBox spineAnimBox;//骨骼模型
     FightUnitBox pixelHeroBox;//像素模型
+    public Vector3 m_Vector3Pos;
 
     public void SetHeroData(FightUnitData heroData, FightUnitTeamEnum heroTeam)
     {
@@ -27,9 +28,9 @@ public class FightUnitRender : RenderObject
         //注意 这里的GameObject是UI格子位置,非战斗单位gameobject
         pixelHeroBox= GameModule.ObjectPool.GetObjectPool<FightUnitBox>().Spawn();
         pixelHeroBox.Initialize(gameObject.transform);
-        pixelHeroBox.RefreshData(HeroData.ResName, heroTeam == FightUnitTeamEnum.Self, HeroData.Hp, HeroData.MaxHp);
-        gameObject = pixelHeroBox.GO;//这里才是真的战斗单位渲染OBJ
-
+        pixelHeroBox.RefreshData(HeroData.SeatId, heroTeam,HeroData.ResName,HeroData.Hp, HeroData.MaxHp);
+        //gameObject = pixelHeroBox.GO;//这里才是真的战斗单位渲染OBJ
+        m_Vector3Pos = gameObject.transform.position;
         //spineAnimBox = GameModule.ObjectPool.GetObjectPool<SpineAnimBox>().Spawn();
         //spineAnimBox.IntObj(gameObject);
         //spineAnimBox.RefreshData(ConfigLoader.Instance.Tables.TbEnemySpine.DataMap[HeroData.id].SpineResName, heroTeam == HeroTeamEnum.Self);
@@ -43,14 +44,31 @@ public class FightUnitRender : RenderObject
 
     }
 
-    public void PlayAnim(string animName)
+    public void PlayAnim(string animName,Action AnimFinishAction)
     {
-        pixelHeroBox.PlayAnim(animName, Vector3.zero,null);
+        pixelHeroBox.PlayAnim(animName, AnimFinishAction);
         //spineAnimBox.PlayAnim(animName);
     }
-    public void NewPlayAnim(string animName,Vector3 TargetPos,Action DamageAction)
+    public void PlayDeath()
     {
-        pixelHeroBox.PlayAnim(animName, TargetPos,DamageAction);
+        pixelHeroBox.DeathAnim(() =>
+        {
+            Log.Info("隐藏的单位是:"+ gameObject.name);
+            gameObject.SetActive(false);
+        });
+        //spineAnimBox.PlayAnim(animName);
+    }
+    public void PlayUITips(int Type)
+    {
+        pixelHeroBox.ShowUIAction(Type);
+    }
+    public void NewPlayAnim(string animName,Action DamageAction)
+    {
+        pixelHeroBox.PlayAnim(animName,DamageAction);
+    }
+    public void FightAnimMovePos(Vector3 TargetPos,Action MoveFinish)
+    {
+        pixelHeroBox.FightAnimMovePos(TargetPos, MoveFinish);
     }
     public void SetAnimState(AnimState state)
     {
@@ -59,30 +77,6 @@ public class FightUnitRender : RenderObject
 
     public void UpdateHP_HUD(int damage, float hpRateValue, float Hpfill,BuffConfig buffCfg=null)
     {
-        //if (damage != 0)
-        //{
-        //    var DamageBox = GameModule.ObjectPool.GetObjectPool<HudDamageTipsPool>().Spawn();
-        //    DamageBox.Init();
-        //    //Debuger.LogError($"看下物体名称:{spineAnimBox.GO.name},目标位置:{spineAnimBox.m_HudPos}");
-        //    DamageBox.AdjustPos(damage, pixelHeroBox.m_HudPos /*spineAnimBox.m_HudPos*/, buffCfg);
-        //    m_HpFill.DOFillAmount(Hpfill, 0.45F);
-        //}
-        //else
-        //{
-        //    //第一次加载HUD
-        //    Vector3 tmpVec31 = RectTransformUtility.WorldToScreenPoint(BattleWordNodes.Instance.Camera3D, pixelHeroBox.m_HudPos  /*spineAnimBox.m_HudPos*/);
-
-        //    RectTransform HpObj = heroTeam == FightUnitTeamEnum.Self ? BattleWordNodes.Instance.heroUIHpFill[HeroData.SeatId] : BattleWordNodes.Instance.enemyUIHpFill[HeroData.SeatId];
-
-        //    m_HpFill = HpObj.transform.Find("Image").GetComponent<Image>();
-        //    m_HpFill.fillAmount = 1;
-        //    HpObj.gameObject.SetActive(true);
-
-        //    if (RectTransformUtility.ScreenPointToWorldPointInRectangle(HpObj, tmpVec31, BattleWordNodes.Instance.UiCamera, out tmpVec31))
-        //    {
-        //        HpObj.transform.position = tmpVec31;
-        //    }
-        //}
         pixelHeroBox.UpdateHp_Hud(damage, hpRateValue);
         //spineAnimBox.UpdateHp_Hud(damage, hpRateValue);
 
@@ -120,7 +114,6 @@ public class FightUnitRender : RenderObject
         //    m_HpFill.transform.parent.gameObject.SetActive(false);
         //    gameObject.SetActive(false);
         //});
-        gameObject.SetActive(false);
     }
 
     public override void OnRelease()

@@ -23,7 +23,8 @@ namespace GabrielBigardi.SpriteAnimator
         private int GetPlayOnceFrame() => Mathf.Min((int)_animationTime, _currentAnimation.Frames.Count - 1);
 
         // Events
-        public event Action OnAnimationComplete;
+        public event Action OnAnimationComplete;//动画完成时回调
+        public event Action OnAnimationFrameComplete;//动画关键帧数回调
 
         private void OnEnable()
         {
@@ -128,6 +129,11 @@ namespace GabrielBigardi.SpriteAnimator
             this.OnAnimationComplete = onAnimationComplete;
             return this;
         }
+        public SpriteAnimator OnKeyFrameComplete(Action onKeyFrameComplete)
+        {
+            this.OnAnimationFrameComplete = onKeyFrameComplete;
+            return this;
+        }
 
         public SpriteAnimation GetAnimationByName(string name)
         {
@@ -169,7 +175,15 @@ namespace GabrielBigardi.SpriteAnimator
                         _animationCompleted = _currentAnimation.SpriteAnimationType == SpriteAnimationType.Looping ? false : true;
                     }
                 }
-
+                if (_currentAnimation.ActionFrame>=0)
+                {
+                    if (_currentAnimation.ActionFrame== GetCurrentFrame())
+                    {
+                        OnAnimationFrameComplete?.Invoke();
+                        OnAnimationFrameComplete = null;
+                    }
+                    
+                }
                 return GetAnimationFrame();
             }
 

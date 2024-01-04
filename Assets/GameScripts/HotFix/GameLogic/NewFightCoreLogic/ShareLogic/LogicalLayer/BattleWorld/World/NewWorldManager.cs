@@ -2,6 +2,7 @@
 using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 public class NewWorldManager
@@ -30,6 +31,7 @@ public class NewWorldManager
         {
             FightUnitData Data = new FightUnitData();
             Data.ID = 1000;
+            Data.Name = "圣剑士";
             FightUnitSkill Skill1 = new FightUnitSkill(101,0,1,6);
             FightUnitSkill Skill2 = new FightUnitSkill(201, 0,2,4);
             FightUnitSkill Skill3 = new FightUnitSkill(301,0,2,3);
@@ -43,7 +45,7 @@ public class NewWorldManager
             Data.WeaponType = 1;
             Data.MaxHp = 9999;
             Data.Hp = 9999;
-            Data.MaxHp = 1000;
+            Data.MaxMp = 1000;
             Data.Mp= 1000;
             Data.ArmorBreakingAT = 30;
             Data.CriticalHit = 50;
@@ -62,18 +64,19 @@ public class NewWorldManager
             Data.Shield = 100;
             Data.RGDEF = 100;
             Data.RangeAk = 300;
-            Data.MeleeAk = 300;
+            Data.MeleeAk = 200;
             Data.PhysicalHit = 300;
 
             playerHeroList.Add(Data);
 
 
             FightRoundWindow.Instance.LeftPosRect[Data.SeatId].gameObject.SetActive(true);
+            
 
         }
 
         var EnemyBase = ConfigLoader.Instance.Tables.TbEnemyModelBase.DataList;
-        for (int i = 0; i <4; i++)
+        for (int i = 0; i <5; i++)
         {
             var EnemyData = EnemyBase[i];
 
@@ -83,14 +86,20 @@ public class NewWorldManager
             Data.ID = EnemyData.Id;
             Data.ResName= EnemyData.ResName;
             Data.Name=EnemyData.Name;
-            FightUnitSkill Skill1 = new FightUnitSkill(EnemyData.PassivitySkill[0].PassSkill,0,0,0, 101);
-            FightUnitSkill Skill2 = new FightUnitSkill(EnemyData.PassivitySkill[0].ActiveSkill, 0, 0, 0, 101);
+            for (int j = 0; j < EnemyData.PassivitySkill.Count; j++)
+            {
+                var SkillData = EnemyData.PassivitySkill[j];
+                FightUnitSkill Skill1 = new FightUnitSkill(SkillData.PassSkill, 0, 0, 0, 101);
+                FightUnitSkill Skill2 = new FightUnitSkill(SkillData.ActiveSkill, 0, 0, 0, 101);
+                //Log.Info($"{EnemyData.ResName}主动技能ID是：{SkillData.ActiveSkill}");
+                Data.m_PassSkillList.Add(Skill1);
+                Data.m_ActiveSkillList.Add(Skill2);
+            }
 
 
 
 
-            Data.m_PassSkillList.Add(Skill1);
-            Data.m_ActiveSkillList.Add(Skill2);
+            
 
             var Atruite = EnemyData.Des;
 
@@ -124,7 +133,12 @@ public class NewWorldManager
 
             FightRoundWindow.Instance.RightPosRect[Data.SeatId].gameObject.SetActive(true);
         }
+        FightRoundWindow.Instance.SwitchFightPos(1,5);
 
+        //粒子系统加载
+        EFX_ParticleHelp.SetParticleRoot(FightRoundWindow.Instance.ParticleSystemRoot);
+        //战斗飘字系统加载
+        HUD_DamageTextHelp.SetHUDTextRoot(FightRoundWindow.Instance.HUDTextSystemRoot);
         //FightRoundWindow.Instance.LeftPosRect
 
 

@@ -21,21 +21,25 @@ namespace GameConfig.SKILL
         /// </summary>
         Close_Combat = 2,
         /// <summary>
+        /// 远程攻击
+        /// </summary>
+        Ranged_Combat = 3,
+        /// <summary>
         /// 魔法攻击
         /// </summary>
-        Magic_Attack = 3,
+        Magic_Attack = 4,
         /// <summary>
         /// 诅咒魔法
         /// </summary>
-        Curse = 4,
+        Curse = 5,
         /// <summary>
         /// 治疗
         /// </summary>
-        CURE = 5,
+        CURE = 6,
         /// <summary>
         /// 游戏中权限等级最高的攻击
         /// </summary>
-        SUBSIDIARY = 6,
+        SUBSIDIARY = 7,
     }
 
 } 

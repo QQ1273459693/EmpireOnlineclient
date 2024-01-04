@@ -26,6 +26,7 @@ public partial class Tables
     public swordSkillBase.TbSwordSkillBase TbSwordSkillBase {get; }
     public enemySkillBase.TbEnemySkillBase TbEnemySkillBase {get; }
     public enemyModelBase.TbEnemyModelBase TbEnemyModelBase {get; }
+    public vFXSkillModelBase.TBVFXSkillModelBase TBVFXSkillModelBase {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
@@ -56,6 +57,8 @@ public partial class Tables
         tables.Add("enemySkillBase.TbEnemySkillBase", TbEnemySkillBase);
         TbEnemyModelBase = new enemyModelBase.TbEnemyModelBase(loader("enemymodelbase_tbenemymodelbase")); 
         tables.Add("enemyModelBase.TbEnemyModelBase", TbEnemyModelBase);
+        TBVFXSkillModelBase = new vFXSkillModelBase.TBVFXSkillModelBase(loader("vfxskillmodelbase_tbvfxskillmodelbase")); 
+        tables.Add("vFXSkillModelBase.TBVFXSkillModelBase", TBVFXSkillModelBase);
 
         PostInit();
         TbItem.Resolve(tables); 
@@ -71,6 +74,7 @@ public partial class Tables
         TbSwordSkillBase.Resolve(tables); 
         TbEnemySkillBase.Resolve(tables); 
         TbEnemyModelBase.Resolve(tables); 
+        TBVFXSkillModelBase.Resolve(tables); 
         PostResolve();
     }
 
@@ -89,6 +93,7 @@ public partial class Tables
         TbSwordSkillBase.TranslateText(translator); 
         TbEnemySkillBase.TranslateText(translator); 
         TbEnemyModelBase.TranslateText(translator); 
+        TBVFXSkillModelBase.TranslateText(translator); 
     }
     
     partial void PostInit();

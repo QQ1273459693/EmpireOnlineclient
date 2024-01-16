@@ -52,10 +52,22 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - 581be390975989847bb44e6bd68f64f6: 21300000
+    - f6cd04b1ca81c5149b4aef01042d2614: 21300000
+    - e83334a8a69c7084093159d71a971df6: 21300000
+    - 91ed65be968194345beb1d094a086584: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 581be390975989847bb44e6bd68f64f6, type: 3}
+  - {fileID: 21300000, guid: f6cd04b1ca81c5149b4aef01042d2614, type: 3}
+  - {fileID: 21300000, guid: e83334a8a69c7084093159d71a971df6, type: 3}
+  - {fileID: 21300000, guid: 91ed65be968194345beb1d094a086584, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - HeadIcon
+  - 5000choyen
+  - parallelogram
+  - parallelogramFlipped
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewNewGUI
   m_IsVariant: 0

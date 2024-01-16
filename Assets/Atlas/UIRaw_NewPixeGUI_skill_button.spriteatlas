@@ -50,10 +50,16 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - 8d60f7a60716d8448a2ced3067f363f2: 21300000
+    - ad0f9e0e938560b479b34e29f4e5b602: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8d60f7a60716d8448a2ced3067f363f2, type: 3}
+  - {fileID: 21300000, guid: ad0f9e0e938560b479b34e29f4e5b602, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - btutton_square_01
+  - button_square_01
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewPixeGUI_skill_button
   m_IsVariant: 0

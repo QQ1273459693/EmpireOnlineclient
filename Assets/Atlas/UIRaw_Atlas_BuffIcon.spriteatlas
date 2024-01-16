@@ -51,10 +51,19 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - d465fc4bb24e96c42bd5c13a63dacfff: 21300000
+    - 1293a9ab9d1aa0940ab63028e6992bb5: 21300000
+    - faf832ae5e670b945b062ee375aea357: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: d465fc4bb24e96c42bd5c13a63dacfff, type: 3}
+  - {fileID: 21300000, guid: 1293a9ab9d1aa0940ab63028e6992bb5, type: 3}
+  - {fileID: 21300000, guid: faf832ae5e670b945b062ee375aea357, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - "\u71C3\u70E7Icon"
+  - "\u51B0\u51BBIcon"
+  - "\u56DE\u8840Icon"
   m_RenderDataMap: {}
   m_Tag: UIRaw_Atlas_BuffIcon
   m_IsVariant: 0

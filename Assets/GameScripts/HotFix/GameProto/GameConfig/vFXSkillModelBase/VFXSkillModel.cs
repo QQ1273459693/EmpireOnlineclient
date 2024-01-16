@@ -17,6 +17,7 @@ public sealed partial class VFXSkillModel :  Bright.Config.BeanBase
     {
         Id = _buf.ReadInt();
         ResName = _buf.ReadString();
+        DealyHit = _buf.ReadFloat();
         ReleaseType = _buf.ReadInt();
         PostInit();
     }
@@ -34,6 +35,10 @@ public sealed partial class VFXSkillModel :  Bright.Config.BeanBase
     /// 特效资源
     /// </summary>
     public string ResName { get; private set; }
+    /// <summary>
+    /// 延迟命中参数
+    /// </summary>
+    public float DealyHit { get; private set; }
     /// <summary>
     /// 释放类型
     /// </summary>
@@ -56,6 +61,7 @@ public sealed partial class VFXSkillModel :  Bright.Config.BeanBase
         return "{ "
         + "Id:" + Id + ","
         + "ResName:" + ResName + ","
+        + "DealyHit:" + DealyHit + ","
         + "ReleaseType:" + ReleaseType + ","
         + "}";
     }

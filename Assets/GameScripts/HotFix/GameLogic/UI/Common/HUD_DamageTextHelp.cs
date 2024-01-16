@@ -71,7 +71,6 @@ namespace TEngine
                 {
                     //可以获取
                     isCan = true;
-                    Log.Debug("拿了多少次");
                     HUD_DamageTextPools[i].TextJumpStart(StartPos,m_HUDPosDict[SeatID], Count, Damage,true);
                     break;
                 }
@@ -84,7 +83,7 @@ namespace TEngine
                 go.transform.localScale = Vector3.one;
                 HUD_DamageTextPool hUD_Damage = new HUD_DamageTextPool(go);
                 hUD_Damage.TextJumpStart(StartPos, m_HUDPosDict[SeatID], Count, Damage);
-                Log.Debug("拿了多少次QQ");
+                //Log.Debug("拿了多少次QQ");
                 HUD_DamageTextPools.Add(hUD_Damage);
             }
         }

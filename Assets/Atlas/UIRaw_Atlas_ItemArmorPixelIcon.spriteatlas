@@ -49,10 +49,13 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - b6662c1da9b481d4092e48bcb21d643a: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: b6662c1da9b481d4092e48bcb21d643a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Icon_Armor_1
   m_RenderDataMap: {}
   m_Tag: UIRaw_Atlas_ItemArmorPixelIcon
   m_IsVariant: 0

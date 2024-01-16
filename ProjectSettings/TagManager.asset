@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemies
+  - Shadow
   layers:
   - Default
   - TransparentFX
@@ -13,12 +15,12 @@ TagManager:
   - UI
   - Enemy
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - LightingSystem
+  - 2DWater
+  - Obstructors
+  - Reflections
+  - WaterPostProcessing
+  - lightrays2d
   - 
   - 
   - 
@@ -40,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Shadows
+    uniqueID: 714797249
     locked: 0

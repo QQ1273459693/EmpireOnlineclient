@@ -51,10 +51,19 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - 744fdd509075bec47917fb1d99d0b7f2: 21300000
+    - 1c530b86fe80f87489aae6267d42c3c5: 21300000
+    - 36253d9c71c5ebb4e95889b0f152e7a1: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 744fdd509075bec47917fb1d99d0b7f2, type: 3}
+  - {fileID: 21300000, guid: 1c530b86fe80f87489aae6267d42c3c5, type: 3}
+  - {fileID: 21300000, guid: 36253d9c71c5ebb4e95889b0f152e7a1, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - frame_redbutton
+  - button_red
+  - icon_x
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewPixeGUI_basic_view_button&frame_Button&frame_X
   m_IsVariant: 0

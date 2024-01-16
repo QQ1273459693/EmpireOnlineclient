@@ -203,7 +203,7 @@ public class NewSkill
     /// <summary>
     /// 创建技能特效
     /// </summary>
-    public void CreateSkillEffect(FightUnitRender render)
+    public void CreateSkillEffect(FightUnitRender render, BeAttackEnum BeAtk)
     {
 #if CLIENT_LOGIC
         if (mSkillCfg.SkillVFXID>0)
@@ -214,7 +214,59 @@ public class NewSkill
                 Log.Error("没有找到特效配置文件ID:"+ mSkillCfg.SkillVFXID);
                 return;
             }
-            EFX_ParticleHelp.GenerParticle(VFXBase.ResName,render.m_Vector3Pos);
+            EFX_ParticleHelp.GenerParticle(VFXBase.ResName, render.m_Vector3Pos);
+            switch (BeAtk)
+            {
+                case BeAttackEnum.Auxiliary:
+                    break;
+                case BeAttackEnum.CURSEATK:
+                    break;
+                case BeAttackEnum.MeleeATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.RangeATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.MAGATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.Invalid:
+                    break;
+                case BeAttackEnum.Evade:
+                    break;
+                case BeAttackEnum.ELEMagicPenetrationAttack:
+                    break;
+                case BeAttackEnum.CURSEMagicPenetrationAttack:
+                    break;
+            }
+            //Log.Info("攻击延迟------------:"+ AtackDealy);
+        }
+        else
+        {
+            switch (BeAtk)
+            {
+                case BeAttackEnum.Auxiliary:
+                    break;
+                case BeAttackEnum.CURSEATK:
+                    break;
+                case BeAttackEnum.MeleeATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.RangeATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.MAGATK:
+                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", render.m_Vector3Pos);
+                    break;
+                case BeAttackEnum.Invalid:
+                    break;
+                case BeAttackEnum.Evade:
+                    break;
+                case BeAttackEnum.ELEMagicPenetrationAttack:
+                    break;
+                case BeAttackEnum.CURSEMagicPenetrationAttack:
+                    break;
+            }
         }
 #endif
     }
@@ -235,63 +287,66 @@ public class NewSkill
     void CauseDamageFightUnitList(List<FightUnitLogic> logicslist)
     {
         Log.Info("目标列表大小:"+ logicslist.Count);
-        foreach (var item in logicslist)
+        //开始延迟技能命中
+        EFX_ParticleHelp.DealyParticle(mSkillCfg.SkillVFXID, () =>
         {
-            BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(mSkillCfg.SkillReleaseType, mSkillOwner, item);
-            int damage;
-            CreateSkillEffect(item.HeroRender);
-            switch (beAttack)
+            foreach (var item in logicslist)
             {
-                case BeAttackEnum.Auxiliary:
-                    AdditionBuffToTargets(item);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}释放了---辅助BUFF");
-                    break;
-                case BeAttackEnum.MeleeATK:
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
-                    item.DamageHP(damage);
-                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行近战攻击伤害---{damage}");
-                    AdditionBuffToTargets(item);
-                    break;
-                case BeAttackEnum.RangeATK:
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
-                    item.DamageHP(damage);
-                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行远程攻击伤害---{damage}");
-                    AdditionBuffToTargets(item);
-                    break;
-                case BeAttackEnum.MAGATK:
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
-                    item.DamageHP(damage);
-                    EFX_ParticleHelp.GenerParticle("EFX_BloodSream", item.HeroRender.m_Vector3Pos);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行魔法攻击伤害---{damage}");
-                    AdditionBuffToTargets(item);
-                    break;
-                case BeAttackEnum.CURSEATK:
-                    AdditionBuffToTargets(item);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒攻击");
-                    break;
-                case BeAttackEnum.Invalid:
-                    //无敌状态(无敌,物理无敌,魔法无敌)
-                    item.BeInvalidByAttack();
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}无敌状态");
-                    break;
-                case BeAttackEnum.Evade:
-                    //被闪避了
-                    item.BeEvade();
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}被闪避");
-                    break;
-                case BeAttackEnum.ELEMagicPenetrationAttack://元素魔法穿透
-                    damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
-                    item.DamageHP(damage);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行元素穿透魔法攻击伤害---{damage}");
-                    break;
-                case BeAttackEnum.CURSEMagicPenetrationAttack://诅咒魔法穿透
-                    AdditionBuffToTargets(item);
-                    Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒穿透魔法攻击伤害---");
-                    break;
+                BeAttackEnum beAttack = NewBattleDataCalculatConter.IsCanBeAttack(mSkillCfg.SkillReleaseType, mSkillOwner, item);
+                int damage;
+                CreateSkillEffect(item.HeroRender, beAttack);
+                switch (beAttack)
+                {
+                    case BeAttackEnum.Auxiliary:
+                        AdditionBuffToTargets(item);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}释放了---辅助BUFF");
+                        break;
+                    case BeAttackEnum.MeleeATK:
+                        damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                        item.DamageHP(damage);
+
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行近战攻击伤害---{damage}");
+                        AdditionBuffToTargets(item);
+                        break;
+                    case BeAttackEnum.RangeATK:
+                        damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                        item.DamageHP(damage);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行远程攻击伤害---{damage}");
+                        AdditionBuffToTargets(item);
+                        break;
+                    case BeAttackEnum.MAGATK:
+                        damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                        item.DamageHP(damage);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行魔法攻击伤害---{damage}");
+                        AdditionBuffToTargets(item);
+                        break;
+                    case BeAttackEnum.CURSEATK:
+                        AdditionBuffToTargets(item);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒攻击");
+                        break;
+                    case BeAttackEnum.Invalid:
+                        //无敌状态(无敌,物理无敌,魔法无敌)
+                        item.BeInvalidByAttack();
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}无敌状态");
+                        break;
+                    case BeAttackEnum.Evade:
+                        //被闪避了
+                        item.BeEvade();
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}被闪避");
+                        break;
+                    case BeAttackEnum.ELEMagicPenetrationAttack://元素魔法穿透
+                        damage = NewBattleDataCalculatConter.CalculatDamage(beAttack, mSkillOwner, item);
+                        item.DamageHP(damage);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行元素穿透魔法攻击伤害---{damage}");
+                        break;
+                    case BeAttackEnum.CURSEMagicPenetrationAttack://诅咒魔法穿透
+                        AdditionBuffToTargets(item);
+                        Log.Info($"技能释放者:{mSkillOwner.Name},对目标:{item.Name}进行诅咒穿透魔法攻击伤害---");
+                        break;
+                }
             }
-        }
+        });
+        
     }
     /// <summary>
     /// 附加BUFF给对象列表

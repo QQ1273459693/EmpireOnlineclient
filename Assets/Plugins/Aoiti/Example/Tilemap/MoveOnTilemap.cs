@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Aoiti.Pathfinding;
-using DG.Tweening;
-using GabrielBigardi.SpriteAnimator;
+using System.Linq;
+using TEngine.Core;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
 
 public class MoveOnTilemap : MonoBehaviour
 {
@@ -26,18 +28,6 @@ public class MoveOnTilemap : MonoBehaviour
     [Range(0.001f,1f)]
     public float stepTime;
 
-    ///<summary>开始寻路触发事件</summary>
-    public event System.Action OnNavigationStarted;
-    ///<summary>到达寻路终点事件</summary>
-    public event System.Action OnDestinationReached;
-    ///<summary>寻路中改变寻路路径事件</summary>
-    public event System.Action<Vector2> OnNavigationChangePoint;
-
-
-
-    public SpriteAnimator animator;
-    Vector2 m_CurClickMousPos;
-    public Transform PlayerTrs;
 
     public float DistanceFunc(Vector3Int a, Vector3Int b)
     {
@@ -63,127 +53,91 @@ public class MoveOnTilemap : MonoBehaviour
         return result;
     }
 
+    public CreateGrid m_CreateGrid;
+    public Transform End;
     // Start is called before the first frame update
     void Start()
     {
         pathfinder = new Pathfinder<Vector3Int>(DistanceFunc, connectionsAndCosts);
+        //这里是瓦片数据测试
+        //IEnumerable<GetTileData> empty = tilemap.GetAllTiles();
+        //var QQ=empty.ToList();
+        //Debug.Log($"全部数量:{QQ.Count}");
+        //for (int i = 0; i < QQ.Count; i++)
+        //{
+        //    //Debug.Log($"瓦片:{QQ[i].Sprite.name}");
+        //    Vector3Int vector3In = new Vector3Int(QQ[i].X, QQ[i].Y, 0);
+        //    Debug.Log($"第:{i+1}块瓦片位置{vector3In}");
+            
+        //}
+
+        int MXMin = (int)tilemap.localBounds.min.x;
+        int MYMin= (int)tilemap.localBounds.min.y;
+        int MXMax = (int)tilemap.localBounds.max.x;
+        int MYMax = (int)tilemap.localBounds.max.y;
+        Vector3Int vector3IntQ = new Vector3Int(0, 0, 0);
+        Debug.Log($"边界MIX:{tilemap.cellBounds.min},MAX:{tilemap.cellBounds.max}");
+        
+        //for (int i = MXMin; i < MXMax; i++)
+        //{
+        //    for (int j = MYMin; j < MYMax; j++)
+        //    {
+        //        Vector3Int vector3Int = new Vector3Int(i,j,0);
+        //        Debug.Log($"位于{vector3Int}/*的精灵是:");
+        //        if (tilemap.GetSprite(vector3Int)!=null)
+        //        {
+        //            Debug.Log($":-------------{tilemap.GetSprite(vector3Int).name}");
+        //        }
+
+        //    }
+        //}
 
 
-        OnNavigationStarted += OnStartNavigation;
-        OnDestinationReached += OnEndNavigation;
-        OnNavigationChangePoint += OnChangeNavigation;
-    }
-    /// <summary>
-    /// 开始寻路
-    /// </summary>
-    void OnStartNavigation()
-    {
-        bool CanPlay = false;
-        if (m_CurClickMousPos.x > transform.position.x && PlayerTrs.localRotation.y == 1)
-        {
-            CanPlay = true;
-        }
-        else if (m_CurClickMousPos.x < transform.position.x && PlayerTrs.localRotation.y == 0)
-        {
-            CanPlay = true;
-        }
-        if (CanPlay)
-        {
+        //Debug.Log($"使用的不同瓦片总数:{tilemap.cellBounds.},精灵数量:{tilemap.GetUsedSpritesCount()}");
 
-            animator.PlayIfNotPlaying("Trun").OnComplete(() =>
-            {
-                if (m_CurClickMousPos.x > transform.position.x)
-                {
-                    PlayerTrs.localRotation = new Quaternion(0, 0, 0, 0);
-                }
-                else if (m_CurClickMousPos.x < transform.position.x)
-                {
-                    PlayerTrs.localRotation = new Quaternion(0, 180F, 0, 0);
-                }
-
-
-                if (!animator.AnimationPlaying("Moveing"))
-                {
-                    //如果不是在移动中
-                    animator.Play("Moveing");
-                }
-            });
-        }
-        else
-        {
-            if (!animator.AnimationPlaying("Moveing"))
-            {
-                animator.Play("BegingMove").OnComplete(() =>
-                {
-                    animator.Play("Moveing");
-                });
-                //如果不是在移动中
-
-            }
-        }
-    }
-    /// <summary>
-    /// 到达寻路位置
-    /// </summary>
-    void OnEndNavigation()
-    {
-        animator.Play("MoveEnd").OnComplete(() =>
-        {
-            animator.Play("Idle");
-        });
-        Debug.Log("Click Destination Reached");
-    }
-    /// <summary>
-    /// 寻路中改变寻路路径
-    /// </summary>
-    /// <param name="pos"></param>
-    void OnChangeNavigation(Vector2 pos)
-    {
 
     }
-
+    public Vector3 StartPos;
+    public Vector3 EndPos;
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(1) )
         {
+            m_CreateGrid.FindPath(StartPos, EndPos);
             var currentCellPos=tilemap.WorldToCell(transform.position);
-            m_CurClickMousPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var target = tilemap.WorldToCell(m_CurClickMousPos);
+            var target = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             target.z = 0;
-            pathfinder.GenerateAstarPath(currentCellPos, target, out path);
-            OnNavigationStarted();
-            MoveToTarget();
-            //StopAllCoroutines();
-            //StartCoroutine(Move());
-            Debug.Log("看下移动位置:" );
+            Debug.Log($"鼠标位置:{currentCellPos},目标地块:{target}");
+            //pathfinder.GenerateAstarPath(currentCellPos, target, out path);
+            GetPathList(currentCellPos, target, out path);
+            //Debug.Log("路线数量:"+ path.Count);
+            StopAllCoroutines();
+            StartCoroutine(Move());
         }
 
         
     }
-    void MoveToTarget()
+    bool GetPathList(Vector3Int StartPos,Vector3Int EndPos,out List<Vector3Int> path)
     {
-        if (path.Count>0)
+        List<Vector3Int> vector3IntLs = new List<Vector3Int>();
+        List<WorldTile> worldTiles= m_CreateGrid.FindPath(StartPos, EndPos);
+        for (int i = 0; i < worldTiles.Count; i++)
         {
-            //Vector2 vector2 = new Vector2(path[0].x/2, path[0].y/2);
-            Debug.Log("看下移动位置:"+ path[0]);
-            transform.DOMove(path[0], 0.15F).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                path.RemoveAt(0);
-                MoveToTarget();
-            });
+            var Data = worldTiles[i];
+            Vector3Int vector = new Vector3Int(Data.cellX, Data.cellY);
+            vector3IntLs.Add(vector);
+            Debug.Log($"第{i + 1}个位置是--X:{worldTiles[i].cellX},Y:{worldTiles[i].cellY}");
         }
-        else
-        {
-            OnDestinationReached();
-        }
+        path = vector3IntLs;
+        return true;
     }
-
+    Vector3 MovePass = new Vector3(0.5F,0.5F);
     IEnumerator Move()
     {
         while (path.Count > 0)
         {
-            transform.position = tilemap.CellToWorld(path[0]);
+            transform.position = tilemap.CellToWorld(path[0])+ MovePass;
             path.RemoveAt(0);
             yield return new WaitForSeconds(stepTime);
             

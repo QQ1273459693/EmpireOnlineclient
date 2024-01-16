@@ -32,7 +32,7 @@ namespace TEngine
         }
         public bool isCanShow()
         {
-            Log.Debug($"{transform.name}的状态是:{transform.gameObject.activeSelf}");
+            //Log.Debug($"{transform.name}的状态是:{transform.gameObject.activeSelf}");
             return transform.gameObject.activeSelf;
         }
         public void TextJumpStart(Vector2 StartPos,List<Vector3> Target, int Count, int DamageNum,bool isGetPool=false)

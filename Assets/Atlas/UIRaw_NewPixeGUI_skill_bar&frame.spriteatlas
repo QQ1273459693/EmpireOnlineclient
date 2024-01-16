@@ -52,10 +52,22 @@ SpriteAtlas:
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys: []
+    packedSpriteRenderDataKeys:
+    - 27a9d3c22a5eeb8419cd2c0b9bc8c73b: 21300000
+    - 3b0f0e945adc0f644a83fea799202ad8: 21300000
+    - 37c2e0e741bc1dd46b8946218bfe510f: 21300000
+    - 78f9a25f4da13694b924fc85c1bbd439: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 27a9d3c22a5eeb8419cd2c0b9bc8c73b, type: 3}
+  - {fileID: 21300000, guid: 3b0f0e945adc0f644a83fea799202ad8, type: 3}
+  - {fileID: 21300000, guid: 37c2e0e741bc1dd46b8946218bfe510f, type: 3}
+  - {fileID: 21300000, guid: 78f9a25f4da13694b924fc85c1bbd439, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - yellowbar_01
+  - yellowbarframe_01
+  - bluebar_01
+  - bluebarframe_01
   m_RenderDataMap: {}
   m_Tag: UIRaw_NewPixeGUI_skill_bar&frame
   m_IsVariant: 0

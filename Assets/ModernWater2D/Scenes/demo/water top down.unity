@@ -280,7 +280,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!21 &258404891
+--- !u!21 &231511764
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -332,6 +332,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7e1aff9652c0dac418d9aa42f5f24dc2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _alphaTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _belowWaterTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -377,7 +381,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _simTex:
-        m_Texture: {fileID: 1747589969}
+        m_Texture: {fileID: 1444281840}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _sun_strips:
@@ -466,14 +470,16 @@ Material:
     - _foam_speed: {r: -0.15, g: -0.15, b: 0, a: 0}
     - _m_Color: {r: 0.6415094, g: 0.20879316, b: 0.20879316, a: 0}
     - _num_of_pixels: {r: 64, g: 64, b: 0, a: 0}
+    - _obs_transform: {r: 0.8, g: 0.8, b: 0.1, a: 0.1}
     - _obstruction_color: {r: 1, g: 1, b: 1, a: 0}
     - _perspective: {r: 0, g: 0, b: 0, a: 0}
     - _perspective2: {r: 0, g: 0, b: 0, a: 0}
     - _playerPosition: {r: 0, g: 0, b: -10, a: 0}
-    - _simFoamColor: {r: 0.6399964, g: 0.8867924, b: 0.8758237, a: 1}
-    - _simMinMaxWavesHeightFoam: {r: 0, g: 1.27, b: 0, a: 0}
+    - _simFoamColor: {r: 0.78764683, g: 0.9433962, b: 0.93597955, a: 1}
+    - _simMinMaxWavesHeightFoam: {r: 0, g: 0.4, b: 0, a: 0}
     - _surfaceTexSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _surfaceTexTiling: {r: 0, g: 0, b: 0, a: 0}
+    - _surfaceTexUV: {r: 0, g: 0, b: 1, a: 1}
     - _tiling: {r: 1, g: 1, b: 0, a: 0}
     - m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
@@ -521,6 +527,7 @@ Transform:
   - {fileID: 676938803}
   - {fileID: 1560430916}
   - {fileID: 1941401728}
+  - {fileID: 1120663079}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -583,7 +590,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -873896499
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5431,6 +5438,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &604915011
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: gaussian blur
+  m_Shader: {fileID: -6465566751694194690, guid: 35a7ec563f3ea1f44ab85a217408b015, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _area: 0.01
+    - _falloffE: 1
+    - _falloffP: 0
+    - _falloffS: 0
+    - _falloffU: 0
+    - _sigmaX: 0.6
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &676938802
 GameObject:
   m_ObjectHideFlags: 0
@@ -5476,18 +5533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c5766e5635c194a81a30f7d581eb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideMainCamera:
-    _value: 0
-  obstructionObjectsVisible:
-    _value: 1
-  cameraVisible:
-    _value: 1
-  textureResolution:
-    _value: 1
-  cam: {fileID: 676938805}
-  _mainCamera: {fileID: 0}
   _layerRenderer:
+    water2D: {fileID: 0}
     layerTexture: {fileID: 1981976019}
+    rendererType: 2
+    sr: {fileID: 0}
     format: 16
     fliterMode: 0
     bitDepth: 0
@@ -5498,10 +5548,21 @@ MonoBehaviour:
     holder: {fileID: 676938803}
     follow: {fileID: 955238874017589500}
     res: 1
+    scale: 1.25
     reflectionLayerIdx: 8
     copyMainBackground: 0
-    lastOrtographicSize: 0
+    lastOrtographicSize: 6.25
   _run: 1
+  overrideMainCamera:
+    _value: 0
+  obstructionObjectsVisible:
+    _value: 1
+  cameraVisible:
+    _value: 1
+  textureResolution:
+    _value: 1
+  cam: {fileID: 676938805}
+  _mainCamera: {fileID: 0}
 --- !u!20 &676938805
 Camera:
   m_ObjectHideFlags: 0
@@ -5529,7 +5590,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.25
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5545,6 +5606,43 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!84 &697810952
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 2029
+  m_Height: 912
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &732059281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5702,56 +5800,6 @@ MonoBehaviour:
   speed: 5
   pathLength: 5
   flip: 1
---- !u!21 &742278411
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: gaussian blur
-  m_Shader: {fileID: -6465566751694194690, guid: 35a7ec563f3ea1f44ab85a217408b015, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _area: 0.01
-    - _falloffE: 1
-    - _falloffP: 0
-    - _falloffS: 0
-    - _falloffU: 0
-    - _sigmaX: 0.6
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &805262505
 GameObject:
   m_ObjectHideFlags: 0
@@ -5923,8 +5971,8 @@ RenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 5
-  m_Width: 1920
-  m_Height: 1080
+  m_Width: 2029
+  m_Height: 912
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthStencilFormat: 0
@@ -5937,7 +5985,7 @@ RenderTexture:
   m_EnableCompatibleFormat: 1
   m_TextureSettings:
     serializedVersion: 2
-    m_FilterMode: 0
+    m_FilterMode: 1
     m_Aniso: 1
     m_MipBias: 0
     m_WrapU: 1
@@ -6018,8 +6066,8 @@ RenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 5
-  m_Width: 1920
-  m_Height: 1080
+  m_Width: 2029
+  m_Height: 912
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthStencilFormat: 0
@@ -6032,7 +6080,7 @@ RenderTexture:
   m_EnableCompatibleFormat: 1
   m_TextureSettings:
     serializedVersion: 2
-    m_FilterMode: 0
+    m_FilterMode: 1
     m_Aniso: 1
     m_MipBias: 0
     m_WrapU: 1
@@ -6041,6 +6089,114 @@ RenderTexture:
   m_Dimension: 2
   m_VolumeDepth: 1
   m_ShadowSamplingMode: 2
+--- !u!1 &1120663078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120663079}
+  - component: {fileID: 1120663081}
+  - component: {fileID: 1120663080}
+  m_Layer: 0
+  m_Name: SurfaceRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120663079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120663078}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.92, y: -0.26, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 263058011}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120663080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120663078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2debad66a47351947a56d59389929af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerRenderer:
+    water2D: {fileID: 0}
+    layerTexture: {fileID: 697810952}
+    rendererType: 3
+    sr: {fileID: 0}
+    format: 0
+    fliterMode: 0
+    bitDepth: 0
+    layerName: nl
+    layerMask: 2147481775
+    mainCamera: {fileID: 1120663081}
+    CameraRenderingScene: {fileID: 955238874017589502}
+    holder: {fileID: 1120663079}
+    follow: {fileID: 955238874017589500}
+    res: 1
+    scale: 1
+    reflectionLayerIdx: -1
+    copyMainBackground: 0
+    lastOrtographicSize: 5
+  _run: 0
+--- !u!20 &1120663081
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120663078}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 0
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 2147481775
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 697810952}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1249289972
 GameObject:
   m_ObjectHideFlags: 0
@@ -6064,8 +6220,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249289972}
-  m_LocalRotation: {x: -0.0021816713, y: -0.25881842, z: 0.96592337, w: -0.00058461627}
-  m_LocalPosition: {x: 0, y: -0.21875, z: 0}
+  m_LocalRotation: {x: -0.0021816716, y: -0.25881842, z: 0.96592337, w: -0.0005846163}
+  m_LocalPosition: {x: 0, y: -0.328125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6107,6 +6263,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1444281840
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1024
+  m_Height: 598
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 46
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1509061213
 GameObject:
   m_ObjectHideFlags: 0
@@ -6201,7 +6394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1515138459}
   - component: {fileID: 1515138460}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: 'reflection : duck2'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6285,7 +6478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516904698}
   - component: {fileID: 1516904699}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: 'reflection : duck2 (2)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6404,6 +6597,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a56f329a4125349aff99112e1cbb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerRenderer:
+    water2D: {fileID: 0}
+    layerTexture: {fileID: 936272860}
+    rendererType: 2
+    sr: {fileID: 0}
+    format: 0
+    fliterMode: 0
+    bitDepth: 0
+    layerName: Reflections
+    layerMask: 0
+    mainCamera: {fileID: 1560430918}
+    CameraRenderingScene: {fileID: 955238874017589502}
+    holder: {fileID: 1560430916}
+    follow: {fileID: 955238874017589500}
+    res: 1
+    scale: 1
+    reflectionLayerIdx: 10
+    copyMainBackground: 0
+    lastOrtographicSize: 5
+  _run: 1
   startupQF: 1
   pivotDetectionAlphaTreshold: 122
   overrideMainCamera:
@@ -6415,6 +6628,7 @@ MonoBehaviour:
   defaultReflectionSprflipx:
     _value: 0
   mainCamera: {fileID: 0}
+  reflectionCamera: {fileID: 1560430918}
   reflectorMat: {fileID: 2100000, guid: 0ae8ac8d38b65bd408099e116c252bce, type: 2}
   reflectionMat: {fileID: 2100000, guid: 075b92eb3f3ea4948a0553b3da251cc5, type: 2}
   textureResolution:
@@ -6422,21 +6636,6 @@ MonoBehaviour:
   layers: 0
   topdown: 1
   reflectionLayerIdx: 0
-  _layerRenderer:
-    layerTexture: {fileID: 936272860}
-    format: 0
-    fliterMode: 0
-    bitDepth: 0
-    layerName: Reflections
-    layerMask: 0
-    mainCamera: {fileID: 1560430918}
-    CameraRenderingScene: {fileID: 955238874017589502}
-    holder: {fileID: 1560430916}
-    follow: {fileID: 955238874017589500}
-    res: 1
-    reflectionLayerIdx: 9
-    copyMainBackground: 0
-    lastOrtographicSize: 0
   _reflectionsSettings:
     layers: []
     angle:
@@ -6453,7 +6652,6 @@ MonoBehaviour:
       _value: 0.494
     y:
       _value: 0
-  _run: 1
 --- !u!20 &1560430918
 Camera:
   m_ObjectHideFlags: 0
@@ -6485,7 +6683,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 936272860}
   m_TargetDisplay: 0
@@ -6535,7 +6733,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 258404891}
+  - {fileID: 231511764}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6595,8 +6793,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waterSimulationType: 0
+  _surfaceRenderer: {fileID: 1120663080}
   _childPPLayerRenderer:
+    water2D: {fileID: 0}
     layerTexture: {fileID: 0}
+    rendererType: 0
+    sr: {fileID: 0}
     format: 0
     fliterMode: 0
     bitDepth: 0
@@ -6607,26 +6809,11 @@ MonoBehaviour:
     holder: {fileID: 0}
     follow: {fileID: 0}
     res: 0
+    scale: 1
     reflectionLayerIdx: -1
     copyMainBackground: 0
     lastOrtographicSize: 0
   _childPP: {fileID: 0}
-  _surfaceRenderer:
-    layerTexture: {fileID: 0}
-    format: 0
-    fliterMode: 0
-    bitDepth: 0
-    layerName: nl
-    layerMask: -1
-    mainCamera: {fileID: 0}
-    CameraRenderingScene: {fileID: 0}
-    holder: {fileID: 0}
-    follow: {fileID: 0}
-    res: 0
-    reflectionLayerIdx: -1
-    copyMainBackground: 0
-    lastOrtographicSize: 0
-  _surfaceRendererObject: {fileID: 0}
   ManagersVisible:
     _value: 0
   enableObstruction:
@@ -6710,6 +6897,7 @@ MonoBehaviour:
         _value: {x: 1, y: 1}
       baseAlpha:
         _value: 1
+      alphaTexture: {fileID: 0}
       numOfPixels:
         _value: 256
       pixelPerfect:
@@ -6748,6 +6936,7 @@ MonoBehaviour:
         _value: 0
       stripsSize:
         _value: 0.57
+      surfaceSprite: {fileID: 0}
       surfaceTexture: {fileID: 0}
       surfaceTiling:
         _value: {x: 0, y: 0}
@@ -6789,7 +6978,7 @@ MonoBehaviour:
       waveRad:
         _value: 0.005
       waveHeight:
-        _value: 0.5
+        _value: 0.21
       dispersion:
         _value: 0.985
       iterations:
@@ -6799,9 +6988,9 @@ MonoBehaviour:
       enableRain:
         _value: 1
       rainWaveHeight:
-        _value: 1.2
+        _value: 1
       rainSpeed:
-        _value: 2.3
+        _value: 0.56
       rainSizeX:
         _value: 2
       rainSizeY:
@@ -6809,9 +6998,9 @@ MonoBehaviour:
       normalStrength:
         _value: 1
       waveColor:
-        _value: {r: 0.6399964, g: 0.8867924, b: 0.8758237, a: 1}
+        _value: {r: 0.78764683, g: 0.9433962, b: 0.93597955, a: 1}
       waveColorMinMaxHeight:
-        _value: {x: 0, y: 1.27}
+        _value: {x: 0, y: 0.4}
     _blurSettings:
       blurType: 1
       useBlur:
@@ -6843,46 +7032,9 @@ MonoBehaviour:
       falloffStrength:
         _value: 1
   customWaterMaterial: 0
-  _mat: {fileID: 258404891}
-  _matb: {fileID: 742278411}
+  _mat: {fileID: 231511764}
+  _matb: {fileID: 604915011}
   _sr: {fileID: 1611749996}
---- !u!84 &1747589969
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1024
-  m_Height: 598
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 46
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1759663826
 GameObject:
   m_ObjectHideFlags: 0
@@ -6990,8 +7142,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895417639}
-  m_LocalRotation: {x: -0.0021499016, y: -0.30652532, z: 0.95185983, w: -0.0006923653}
-  m_LocalPosition: {x: 0, y: -0.21875, z: 0}
+  m_LocalRotation: {x: -0.0025461894, y: -0.306525, z: 0.9518589, w: -0.000819981}
+  m_LocalPosition: {x: 0, y: -0.328125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7075,6 +7227,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a56f329a4125349aff99112e1cbb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerRenderer:
+    water2D: {fileID: 0}
+    layerTexture: {fileID: 1081408501}
+    rendererType: 3
+    sr: {fileID: 0}
+    format: 0
+    fliterMode: 0
+    bitDepth: 0
+    layerName: 
+    layerMask: 0
+    mainCamera: {fileID: 1941401730}
+    CameraRenderingScene: {fileID: 955238874017589502}
+    holder: {fileID: 1941401728}
+    follow: {fileID: 955238874017589500}
+    res: 1
+    scale: 1
+    reflectionLayerIdx: -1
+    copyMainBackground: 0
+    lastOrtographicSize: 5
+  _run: 0
   startupQF: 1
   pivotDetectionAlphaTreshold: 122
   overrideMainCamera:
@@ -7086,6 +7258,7 @@ MonoBehaviour:
   defaultReflectionSprflipx:
     _value: 0
   mainCamera: {fileID: 955238874017589502}
+  reflectionCamera: {fileID: 1941401730}
   reflectorMat: {fileID: 2100000, guid: 0ae8ac8d38b65bd408099e116c252bce, type: 2}
   reflectionMat: {fileID: 2100000, guid: 075b92eb3f3ea4948a0553b3da251cc5, type: 2}
   textureResolution:
@@ -7093,21 +7266,6 @@ MonoBehaviour:
   layers: 0
   topdown: 0
   reflectionLayerIdx: 0
-  _layerRenderer:
-    layerTexture: {fileID: 1081408501}
-    format: 0
-    fliterMode: 0
-    bitDepth: 0
-    layerName: 
-    layerMask: 0
-    mainCamera: {fileID: 1941401730}
-    CameraRenderingScene: {fileID: 955238874017589502}
-    holder: {fileID: 1941401728}
-    follow: {fileID: 955238874017589500}
-    res: 1
-    reflectionLayerIdx: -1
-    copyMainBackground: 0
-    lastOrtographicSize: 0
   _reflectionsSettings:
     layers: []
     angle:
@@ -7124,7 +7282,6 @@ MonoBehaviour:
       _value: 0.494
     y:
       _value: 0
-  _run: 0
 --- !u!20 &1941401730
 Camera:
   m_ObjectHideFlags: 2
@@ -7192,7 +7349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967420184}
   m_LocalRotation: {x: -0.0021816716, y: -0.25881842, z: 0.96592337, w: -0.0005846163}
-  m_LocalPosition: {x: 0, y: -0.21875, z: 0}
+  m_LocalPosition: {x: 0, y: -0.328125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7214,8 +7371,8 @@ RenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 5
-  m_Width: 1920
-  m_Height: 1080
+  m_Width: 2536
+  m_Height: 1140
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthStencilFormat: 0
@@ -7228,7 +7385,7 @@ RenderTexture:
   m_EnableCompatibleFormat: 1
   m_TextureSettings:
     serializedVersion: 2
-    m_FilterMode: 0
+    m_FilterMode: 1
     m_Aniso: 1
     m_MipBias: 0
     m_WrapU: 1
@@ -7247,7 +7404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053109340}
   - component: {fileID: 2053109341}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: 'reflection : duck2 (1)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}

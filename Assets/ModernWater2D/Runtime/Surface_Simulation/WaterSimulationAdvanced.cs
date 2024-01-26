@@ -153,7 +153,7 @@ namespace Water2D
         void Render()
         {
             //blit here
-            RenderUtils.RenderToRT2D(waveShader, Temporary);
+            WaterRenderUtils.RenderToRT2D(waveShader, Temporary);
             Graphics.CopyTexture(Temporary, CurrentState);
         }
 
@@ -162,7 +162,7 @@ namespace Water2D
             Vector2 d = (Vector2)CalculateDeltaUV();
             offsetShader.SetTexture("_tex", CurrentState);
             offsetShader.SetVector("delta", d);
-            RenderUtils.RenderToRT2D(offsetShader, Temporary);
+            WaterRenderUtils.RenderToRT2D(offsetShader, Temporary);
             Graphics.CopyTexture(Temporary, CurrentState);
         }
 

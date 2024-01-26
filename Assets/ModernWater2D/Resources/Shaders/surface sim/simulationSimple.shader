@@ -50,6 +50,7 @@ Shader "Water2D/Simulations/process"
             uniform float rainSizeX;
             uniform float rainSizeY;
             uniform float enableRain;
+            uniform float animate;
 
 
             float hash12(float2 co) 
@@ -92,7 +93,7 @@ Shader "Water2D/Simulations/process"
                 float new_s = data.y;
                 float org_s = data.x;
                 float gather = 0.0;
-                float mp = 1.0;
+                 float mp = 1.0;
                 const float take = 0.20;
                 const float takeCorner = 0.05;
 
@@ -130,21 +131,21 @@ Shader "Water2D/Simulations/process"
                      const float GoldenAngle = 2.399996 ; 
                     const float radius = 0.25;
         
-
-        float r = 1.;
-        float2x2 G = rot(GoldenAngle);
-        float2 offset = float2(radius, 0.);
+                float obsC;
+                float r = 1.;
+                float2x2 G = rot(GoldenAngle);
+                float2 offset = float2(radius, 0.);
         
-        for (int i = 0; i < iter; ++i)
-        {
-            r += 1. / r;
-            offset = mul(G,  offset);
-            mp *= round(tex2D(_ObstructionTex, obsUvs + offset * (r - 1.) * stepSizeObs));
-        }
+                    for (int i = 0; i < iter; ++i)
+                    {
+                        r += 1. / r;
+                        offset = mul(G,  offset);
+                        mp *=  tex2D(_ObstructionTex, obsUvs + offset * (r - 1.) * stepSizeObs).x;
+                    }
             
 
-                    
-                    newH -= tex2D(_ObstructionTex, obsUvs) * mp * waveHeight;
+                    obsC = tex2D(_ObstructionTex, obsUvs);
+                    newH -= obsC * mp * waveHeight;
  
     }
 
@@ -162,7 +163,7 @@ Shader "Water2D/Simulations/process"
 
     //return obsUvs.xy;
     return float2(newH, org_s);
-    //return float2(tex2D(_ObstructionTex, obsUvs + float2(0.01,0.01)).x, tex2D(_ObstructionTex, obsUvs).x);
+    //return float2(tex2D(_ObstructionTex, obsUvs + float2(0.005,0.005)).x, tex2D(_ObstructionTex, obsUvs).x);
 }           
 
             ENDCG

@@ -9,9 +9,7 @@ using UnityEngine;
 namespace Water2D
 {
 
-    [ExecuteAlways]
-    [RequireComponent(typeof(Camera))]
-    public class ReflectionsSystem : MonoBehaviour
+    public class ReflectionsSystem : WaterFeatureLayerRenderer
     {
         #region Singleton
         [SerializeField][HideInInspector] public static ReflectionsSystem instanceTopDown;
@@ -75,6 +73,7 @@ namespace Water2D
         [HideInInspector] [SerializeField] public WaterCryo<bool> cameraVisible = new WaterCryo<bool>(false);
         [HideInInspector] [SerializeField] public WaterCryo<bool> defaultReflectionSprflipx = new WaterCryo<bool>(false);
         [HideInInspector] [SerializeField] public Camera mainCamera;
+        [HideInInspector] [SerializeField] public Camera reflectionCamera;
         [HideInInspector] [SerializeField] public Material reflectorMat;
         [HideInInspector] [SerializeField] public Material reflectionMat;
         [HideInInspector] [SerializeField] public WaterCryo<float> textureResolution = new WaterCryo<float>(1);
@@ -88,8 +87,7 @@ namespace Water2D
 
         [HideInInspector] public int reflectionLayerIdx;
 
-        [SerializeField][HideInInspector] LayerRenderer _layerRenderer;
-        [SerializeField][HideInInspector] LayerRenderer layerRenderer 
+        LayerRenderer layerRenderer 
         {
             get 
             {
@@ -147,6 +145,11 @@ namespace Water2D
         public void AddReflector(ReflectionSO r)
         {
             if (!reflectors.ContainsKey(r.source)) reflectors.Add(r.source, r);
+            else
+            {
+                reflectors.Remove(r.source);
+                reflectors.Add(r.source, r);
+            }
             UpdateReflection(r);
         }
 
@@ -240,10 +243,12 @@ namespace Water2D
             EditorApplication.update += Update;
 #endif
             SetCallbacks();
+     
             if (topdown) _layerRenderer.Setup(mainCamera, transform, rlayer, textureResolution.value);
             else  _layerRenderer.Setup(mainCamera, transform, layers, textureResolution.value);
             OnSettingsChanged();
-            SetupVariables(); 
+            SetupVariables();
+            reflectionCamera = GetComponent<Camera>();
         }
 
         private void SetupVariables()
@@ -285,12 +290,12 @@ namespace Water2D
             GetAllReflectors();
         }
 
-        private void Update()
+        protected override void Update()
         {
-            _layerRenderer.run = run;
+            base.Update();
             if (!run) return;
             if (this == null) return;
-            if (GetComponent<Camera>()) GetComponent<Camera>().hideFlags = (cameraVisible.value?HideFlags.None : HideFlags.HideInInspector);
+            if (reflectionCamera!=null) reflectionCamera.hideFlags = (cameraVisible.value?HideFlags.None : HideFlags.HideInInspector);
             layerRenderer.Loop();
 
             if (!topdown) return;
@@ -310,18 +315,6 @@ namespace Water2D
         Transform[] cleaner = new Transform[50000];
         int cleanIdx = 0;
 
-        [HideInInspector][SerializeField] bool _run;
-        [HideInInspector]
-        [SerializeField]
-        internal bool run
-        {
-            get { return _run; }
-            set
-            {
-                _layerRenderer.run = value;
-                _run = value;
-            }
-        }
 
         private void UpdateReflectionsPhysics()
         {
@@ -347,7 +340,7 @@ namespace Water2D
         public static bool update_extended = false;
         private void UpdateReflection(ReflectionSO reflection)
         {
-            if (reflection.reflectionSr.sprite != reflection.sourceSr.sprite) reflection.reflectionSr.sprite = ( reflection.MSP_ReflectionGenerator ? reflection.reflectionSr.sprite : reflection.sourceSr.sprite) ;
+            if (!reflection.raymarched && (reflection.reflectionSr.sprite != reflection.sourceSr.sprite)  ) reflection.reflectionSr.sprite = ( reflection.MSP_ReflectionGenerator ? reflection.reflectionSr.sprite : reflection.sourceSr.sprite) ;
             
             SetReflectionXOrientation(reflection);
 
@@ -378,12 +371,14 @@ namespace Water2D
 
         private void SetReflectionPivotPos(ReflectionSO reflection)
         {
+
             //pivot pos
             switch (reflection.reflectionPivotSourceMode)
             {
                 case ReflectionPivotSourceMode.auto:
-                    reflection.reflectionPivot.localPosition =  - ( reflection.source.lossyScale * GetSpritePivot(reflection.sourceSr.sprite)) + reflection.displacement; 
-                    reflection.reflection.localPosition = GetSpritePivot(reflection.reflectionSr.sprite) ;
+                    reflection.reflectionPivot.localPosition =  - ( reflection.source.lossyScale * GetSpritePivot(reflection.sourceSr.sprite)) + reflection.displacement;
+                    if (reflection.raymarched) { reflection.reflection.localPosition = Vector3.zero; break; }
+                    else reflection.reflection.localPosition = GetSpritePivot(reflection.reflectionSr.sprite) ;
                     break;
                 case ReflectionPivotSourceMode.sprite_pivot:
                     reflection.reflectionPivot.localPosition = reflection.displacement ;

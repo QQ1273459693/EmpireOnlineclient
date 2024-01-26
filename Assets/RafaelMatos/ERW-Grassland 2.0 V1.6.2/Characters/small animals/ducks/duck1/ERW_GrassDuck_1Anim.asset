@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77fafcc6bd2ee94ebe9ac341b986e7a, type: 3}
+  m_Name: ERW_GrassDuck_1Anim
+  m_EditorClassIdentifier: 
+  SpriteAnimations:
+  - Name: Idle
+    FPS: 15
+    ActionFrame: 0
+    Frames:
+    - {fileID: -847111272, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: -344636758, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: -19595239, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: 1282780902, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: 1057385951, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: -2118109567, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: -777369735, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    - {fileID: -1377786536, guid: c6d35e54d1822504a9068c84f1269aa1, type: 3}
+    SpriteAnimationType: 0
+  - Name: Move
+    FPS: 15
+    ActionFrame: 0
+    Frames:
+    - {fileID: -1852407747, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: -218891802, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: 1442406820, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: -223074175, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: 707965308, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: 710878857, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: -810410652, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    - {fileID: -1419222065, guid: ed8903ed1094baf4ea35d250ad19328b, type: 3}
+    SpriteAnimationType: 0

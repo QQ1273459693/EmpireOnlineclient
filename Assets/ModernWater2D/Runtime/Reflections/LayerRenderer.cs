@@ -42,7 +42,7 @@ namespace Water2D
             set 
             {
                 if(value == true) { mainCamera.orthographicSize = lastOrtographicSize; mainCamera.enabled = true; }
-                else { lastOrtographicSize = mainCamera.orthographicSize * scale; mainCamera.orthographicSize = 0; mainCamera.enabled = false;   }
+                else { lastOrtographicSize = CameraRenderingScene.orthographicSize * scale; mainCamera.orthographicSize = 0; mainCamera.enabled = false;   }
                 _run = value;
             }
         }
@@ -181,6 +181,7 @@ namespace Water2D
             if (layerTexture == null) layerTexture.Create();
             mainCamera.targetTexture = layerTexture;
 
+      
         }
 
         void StripCamera()
@@ -284,9 +285,9 @@ namespace Water2D
         private void UpdateCameraSize()
         {
 
-            if (mainCamera.orthographicSize != CameraRenderingScene.orthographicSize * scale) { mainCamera.orthographicSize = CameraRenderingScene.orthographicSize * scale; CreateRT(sr, CameraRenderingScene, rendererType);  }
+            if (Mathf.Abs( mainCamera.orthographicSize - CameraRenderingScene.orthographicSize * scale ) > 0.01f) { lastOrtographicSize = mainCamera.orthographicSize = CameraRenderingScene.orthographicSize * scale; CreateRT(sr, CameraRenderingScene, rendererType);  }
             if (mainCamera.aspect != CameraRenderingScene.aspect){ mainCamera.aspect = CameraRenderingScene.aspect; CreateRT(sr, CameraRenderingScene, rendererType); }
-
+ 
         }
 
         private void RemoveLayerFromMainCamera() 

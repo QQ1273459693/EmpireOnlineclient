@@ -497,9 +497,6 @@ namespace Water2D
 
             water.settings._waterSettings.enableBelowWater.value = EditorGUILayout.Toggle("enable", water.settings._waterSettings.enableBelowWater.value);
             
-            if(!water.settings._waterSettings.enableBelowWater.value)
-
-            if (water._surfaceRendererObject == null && (water.settings._waterSettings.enableBelowWater.value)) water.CreateChildSurfaceRenderer();
 
             water.settings._waterSettings.belowWaterAlpha.value = EditorGUILayout.Slider("alpha (surface below water)", water.settings._waterSettings.belowWaterAlpha.value,0f,1f);
             water.settings._waterSettings.belowWaterDistortionStrength.value = EditorGUILayout.Slider("simulation/distortion strength", water.settings._waterSettings.belowWaterDistortionStrength.value,0f,1f);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -16,6 +17,11 @@ namespace Water2D
         [SerializeField][HideInInspector] public WaterCryo<bool > MSP_ReflectionGenerator = new WaterCryo<bool>(false);
         [SerializeField][HideInInspector] public WaterCryo<Vector2 > displacement = new WaterCryo<Vector2>(new Vector2(0,0));
         [SerializeField][HideInInspector] public WaterCryo<float > additionalTilt = new WaterCryo<float>(0);
+
+        [SerializeField][HideInInspector] public bool raymarched = false;
+        [SerializeField][HideInInspector] public int maxLength = 10000;
+        [SerializeField][HideInInspector] [Range(0f, 1f)] public float fadeStrength = 0;
+        [SerializeField][HideInInspector] public Dictionary<Sprite, Sprite> spritesDictionary = new Dictionary<Sprite, Sprite>();
 
         [HideInInspector] [SerializeField] ReflectionSO _data;
 
@@ -65,6 +71,62 @@ namespace Water2D
 
         }
 
+
+        Sprite GetRaymarchTexture(Sprite original)
+        {
+
+            Texture2D raymarchedTexture = new Texture2D(original.texture.width, original.texture.height*2);
+
+            Color[] colors = original.texture.GetPixels();
+            Color[] newColors = new Color[colors.Length*2];
+
+            int w1 = original.texture.width;
+            int w2 = original.texture.width;
+            int h1 = original.texture.height;
+            int h2 = original.texture.height*2;
+
+          
+
+            for (int x = 0; x < w1; x++)
+                for (int y = 0; y < h1; y++) newColors[x + w1 * y] = Color.clear;
+            for (int x = 0; x < w1; x++)
+                for (int y = h1; y < h2; y++) newColors[x + w1 * y] = colors[x + w1* (y-h1)];
+
+
+            for (int x = 0; x < w1; x++)
+                for (int y = 0; y < h2; y++)
+                    if (newColors[x + w1 * y].a < 0.1f)
+                    {
+                        for (int y1 = y+1; y1 < h2; y1++)
+                        {
+                            if (newColors[x + w1 * y1].a > 0.1f)
+                            {
+                                if((y1 + (y1 - y)) < h2 && (y1-y) <= maxLength) newColors[x + w1 * y] = newColors[x + w1 * (y1 + (y1-y))];
+                                break;
+                            }
+                        }
+                    }
+
+            for (int x = 0; x < w1; x++)
+                for (int y = h1; y < h2; y++) if (colors[x + w1 * (y-h1)].a  > 0.1f) newColors[x + w1 * y] = Color.clear;
+
+            raymarchedTexture.SetPixels(newColors);
+            raymarchedTexture.Apply();
+
+       
+
+            Sprite newSprite = Sprite.Create(raymarchedTexture, new Rect(0,0, raymarchedTexture.width, raymarchedTexture.height), original.pivot / new Vector2(raymarchedTexture.width, original.texture.height), original.pixelsPerUnit);
+            spritesDictionary[original] = newSprite;
+            newSprite.name = original.name + "raymarched";
+
+
+
+
+
+            return spritesDictionary[original];
+        }
+
+
         private void Start()
         {
             data.reflection.gameObject.layer = Obstructor.GetLayerIdx(ReflectionsSystem.rlayer);
@@ -106,11 +168,12 @@ namespace Water2D
             reflectionSr.sortingLayerName = sourceSr.sortingLayerName;
             reflectionSr.sortingOrder = sourceSr.sortingOrder;
             reflectionSr.flipX = sourceSr.flipX;
-            reflectionSr.flipY = sourceSr.flipY;
-            reflectionSr.sprite = (MSP_ReflectionGenerator.value ? CreateMSPSprite(sourceSr.sprite) : sourceSr.sprite);
-            ReflectionSO reflectionSO = new ReflectionSO(source, reflectionPivot, pivotSourceMode, reflection, sourceSr, reflectionSr, flipX.value, displacement.value, MSP_ReflectionGenerator.value, additionalTilt.value);
+            reflectionSr.flipY = !raymarched ? sourceSr.flipY : !sourceSr.flipY;
+            reflectionSr.sprite = !raymarched ? (MSP_ReflectionGenerator.value ? CreateMSPSprite(sourceSr.sprite) : sourceSr.sprite) : GetRaymarchTexture(sourceSr.sprite);
+            ReflectionSO reflectionSO = new ReflectionSO(source, reflectionPivot, pivotSourceMode, reflection, sourceSr, reflectionSr, flipX.value, displacement.value, MSP_ReflectionGenerator.value, additionalTilt.value,raymarched);
             reflectionSO.customPivot = customPivot;
             data = reflectionSO;
+            data.raymarched = raymarched;
 
             ReflectionsSystem.instanceTopDown.AddReflector(data);
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Water2D
@@ -11,8 +10,6 @@ namespace Water2D
         [SerializeField][HideInInspector] ObstructorSO _data;
         [SerializeField][HideInInspector][Range(0f, 1f)] public float height;
         [SerializeField][HideInInspector] SpriteRenderer sr;
-
-
 
         [SerializeField] [HideInInspector]
         public ObstructorSO data
@@ -78,7 +75,8 @@ namespace Water2D
         }
 
 
-        ObstructorPair p;
+
+
 
         public void Destroy() 
         {

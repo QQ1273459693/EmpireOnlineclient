@@ -33,6 +33,7 @@ namespace Water2D
         [SerializeField] private int rainSizeY = 1;
         [SerializeField] private bool enableRain = false;
 
+
         [SerializeField][HideInInspector] Camera _mainCam;
         Camera mainCam
         {
@@ -146,7 +147,7 @@ namespace Water2D
         void Render()
         {
             //blit here
-            RenderUtils.RenderToRT2D(new Rect(0, 0, resolution.x, resolution.y), waveShader, Temporary);
+            WaterRenderUtils.RenderToRT2D(new Rect(0, 0, resolution.x, resolution.y), waveShader, Temporary);
             Graphics.CopyTexture(Temporary, CurrentState);
         }
 
@@ -166,9 +167,8 @@ namespace Water2D
 
         public override void Loop()
         {
-
+            
             ObstructionTex = ObstructorManager.instance.layerRenderer.LayerTexture();
-  
             waveShader.SetTexture("_ObstructionTex", ObstructionTex);
             waveShader.SetVector("OstructionTexPos", FutureSight());
        
@@ -199,7 +199,10 @@ namespace Water2D
             Profiler.BeginSample("Rendering Water Simulation");
             for (int i = 0; i < iterations; i++) Render();
             Profiler.EndSample();
+
+           
         }
+
 
         public override void Setup(SimulationSettings value)
         {

@@ -4889,7 +4889,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "Lens_Blur",
     "m_FunctionSource": "",
-    "m_FunctionBody": "float div = 0.0;\r\nfloat4 accumulate = float4(0.0,0.0,0.0,0.0);\r\n    \r\n    for(int iy = 0; iy < quality; iy++)\r\n    {\r\n        float y = (float(iy) / float(quality))*2.0 - 1.0;\r\n        for(int ix = 0; ix < quality; ix++)\r\n        {\r\n            float x = (float(ix) / float(quality))*2.0 - 1.0;\r\n            float2 p = float2(x, y);\r\n            float i = smoothstep(1.0, hardness, distance(p, float2(0.0,0.0)));\r\n            \r\n            div += i;\r\n            accumulate += pow( tex.Sample(sam, uv+p*area*float2(1.0, ratio)).xyzw, float4(gamma.xxxx) ) * i;\r\n        }\r\n    }\r\n    \r\n    rgba = float4( pow(accumulate / float3(div.xxx), float3( 1 / gamma.xxx)).xyz , tex.Sample(sam, uv).w   );"
+    "m_FunctionBody": "float div = 0.0;\r\nfloat4 accumulate = float4(0.0,0.0,0.0,0.0);\r\n    \r\n    for(int iy = 0; iy < quality; iy++)\r\n    {\r\n        float y = (float(iy) / float(quality))*2.0 - 1.0;\r\n        for(int ix = 0; ix < quality; ix++)\r\n        {\r\n            float x = (float(ix) / float(quality))*2.0 - 1.0;\r\n            float2 p = float2(x, y);\r\n            float i = smoothstep(1.0, hardness, distance(p, float2(0.0,0.0)));\r\n            \r\n            div += i;\r\n            accumulate += pow(abs( tex.Sample(sam, uv+p*area*float2(1.0, ratio)).xyzw), float4(gamma.xxxx) ) * i;\r\n        }\r\n    }\r\n    \r\n    rgba = float4( pow(abs(accumulate / float3(div.xxx)), float3( 1 / gamma.xxx)).xyz , tex.Sample(sam, uv).w   );"
 }
 
 {

@@ -8,9 +8,7 @@ using UnityEngine;
 namespace Water2D
 {
 
-    [ExecuteAlways]
-    [RequireComponent(typeof(Camera))]
-    public class ObstructorManager : MonoBehaviour
+    public class ObstructorManager : WaterFeatureLayerRenderer
     {
         [SerializeField] [HideInInspector] public static ObstructorManager instance;
 
@@ -74,10 +72,6 @@ namespace Water2D
             set { _red = value; }
         }
 
-        [SerializeField][HideInInspector] LayerRenderer _layerRenderer;
-
-        [SerializeField]
-        [HideInInspector]
         public LayerRenderer layerRenderer
         {
             get
@@ -85,7 +79,7 @@ namespace Water2D
                 if (_layerRenderer == null)
                 {
                     _layerRenderer = new LayerRenderer();
-                    _layerRenderer.Setup(mainCamera, transform, rlayer, textureResolution.value, RenderTextureFormat.R8, 1.25f);
+                    _layerRenderer.Setup(mainCamera, transform, rlayer, textureResolution.value, RenderTextureFormat.RG16, 1.25f);
                 }
                 return _layerRenderer;
             }
@@ -94,16 +88,6 @@ namespace Water2D
 
         [SerializeField] Dictionary<Transform, ObstructorSO> _obstructors = new Dictionary<Transform, ObstructorSO>();
 
-        [HideInInspector][SerializeField] bool _run;
-        [HideInInspector] [SerializeField] internal bool run 
-        {
-            get { return _run; }
-            set 
-            {
-                _layerRenderer.run = value;
-                _run = value;
-            }
-        }
 
         Dictionary<Transform, ObstructorSO> obstructors
         {
@@ -183,7 +167,7 @@ namespace Water2D
             Singleton();
             SetCallbacks();
             if (mainCamera==null) mainCamera = Camera.main;
-            layerRenderer.Setup(mainCamera, transform, rlayer, textureResolution.value,  RenderTextureFormat.R8, 1.25f);
+            layerRenderer.Setup(mainCamera, transform, rlayer, textureResolution.value,  RenderTextureFormat.RG16, 1.25f);
             UpdateReflectionsShader();
         }
 
@@ -205,9 +189,9 @@ namespace Water2D
 
         #region Update
 
-        public void Update()
+        protected override void Update()
         {
-            _layerRenderer.run = run;
+            base.Update();
             _layerRenderer.Loop();
             if (!run) return;
 

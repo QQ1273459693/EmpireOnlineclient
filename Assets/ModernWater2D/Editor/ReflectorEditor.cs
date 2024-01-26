@@ -30,6 +30,16 @@ namespace Water2D
             reflector.additionalTilt.value = EditorGUILayout.Slider("additional tilt",reflector.additionalTilt.value, -90f, 90f);
             foreach (Reflector r in targets) r.additionalTilt = reflector.additionalTilt;
 
+            GUILayout.Label("Raymarched Reflection", GUIStyleUtils.Label(14, "87F6FF"));
+
+            bool oldR = reflector.raymarched;
+            reflector.raymarched = EditorGUILayout.Toggle("raymarch",reflector.raymarched);
+            if (oldR != reflector.raymarched) foreach (Reflector r in targets) { r.raymarched = reflector.raymarched; r.CreateData(); }
+
+            int oldM = reflector.maxLength;
+            reflector.maxLength = EditorGUILayout.IntField("max pixel length", reflector.maxLength);
+            if (oldM != reflector.maxLength) foreach (Reflector r in targets) { r.maxLength = reflector.maxLength; r.CreateData(); }
+
 
             //reflector.MSP_ReflectionGenerator.value = EditorGUILayout.Toggle("MSP Reflector Generator", reflector.MSP_ReflectionGenerator.value);
 

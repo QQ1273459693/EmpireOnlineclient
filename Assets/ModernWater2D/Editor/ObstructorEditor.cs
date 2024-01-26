@@ -21,6 +21,7 @@ namespace Water2D
             if (oldV != ob.height) foreach (Obstructor obs in targets) obs.height = ob.height;
 
 
+
             if (GUILayout.Button("Create")) foreach (Obstructor obs in targets) { obs.CreateData(); EditorUtility.SetDirty(obs); }
             if (GUILayout.Button("Destroy")) foreach (Obstructor obs in targets) { obs.Destroy(); EditorUtility.SetDirty(obs); }
 

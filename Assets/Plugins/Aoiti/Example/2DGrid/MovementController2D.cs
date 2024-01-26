@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Aoiti.Pathfinding; //import the pathfinding library 
+using static Sirenix.OdinInspector.Editor.Internal.FastDeepCopier;
+using UnityEngine.Tilemaps;
+using GabrielBigardi.SpriteAnimator;
 
 
 //public class NavigationTest: MonoBehaviour
@@ -79,6 +82,8 @@ public class MovementController2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Animator = Player.GetComponent<SpriteAnimator>();
+        ClickImg = ClickAroow.GetComponent<SpriteRenderer>();
         pathfinder = new Pathfinder<Vector2>(GetDistance,GetNeighbourNodes,1000); //increase patience or gridSize for larger maps
     }
 
@@ -87,19 +92,47 @@ public class MovementController2D : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) //check for a new target
         {
-            GetMoveCommand(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-
-        if (pathLeftToGo.Count > 0) //if the target is not yet reached
-        {
-            Vector3 dir =  (Vector3)pathLeftToGo[0]-transform.position ;
-            transform.position += dir.normalized * speed;
-            if (((Vector2)transform.position - pathLeftToGo[0]).sqrMagnitude <speed*speed) 
+            StopAllCoroutines();
+            var Target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+            GetMoveCommand(Target);
+            if (pathLeftToGo.Count > 0)
             {
-                transform.position = pathLeftToGo[0];
-                pathLeftToGo.RemoveAt(0);
+                ClickImg.color = Color.white;
+                ClickAroow.position = pathLeftToGo[pathLeftToGo.Count-1];
+                StartCoroutine(ClickShow());
+                Animator.Play("Move");
+                movePoint = pathLeftToGo[0];
+                if (transform.position.x > movePoint.x)
+                {
+                    transform.eulerAngles = new Vector3(0, 180, 0);
+                }
+                else if (transform.position.x < movePoint.x)
+                {
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                }
+                StartCoroutine(Move());
+            }
+            else
+            {
+                if (!Animator.AnimationPlaying("Idle"))
+                {
+                    Animator.Play("Idle");
+                }
+
             }
         }
+
+        //if (pathLeftToGo.Count > 0) //if the target is not yet reached
+        //{
+        //    Vector3 dir =  (Vector3)pathLeftToGo[0]-transform.position ;
+        //    transform.position += dir.normalized * speed;
+        //    if (((Vector2)transform.position - pathLeftToGo[0]).sqrMagnitude <speed*speed) 
+        //    {
+        //        transform.position = pathLeftToGo[0];
+        //        pathLeftToGo.RemoveAt(0);
+        //    }
+        //}
 
         if (drawDebugLines)
         {
@@ -109,8 +142,48 @@ public class MovementController2D : MonoBehaviour
             }
         }
     }
+    Vector2 movePoint;
+    public Transform Player;
+    SpriteAnimator Animator;
+    public Transform ClickAroow;
+    SpriteRenderer ClickImg;
+    IEnumerator Move()
+    {
+        while (pathLeftToGo.Count > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movePoint, speed * Time.fixedDeltaTime);
+            if (Vector3.Distance(transform.position, movePoint) <= .001f)
+            {
+                pathLeftToGo.RemoveAt(0);
+                if (pathLeftToGo.Count > 0)
+                {
+                    movePoint = pathLeftToGo[0];
+                    if (transform.position.x > movePoint.x)
+                    {
+                        transform.eulerAngles = new Vector3(0, 180, 0);
+                    }
+                    else if (transform.position.x < movePoint.x)
+                    {
+                        transform.eulerAngles = new Vector3(0, 0, 0);
+                    }
+                }
+                else
+                {
+                    Animator.Play("Idle");
+                }
+            }
+            //transform.position = tilemap.CellToWorld(path[0])+ MovePass;
+            //path.RemoveAt(0);
+            yield return null;
 
-    
+        }
+    }
+    IEnumerator ClickShow()
+    {
+        yield return new WaitForSeconds(0.45F);
+        ClickImg.color = Color.clear;
+    }
+
     void GetMoveCommand(Vector2 target)
     {
         Vector2 closestNode = GetClosestNode(transform.position);
@@ -125,7 +198,6 @@ public class MovementController2D : MonoBehaviour
             }
 
         }
-        
     }
 
 

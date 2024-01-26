@@ -17,14 +17,18 @@ namespace Water2D
         [HideInInspector][SerializeField] private static ReflectionsSystem _reflectionsManagerPlatformer;
         [HideInInspector][SerializeField] private static ReflectionsSystem _reflectionsManagerTopDown;
 
-        public static ObstructorManager obstructorManager
+        [HideInInspector] [SerializeField] public ObstructorManager obstructorManager
         {
             get
             {
                 if (_obstructorManager == null)
                 {
                     if (FindObjectOfType<ObstructorManager>() != null) _obstructorManager = FindObjectOfType<ObstructorManager>();
-                    else _obstructorManager = new GameObject("ObstructorManager").AddComponent<ObstructorManager>();
+                    else
+                    {
+                        _obstructorManager = new GameObject("ObstructorManager").AddComponent<ObstructorManager>();
+                        OnObstructionChanged();
+                    }
                 }
 
                 _obstructorManager.transform.parent = managersParent;
@@ -32,7 +36,27 @@ namespace Water2D
             }
             set { }
         }
-        public static ReflectionsSystem reflectionsManagerPlatformer
+        [HideInInspector][SerializeField] SurfaceRenderingManager _surfaceRenderer;
+        [HideInInspector] [SerializeField] public SurfaceRenderingManager surfaceRenderer
+        {
+            get
+            {
+                if (_surfaceRenderer == null)
+                {
+                    if (FindObjectOfType<SurfaceRenderingManager>() != null) _surfaceRenderer = FindObjectOfType<SurfaceRenderingManager>();
+                    else
+                    {
+                        _surfaceRenderer = new GameObject("SurfaceRenderer").AddComponent<SurfaceRenderingManager>();
+                        _surfaceRenderer.SetupLayerRenderer(Camera.main);
+                    }
+                }
+
+                _surfaceRenderer.transform.parent = managersParent;
+                return _surfaceRenderer;
+            }
+            set { }
+        }
+        [HideInInspector] [SerializeField] public  ReflectionsSystem reflectionsManagerPlatformer
         {
             get
             {
@@ -43,6 +67,7 @@ namespace Water2D
                 if (_reflectionsManagerPlatformer == null)
                 {
                     _reflectionsManagerPlatformer = new GameObject("ReflectionsManagerPL").AddComponent<ReflectionsSystem>();
+                    OnReflectionsChanged();
                 }
                 _reflectionsManagerPlatformer.topdown = false;
                 _reflectionsManagerPlatformer.transform.parent = managersParent;
@@ -50,7 +75,7 @@ namespace Water2D
             }
             set { _reflectionsManagerPlatformer = value; }
         }
-        public static ReflectionsSystem reflectionsManagerTopDown
+        [HideInInspector] [SerializeField] public ReflectionsSystem reflectionsManagerTopDown
         {
             get
             {
@@ -60,6 +85,7 @@ namespace Water2D
                     if (_reflectionsManagerTopDown == null)
                     {
                         _reflectionsManagerTopDown = new GameObject("ReflectionsManagerTD").AddComponent<ReflectionsSystem>();
+                        OnReflectionsChanged();
                     }
                 }
                 _reflectionsManagerTopDown.topdown = true;
@@ -96,22 +122,6 @@ namespace Water2D
             }
         }
 
-        [HideInInspector][SerializeField] private LayerRenderer _surfaceRenderer;
-
-        //child for shader double pass
-        [HideInInspector][SerializeField] public GameObject _surfaceRendererObject;
-        public GameObject surfaceRendererObject
-        {
-            get
-            {
-                if (_surfaceRendererObject == null && (settings._waterSettings.enableBelowWater.value)) CreateChildSurfaceRenderer();
-                return _surfaceRendererObject;
-            }
-            set
-            {
-                _surfaceRendererObject = value;
-            }
-        }
 
         [SerializeField][HideInInspector] public WaterCryo<bool> ManagersVisible = new WaterCryo<bool>(false);
         [HideInInspector][SerializeField] public WaterCryo<bool> enableObstruction = new WaterCryo<bool>(true);
@@ -163,16 +173,19 @@ namespace Water2D
             set { _sr = value; }
         }
 
-        const string managersParentName = "2DWaterManagers";
-        const string srLayer = "Water";
-        const string sr2Layer = "WaterPostProcessing";
+        public const string managersParentName = "2DWaterManagers";
+        public const string srLayer = "Water";
+        public const string sr2Layer = "WaterPostProcessing";
 
         private void OnEnable()
         {
+          
             //record current resolution
             resolution = new Vector2(Screen.width, Screen.height);
 
             //create instance of water material
+            if (sr.sharedMaterial == null) sr.sharedMaterial = new Material(Shader.Find("water2d/waterg"));
+
             mat = new Material(sr.sharedMaterial);
             sr.sharedMaterial = mat;
             sr.sharedMaterial.SetTexture("_simTex", (Texture2D)Resources.Load("Sprites/placeholders/blackTex"));
@@ -203,7 +216,6 @@ namespace Water2D
             gameObject.layer = Obstructor.GetLayerIdx(srLayer);
             SetCameraLayers();
             CreateDestroyPostProcessingCamera();
-            CreateDestroySurfaceRenderingCamera();
         }
 
         void CreateDestroyPostProcessingCamera()
@@ -212,11 +224,6 @@ namespace Water2D
             else if (!settings._blurSettings.useBlur.value && _childPP != null) DestroyImmediate(_childPP);
         }
 
-        void CreateDestroySurfaceRenderingCamera()
-        {
-            if (settings._waterSettings.enableBelowWater.value && _surfaceRendererObject == null) CreateChildSurfaceRenderer();
-            else if (!settings._waterSettings.enableBelowWater.value && _surfaceRendererObject != null) DestroyImmediate(_surfaceRendererObject);
-        }
 
         void CreateChildPP()
         {
@@ -252,25 +259,7 @@ namespace Water2D
             t.localScale = Vector3.one;
         }
 
-        public void CreateChildSurfaceRenderer()
-        {
-            _surfaceRendererObject = new GameObject(name + " surface renderer");
-            SetCameraAboveWaterTransform(_surfaceRendererObject.transform,3f);
-            _surfaceRendererObject.AddComponent<Camera>().CopyFrom(Camera.main);
 
-            if (_surfaceRenderer == null) _surfaceRenderer = new LayerRenderer();
-
-            int bitmask = GetCameraRenderingScreen().cullingMask; //get main camera bitmask
-            bitmask &= ~(1 << Obstructor.GetLayerIdx(srLayer));   //remove water
-            bitmask &= ~(1 << Obstructor.GetLayerIdx(sr2Layer));  //remove water post processing
-
-            _surfaceRenderer.Setup(GetCameraRenderingScreen(), sr, _surfaceRendererObject.transform, bitmask);
-            SetCameraAboveWaterTransform(_surfaceRendererObject.transform,3f);
-
-
-
-            sr.sharedMaterial.SetTexture("_belowWaterTex", _surfaceRenderer.LayerTexture());
-        }
 
         private Camera GetCameraRenderingScreen() 
         {
@@ -281,17 +270,10 @@ namespace Water2D
         //includes or excludes the water layer in mainCamera 
         void SetCameraLayers() 
         {
-            //include normal, exclude post processing layer
-            if (settings._blurSettings.useBlur.value)
-            {
-                Camera.main.cullingMask &= ~(1 <<  Obstructor.GetLayerIdx(srLayer));
-                Camera.main.cullingMask |= (1 <<  Obstructor.GetLayerIdx(sr2Layer));
-            }
-            else //inverses
-            {
-                Camera.main.cullingMask |= (1 <<  Obstructor.GetLayerIdx(srLayer));
-                Camera.main.cullingMask &= ~(1 << Obstructor.GetLayerIdx(sr2Layer));
-            }
+            //include normal and post processing layer
+            Camera.main.cullingMask |= (1 << Obstructor.GetLayerIdx(srLayer));
+            Camera.main.cullingMask |= (1 << Obstructor.GetLayerIdx(sr2Layer));
+
         }
 
         public void SetWaterSim(ref WaterSimulation _waterSimulation)
@@ -318,12 +300,12 @@ namespace Water2D
         {
             ObstructorManager.instance = obstructorManager;
 
-            SimulationSetup();
-
             OnWaterChanged();
             OnReflectionsChanged();
             OnObstructionChanged();
+            SimulationSetup();
             OnOSimulationChanged();
+            surfaceRenderer.SetupLayerRenderer(GetCameraRenderingScreen());
         }
 
         private void OnResolutionChanged() 
@@ -504,6 +486,7 @@ namespace Water2D
             reflectionsManagerTopDown.run = enableReflections.value && settings._reflectionsSettings.enableTopDownReflections.value;
             reflectionsManagerPlatformer.run = enableReflections.value && settings._reflectionsSettings.enablePlatformerReflections.value;
             obstructorManager.run = enableObstruction.value;
+            surfaceRenderer.run = settings._waterSettings.enableBelowWater.value;
 
             //set material variables
 
@@ -533,12 +516,13 @@ namespace Water2D
             sr.sharedMaterial.SetFloat("_foam_density", settings._waterSettings.foamDensity.value);
             sr.sharedMaterial.SetFloat("_foam_alpha", settings._waterSettings.foamAlpha.value);
 
-            CreateDestroySurfaceRenderingCamera();
 
 
-            if (settings._waterSettings.enableBelowWater.value) sr.sharedMaterial.SetTexture("_belowWaterTex", _surfaceRenderer.LayerTexture());
-            else sr.sharedMaterial.SetTexture("_belowWaterTex", null);
-            sr.sharedMaterial.SetVector("_belowWaterTexUV",new Vector4(0f,0f,1f,1f));
+            if (settings._waterSettings.enableBelowWater.value) sr.sharedMaterial.SetTexture("_belowWaterTex", surfaceRenderer.layerRenderer.LayerTexture());
+            else
+            {
+                sr.sharedMaterial.SetTexture("_belowWaterTex", null);
+            }
             sr.sharedMaterial.SetFloat("_belowWaterTexDistortionStrength", settings._waterSettings.belowWaterDistortionStrength.value);
             sr.sharedMaterial.SetFloat("_belowWaterTexAlpha", settings._waterSettings.enableBelowWater.value? settings._waterSettings.belowWaterAlpha.value : 0f);
 
@@ -596,7 +580,8 @@ namespace Water2D
             if(settings._reflectionsSettings.playerPosition != null) sr.sharedMaterial.SetVector("_playerPosition", settings._reflectionsSettings.playerPosition.position);
             CameraSetup();
             SurfaceSetup();
-            if (enableSimulation.value) waterSimulation.UpdLoop();
+            BelowWaterSetup();
+            if (enableSimulation.value && Application.isPlaying) waterSimulation.UpdLoop();
             if (CheckForResolutionChanged()) OnResolutionChanged();
         }
         private void SurfaceSetup() 
@@ -615,14 +600,42 @@ namespace Water2D
                 float xp1 = settings._waterSettings.surfaceSprite.bounds.max.x;
                 float yp1 = settings._waterSettings.surfaceSprite.bounds.max.y;
 
-                Vector4 uvs = new Vector4((x0 - xp0) / xp1, (x1 - xp0) / xp1, (y0 - yp0) / yp1, (y1 - yp0) / yp1);
+                Vector4 uvs = new Vector4((x0 - xp0) / Mathf.Abs(xp1 - xp0), (x1 - xp0) / Mathf.Abs(xp1-xp0), (y0 - yp0) / Mathf.Abs(yp1 - yp0), (y1 - yp0) / Mathf.Abs(yp1 - yp0));
                 sr.sharedMaterial.SetVector("_surfaceTexUV", uvs );
             }
         }
 
+        private void BelowWaterSetup()
+        {
+            if (settings._waterSettings.enableBelowWater.value)
+            {
+                float x0 = sr.bounds.min.x;
+                float y0 = sr.bounds.min.y;
+                float x1 = sr.bounds.max.x;
+                float y1 = sr.bounds.max.y;
+
+                Vector2 tr = GetCameraRenderingScreen().ViewportToWorldPoint(new Vector3(1, 1));
+                Vector2 bl = GetCameraRenderingScreen().ViewportToWorldPoint(new Vector3(0, 0));
+
+                float xp0 = bl.x;
+                float yp0 = bl.y;
+                float xp1 = tr.x;
+                float yp1 = tr.y;
+
+                Vector4 uvs = new Vector4((x0 - xp0) / Mathf.Abs(xp1 - xp0), (x1 - xp0) / Mathf.Abs(xp1 - xp0), (y0 - yp0) / Mathf.Abs(yp1 - yp0), (y1 - yp0) / Mathf.Abs(yp1 - yp0));
+
+                sr.sharedMaterial.SetVector("_belowWaterTexUV", uvs);
+            }
+        }
+
+
         private void FixedUpdate()
         {
-            if (enableSimulation.value) waterSimulation.Loop();
+            if (enableSimulation.value)
+            {
+                waterSimulation.Loop();
+ 
+            }
         }
 
         private void OnDrawGizmos()

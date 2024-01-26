@@ -7,7 +7,7 @@ namespace LeafUtils
     public static class WaterRenderUtils
     {
         public static void RenderToRT2D(Material mat, RenderTexture result) => RenderToRT2D(new Rect(0, 0, result.width, result.height), mat, result);
-        public static void RenderToRT2D(RenderTexture result, Material mat) => RenderToRT2D(new Rect(0, 0, result.width, result.height), mat, result);
+        public static void RenderToRT2D(RenderTexture result , Material mat) => RenderToRT2D(new Rect(0, 0, result.width, result.height), mat, result);
 
         public static void RenderToRT2D(Rect viewport, Material mat, RenderTexture result)
         {
@@ -27,14 +27,6 @@ namespace LeafUtils
 
             Graphics.ExecuteCommandBuffer(cmd);
             cmd.Release();
-        }
-
-        public static RenderTexture WaterDeepCopy(this RenderTexture tex)
-        {
-            RenderTexture tex2 = new RenderTexture(tex.width, tex.height, tex.depth, tex.format, tex.mipmapCount);
-            if (tex.enableRandomWrite) tex2.enableRandomWrite = true;
-            Graphics.CopyTexture(tex, tex2);
-            return tex2;
         }
     }
 

@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1957121900670003783
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -66,10 +53,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_9e3a7e262db34ddea10b612088dd1860_Out_0:
         m_Texture: {fileID: 2800000, guid: 7e1aff9652c0dac418d9aa42f5f24dc2, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _alphaTexture:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _belowWaterTex:
@@ -206,7 +189,6 @@ Material:
     - _foam_speed: {r: 0.3, g: 0.1, b: 0, a: 0}
     - _m_Color: {r: 0.6415094, g: 0.20879316, b: 0.20879316, a: 0}
     - _num_of_pixels: {r: 64, g: 64, b: 0, a: 0}
-    - _obs_transform: {r: 0, g: 0, b: 0, a: 0}
     - _obstruction_color: {r: 1, g: 1, b: 1, a: 0}
     - _perspective: {r: 0, g: 0, b: 0, a: 0}
     - _perspective2: {r: 0, g: 0, b: 0, a: 0}
@@ -215,7 +197,19 @@ Material:
     - _simMinMaxWavesHeightFoam: {r: 0, g: 1.27, b: 0, a: 0}
     - _surfaceTexSpeed: {r: 0.2, g: 0, b: 0, a: 0}
     - _surfaceTexTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _surfaceTexUV: {r: 0, g: 1, b: 0, a: 1}
     - _tiling: {r: 1, g: 1, b: 0, a: 0}
     - m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &4675297424855158817
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

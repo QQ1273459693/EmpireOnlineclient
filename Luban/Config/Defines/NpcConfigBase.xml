@@ -1,0 +1,10 @@
+<module name="Tb.NpcConfigBase">
+	<bean name="TalkMessage" comment="对话文本组" sep="-">
+		<var name="txtLine" type="string" comment="对话行"/>
+		<var name="TXTContent" type="string" comment="内容"/>
+		<var name="int" type="int" comment="跳转类型"/>
+	</bean>		
+	<bean name="TalkMessageList" comment="对话文本列表">
+		<var name="TalkArray" type="(list#sep=|),TalkMessage" comment="对话数组"/>
+	</bean>
+</module>

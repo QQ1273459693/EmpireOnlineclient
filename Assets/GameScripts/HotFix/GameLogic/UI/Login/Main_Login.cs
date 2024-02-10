@@ -28,7 +28,7 @@ namespace TEngine
 
         void LoginBtn(GameObject obj, PointerEventData eventData)
         {
-            GameModule.Resource.LoadSceneAsync("SC Pixel Art Top Down - Basic");
+            GameModule.Resource.LoadSceneAsync("StandardSampleSceneGL2");
             Close();
             return;
             TipsWnd_MessageBox.Show(TipsWnd_MessageBox.ButtonType.All, "是否确认登陆?", () =>

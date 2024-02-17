@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
+using YooAsset;
 
 public class NewWorldManager
 {
@@ -13,11 +14,13 @@ public class NewWorldManager
     public static List<FightUnitData> lastEnemyDataList;
     public static int lastBattleid;
     public static int lastRandomSiteid;
+    public static bool mFightIng=false;
     public static void Initialize()
     {
 
         //这里用于本地不联网战斗
         Start();
+        mFightIng = true;
     }
 
     public static void Start()
@@ -70,7 +73,7 @@ public class NewWorldManager
             playerHeroList.Add(Data);
 
 
-            FightRoundWindow.Instance.LeftPosRect[Data.SeatId].gameObject.SetActive(true);
+            //FightRoundWindow.Instance.LeftPosRect[Data.SeatId].gameObject.SetActive(true);
             
 
         }
@@ -131,7 +134,7 @@ public class NewWorldManager
 
             enemyHeroList.Add(Data);
 
-            FightRoundWindow.Instance.RightPosRect[Data.SeatId].gameObject.SetActive(true);
+            //FightRoundWindow.Instance.RightPosRect[Data.SeatId].gameObject.SetActive(true);
         }
         FightRoundWindow.Instance.SwitchFightPos(1,5);
 
@@ -177,6 +180,10 @@ public class NewWorldManager
         if (mBattleWorld != null)
         {
             mBattleWorld.DestroyWorld();
+            mBattleWorld = null;
+            mFightIng = false;
+            FightRoundWindow.Instance.ExitFight();
+
         }
     }
 

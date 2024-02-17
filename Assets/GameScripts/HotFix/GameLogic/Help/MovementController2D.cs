@@ -8,6 +8,10 @@ using GabrielBigardi.SpriteAnimator;
 using TEngine;
 using UnityEngine.EventSystems;
 using EventSystem = UnityEngine.EventSystems.EventSystem;
+using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
+using static TEngine.Utility;
+using GameLogic;
+using System;
 
 
 //public class NavigationTest: MonoBehaviour
@@ -82,6 +86,8 @@ public class MovementController2D : MonoBehaviour
     List<Vector2> pathLeftToGo= new List<Vector2>();
     [SerializeField] bool drawDebugLines;
 
+    private LayerMask lm1 = 1 << 14; // 只检测到Layer层id为8的物体
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +103,10 @@ public class MovementController2D : MonoBehaviour
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         //向点击位置发射一条射线，检测是否点击UI
         EventSystem.current.RaycastAll(eventData, raycastResults);
+
+        
+
+
 
         if (raycastResults.Count > 0)
         {
@@ -120,13 +130,14 @@ public class MovementController2D : MonoBehaviour
            // Update is called once per frame
         void Update()
     {
-            if (Input.GetMouseButtonDown(0)) //check for a new target
+            if (Input.GetMouseButtonDown(0)&& !NewWorldManager.mFightIng) //check for a new target
         {
             if (IsPointerOverGameObject(Input.mousePosition))
             {
                 return;
             }
             StopAllCoroutines();
+            ClickAction = null;
             var Target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
             GetMoveCommand(Target);
@@ -134,6 +145,18 @@ public class MovementController2D : MonoBehaviour
             {
                 ClickImg.color = Color.white;
                 ClickAroow.position = pathLeftToGo[pathLeftToGo.Count-1];
+                RaycastHit2D hit = Physics2D.Raycast(ClickAroow.position, Vector2.right,0.5F,(int)m_laymK);
+
+                // If it hits something...
+                if (hit.collider != null)
+                {
+                    ClickAction = (() =>
+                    {
+                        GameModule.UI.ShowUI<TipsWnd_NPCMessage, int>(hit.transform.GetComponent<NPCMonoController>().NPCID);
+                        ClickAction = null;
+                    });
+                    Debug.Log("hit的碰撞:" + hit.transform.name);
+                }
                 StartCoroutine(ClickShow());
                 Animator.Play("Move");
                 movePoint = pathLeftToGo[0];
@@ -181,6 +204,8 @@ public class MovementController2D : MonoBehaviour
     SpriteAnimator Animator;
     public Transform ClickAroow;
     SpriteRenderer ClickImg;
+    public LayerMask m_laymK;
+    Action ClickAction;
     IEnumerator Move()
     {
         while (pathLeftToGo.Count > 0)
@@ -203,7 +228,7 @@ public class MovementController2D : MonoBehaviour
                 }
                 else
                 {
-                    GameModule.UI.ShowUI<TipsWnd_NPCMessage,int>(1);
+                    ClickAction?.Invoke();
                     Animator.Play("Idle");
                 }
             }

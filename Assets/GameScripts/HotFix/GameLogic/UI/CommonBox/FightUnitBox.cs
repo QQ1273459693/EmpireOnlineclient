@@ -60,7 +60,7 @@ namespace GameLogic
 
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, parntObj.position);
             Vector2 localPoint;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(FightRoundWindow.Instance.Canvas, screenPoint, FightRoundWindow.Instance.UiCamera, out localPoint))
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(FightRoundWindow.Instance.Canvas, screenPoint, null/*FightRoundWindow.Instance.UiCamera*/, out localPoint))
             {
                 GO.GetComponent<RectTransform>().anchoredPosition = localPoint ;
             }
@@ -224,7 +224,11 @@ namespace GameLogic
         public void OnUnspawn()
         {
             FightUnitHandle?.Release();
+            FightUnitHandle = null;
+            Log.Info("–∂‘ÿ¡À¬");
             SpriteAnimationHandle?.Release();
+            SpriteAnimationHandle = null;
+            GameObject.Destroy(GO);
         }
     }
 }

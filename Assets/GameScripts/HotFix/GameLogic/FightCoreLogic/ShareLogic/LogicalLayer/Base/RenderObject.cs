@@ -20,6 +20,6 @@ public class RenderObject : RenderBehaviour
     public override void OnRelease()
     {
         base.OnRelease();
-        GameObject.Destroy(gameObject);
+        //GameObject.Destroy(gameObject);
     }
 }

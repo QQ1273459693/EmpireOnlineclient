@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameLogic;
+using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
@@ -127,9 +128,9 @@ public class NewBattleWorld
         Time.timeScale = quickenMultiple;
 #endif
     }
-    public void BattleEnd(BattleResultResponse result)
+    public void BattleEnd(bool isWin/*BattleResultResponse result*/)
     {
-        IsWin = result.isWin;
+        IsWin = isWin;
         Debuger.Log("战斗结束 isWin:" + IsWin);
 
         //string heroHPStr = " ";
@@ -138,16 +139,19 @@ public class NewBattleWorld
 
         //Debuger.Log("战斗结束 战斗数据：  \n所有英雄生命值：\n" + heroHPStr);
 
-        battleEnd = true;
+        
       
         OnBattleEndListener?.Invoke(this);
 #if CLIENT_LOGIC
         //显示战斗界面
-        //BattleWordNodes.Instance.battleResultWindow.SetBattleRsult(result.isWin);
+        FightRoundWindow.Instance.BattleEnd(IsWin);
+        LogicTimeManager.Instance.DelayCall(2000, () =>
+        {
+            NewWorldManager.DestroyWorld();
+            battleEnd = true;
+        });
 #endif
-        DestroyWorld();
-        NewBuffsManager.Instance.OnDestroy();
-        NewSkillManager.Instance.OnDestroy();
+        //NewWorldManager.DestroyWorld();
     }
  
     public void DestroyWorld()

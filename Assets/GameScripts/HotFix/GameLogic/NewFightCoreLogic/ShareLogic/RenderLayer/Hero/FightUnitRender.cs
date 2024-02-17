@@ -53,7 +53,6 @@ public class FightUnitRender : RenderObject
     {
         pixelHeroBox.DeathAnim(() =>
         {
-            Log.Info("隐藏的单位是:"+ gameObject.name);
             gameObject.SetActive(false);
         });
         //spineAnimBox.PlayAnim(animName);

@@ -82,6 +82,10 @@ namespace TEngine
         }
         void JumpIngTest()
         {
+            if (transform==null)
+            {
+                return;
+            }
             if (transform.position.y < TargetList[mCurJumpIndex].y)
             {
                 transform.position = TargetList[mCurJumpIndex];

@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8430091}
   - component: {fileID: 8430092}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: vegetation 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 64273048}
   - component: {fileID: 64273050}
   - component: {fileID: 64273049}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 68399646}
   - component: {fileID: 68399647}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,6 +556,62 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &73335747
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bokeh blur
+  m_Shader: {fileID: -6465566751694194690, guid: cdc4d123c2923ef419308dc1041672ed, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _area: 0.01
+    - _falloffE: 1
+    - _falloffP: 0
+    - _falloffS: 0
+    - _falloffU: 0
+    - _gamma: 10.5
+    - _hardness: 0.6
+    - _quality: 12
+    - _ratio: 1.85
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &76610925
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 76610926}
   - component: {fileID: 76610927}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84537985}
   - component: {fileID: 84537986}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-rope-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 88869693}
   - component: {fileID: 88869694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u89D2\u8272"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,6 +919,9 @@ MonoBehaviour:
   drawDebugLines: 1
   Player: {fileID: 1063653999}
   ClickAroow: {fileID: 1459779453}
+  m_laymK:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!1 &96909317
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +1009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 100140696}
   - component: {fileID: 100140697}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - pan 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1193,7 +1252,7 @@ GameObject:
   - component: {fileID: 115582485}
   - component: {fileID: 115582487}
   - component: {fileID: 115582486}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6020,7 +6079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 125105877}
   - component: {fileID: 125105878}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6108,7 +6167,7 @@ GameObject:
   - component: {fileID: 134717093}
   - component: {fileID: 134717094}
   - component: {fileID: 134717095}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6245,7 +6304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168889076}
   - component: {fileID: 168889077}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 36 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6329,7 +6388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170170635}
   - component: {fileID: 170170636}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadowPivot'
   m_TagString: Shadow
   m_Icon: {fileID: 0}
@@ -6628,7 +6687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 188355560}
   - component: {fileID: 188355561}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 24 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6712,7 +6771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 201362321}
   - component: {fileID: 201362322}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - up - down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6912,7 +6971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 214219365}
   - component: {fileID: 214219366}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6996,7 +7055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219601937}
   - component: {fileID: 219601938}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: barrel 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7080,7 +7139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222849209}
   - component: {fileID: 222849210}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 5 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7163,7 +7222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245666259}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7196,7 +7255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281679302}
   - component: {fileID: 281679303}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - pan 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7280,7 +7339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293675374}
   - component: {fileID: 293675375}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7448,7 +7507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 311155174}
   - component: {fileID: 311155175}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7532,7 +7591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316536962}
   - component: {fileID: 316536963}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: carriage - broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7606,6 +7665,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!84 &320686136
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1024
+  m_Height: 738
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 46
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &324990971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7617,6 +7714,10 @@ PrefabInstance:
     - target: {fileID: 1052873364858818017, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
       propertyPath: m_Name
       value: Leafs with wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052873364858818017, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1052873364858818018, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
       propertyPath: m_RootOrder
@@ -7908,7 +8009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349593506}
   - component: {fileID: 349593507}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'lamp post 1 - lamp : shadowPivot'
   m_TagString: Shadow
   m_Icon: {fileID: 0}
@@ -8207,7 +8308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383784307}
   - component: {fileID: 383784308}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8301,7 +8402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 385727412}
   - component: {fileID: 385727413}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8385,7 +8486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 386245230}
   - component: {fileID: 386245231}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: trunk 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8469,7 +8570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 389911015}
   - component: {fileID: 389911016}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadowPivot'
   m_TagString: Shadow
   m_Icon: {fileID: 0}
@@ -8537,7 +8638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407964357}
   - component: {fileID: 407964358}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: tree - color scheme 4 - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8698,7 +8799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418327398}
   - component: {fileID: 418327399}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - bear carpet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8897,7 +8998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426801433}
   - component: {fileID: 426801434}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8981,7 +9082,7 @@ GameObject:
   m_Component:
   - component: {fileID: 428603377}
   - component: {fileID: 428603378}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-fence-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9190,7 +9291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459967685}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: "\u680F\u6746"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9236,7 +9337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474351299}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9269,7 +9370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 487707736}
   - component: {fileID: 487707737}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bush 18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9433,7 +9534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514364232}
   - component: {fileID: 514364233}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: crate 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9517,7 +9618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 518513203}
   - component: {fileID: 518513204}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9601,7 +9702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521960579}
   - component: {fileID: 521960580}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9685,7 +9786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557463892}
   - component: {fileID: 557463893}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9770,7 +9871,7 @@ GameObject:
   - component: {fileID: 562826987}
   - component: {fileID: 562826988}
   - component: {fileID: 562826989}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: tree - color scheme 2 - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9908,7 +10009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576399248}
   - component: {fileID: 576399249}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: barrel 2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10146,7 +10247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 586741459}
   - component: {fileID: 586741460}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks - color scheme 1 - 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10230,7 +10331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 588131735}
   - component: {fileID: 588131736}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11164,7 +11265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647690267}
   - component: {fileID: 647690268}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: crate 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11250,7 +11351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 660660004}
   - component: {fileID: 660660005}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: tree - color scheme 5 - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11412,7 +11513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 664841934}
   - component: {fileID: 664841935}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11496,7 +11597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 667374833}
   - component: {fileID: 667374834}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'lamp post 1 - lamp : shadow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11580,7 +11681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674055863}
   - component: {fileID: 674055864}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bush 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11825,7 +11926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 689298776}
   - component: {fileID: 689298777}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: vegetation 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11909,7 +12010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 691945445}
   - component: {fileID: 691945446}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks on sand - color scheme 2 - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12125,7 +12226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 753261183}
   - component: {fileID: 753261184}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - bench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12437,7 +12538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 769067627}
   - component: {fileID: 769067628}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - right - down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12522,6 +12623,10 @@ PrefabInstance:
     - target: {fileID: 2899782432847297440, guid: 95e342edd36fdc542bd14786d55f30c9, type: 3}
       propertyPath: m_Name
       value: Falling Leafs Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899782432847297440, guid: 95e342edd36fdc542bd14786d55f30c9, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2899782432847297442, guid: 95e342edd36fdc542bd14786d55f30c9, type: 3}
       propertyPath: m_SortingLayer
@@ -12742,62 +12847,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.063158, y: 0.6358986}
   m_EdgeRadius: 0
---- !u!21 &786834761
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: bokeh blur
-  m_Shader: {fileID: -6465566751694194690, guid: cdc4d123c2923ef419308dc1041672ed, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _area: 0.01
-    - _falloffE: 1
-    - _falloffP: 0
-    - _falloffS: 0
-    - _falloffU: 0
-    - _gamma: 10.5
-    - _hardness: 0.6
-    - _quality: 12
-    - _ratio: 1.85
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &801571756
 GameObject:
   m_ObjectHideFlags: 0
@@ -12885,7 +12934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803214294}
   - component: {fileID: 803214295}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12969,7 +13018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835486828}
   - component: {fileID: 835486829}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks - color scheme 1 - 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13053,7 +13102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839826762}
   - component: {fileID: 839826763}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13175,7 +13224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851422472}
   - component: {fileID: 851422473}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - bench (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13259,7 +13308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855743927}
   - component: {fileID: 855743928}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19380,7 +19429,7 @@ GameObject:
   - component: {fileID: 885347669}
   - component: {fileID: 885347671}
   - component: {fileID: 885347670}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BlockGround_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20870,7 +20919,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.2181928, y: -0.18884277}
+  m_Offset: {x: 2.3818514, y: -0.18884277}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -20881,7 +20930,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34880018, y: 2.2468224}
+  m_Size: {x: 0.6761174, y: 2.2468224}
   m_EdgeRadius: 0
 --- !u!1 &913465969
 GameObject:
@@ -20893,7 +20942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 913465970}
   - component: {fileID: 913465971}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20977,7 +21026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 938226054}
   - component: {fileID: 938226055}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - up - down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21138,7 +21187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973637351}
   - component: {fileID: 973637352}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21222,7 +21271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 986049610}
   - component: {fileID: 986049611}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - pans
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21306,7 +21355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 986517653}
   - component: {fileID: 986517654}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: waterwell - broken - no grass - no grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21390,7 +21439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1002468607}
   - component: {fileID: 1002468608}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21474,7 +21523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1009818302}
   - component: {fileID: 1009818303}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Top : shadowPivot'
   m_TagString: Shadow
   m_Icon: {fileID: 0}
@@ -21542,7 +21591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014971648}
   - component: {fileID: 1014971649}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-fence-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21626,7 +21675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1022521625}
   - component: {fileID: 1022521626}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: tree - color scheme 4 - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21840,7 +21889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1047571090}
   - component: {fileID: 1047571091}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bush 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22269,7 +22318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1073502211}
   - component: {fileID: 1073502212}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks - color scheme 1 - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22353,7 +22402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084008311}
   - component: {fileID: 1084008312}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - right - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22935,7 +22984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108276475}
   - component: {fileID: 1108276476}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23096,7 +23145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144819299}
   - component: {fileID: 1144819300}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bush 23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23257,7 +23306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1150358977}
   - component: {fileID: 1150358978}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 6 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23418,7 +23467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1153166056}
   - component: {fileID: 1153166057}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: crate 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23502,7 +23551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166752873}
   - component: {fileID: 1166752874}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-bot section
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23586,7 +23635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186670242}
   - component: {fileID: 1186670243}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks on grass - color scheme 3 - 16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23670,7 +23719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1238541422}
   - component: {fileID: 1238541423}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin - interior - front wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24068,7 +24117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274823471}
   - component: {fileID: 1274823472}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - right - down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24152,7 +24201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274939952}
   - component: {fileID: 1274939953}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24236,7 +24285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276518228}
   - component: {fileID: 1276518229}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29997,7 +30046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1293071432}
   - component: {fileID: 1293071433}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30084,7 +30133,7 @@ GameObject:
   - component: {fileID: 1351202164}
   - component: {fileID: 1351202167}
   - component: {fileID: 1351202166}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30257,7 +30306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363349223}
   - component: {fileID: 1363349224}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30341,7 +30390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365600879}
   - component: {fileID: 1365600880}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks on grass - color scheme 3 - 16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30426,7 +30475,7 @@ GameObject:
   - component: {fileID: 1373780972}
   - component: {fileID: 1373780973}
   - component: {fileID: 1373780974}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30645,7 +30694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390729752}
   - component: {fileID: 1390729753}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30882,44 +30931,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!84 &1434332132
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1024
-  m_Height: 738
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 46
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1436989763
 GameObject:
   m_ObjectHideFlags: 0
@@ -30930,7 +30941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436989764}
   - component: {fileID: 1436989765}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin - interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31014,7 +31025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1439141900}
   - component: {fileID: 1439141901}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31097,7 +31108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1444592614}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Tree_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31207,7 +31218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453542805}
   - component: {fileID: 1453542806}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: doorway - entrance - gateway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31291,7 +31302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1455915455}
   - component: {fileID: 1455915456}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'tree - color scheme 2 - 3 : shadowPivot'
   m_TagString: Shadow
   m_Icon: {fileID: 0}
@@ -31534,7 +31545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1481656760}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: "\u706B\u5806"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31646,7 +31657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494697790}
   - component: {fileID: 1494697791}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31765,6 +31776,10 @@ PrefabInstance:
     - target: {fileID: 1052873364858818017, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
       propertyPath: m_Name
       value: Leafs with wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052873364858818017, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1052873364858818018, guid: 79417e786a4afc44d8e5685e6f62f7fd, type: 3}
       propertyPath: m_RootOrder
@@ -31930,7 +31945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1524573108}
   - component: {fileID: 1524573109}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks on grass - color scheme 3 - 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32015,7 +32030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527943895}
   - component: {fileID: 1527943896}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32099,7 +32114,7 @@ GameObject:
   - component: {fileID: 1555776478}
   - component: {fileID: 1555776479}
   - component: {fileID: 1555776480}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32236,7 +32251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1561529179}
   - component: {fileID: 1561529180}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: crate 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32320,7 +32335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1566986977}
   - component: {fileID: 1566986978}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - bed - pillow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32404,7 +32419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571319196}
   - component: {fileID: 1571319197}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: chimney2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32488,7 +32503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584997042}
   - component: {fileID: 1584997043}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32572,7 +32587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587991267}
   - component: {fileID: 1587991268}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: barrel 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32646,212 +32661,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!21 &1600530024
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: water
-  m_Shader: {fileID: -6465566751694194690, guid: 13326eeed13ec4b498f4eb0770b38c60, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_6e24d4388be447eb97d29ddf82a9a802_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 03d9c4cfc0adea348b4dfdaf43005925, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TexelSize_41cd799c4d5c4671a2abaa82c24c2116_Texture_1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TexelSize_e952e8381c61479c99b38609e01c5554_Texture_1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_9e3a7e262db34ddea10b612088dd1860_Out_0:
-        m_Texture: {fileID: 2800000, guid: 7e1aff9652c0dac418d9aa42f5f24dc2, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _alphaTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _belowWaterTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _distortion_tex:
-        m_Texture: {fileID: 2800000, guid: e29cd12bb99d72941acb950ee62a4e5e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_03f5e53fd18b43e19a2becb6e93e2e58_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_3a2b250062924f3da269ec1b910b2f57_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_660921aca76b4ccca33840e8e7c6d762_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_8e2ab4842edb4530b0c5c85605e2f077_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_b5263cc47d6b4a8d84a602eb760e7a19_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_b75d5bc4da1347da957eff4013b32203_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_c5a47b7d4821456281b0ca7cff8a55e1_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _pixelperfectuv_f8eba3edd3e04eee97fe2c65a8a53d16_tex_258542073:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _reflectionsTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _simTex:
-        m_Texture: {fileID: 1434332132}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _sun_strips:
-        m_Texture: {fileID: 2800000, guid: 02b9ccfabe688644ebd37eb70cbe2341, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _surfaceTex:
-        m_Texture: {fileID: 2800000, guid: 187bfeb4f05059240b5ec5c9c3296cc3, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _EnableExternalAlpha: 0
-    - _RFalpha: 0
-    - _RForgColor: 0
-    - _belowWaterTexAlpha: 0
-    - _belowWaterTexDistortionStrength: 1
-    - _deep_mlp: 1
-    - _distortionFPRH: 0
-    - _distortion_str: 0.1
-    - _enableFalloff: 0
-    - _enable_nor: 0
-    - _enable_obs: 1
-    - _enable_pl: 0
-    - _enable_plat: 1
-    - _enable_ref: 1
-    - _enable_scrolling: 0
-    - _enable_sim: 1
-    - _enable_td: 1
-    - _enable_topdown: 0
-    - _falloffStart: 0
-    - _falloffStrength: 0
-    - _foam_alpha: 0.032
-    - _foam_density: 0.104
-    - _foam_size: 2.78
-    - _foam_speed: 0.37
-    - _foam_width: 0.179
-    - _lighting: 1
-    - _normStr: 0.07
-    - _num_of_pixels: 624
-    - _obstruction_alpha: 1
-    - _obstruction_width: 0.15
-    - _pixelArtUV: 0
-    - _pixel_art: 0
-    - _pixel_perfect: 0
-    - _reflectionY: 0
-    - _scrStrength: 0
-    - _strength: 0
-    - _strips_alpha: 0.641
-    - _strips_density: 16
-    - _strips_scrolling_speed: 0
-    - _strips_size: 0.46
-    - _strips_speed: 0.86
-    - _surfaceAlpha: 1
-    - _surfaceTexAlpha: 1
-    - _useFoamSpeedForST: 1
-    - _usePerspective: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RFcolor: {r: 0, g: 0, b: 0, a: 0}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _belowWaterTexUV: {r: 0, g: 0, b: 1, a: 1}
-    - _color: {r: 0.26032028, g: 0.4811321, b: 0.12436808, a: 0}
-    - _deep_color: {r: 0.12061229, g: 0.8301887, b: 0.803908, a: 0}
-    - _deep_minmax: {r: 0, g: 1, b: 0, a: 0}
-    - _deep_minmax_1: {r: 0.56, g: 1, b: 0, a: 0}
-    - _distortion_color: {r: 1, g: 1, b: 1, a: 1}
-    - _distortion_minmax: {r: 0, g: 3, b: 0, a: 0}
-    - _distortion_speed: {r: 0.03, g: 0.03, b: 0, a: 0}
-    - _distortion_strength: {r: 0.03, g: 0.03, b: 0, a: 0}
-    - _distortion_tiling: {r: 2, g: 2, b: 0, a: 0}
-    - _foam_color: {r: 0.6132076, g: 0.3783375, b: 0.3783375, a: 0}
-    - _foam_speed: {r: 0.2, g: 0.05, b: 0, a: 0}
-    - _m_Color: {r: 0.6415094, g: 0.20879316, b: 0.20879316, a: 0}
-    - _num_of_pixels: {r: 64, g: 64, b: 0, a: 0}
-    - _obs_transform: {r: 0.8, g: 0.8, b: 0.1, a: 0.1}
-    - _obstruction_color: {r: 1, g: 1, b: 1, a: 0}
-    - _perspective: {r: 1.59, g: -0.17, b: 0, a: 0}
-    - _perspective2: {r: 0, g: 0, b: 0, a: 0}
-    - _playerPosition: {r: 0, g: 0, b: -10, a: 0}
-    - _simFoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _simMinMaxWavesHeightFoam: {r: 0, g: 0.07, b: 0, a: 0}
-    - _surfaceTexSpeed: {r: 0.72, g: 0.75, b: 0, a: 0}
-    - _surfaceTexTiling: {r: 2.68, g: -2.25, b: 0, a: 0}
-    - _surfaceTexUV: {r: 0, g: 0, b: 1, a: 1}
-    - _tiling: {r: 1.5, g: 1, b: 0, a: 0}
-    - m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1001 &1601655432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33035,7 +32844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607150006}
   - component: {fileID: 1607150007}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bucket 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33119,7 +32928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607619919}
   - component: {fileID: 1607619920}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - side table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33208,7 +33017,7 @@ GameObject:
   - component: {fileID: 1625556932}
   - component: {fileID: 1625556933}
   - component: {fileID: 1625556934}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: lamp post 1 - lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33449,7 +33258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644402209}
   - component: {fileID: 1644402210}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - right - 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33571,7 +33380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657431680}
   - component: {fileID: 1657431681}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'tree - color scheme 2 - 3 : shadow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33655,7 +33464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1683988404}
   - component: {fileID: 1683988405}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33864,11 +33673,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0.2
+  m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
-  m_YDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
@@ -33988,7 +33797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1718888182}
   - component: {fileID: 1718888183}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: barrel 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34072,7 +33881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727896236}
   - component: {fileID: 1727896237}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34157,6 +33966,7 @@ GameObject:
   - component: {fileID: 1757647005}
   - component: {fileID: 1757647004}
   - component: {fileID: 1757647006}
+  - component: {fileID: 1757647007}
   m_Layer: 14
   m_Name: "\u6728\u6869"
   m_TagString: Untagged
@@ -34276,6 +34086,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3696508, y: 1.5466466}
   m_EdgeRadius: 0
+--- !u!114 &1757647007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757647003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81518be1fa6fa044b0ac14e130b5a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPCID: 1
 --- !u!1 &1761030466
 GameObject:
   m_ObjectHideFlags: 0
@@ -34440,7 +34263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1794719107}
   - component: {fileID: 1794719108}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 36
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34524,7 +34347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1802252122}
   - component: {fileID: 1802252123}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: campfire 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34608,7 +34431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814520008}
   - component: {fileID: 1814520009}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cabin-rope-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34776,7 +34599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826143625}
   - component: {fileID: 1826143626}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: cabin interior - carpet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35046,7 +34869,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870924724}
   - component: {fileID: 1870924725}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence2 - left - up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35207,7 +35030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896690530}
   - component: {fileID: 1896690531}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: crate 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35368,7 +35191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1911756662}
   - component: {fileID: 1911756663}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: barrel 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35452,7 +35275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926016679}
   - component: {fileID: 1926016680}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left - up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35535,7 +35358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1929425251}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: "\u623F\u5B50\u4E8C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35660,7 +35483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1939990306}
   - component: {fileID: 1939990307}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35734,6 +35557,212 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &1941850010
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: water
+  m_Shader: {fileID: -6465566751694194690, guid: 13326eeed13ec4b498f4eb0770b38c60, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6e24d4388be447eb97d29ddf82a9a802_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 03d9c4cfc0adea348b4dfdaf43005925, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexelSize_41cd799c4d5c4671a2abaa82c24c2116_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexelSize_e952e8381c61479c99b38609e01c5554_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_9e3a7e262db34ddea10b612088dd1860_Out_0:
+        m_Texture: {fileID: 2800000, guid: 7e1aff9652c0dac418d9aa42f5f24dc2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _alphaTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _belowWaterTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _distortion_tex:
+        m_Texture: {fileID: 2800000, guid: e29cd12bb99d72941acb950ee62a4e5e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_03f5e53fd18b43e19a2becb6e93e2e58_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_3a2b250062924f3da269ec1b910b2f57_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_660921aca76b4ccca33840e8e7c6d762_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_8e2ab4842edb4530b0c5c85605e2f077_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_b5263cc47d6b4a8d84a602eb760e7a19_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_b75d5bc4da1347da957eff4013b32203_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_c5a47b7d4821456281b0ca7cff8a55e1_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _pixelperfectuv_f8eba3edd3e04eee97fe2c65a8a53d16_tex_258542073:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _reflectionsTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _simTex:
+        m_Texture: {fileID: 320686136}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _sun_strips:
+        m_Texture: {fileID: 2800000, guid: 02b9ccfabe688644ebd37eb70cbe2341, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _surfaceTex:
+        m_Texture: {fileID: 2800000, guid: 187bfeb4f05059240b5ec5c9c3296cc3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _EnableExternalAlpha: 0
+    - _RFalpha: 0
+    - _RForgColor: 0
+    - _belowWaterTexAlpha: 0
+    - _belowWaterTexDistortionStrength: 1
+    - _deep_mlp: 1
+    - _distortionFPRH: 0
+    - _distortion_str: 0.1
+    - _enableFalloff: 0
+    - _enable_nor: 0
+    - _enable_obs: 1
+    - _enable_pl: 0
+    - _enable_plat: 1
+    - _enable_ref: 1
+    - _enable_scrolling: 0
+    - _enable_sim: 1
+    - _enable_td: 1
+    - _enable_topdown: 0
+    - _falloffStart: 0
+    - _falloffStrength: 0
+    - _foam_alpha: 0.032
+    - _foam_density: 0.104
+    - _foam_size: 2.78
+    - _foam_speed: 0.37
+    - _foam_width: 0.179
+    - _lighting: 1
+    - _normStr: 0.07
+    - _num_of_pixels: 624
+    - _obstruction_alpha: 1
+    - _obstruction_width: 0.15
+    - _pixelArtUV: 0
+    - _pixel_art: 0
+    - _pixel_perfect: 0
+    - _reflectionY: 0
+    - _scrStrength: 0
+    - _strength: 0
+    - _strips_alpha: 0.641
+    - _strips_density: 16
+    - _strips_scrolling_speed: 0
+    - _strips_size: 0.46
+    - _strips_speed: 0.86
+    - _surfaceAlpha: 1
+    - _surfaceTexAlpha: 1
+    - _useFoamSpeedForST: 1
+    - _usePerspective: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RFcolor: {r: 0, g: 0, b: 0, a: 0}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _belowWaterTexUV: {r: 0, g: 0, b: 1, a: 1}
+    - _color: {r: 0.26032028, g: 0.4811321, b: 0.12436808, a: 0}
+    - _deep_color: {r: 0.12061229, g: 0.8301887, b: 0.803908, a: 0}
+    - _deep_minmax: {r: 0, g: 1, b: 0, a: 0}
+    - _deep_minmax_1: {r: 0.56, g: 1, b: 0, a: 0}
+    - _distortion_color: {r: 1, g: 1, b: 1, a: 1}
+    - _distortion_minmax: {r: 0, g: 3, b: 0, a: 0}
+    - _distortion_speed: {r: 0.03, g: 0.03, b: 0, a: 0}
+    - _distortion_strength: {r: 0.03, g: 0.03, b: 0, a: 0}
+    - _distortion_tiling: {r: 2, g: 2, b: 0, a: 0}
+    - _foam_color: {r: 0.6132076, g: 0.3783375, b: 0.3783375, a: 0}
+    - _foam_speed: {r: 0.2, g: 0.05, b: 0, a: 0}
+    - _m_Color: {r: 0.6415094, g: 0.20879316, b: 0.20879316, a: 0}
+    - _num_of_pixels: {r: 64, g: 64, b: 0, a: 0}
+    - _obs_transform: {r: 0.8, g: 0.8, b: 0.1, a: 0.1}
+    - _obstruction_color: {r: 1, g: 1, b: 1, a: 0}
+    - _perspective: {r: 1.59, g: -0.17, b: 0, a: 0}
+    - _perspective2: {r: 0, g: 0, b: 0, a: 0}
+    - _playerPosition: {r: 0, g: 0, b: -10, a: 0}
+    - _simFoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _simMinMaxWavesHeightFoam: {r: 0, g: 0.07, b: 0, a: 0}
+    - _surfaceTexSpeed: {r: 0.72, g: 0.75, b: 0, a: 0}
+    - _surfaceTexTiling: {r: 2.68, g: -2.25, b: 0, a: 0}
+    - _surfaceTexUV: {r: 0, g: 0, b: 1, a: 1}
+    - _tiling: {r: 1.5, g: 1, b: 0, a: 0}
+    - m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1 &1971207381
 GameObject:
   m_ObjectHideFlags: 0
@@ -35744,7 +35773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1971207382}
   - component: {fileID: 1971207383}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36125,7 +36154,7 @@ MonoBehaviour:
   m_RefResolutionX: 320
   m_RefResolutionY: 780
   m_CropFrame: 0
-  m_GridSnapping: 1
+  m_GridSnapping: 0
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0
@@ -36675,7 +36704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122158558}
   - component: {fileID: 2122158559}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: beach detail 21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36759,7 +36788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2124699464}
   - component: {fileID: 2124699465}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: wood log 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36843,7 +36872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133128113}
   - component: {fileID: 2133128114}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fence - right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36927,7 +36956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137401963}
   - component: {fileID: 2137401964}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: rocks - color scheme 1 - 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37271,8 +37300,8 @@ MonoBehaviour:
       falloffStrength:
         _value: 1
   customWaterMaterial: 0
-  _mat: {fileID: 1600530024}
-  _matb: {fileID: 786834761}
+  _mat: {fileID: 1941850010}
+  _matb: {fileID: 73335747}
   _sr: {fileID: 1147663653900915095}
 --- !u!4 &1147663653900915094
 Transform:
@@ -37309,7 +37338,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1600530024}
+  - {fileID: 1941850010}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameLogic;
+using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         Log.Info("游戏战斗回合开始!");
         //回合开始
 #if CLIENT_LOGIC
-        //BattleWordNodes.Instance.roundWindow.RoundStart();
+        FightRoundWindow.Instance.RoundStart();
 #endif
         LogicTimeManager.Instance.DelayCall(2000, NextRoundStart);
     }
@@ -43,8 +44,8 @@ public class NewRoundLogicCtrl : ILogicBehaviour
         }
         RoundId++;
 #if CLIENT_LOGIC
-        //显示下一关卡
-        //BattleWordNodes.Instance.roundWindow.NextRound(RoundId);
+        //显示下一回合
+        FightRoundWindow.Instance.NextRound(RoundId);
 #endif
         for (int i = 0; i < mHeroLogicCtrl.AllHeroList.Count; i++)
         {
@@ -72,6 +73,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
     {
         if (CheckBattleIsOver() || NewBattleWorld.Instance.battleEnd)
         {
+
             return;
         }
         if (mHeroAttackQueue.Count == 0)
@@ -113,7 +115,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
 #if CLIENT_LOGIC
             //HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
 #endif
-            //BattleWorld.Instance.BattleEnd(false);
+            NewBattleWorld.Instance.BattleEnd(false);
             //enemy Win
             Debuger.Log(" BattleOver You Loos!");
             return true;
@@ -125,7 +127,7 @@ public class NewRoundLogicCtrl : ILogicBehaviour
             //HallMsgHandlerConter.Instance.SendGetBatleResultRequest(BattleWorld.Instance.BattleId);
 #endif
 
-            //BattleWorld.Instance.BattleEnd(true);
+            NewBattleWorld.Instance.BattleEnd(true);
             Debuger.Log(" BattleOver You Win!");
             return true;
         }

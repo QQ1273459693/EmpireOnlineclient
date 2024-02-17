@@ -21,6 +21,10 @@ namespace TEngine
         //public static int Count { get { return m_ElemList.Count; } }
         public static void SetHUDTextRoot(GameObject root)
         {
+            if (m_RootGo!=null)
+            {
+                return;
+            }
             m_RootGo = root.transform;
             spawner = UniPooling.CreateSpawner("DefaultPackage");
 

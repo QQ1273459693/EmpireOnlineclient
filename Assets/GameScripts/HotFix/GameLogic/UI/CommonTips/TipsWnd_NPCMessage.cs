@@ -7,6 +7,8 @@ using GameLogic;
 using TMPro;
 using System.Collections.Generic;
 using GameConfig.NpcConfigBase;
+using static TEngine.Utility;
+using Text = UnityEngine.UI.Text;
 
 namespace TEngine
 {
@@ -14,17 +16,17 @@ namespace TEngine
     class TipsWnd_NPCMessage : UIWindow,UIWindow.IInitData<int>
     {
         Text m_TalkDesText;
-        GameObject m_ButtonObj;
+        RectTransform BgRect;
         UIGridTool m_UiGridTool;
         //数据
         int m_NpcID;
-        List<common_NpcTalkButnPool> m_TalkButnPoolList = new List<common_NpcTalkButnPool>();
+        Dictionary<GameObject,common_NpcTalkButnPool> m_TalkButnPoolList = new Dictionary<GameObject, common_NpcTalkButnPool>();
         class common_NpcTalkButnPool
         {
-            GameObject Btn;
+            public GameObject Btn;
             public int JumpActionID;
             Text m_BtnText;
-            string m_JumpDes;
+            public string m_JumpDes;
             EventTriggerListener m_EventTriggerListener;
 
             public EventTriggerListener GetClickTipEvent()
@@ -54,6 +56,7 @@ namespace TEngine
         public override void ScriptGenerator()
         {
             m_TalkDesText = FindChildComponent<Text>("Tips/Bg/TalkImg/Text");
+            BgRect= FindChildComponent<RectTransform>("Tips/Bg");
             m_UiGridTool = new UIGridTool(FindChild("Tips/Bg/Content").gameObject, "common_NpcTalkButton");
 
             RegisterEventClick(FindChild("Bg").gameObject, CancleBtn);
@@ -76,17 +79,39 @@ namespace TEngine
             m_TalkDesText.text = NpcConfig.Description;
             int Count = NpcConfig.TalkParam.TalkArray.Count;
             m_UiGridTool.GenerateElem(Count+1);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(BgRect);
             for (int i = 0; i < Count; i++)
             {
                 common_NpcTalkButnPool pool = new common_NpcTalkButnPool();
                 pool.Init(m_UiGridTool.Get(i));
                 pool.GetClickTipEvent().onClick.AddListener((go,arg) =>
                 {
-                    
+                    switch (pool.JumpActionID)
+                    {
+                        case 0:
+                            //转换描述
+                            m_TalkDesText.text = pool.m_JumpDes;
+                            m_UiGridTool.GenerateElem(1);
+                            LayoutRebuilder.ForceRebuildLayoutImmediate(BgRect);
+                            var Pool = m_TalkButnPoolList[m_UiGridTool.Get(0)];
+                            Pool.InitRefreshTalkInfo("离开", "", 0);
+                            Pool.GetClickTipEvent().onClick.AddListener((go, arg) =>
+                            {
+                                Close();
+                            });
+                            break;
+                        case 1:
+                            //写死指定页面打开
+                            GameModule.UI.ShowUI<TipsWnd_FightWoodenPile>();
+                            Close();
+                            break;
+                        case 2:
+                            break;
+                    }
                 });
                 var ConfigData = NpcConfig.TalkParam.TalkArray[i];
                 pool.InitRefreshTalkInfo(ConfigData.TxtLine, ConfigData.TXTContent, ConfigData.Int);
-                m_TalkButnPoolList.Add(pool);
+                m_TalkButnPoolList.Add(pool.Btn,pool);
             }
             //离开单独按钮
             common_NpcTalkButnPool ClosePool = new common_NpcTalkButnPool();
@@ -96,12 +121,17 @@ namespace TEngine
                 Close();
             });
             ClosePool.InitRefreshTalkInfo("离开", "",0);
-            m_TalkButnPoolList.Add(ClosePool);
+            m_TalkButnPoolList.Add(ClosePool.Btn, ClosePool);
         }
         public override void BeforeClose()
         {
             base.BeforeClose();
             m_UiGridTool.Clear();
+            foreach (var item in m_TalkButnPoolList.Values)
+            {
+                item.Dipose();
+            }
+            m_TalkButnPoolList.Clear();
         }
 
         public void InitData(int a)
